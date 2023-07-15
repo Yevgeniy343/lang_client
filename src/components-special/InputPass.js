@@ -60,7 +60,6 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     background: #f4f4f4;
-    /* padding: 1rem; */
 
     svg {
       font-size: 1.5rem;
