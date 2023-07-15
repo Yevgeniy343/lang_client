@@ -5,6 +5,7 @@ import Button from "../components-special/Button";
 import NavBar from "../components/Navigation/Navbar";
 import SideBar from "../components/Navigation/Sidebar";
 import SmallMenu from "../components/SmallMenu";
+import RightHeader from "../components/RightHeader";
 
 const PersonamArea = () => {
   const { user, currentSmallMenu } = useSelector((store) => store.user);
@@ -24,7 +25,9 @@ const PersonamArea = () => {
             <SmallMenu item="Профиль" />
             <SmallMenu item="Мои курсы" />
           </div>
-          <div className="right"></div>
+          <div className="right">
+            <RightHeader />
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -54,7 +57,7 @@ const Wrapper = styled.div`
     .right {
       border: 1px solid gray;
       width: 100%;
-      height: 100px;
+      height: 300px;
       margin: 1rem;
       margin-left: 0;
     }
