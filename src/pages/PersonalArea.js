@@ -6,6 +6,7 @@ import NavBar from "../components/Navigation/Navbar";
 import SideBar from "../components/Navigation/Sidebar";
 import SmallMenu from "../components/SmallMenu";
 import RightHeader from "../components/RightHeader";
+import Profile from "../components/Profile";
 
 const PersonamArea = () => {
   const { user, currentSmallMenu } = useSelector((store) => store.user);
@@ -27,6 +28,7 @@ const PersonamArea = () => {
           </div>
           <div className="right">
             <RightHeader />
+            {currentSmallMenu === "Профиль" && <Profile />}
           </div>
         </div>
       </div>
@@ -55,7 +57,6 @@ const Wrapper = styled.div`
       background-color: var(--gray-0);
     }
     .right {
-      border: 1px solid gray;
       width: 100%;
       height: 300px;
       margin: 1rem;
@@ -83,7 +84,6 @@ const Wrapper = styled.div`
         flex-direction: column;
       }
       .right {
-        border: 1px solid gray;
         margin-left: 1rem;
       }
     }

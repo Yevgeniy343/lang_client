@@ -12,6 +12,7 @@ import { GiExitDoor } from "react-icons/gi";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import { smallMenuHandler } from "../../features/user/userSlise";
 
 const NavBar = () => {
   const { user, isModal } = useSelector((store) => store.user);
@@ -29,16 +30,12 @@ const NavBar = () => {
             <div className="logo">
               <img src={logo} alt="logo" className="logo" />
             </div>
-            <button
-              type="button"
-              className="nav-toggle"
-              onClick={() => dispatch(sidebarOpenHandler())}
-            >
+            <button type="button" className="nav-toggle">
               <AiOutlineMenu />
             </button>
           </div>
           <ul className="nav-links">
-            <li>
+            <li onClick={() => dispatch(smallMenuHandler("Профиль"))}>
               <BiUser />
             </li>
             <li onClick={logOutHandler}>

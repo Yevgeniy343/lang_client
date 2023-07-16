@@ -55,6 +55,7 @@ const Wrapper = styled.div`
     .rate-text {
       font-size: 1.3rem;
       word-break: keep-all;
+      margin: 1rem 0;
     }
   }
   .notice {
