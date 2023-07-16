@@ -1,16 +1,17 @@
 import React from "react";
-
 import logo from "../../images/esebb1n53kocs4kg80gw8owg8k4o80.webp";
-
 import { AiOutlineClose } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { GiExitDoor } from "react-icons/gi";
-
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { sidebarCloseHandler } from "../../features/user/userSlise";
-import { toggleHandler, logOutUser } from "../../features/user/userSlise";
+import {
+  toggleHandler,
+  logOutUser,
+  smallMenuHandler,
+  sidebarCloseHandler,
+} from "../../features/user/userSlise";
 
 const SideBar = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,11 @@ const SideBar = () => {
   const logOutHandler = () => {
     dispatch(sidebarCloseHandler());
     dispatch(logOutUser());
+  };
+
+  const profileHandler = () => {
+    dispatch(smallMenuHandler("Профиль"));
+    dispatch(sidebarCloseHandler());
   };
 
   const { isSidebarOpen, user } = useSelector((store) => store.user);
@@ -37,7 +43,7 @@ const SideBar = () => {
           </button>
         </div>
         <ul className="links">
-          <li>
+          <li onClick={profileHandler}>
             <BiUser />
             <p>Профайл</p>
           </li>

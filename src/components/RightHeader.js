@@ -29,7 +29,7 @@ const RightHeader = () => {
 
 const Wrapper = styled.div`
   background-color: var(--gray-0);
-  height: 130px;
+  /* height: 130px; */
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -40,6 +40,7 @@ const Wrapper = styled.div`
   .discount,
   .balsak {
     min-width: 200px;
+    margin-bottom: 1rem;
   }
   .rate {
     height: 50px;
