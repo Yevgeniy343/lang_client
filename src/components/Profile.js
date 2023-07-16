@@ -10,42 +10,80 @@ const Profile = () => {
     name: user.name,
     email: user.email,
     second_name: user.second_name,
+    phone: user.phone,
+    date: user.date,
+    city: user.city,
   };
 
   const [values, setValues] = useState(initialState);
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   return (
     <Wrapper>
       <h4>Мой профиль</h4>
       <div className="name">
         <div className="firs">
           <label>Фамилия</label>
-          <Input type="text" name="second_name" value={values.second_name} />
+          <Input
+            type="text"
+            name="second_name"
+            value={values.second_name}
+            onChange={changeHandler}
+          />
         </div>
         <div className="second">
           <label>Имя</label>
-          <Input type="text" name="name" value={values.name} />
+          <Input
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={changeHandler}
+          />
         </div>
       </div>
       <div className="contacts">
         <div className="firs">
           <label>Email</label>
-          <Input type="email" naame="email" value={values.email} />
+          <Input
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={changeHandler}
+          />
         </div>
         <div className="second">
           <label>Телефон</label>
-          <Input type="phone" name="phone" />
+          <Input
+            type="phone"
+            name="phone"
+            value={values.phone}
+            onChange={changeHandler}
+          />
         </div>
       </div>
       <div className="contacts2">
         <div className="firs">
           <label>Дата рождения</label>
-          <Input type="date" name="date" value={values.date} />
+          <Input
+            type="date"
+            name="date"
+            value={values.date}
+            onChange={changeHandler}
+          />
         </div>
         <div className="second">
           <label type="text" name="city" value={values.city}>
             Город
           </label>
-          <Input />
+          <Input
+            type="text"
+            name="city"
+            value={values.city}
+            onChange={changeHandler}
+          />
         </div>
       </div>
       {/* <div className="description">description</div> */}
@@ -89,14 +127,6 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 768px) {
-    .name,
-    .contacts,
-    .contacts2 {
-      justify-content: space-between;
-      input {
-        width: 400px;
-      }
-    }
   }
   @media (min-width: 992px) {
     .name,

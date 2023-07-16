@@ -30,7 +30,11 @@ const NavBar = () => {
             <div className="logo">
               <img src={logo} alt="logo" className="logo" />
             </div>
-            <button type="button" className="nav-toggle">
+            <button
+              type="button"
+              className="nav-toggle"
+              onClick={() => dispatch(sidebarOpenHandler())}
+            >
               <AiOutlineMenu />
             </button>
           </div>
