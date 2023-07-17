@@ -1,42 +1,185 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
+import { MdDelete } from "react-icons/md";
+
+const initialState = {
+  name: "",
+  date1: "",
+  date2: "",
+  description: "",
+};
 
 const Event = () => {
+  const [file, setFile] = useState();
+  const [image, setImage] = useState();
+  const [values, setValues] = useState(initialState);
+  if (image) {
+    console.log(image);
+  }
+  const [previewURL, setpreviewURL] = useState();
+
+  const filePickerRef = useRef();
+  const filePickerRefImage = useRef();
+
+  const dispatch = useDispatch();
+
+  const pickImageHandler = () => {
+    filePickerRef.current.click();
+  };
+
+  const pickImageHandler2 = () => {
+    filePickerRefImage.current.click();
+  };
+
+  const pickedHandler = (e) => {
+    let pickedFile;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setFile(pickedFile);
+      return;
+    }
+  };
+
+  const pickedHandlerImage = (e) => {
+    let pickedFileImage;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFileImage = e.target.files[0];
+      setImage(pickedFileImage);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setpreviewURL(fileReader.result);
+    };
+    fileReader.readAsDataURL(image);
+  }, [image]);
+
+  const imageRemoveHandler = () => {
+    setImage(null);
+    setpreviewURL(null);
+  };
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("image", image);
+  formData.append("name", values.name);
+  formData.append("date1", values.date1);
+  formData.append("date2", values.date2);
+  formData.append("description", values.description);
+
+  //   const sendDataHandler = (e) => {
+  //     e.preventDefault();
+  //     // dispatch()
+  //     setpreviewURL(null);
+  //     setTimeout(() => {
+  //       setFile(null);
+  //       // setValues(initialState);
+  //     }, 1000);
+  //   };
+
   return (
     <Wrapper>
-      <div className="name">
-        <label>
-          <span>*</span>Название мероприятия
-        </label>
-        <Input />
-      </div>
-      <div className="date">
-        <div className="date1">
+      <form>
+        <div className="name">
           <label>
-            <span>*</span>Дата начала
+            <span>*</span>Название мероприятия
           </label>
-          <Input type="date" />
+          <Input
+            type="text"
+            name="name"
+            value={values.name}
+            onChange={changeHandler}
+          />
         </div>
-        <div className="date2">
-          <label>
-            <span>*</span>Дата окончания
-          </label>
-          <Input type="date" />
+        <div className="date">
+          <div className="date1">
+            <label>
+              <span>*</span>Дата начала
+            </label>
+            <Input
+              type="date"
+              name="date1"
+              value={values.date1}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="date2">
+            <label>
+              <span>*</span>Дата окончания
+            </label>
+            <Input
+              type="date"
+              name="date2"
+              value={values.date2}
+              onChange={changeHandler}
+            />
+          </div>
         </div>
-      </div>
-      <div className="description">
-        <textarea rows="10"></textarea>
-      </div>
-      <div className="upload-pfd">
-        <input type="file" style={{ display: "none" }} accept=".pdf" />
-        <div className="actions">
-          <Button text="добавить pdf" />
-          <Button text="загрузить" />
+        <div className="description">
+          <textarea
+            rows="10"
+            name="description"
+            type="text"
+            value={values.description}
+            onChange={changeHandler}
+          ></textarea>
         </div>
-      </div>
-      <div className="picture"></div>
+        <div className="upload-pfd">
+          <input
+            type="file"
+            style={{ display: "none" }}
+            accept=".pdf"
+            ref={filePickerRef}
+            onChange={pickedHandler}
+          />
+          <div className="actions">
+            <Button
+              text="Загрузить pdf"
+              type="button"
+              onClick={pickImageHandler}
+            />
+            {file && <p className="file-name">{file.name}</p>}
+            {file && <MdDelete onClick={() => setFile(null)} />}
+          </div>
+        </div>
+        <div className="upload-picture">
+          <input
+            type="file"
+            accept=".jpeg,.jpg,.png"
+            style={{ display: "none" }}
+            ref={filePickerRefImage}
+            onChange={pickedHandlerImage}
+          />
+          <div className="actions">
+            <Button
+              text="Загрузить картинку"
+              type="button"
+              onClick={pickImageHandler2}
+            />
+            <div className="picture">
+              <img src={previewURL} alt="" />
+              {image && <MdDelete onClick={imageRemoveHandler} />}
+            </div>
+          </div>
+        </div>
+        <div className="create">
+          <Button text="Создать пероприятие" type="submit" />
+        </div>
+      </form>
     </Wrapper>
   );
 };
@@ -59,8 +202,13 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     input {
-      margin: 0 10px;
+      /* margin: 0 10px; */
       margin-bottom: 1rem;
+    }
+  }
+  .date2 {
+    input {
+      margin-left: 20px;
     }
   }
   input,
@@ -73,6 +221,33 @@ const Wrapper = styled.div`
     margin-bottom: 1rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    button {
+      margin-right: 1rem;
+    }
+    .file-name {
+      color: var(--clr-grey-5);
+    }
+    svg {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition2);
+      color: var(--main-0);
+      :hover {
+        color: var(--clr-red-dark);
+      }
+    }
+  }
+  .picture {
+    img {
+      width: 200px;
+    }
+  }
+  .create {
+    margin: 1rem 0;
+    button {
+      width: 100%;
+    }
   }
   @media (min-width: 576px) {
   }
