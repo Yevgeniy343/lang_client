@@ -206,11 +206,6 @@ const Wrapper = styled.div`
       margin-bottom: 1rem;
     }
   }
-  .date2 {
-    input {
-      margin-left: 20px;
-    }
-  }
   input,
   textarea {
     margin-bottom: 1rem;
@@ -265,6 +260,11 @@ const Wrapper = styled.div`
         width: 240px;
       }
     }
+    .date2 {
+      input {
+        margin-left: 20px;
+      }
+    }
   }
   @media (min-width: 992px) {
   }
@@ -295,6 +295,9 @@ const Wrapper = styled.div`
         transition: 0.5s;
       }
     }
+  }
+  button {
+    width: 130px;
   }
 `;
 export default Event;
