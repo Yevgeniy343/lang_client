@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     width: calc(100%);
     border-radius: 5px;
     font-size: 100%;
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
     color: var(--main-0);
 
     ::placeholder {
