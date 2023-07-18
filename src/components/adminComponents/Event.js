@@ -232,6 +232,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     button {
       margin-right: 1rem;
     }
@@ -243,6 +244,7 @@ const Wrapper = styled.div`
       cursor: pointer;
       transition: var(--transition2);
       color: var(--main-0);
+
       :hover {
         color: var(--clr-red-dark);
       }

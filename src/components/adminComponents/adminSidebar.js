@@ -7,10 +7,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   toggleHandler,
-  logOutUser,
   smallMenuHandler,
   sidebarCloseHandler,
 } from "../../features/user/userSlise";
+import { logOutAdmin } from "../../features/adminSlice";
 
 const AdminSideBar = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const AdminSideBar = () => {
 
   const logOutHandler = () => {
     dispatch(sidebarCloseHandler());
-    dispatch(logOutUser());
+    dispatch(logOutAdmin());
   };
 
   const profileHandler = () => {
