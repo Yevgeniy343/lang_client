@@ -7,10 +7,16 @@ import SideBar from "../components/Navigation/Sidebar";
 import SmallMenu from "../components/SmallMenu";
 import RightHeader from "../components/RightHeader";
 import Profile from "../components/Profile";
+import UserEvents from "../components/UserEvents";
+import { getEvent } from "../features/user/userSlise";
 
 const PersonamArea = () => {
-  const { user, currentSmallMenu } = useSelector((store) => store.user);
+  const { user, currentSmallMenu, events } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEvent());
+  }, []);
 
   return (
     <Wrapper>
@@ -24,11 +30,12 @@ const PersonamArea = () => {
           <div className="left">
             <SmallMenu item="Мои заказы" />
             <SmallMenu item="Профиль" />
-            <SmallMenu item="Мои курсы" />
+            <SmallMenu item="Все мероприятия" />
           </div>
           <div className="right">
             <RightHeader />
             {currentSmallMenu === "Профиль" && <Profile />}
+            {currentSmallMenu === "Все мероприятия" && <UserEvents />}
           </div>
         </div>
       </div>

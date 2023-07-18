@@ -73,6 +73,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   .content {
     width: 90%;
     height: 70%;
@@ -101,14 +102,15 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 576px) {
-  }
-  @media (min-width: 768px) {
-  }
-  @media (min-width: 992px) {
     .content {
       width: 30%;
       height: 50%;
     }
+  }
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
   }
   @media (min-width: 1140px) {
   }

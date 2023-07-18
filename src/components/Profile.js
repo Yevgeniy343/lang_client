@@ -132,7 +132,7 @@ const Wrapper = styled.div`
   h4 {
     margin-bottom: 2rem;
     color: var(--main-0);
-    text-align: center;
+    /* text-align: center; */
   }
   label {
     font-size: 0.9rem;
@@ -199,13 +199,21 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 1140px) {
+    .name,
+    .contacts,
+    .contacts2 {
+      justify-content: space-between;
+      input {
+        width: 500px;
+      }
+    }
   }
   @media (min-width: 1340px) {
     .name,
     .contacts,
     .contacts2 {
       input {
-        width: 450px;
+        width: 550px;
       }
     }
   }

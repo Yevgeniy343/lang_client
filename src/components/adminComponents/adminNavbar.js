@@ -95,9 +95,6 @@ const NavContainer = styled.nav`
     display: none;
     align-items: center;
   }
-  .cart-btn-wrapper {
-    display: none;
-  }
 
   li {
     cursor: pointer;

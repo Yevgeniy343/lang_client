@@ -41,9 +41,11 @@ const NavBar = () => {
           <ul className="nav-links">
             <li onClick={() => dispatch(smallMenuHandler("Профиль"))}>
               <BiUser />
+              <p>Профиль</p>
             </li>
             <li onClick={logOutHandler}>
               <GiExitDoor />
+              <p>Выйти</p>
             </li>
           </ul>
         </div>
@@ -87,14 +89,24 @@ const NavContainer = styled.nav`
     display: none;
     align-items: center;
   }
-  .cart-btn-wrapper {
-    display: none;
-  }
 
   li {
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 15px;
+    :hover {
+      svg {
+        color: var(--main-1);
+      }
+      p {
+        color: var(--main-1);
+      }
+    }
+    p {
+      transition: var(--transition2);
+      color: var(--main-0);
+      font-size: 1rem;
+    }
   }
   .name {
     padding: 0.5rem;

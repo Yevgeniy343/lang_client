@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "../../images/esebb1n53kocs4kg80gw8owg8k4o80.webp";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineUnorderedList } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
+import { MdEventAvailable } from "react-icons/md";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -21,8 +22,13 @@ const AdminSideBar = () => {
     dispatch(logOutAdmin());
   };
 
-  const profileHandler = () => {
-    dispatch(smallMenuHandler("Профиль"));
+  const allEventsHandler = () => {
+    navigate("/all-events");
+    dispatch(sidebarCloseHandler());
+  };
+
+  const newEventHandler = () => {
+    navigate("/new-event");
     dispatch(sidebarCloseHandler());
   };
 
@@ -42,6 +48,14 @@ const AdminSideBar = () => {
           </button>
         </div>
         <ul className="links">
+          <li onClick={newEventHandler}>
+            <MdEventAvailable />
+            <p>Новое мероприятие</p>
+          </li>
+          <li onClick={allEventsHandler}>
+            <AiOutlineUnorderedList />
+            <p>Все мероприятия</p>
+          </li>
           <li onClick={logOutHandler}>
             <GiExitDoor />
             <p>Выйти</p>

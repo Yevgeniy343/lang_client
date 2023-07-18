@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { registerUserThunk, loginUserThunk, editUserThunk } from "./thunk";
+import {
+  registerUserThunk,
+  loginUserThunk,
+  editUserThunk,
+  getEventThunk,
+} from "./thunk";
 import toast from "react-hot-toast";
 import {
   addTokenToLocalStorage,
@@ -16,6 +21,7 @@ const initialState = {
   token: getTokenFromLocalStorage(),
   isSidebarOpen: false,
   currentSmallMenu: "",
+  events: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -35,8 +41,14 @@ export const loginUser = createAsyncThunk(
 export const editUser = createAsyncThunk(
   "user/editUser",
   async (user, thunkAPI) => {
-    console.log(user);
     return editUserThunk(`/user/edit_user/`, user, thunkAPI);
+  }
+);
+
+export const getEvent = createAsyncThunk(
+  "user/getEvent",
+  async (info, thunkAPI) => {
+    return getEventThunk(`/user/get_event/`, info, thunkAPI);
   }
 );
 
@@ -95,7 +107,7 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      toast.error(payload, { theme: "colored" });
+      toast.error(payload);
     });
 
     // editUser
@@ -107,7 +119,20 @@ const userSlice = createSlice({
     });
     builder.addCase(editUser.rejected, (state, { payload }) => {
       state.isLoading = false;
-      toast.error(payload, { theme: "colored" });
+      toast.error(payload);
+    });
+
+    // getEvent
+    builder.addCase(getEvent.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getEvent.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.events = payload.event;
+    });
+    builder.addCase(getEvent.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
     });
   },
 });
