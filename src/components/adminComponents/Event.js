@@ -85,10 +85,10 @@ const Event = () => {
     if (
       !file ||
       !image ||
-      values.name ||
-      values.date1 ||
-      values.data2 ||
-      values.description
+      !values.name ||
+      !values.date1 ||
+      !values.date2 ||
+      !values.description
     ) {
       toast.error("Введите все значения");
       return;
@@ -200,11 +200,11 @@ const Event = () => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 2rem; */
   span {
     color: var(--clr-red-dark);
   }

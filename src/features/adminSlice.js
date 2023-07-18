@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginAdminThunk, createEventThunk } from "./admin-thunk";
+import {
+  loginAdminThunk,
+  createEventThunk,
+  getEventsThunk,
+} from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
   addAdminToLocalStorage,
@@ -10,7 +14,9 @@ import {
 const initialState = {
   isLoading: false,
   admin: getAdminFromLocalStorage(),
+  events: [],
 };
+
 export const loginAdmin = createAsyncThunk(
   "user/loginAdmin",
   async (user, thunkAPI) => {
@@ -21,8 +27,15 @@ export const loginAdmin = createAsyncThunk(
 export const createEvent = createAsyncThunk(
   "admin/createevent",
   async (info, thunkAPI) => {
-    console.log("info", info);
     return createEventThunk(`/admin/createevent/`, info, thunkAPI);
+  }
+);
+
+export const getEvents = createAsyncThunk(
+  "admin/getevent",
+  async (info, thunkAPI) => {
+    console.log("info", info);
+    return getEventsThunk(`/admin/getevents/`, info, thunkAPI);
   }
 );
 
@@ -60,10 +73,22 @@ const adminSlice = createSlice({
     });
     builder.addCase(createEvent.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
       toast.success(`Мероприятие "${payload.name}" успешно создано !`);
     });
     builder.addCase(createEvent.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // getEvent
+    builder.addCase(getEvents.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getEvents.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.events = payload.events;
+    });
+    builder.addCase(getEvents.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

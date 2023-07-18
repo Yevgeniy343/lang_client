@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../components-special/Button";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,9 +6,14 @@ import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
 import AdminEvents from "./AdminEvents";
 import Event from "../../components/adminComponents/Event";
+import { getEvents } from "../../features/adminSlice";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
 
   return (
     <Wrapper>

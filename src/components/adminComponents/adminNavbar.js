@@ -9,8 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { GiExitDoor } from "react-icons/gi";
 import { logOutAdmin } from "../../features/adminSlice";
-import { AiOutlineMenu } from "react-icons/ai";
-import { BiUser } from "react-icons/bi";
+import { AiOutlineMenu, AiOutlineUnorderedList } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { smallMenuHandler } from "../../features/user/userSlise";
@@ -43,7 +42,11 @@ const AdminNavBar = () => {
           <ul className="nav-links">
             <li>
               <MdEventAvailable />
-              <p>Мероприятие</p>
+              <p>Новое мероприятие</p>
+            </li>
+            <li>
+              <AiOutlineUnorderedList />
+              <p>Все мероприятия</p>
             </li>
             <li onClick={() => dispatch(logOutAdmin())}>
               <GiExitDoor />
@@ -110,6 +113,7 @@ const NavContainer = styled.nav`
     p {
       transition: var(--transition2);
       color: var(--main-0);
+      font-size: 1rem;
     }
   }
   .name {

@@ -1,20 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
 import Event from "../../components/adminComponents/Event";
+import EventItem from "../../components/adminComponents/EventItem";
 
 const AdminEvents = () => {
+  const { events } = useSelector((store) => store.admin);
+  console.log(events);
   return (
     <Wrapper>
-      <div className="all-events">
-        <div className="all-event-header">
-          <p>все мероприятия</p>
-          <MdAdd />
-        </div>
-      </div>
-      <div className="event">
+      <div className="content">
         <div className="event-header">
-          <p>мероприятие</p>
+          <p>Новое мероприятие</p>
         </div>
         <Event />
       </div>
@@ -23,55 +21,37 @@ const AdminEvents = () => {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  border: 1px solid gray;
-  .all-events {
-    border: 1px solid gray;
-  }
-  .event {
-    border: 1px solid gray;
-    width: 100%;
-  }
-  .all-event-header {
+  display: flex;
+  justify-content: center;
+  .content {
+    box-shadow: var(--dark-shadow);
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    p {
-      color: var(--main-0);
-    }
-    svg {
-      font-size: 2rem;
-      color: var(--main-0);
-      transition: var(--transition2);
-      cursor: pointer;
-      :hover {
-        color: var(--main-1);
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 2rem;
+    padding: 2rem;
+    /* width: 300px; */
+    .event-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+      p {
+        color: var(--main-0);
+        font-size: 1.5rem;
       }
     }
   }
-  .event-header {
-    display: flex;
-    /* height: 100%; */
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    p {
-      color: var(--main-0);
-    }
-  }
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
   }
   @media (min-width: 992px) {
-    flex-direction: row;
-    .all-events {
-      width: 300px;
-    }
-    .event {
-    }
   }
   @media (min-width: 1140px) {
   }
