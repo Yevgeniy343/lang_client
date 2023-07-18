@@ -19,7 +19,7 @@ export const loginAdmin = createAsyncThunk(
 );
 
 export const createEvent = createAsyncThunk(
-  "admin/loginAdmin",
+  "admin/createevent",
   async (info, thunkAPI) => {
     console.log("info", info);
     return createEventThunk(`/admin/createevent/`, info, thunkAPI);
@@ -60,8 +60,8 @@ const adminSlice = createSlice({
     });
     builder.addCase(createEvent.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-
-      // toast.success(`Привет Админ !`);
+      console.log(payload);
+      toast.success(`Мероприятие "${payload.name}" успешно создано !`);
     });
     builder.addCase(createEvent.rejected, (state, { payload }) => {
       state.isLoading = false;

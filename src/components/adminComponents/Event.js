@@ -82,12 +82,12 @@ const Event = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(createEvent(formData));
-    setTimeout(() => {
-      setpreviewURL(null);
-      setImage(null);
-      setFile(null);
-      setValues(initialState);
-    }, 500);
+    // setTimeout(() => {
+    //   setpreviewURL(null);
+    //   setImage(null);
+    //   setFile(null);
+    //   setValues(initialState);
+    // }, 500);
   };
 
   return (

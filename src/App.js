@@ -45,12 +45,12 @@ function App() {
           position={"top-right"}
           reverseOrder={false}
           toastOptions={{
-            duration: 5000,
+            duration: 6000,
             style: {
               padding: "1rem",
-              // backgroundColor: "#ffdfff",
+              backgroundColor: "#b88aa8",
               fontSize: "1rem",
-              // color: "#17132a",
+              color: "white",
               // borderColor: "#ff00ff",
               // border: "2px solid #ff00ff",
             },

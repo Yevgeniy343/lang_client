@@ -41,7 +41,7 @@ const AdminNavBar = () => {
             </button>
           </div>
           <ul className="nav-links">
-            <li onClick={() => dispatch(logOutAdmin())}>
+            <li>
               <MdEventAvailable />
               <p>Мероприятие</p>
             </li>
