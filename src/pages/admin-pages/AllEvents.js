@@ -27,6 +27,8 @@ const AllEvents = () => {
             name={e.name}
             date1={e.date1}
             date2={e.date2}
+            description={e.description}
+            image={e.image}
           />
         ))}
       </Wrapper>
@@ -36,6 +38,7 @@ const AllEvents = () => {
 
 const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 
   @media (min-width: 576px) {
