@@ -25,7 +25,27 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
-
+  box-shadow: var(--dark-shadow);
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--main-2);
+  transition: var(--transition2);
+  cursor: pointer;
+  :hover {
+    box-shadow: var(--dark-shadow2);
+  }
+  .name {
+    p {
+      color: var(--main-0);
+      font-size: 1.3rem;
+    }
+  }
+  .date {
+    margin: 0.5rem 0;
+    p {
+      color: var(--gray-6);
+    }
+  }
   img {
     width: 200px;
   }
