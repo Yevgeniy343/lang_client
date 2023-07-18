@@ -5,6 +5,7 @@ import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
 import { createEvent } from "../../features/adminSlice";
+import toast from "react-hot-toast";
 
 const initialState = {
   name: "",
@@ -81,13 +82,25 @@ const Event = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createEvent(formData));
-    // setTimeout(() => {
-    //   setpreviewURL(null);
-    //   setImage(null);
-    //   setFile(null);
-    //   setValues(initialState);
-    // }, 500);
+    if (
+      !file ||
+      !image ||
+      values.name ||
+      values.date1 ||
+      values.data2 ||
+      values.description
+    ) {
+      toast.error("Введите все значения");
+      return;
+    } else {
+      dispatch(createEvent(formData));
+      // setTimeout(() => {
+      //   setpreviewURL(null);
+      //   setImage(null);
+      //   setFile(null);
+      //   setValues(initialState);
+      // }, 500);
+    }
   };
 
   return (
@@ -129,6 +142,9 @@ const Event = () => {
           </div>
         </div>
         <div className="description">
+          <label>
+            <span>*</span>Положение
+          </label>
           <textarea
             rows="10"
             name="description"
@@ -241,6 +257,13 @@ const Wrapper = styled.div`
     margin: 1rem 0;
     button {
       width: 100%;
+    }
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    label {
+      margin: 0 1rem;
     }
   }
   @media (min-width: 576px) {
