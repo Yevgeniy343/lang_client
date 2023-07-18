@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import logo from "../../images/esebb1n53kocs4kg80gw8owg8k4o80.webp";
 import {
   sidebarOpenHandler,
@@ -11,7 +12,7 @@ import { GiExitDoor } from "react-icons/gi";
 import { logOutAdmin } from "../../features/adminSlice";
 import { AiOutlineMenu, AiOutlineUnorderedList } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+
 import { smallMenuHandler } from "../../features/user/userSlise";
 
 const AdminNavBar = () => {
@@ -40,11 +41,11 @@ const AdminNavBar = () => {
             </button>
           </div>
           <ul className="nav-links">
-            <li>
+            <li onClick={() => navigate("/new-event")}>
               <MdEventAvailable />
               <p>Новое мероприятие</p>
             </li>
-            <li>
+            <li onClick={() => navigate("/all-events")}>
               <AiOutlineUnorderedList />
               <p>Все мероприятия</p>
             </li>

@@ -12,21 +12,10 @@ const EventItem = ({ name, date1, date2, descriprion, image }) => {
         <p>{date1}</p>
         <p>{date2}</p>
       </div>
-      <div className="poster">
-        <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
-      </div>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  .poster {
-    img {
-      width: 200px;
-      height: 150px;
-    }
-  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {

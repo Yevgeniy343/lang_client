@@ -4,19 +4,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { MdAdd } from "react-icons/md";
 import Event from "../../components/adminComponents/Event";
 import EventItem from "../../components/adminComponents/EventItem";
+import AdminNavBar from "../../components/adminComponents/adminNavbar";
+import AdminSideBar from "../../components/adminComponents/adminSidebar";
 
 const AdminEvents = () => {
   const { events } = useSelector((store) => store.admin);
   console.log(events);
   return (
-    <Wrapper>
-      <div className="content">
-        <div className="event-header">
-          <p>Новое мероприятие</p>
+    <div>
+      <AdminNavBar />
+      <AdminSideBar />
+      <Wrapper>
+        <div className="content">
+          <div className="event-header">
+            <p>Новое мероприятие</p>
+          </div>
+          <Event />
         </div>
-        <Event />
-      </div>
-    </Wrapper>
+      </Wrapper>
+    </div>
   );
 };
 

@@ -6,22 +6,13 @@ import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
 import AdminEvents from "./AdminEvents";
 import Event from "../../components/adminComponents/Event";
-import { getEvents } from "../../features/adminSlice";
 
 const AdminPage = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getEvents());
-  }, []);
-
   return (
     <Wrapper>
       <AdminNavBar />
       <AdminSideBar />
-      <div className="main">
-        <AdminEvents />
-      </div>
+      <div className="main"></div>
     </Wrapper>
   );
 };
