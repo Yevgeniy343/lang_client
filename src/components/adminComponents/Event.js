@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
+import { createEvent } from "../../features/adminSlice";
 
 const initialState = {
   name: "",
@@ -17,9 +17,7 @@ const Event = () => {
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const [values, setValues] = useState(initialState);
-  if (image) {
-    console.log(image);
-  }
+
   const [previewURL, setpreviewURL] = useState();
 
   const filePickerRef = useRef();
@@ -81,19 +79,20 @@ const Event = () => {
   formData.append("date2", values.date2);
   formData.append("description", values.description);
 
-  //   const sendDataHandler = (e) => {
-  //     e.preventDefault();
-  //     // dispatch()
-  //     setpreviewURL(null);
-  //     setTimeout(() => {
-  //       setFile(null);
-  //       // setValues(initialState);
-  //     }, 1000);
-  //   };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createEvent(formData));
+    setTimeout(() => {
+      setpreviewURL(null);
+      setImage(null);
+      setFile(null);
+      setValues(initialState);
+    }, 500);
+  };
 
   return (
     <Wrapper>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className="name">
           <label>
             <span>*</span>Название мероприятия
@@ -177,7 +176,7 @@ const Event = () => {
           </div>
         </div>
         <div className="create">
-          <Button text="Создать пероприятие" type="submit" />
+          <Button text="Создать мероприятие" type="submit" />
         </div>
       </form>
     </Wrapper>
@@ -297,7 +296,7 @@ const Wrapper = styled.div`
     }
   }
   button {
-    width: 130px;
+    width: 150px;
   }
 `;
 export default Event;
