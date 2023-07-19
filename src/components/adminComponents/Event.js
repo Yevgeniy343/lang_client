@@ -96,13 +96,13 @@ const Event = () => {
       return;
     } else {
       dispatch(createEvent(formData));
-      setTimeout(() => {
-        setpreviewURL(null);
-        setImage(null);
-        setFile(null);
-        setValues(initialState);
-        // navigate("/all-events");
-      }, 500);
+      // setTimeout(() => {
+      //   setpreviewURL(null);
+      //   setImage(null);
+      //   setFile(null);
+      //   setValues(initialState);
+      //   navigate("/all-events");
+      // }, 500);
     }
   };
 
