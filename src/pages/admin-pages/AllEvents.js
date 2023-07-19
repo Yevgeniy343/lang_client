@@ -30,6 +30,8 @@ const AllEvents = () => {
             date2={e.date2}
             description={e.description}
             image={e.image}
+            id={e._id}
+            pdf={e.pdf}
           />
         ))}
       </Wrapper>

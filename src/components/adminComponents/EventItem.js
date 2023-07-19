@@ -1,16 +1,34 @@
 import React from "react";
 import styled from "styled-components";
 import { MdDelete } from "react-icons/md";
-import { eventModalHandler } from "../../features/adminSlice";
+import {
+  eventModalHandler,
+  currentEventHandler,
+} from "../../features/adminSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const { REACT_APP_URL_API } = process.env;
 
-const EventItem = ({ name, date1, date2, description, image }) => {
+const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
   const dispatch = useDispatch();
 
+  const modalHandler = () => {
+    dispatch(eventModalHandler(true));
+    dispatch(
+      currentEventHandler({
+        name: name,
+        date1: date1,
+        date2: date2,
+        description: description,
+        image: image,
+        pdf: pdf,
+        id: id,
+      })
+    );
+  };
+
   return (
-    <Wrapper onClick={() => dispatch(eventModalHandler(true))}>
+    <Wrapper onClick={modalHandler}>
       <div className="name">
         <p>{name}</p>
       </div>
