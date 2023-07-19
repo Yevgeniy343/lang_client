@@ -27,3 +27,12 @@ export const getEventsThunk = async (url, info, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
+
+export const editEventsThunk = async (url, info, thunkAPI) => {
+  try {
+    const resp = await customFetch.patch(url, info);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};

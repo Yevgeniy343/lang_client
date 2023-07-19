@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { eventModalHandler } from "../../features/adminSlice";
+import { eventModalHandler, editEvents } from "../../features/adminSlice";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
+import toast from "react-hot-toast";
 const { REACT_APP_URL_API } = process.env;
 
 const EventAdminModal = () => {
@@ -77,17 +78,20 @@ const EventAdminModal = () => {
   };
 
   const formData = new FormData();
-  formData.append("file", file ? file : null);
-  formData.append("image", image ? image : null);
+  formData.append("file", file ? file : "false");
+  formData.append("image", image ? image : "false");
   formData.append("name", values.name);
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
   formData.append("description", values.description);
+  formData.append("id", currentEvent.id);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    //   dispatch(createEvent(formData));
+    if (!values.name || !values.date1 || !values.date2 || !values.description) {
+      toast.error("Введите все значения");
+      return;
+    } else dispatch(editEvents(formData));
   };
 
   return (
@@ -161,7 +165,7 @@ const EventAdminModal = () => {
                 {initialState.pdf}
               </p>
               <Button
-                text="Загрузить pdf"
+                text="Заменить pdf"
                 type="button"
                 onClick={pickImageHandler}
               />
@@ -184,7 +188,7 @@ const EventAdminModal = () => {
             />
             <div className="actions">
               <Button
-                text="Загрузить картинку"
+                text="Заменить картинку"
                 type="button"
                 onClick={pickImageHandler2}
               />

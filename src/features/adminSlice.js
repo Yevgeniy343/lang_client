@@ -3,6 +3,7 @@ import {
   loginAdminThunk,
   createEventThunk,
   getEventsThunk,
+  editEventsThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -36,8 +37,15 @@ export const createEvent = createAsyncThunk(
 export const getEvents = createAsyncThunk(
   "admin/getevent",
   async (info, thunkAPI) => {
-    console.log("info", info);
     return getEventsThunk(`/admin/getevents/`, info, thunkAPI);
+  }
+);
+
+export const editEvents = createAsyncThunk(
+  "admin/editevent",
+  async (info, thunkAPI) => {
+    console.log("info", info);
+    return editEventsThunk(`/admin/editevent/`, info, thunkAPI);
   }
 );
 
@@ -97,6 +105,19 @@ const adminSlice = createSlice({
       state.events = payload.events;
     });
     builder.addCase(getEvents.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // editEvent
+    builder.addCase(editEvents.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editEvents.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.events = payload.events;
+    });
+    builder.addCase(editEvents.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
