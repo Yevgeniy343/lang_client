@@ -1,26 +1,93 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { eventModalHandler } from "../../features/adminSlice";
 import Input from "../../components-special/Input";
+import Button from "../../components-special/Button";
+import { MdDelete } from "react-icons/md";
+const { REACT_APP_URL_API } = process.env;
 
 const EventAdminModal = () => {
   const { isEventModal, currentEvent } = useSelector((store) => store.admin);
 
   const dispatch = useDispatch();
+  const filePickerRef = useRef();
+  const filePickerRefImage = useRef();
 
   const initialState = {
     name: currentEvent.name,
     date1: currentEvent.date1,
     date2: currentEvent.date2,
     description: currentEvent.description,
+    pdf: currentEvent.pdf,
+    image: currentEvent.image,
   };
 
   const [values, setValues] = useState(initialState);
+  const [file, setFile] = useState();
+  const [previewURL, setpreviewURL] = useState();
+  const [image, setImage] = useState();
 
+  console.log(file);
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const pickImageHandler = () => {
+    filePickerRef.current.click();
+  };
+
+  const pickImageHandler2 = () => {
+    filePickerRefImage.current.click();
+  };
+
+  const pickedHandler = (e) => {
+    let pickedFile;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setFile(pickedFile);
+      return;
+    }
+  };
+
+  const pickedHandlerImage = (e) => {
+    let pickedFileImage;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFileImage = e.target.files[0];
+      setImage(pickedFileImage);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setpreviewURL(fileReader.result);
+    };
+    fileReader.readAsDataURL(image);
+  }, [image]);
+
+  const imageRemoveHandler = () => {
+    setImage(null);
+    setpreviewURL(null);
+  };
+
+  const formData = new FormData();
+  formData.append("file", file ? file : null);
+  formData.append("image", image ? image : null);
+  formData.append("name", values.name);
+  formData.append("date1", values.date1);
+  formData.append("date2", values.date2);
+  formData.append("description", values.description);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    //   dispatch(createEvent(formData));
   };
 
   return (
@@ -32,7 +99,7 @@ const EventAdminModal = () => {
         >
           <AiOutlineClose />
         </div>
-        <div className="content">
+        <form className="content" onSubmit={onSubmit}>
           <div className="name">
             <label>
               <span>*</span>Название мероприятия
@@ -80,7 +147,62 @@ const EventAdminModal = () => {
               onChange={changeHandler}
             ></textarea>
           </div>
-        </div>
+          <div className="upload-pfd">
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept=".pdf"
+              ref={filePickerRef}
+              onChange={pickedHandler}
+            />
+            <div className="actions">
+              <p className="file-name">
+                <span className="notice">загруженный файл:</span>{" "}
+                {initialState.pdf}
+              </p>
+              <Button
+                text="Загрузить pdf"
+                type="button"
+                onClick={pickImageHandler}
+              />
+              {file && (
+                <p className="file-name">
+                  <span className="notice">новый файл:</span>
+                  {file.name}
+                </p>
+              )}
+              {file && <MdDelete onClick={() => setFile(null)} />}
+            </div>
+          </div>
+          <div className="upload-picture">
+            <input
+              type="file"
+              accept=".jpeg,.jpg,.png"
+              style={{ display: "none" }}
+              ref={filePickerRefImage}
+              onChange={pickedHandlerImage}
+            />
+            <div className="actions">
+              <Button
+                text="Загрузить картинку"
+                type="button"
+                onClick={pickImageHandler2}
+              />
+              <div className="picture">
+                <img
+                  src={`${REACT_APP_URL_API}/${initialState.image}`}
+                  alt=""
+                />
+
+                <img src={previewURL} alt="" />
+                {image && <MdDelete onClick={imageRemoveHandler} />}
+              </div>
+            </div>
+          </div>
+          <div className="create">
+            <Button text="Сохраниить изменения" type="submit" />
+          </div>
+        </form>
       </div>
     </Wrapper>
   );
@@ -102,7 +224,6 @@ const Wrapper = styled.div`
   .modal {
     background-color: white;
     width: 95vw;
-    height: 95vh;
     border-radius: 10px;
   }
   .close {
@@ -150,6 +271,44 @@ const Wrapper = styled.div`
       margin: 0 1rem;
     }
   }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    button {
+      margin: 1rem 0;
+    }
+    .file-name {
+      color: var(--clr-grey-5);
+    }
+    svg {
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: var(--transition2);
+      color: var(--main-0);
+
+      :hover {
+        color: var(--clr-red-dark);
+      }
+    }
+  }
+  .notice {
+    color: var(--main-0);
+    font-size: 1rem;
+  }
+  .picture {
+    img {
+      width: 200px;
+      height: 150px;
+      margin-right: 1rem;
+    }
+  }
+  .create {
+    margin: 1rem 0;
+    button {
+      width: 100%;
+    }
+  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
@@ -168,11 +327,14 @@ const Wrapper = styled.div`
         margin-left: 20px;
       }
     }
+    .actions {
+      width: 500px;
+    }
   }
   @media (min-width: 992px) {
     .modal {
       width: 580px;
-      height: 90vh;
+      padding: 1rem;
     }
   }
   @media (min-width: 1140px) {
