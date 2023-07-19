@@ -6,6 +6,7 @@ import AdminSideBar from "../../components/adminComponents/adminSidebar";
 import EventItem from "../../components/adminComponents/EventItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../../features/adminSlice";
+import EventAdminModal from "../../components/adminModal/eventAdminModal";
 
 const AllEvents = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const AllEvents = () => {
     dispatch(getEvents());
   }, []);
 
-  const { events } = useSelector((store) => store.admin);
+  const { events, isEventModal } = useSelector((store) => store.admin);
 
   return (
     <div>
@@ -32,6 +33,7 @@ const AllEvents = () => {
           />
         ))}
       </Wrapper>
+      {isEventModal && <EventAdminModal />}
     </div>
   );
 };

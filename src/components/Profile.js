@@ -244,11 +244,21 @@ const Wrapper = styled.div`
     .place {
       justify-content: space-between;
       input {
-        width: 500px;
+        width: 400px;
       }
     }
   }
   @media (min-width: 1340px) {
+    .name,
+    .contacts,
+    .contacts2,
+    .place {
+      input {
+        width: 450px;
+      }
+    }
+  }
+  @media (min-width: 1540px) {
     .name,
     .contacts,
     .contacts2,

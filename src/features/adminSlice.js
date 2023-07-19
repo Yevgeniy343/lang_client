@@ -15,6 +15,7 @@ const initialState = {
   isLoading: false,
   admin: getAdminFromLocalStorage(),
   events: [],
+  isEventModal: false,
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -47,6 +48,9 @@ const adminSlice = createSlice({
       state.admin = null;
       removeAdminFromLocalStorage();
       toast.success(`Пока !`);
+    },
+    eventModalHandler: (state, { payload }) => {
+      state.isEventModal = payload;
     },
   },
   extraReducers: (builder) => {
@@ -95,5 +99,5 @@ const adminSlice = createSlice({
   },
 });
 
-export const { logOutAdmin } = adminSlice.actions;
+export const { logOutAdmin, eventModalHandler } = adminSlice.actions;
 export default adminSlice.reducer;

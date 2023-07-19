@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { MdAdd } from "react-icons/md";
 import Event from "../../components/adminComponents/Event";
-import EventItem from "../../components/adminComponents/EventItem";
 import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
+import EventAdminModal from "../../components/adminModal/eventAdminModal";
 
 const AdminEvents = () => {
   const { events } = useSelector((store) => store.admin);
-  console.log(events);
   return (
     <div>
       <AdminNavBar />

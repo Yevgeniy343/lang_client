@@ -6,6 +6,7 @@ import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
 import AdminEvents from "./AdminEvents";
 import Event from "../../components/adminComponents/Event";
+import EventAdminModal from "../../components/adminModal/eventAdminModal";
 
 const AdminPage = () => {
   return (
