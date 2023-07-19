@@ -1,12 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineFilePdf } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { eventModalHandler, editEvents } from "../../features/adminSlice";
+import {
+  eventModalHandler,
+  editEvents,
+  deleteEvents,
+} from "../../features/adminSlice";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
+import Axios from "axios";
+import FileDownload from "js-file-download";
 const { REACT_APP_URL_API } = process.env;
 
 const EventAdminModal = () => {
@@ -25,10 +31,22 @@ const EventAdminModal = () => {
     image: currentEvent.image,
   };
 
+  const downloadHandler = (e) => {
+    e.preventDefault();
+    Axios({
+      url: `${REACT_APP_URL_API}/${initialState.pdf}`,
+      method: "GET",
+      responseType: "blob",
+    }).then((res) => {
+      FileDownload(res.data, initialState.pdf);
+    });
+  };
+
   const [values, setValues] = useState(initialState);
   const [file, setFile] = useState();
   const [previewURL, setpreviewURL] = useState();
   const [image, setImage] = useState();
+  const [del, setDel] = useState(false);
 
   console.log(file);
   const changeHandler = (e) => {
@@ -91,9 +109,18 @@ const EventAdminModal = () => {
     if (!values.name || !values.date1 || !values.date2 || !values.description) {
       toast.error("Введите все значения");
       return;
-    } else dispatch(editEvents(formData));
+    } else {
+      dispatch(editEvents(formData));
+      setTimeout(() => {
+        dispatch(eventModalHandler(false));
+      }, 1000);
+    }
   };
 
+  const deleteEnentHandler = () => {
+    dispatch(deleteEvents({ id: currentEvent.id }));
+    dispatch(eventModalHandler(false));
+  };
   return (
     <Wrapper>
       <div className="modal">
@@ -161,8 +188,10 @@ const EventAdminModal = () => {
             />
             <div className="actions">
               <p className="file-name">
-                <span className="notice">загруженный файл:</span>{" "}
-                {initialState.pdf}
+                <span className="notice">загруженный файл</span>{" "}
+                <div onClick={downloadHandler}>
+                  <AiOutlineFilePdf />
+                </div>
               </p>
               <Button
                 text="Заменить pdf"
@@ -207,6 +236,10 @@ const EventAdminModal = () => {
             <Button text="Сохраниить изменения" type="submit" />
           </div>
         </form>
+        <div className="delete">
+          <p onClick={() => setDel(!del)}>удалить мероприятие</p>
+          {del && <p onClick={deleteEnentHandler}>подтверждаю</p>}
+        </div>
       </div>
     </Wrapper>
   );
@@ -228,6 +261,8 @@ const Wrapper = styled.div`
   .modal {
     background-color: white;
     width: 95vw;
+    height: 90%;
+    overflow-y: auto;
     border-radius: 10px;
   }
   .close {
@@ -284,6 +319,12 @@ const Wrapper = styled.div`
     }
     .file-name {
       color: var(--clr-grey-5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      svg {
+        font-size: 2rem;
+      }
     }
     svg {
       font-size: 1.5rem;
@@ -311,6 +352,20 @@ const Wrapper = styled.div`
     margin: 1rem 0;
     button {
       width: 100%;
+    }
+  }
+  .delete {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    p {
+      transition: var(--transition2);
+      cursor: pointer;
+      :hover {
+        color: var(--clr-red-light);
+      }
     }
   }
   @media (min-width: 576px) {

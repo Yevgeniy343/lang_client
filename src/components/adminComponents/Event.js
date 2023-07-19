@@ -6,6 +6,7 @@ import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
 import { createEvent } from "../../features/adminSlice";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const initialState = {
   name: "",
@@ -25,6 +26,7 @@ const Event = () => {
   const filePickerRefImage = useRef();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const pickImageHandler = () => {
     filePickerRef.current.click();
@@ -94,12 +96,13 @@ const Event = () => {
       return;
     } else {
       dispatch(createEvent(formData));
-      // setTimeout(() => {
-      //   setpreviewURL(null);
-      //   setImage(null);
-      //   setFile(null);
-      //   setValues(initialState);
-      // }, 500);
+      setTimeout(() => {
+        setpreviewURL(null);
+        setImage(null);
+        setFile(null);
+        setValues(initialState);
+        // navigate("/all-events");
+      }, 500);
     }
   };
 

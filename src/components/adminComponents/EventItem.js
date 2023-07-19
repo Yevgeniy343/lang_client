@@ -59,9 +59,11 @@ const Wrapper = styled.div`
     box-shadow: var(--dark-shadow2);
   }
   .name {
+    max-width: 200px;
     p {
       color: var(--main-0);
       font-size: 1.3rem;
+      word-break: break-all;
     }
   }
   .date {
