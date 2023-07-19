@@ -116,6 +116,12 @@ const userSlice = createSlice({
     });
     builder.addCase(editUser.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      const { user, token } = payload;
+      state.user = user;
+      state.token = token;
+      addUserToLocalStorage(user);
+      addTokenToLocalStorage(token);
+      toast.success(`Изменения внесены`);
     });
     builder.addCase(editUser.rejected, (state, { payload }) => {
       state.isLoading = false;

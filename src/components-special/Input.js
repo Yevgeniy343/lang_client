@@ -1,7 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Input = ({ type, placeholder, value, name, onChange, required }) => {
+const Input = ({
+  type,
+  placeholder,
+  value,
+  name,
+  onChange,
+  required,
+  pattern,
+}) => {
   return (
     <Wrapper>
       <input
@@ -11,6 +19,7 @@ const Input = ({ type, placeholder, value, name, onChange, required }) => {
         value={value}
         name={name}
         onChange={onChange}
+        pattern={pattern}
       />
     </Wrapper>
   );

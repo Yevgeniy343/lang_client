@@ -18,6 +18,8 @@ const Profile = () => {
     phone: user.phone,
     date: user.date,
     city: user.city,
+    job: user.job,
+    job_title: user.job_title,
   };
 
   const [values, setValues] = useState(initialState);
@@ -28,15 +30,19 @@ const Profile = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const { name, email, second_name, phone, date, city } = values;
+    const { name, email, second_name, date, city, job, job_title, phone } =
+      values;
     dispatch(
       editUser({
         name: name,
         email: email,
         second_name: second_name,
         phone: state.phone,
+        // phone: phone,
         date: date,
         city: city,
+        job: job,
+        job_title: job_title,
         id: user._id,
       })
     );
@@ -88,12 +94,20 @@ const Profile = () => {
               className="i"
               //   type="phone"
               //   name="phone"
-              value={values.phone}
+              value={initialState.phone}
               //   onChange={changeHandler}
               inputProps={{ name: "phone" }}
-              onlyCountries={["ru", "kz", "by", "uz"]}
+              // onlyCountries={["ru"]}
+              country="ru"
               onChange={(phone) => setState({ phone })}
             />
+            {/* <Input
+              type="tel"
+              name="phone"
+              value={values.phone}
+              onChange={changeHandler}
+              pattern="[7]{3}-[0-9]{3}-[0-9]{4}"
+            /> */}
           </div>
         </div>
         <div className="contacts2">
@@ -114,6 +128,28 @@ const Profile = () => {
               type="text"
               name="city"
               value={values.city}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="place">
+          <div className="firs">
+            <label>Место работы</label>
+            <Input
+              type="text"
+              name="job"
+              value={values.job}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="second">
+            <label type="text" name="city" value={values.city}>
+              Должность
+            </label>
+            <Input
+              type="text"
+              name="job_title"
+              value={values.job_title}
               onChange={changeHandler}
             />
           </div>
@@ -141,7 +177,8 @@ const Wrapper = styled.div`
   }
   .name,
   .contacts,
-  .contacts2 {
+  .contacts2,
+  .place {
     display: flex;
     width: 100%;
     justify-content: center;
@@ -172,7 +209,8 @@ const Wrapper = styled.div`
   @media (min-width: 576px) {
     .name,
     .contacts,
-    .contacts2 {
+    .contacts2,
+    .place {
       input {
         width: 400px;
       }
@@ -184,7 +222,8 @@ const Wrapper = styled.div`
   @media (min-width: 992px) {
     .name,
     .contacts,
-    .contacts2 {
+    .contacts2,
+    .place {
       justify-content: space-between;
       input {
         width: 400px;
@@ -201,7 +240,8 @@ const Wrapper = styled.div`
   @media (min-width: 1140px) {
     .name,
     .contacts,
-    .contacts2 {
+    .contacts2,
+    .place {
       justify-content: space-between;
       input {
         width: 500px;
@@ -211,7 +251,8 @@ const Wrapper = styled.div`
   @media (min-width: 1340px) {
     .name,
     .contacts,
-    .contacts2 {
+    .contacts2,
+    .place {
       input {
         width: 550px;
       }
