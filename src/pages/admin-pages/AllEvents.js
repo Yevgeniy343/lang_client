@@ -7,6 +7,7 @@ import EventItem from "../../components/adminComponents/EventItem";
 import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../../features/adminSlice";
 import EventAdminModal from "../../components/adminModal/eventAdminModal";
+import Loading from "../../components/Loading";
 
 const AllEvents = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,15 @@ const AllEvents = () => {
     dispatch(getEvents());
   }, []);
 
-  const { events, isEventModal } = useSelector((store) => store.admin);
+  const { events, isEventModal, isLoading } = useSelector(
+    (store) => store.admin
+  );
 
   return (
     <div>
       <AdminNavBar />
       <AdminSideBar />
+      {isLoading && <Loading />}
       <Wrapper>
         {events.map((e) => (
           <EventItem

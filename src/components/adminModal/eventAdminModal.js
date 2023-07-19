@@ -13,10 +13,14 @@ import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import Axios from "axios";
 import FileDownload from "js-file-download";
+import Loading from "../Loading";
+
 const { REACT_APP_URL_API } = process.env;
 
 const EventAdminModal = () => {
-  const { isEventModal, currentEvent } = useSelector((store) => store.admin);
+  const { isEventModal, currentEvent, isLoading } = useSelector(
+    (store) => store.admin
+  );
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -222,6 +226,7 @@ const EventAdminModal = () => {
                 onClick={pickImageHandler2}
               />
               <div className="picture">
+                {isLoading && <Loading />}
                 <img
                   src={`${REACT_APP_URL_API}/${initialState.image}`}
                   alt=""
@@ -259,6 +264,7 @@ const Wrapper = styled.div`
   z-index: 999;
   opacity: 1;
   .modal {
+    overflow-x: hidden;
     background-color: white;
     width: 95vw;
     height: 90%;
