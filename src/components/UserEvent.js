@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Button from "../components-special/Button";
 const { REACT_APP_URL_API } = process.env;
 
 const UserEvent = ({ name, date1, date2, description, image }) => {
@@ -18,6 +19,9 @@ const UserEvent = ({ name, date1, date2, description, image }) => {
       <div className="image">
         <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
       </div>
+      <div className="actives">
+        <Button text="Принять участие" />
+      </div>
     </Wrapper>
   );
 };
@@ -32,9 +36,9 @@ const Wrapper = styled.div`
   border: 1px solid var(--main-2);
   transition: var(--transition2);
   cursor: pointer;
-  :hover {
+  /* :hover {
     box-shadow: var(--dark-shadow2);
-  }
+  } */
   .name {
     p {
       color: var(--main-0);
@@ -54,6 +58,23 @@ const Wrapper = styled.div`
     display: flex;
 
     justify-content: space-between;
+  }
+  .actives {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
+  button {
+    /* box-shadow: var(--dark-shadow); */
+    transition: var(--transition2);
+    padding: 0.5rem 0.8rem;
+    :hover {
+      box-shadow: var(--dark-shadow2);
+    }
+    :active {
+      box-shadow: none;
+    }
   }
   @media (min-width: 576px) {
   }
