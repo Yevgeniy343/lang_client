@@ -1,9 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../components-special/Button";
+import { useSelector, useDispatch } from "react-redux";
+import { orderModalHandler } from "../features/user/userSlise";
+
 const { REACT_APP_URL_API } = process.env;
 
 const UserEvent = ({ name, date1, date2, description, image }) => {
+  const { isOrderModal } = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+
   return (
     <Wrapper>
       <div className="name">
@@ -20,7 +26,10 @@ const UserEvent = ({ name, date1, date2, description, image }) => {
         <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
       </div>
       <div className="actives">
-        <Button text="Принять участие" />
+        <Button
+          text="Принять участие"
+          onClick={() => dispatch(orderModalHandler(true))}
+        />
       </div>
     </Wrapper>
   );
@@ -63,7 +72,11 @@ const Wrapper = styled.div`
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+    height: 100%;
     align-items: end;
+
+    /* align-items: end; */
+    /* margin: auto; */
   }
   button {
     /* box-shadow: var(--dark-shadow); */

@@ -22,6 +22,7 @@ const initialState = {
   isSidebarOpen: false,
   currentSmallMenu: "",
   events: [],
+  isOrderModal: false,
 };
 
 export const registerUser = createAsyncThunk(
@@ -70,6 +71,9 @@ const userSlice = createSlice({
     },
     smallMenuHandler: (state, { payload }) => {
       state.currentSmallMenu = payload;
+    },
+    orderModalHandler: (state, { payload }) => {
+      state.isOrderModal = payload;
     },
   },
   extraReducers: (builder) => {
@@ -148,5 +152,6 @@ export const {
   sidebarCloseHandler,
   sidebarOpenHandler,
   smallMenuHandler,
+  orderModalHandler,
 } = userSlice.actions;
 export default userSlice.reducer;

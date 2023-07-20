@@ -9,9 +9,12 @@ import RightHeader from "../components/RightHeader";
 import Profile from "../components/Profile";
 import UserEvents from "../components/UserEvents";
 import { getEvent } from "../features/user/userSlise";
+import UserModalOrder from "../components/userOrder/userModalOrder";
 
 const PersonamArea = () => {
-  const { user, currentSmallMenu, events } = useSelector((store) => store.user);
+  const { user, currentSmallMenu, events, isOrderModal } = useSelector(
+    (store) => store.user
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,6 +39,7 @@ const PersonamArea = () => {
             <RightHeader />
             {currentSmallMenu === "Профиль" && <Profile />}
             {currentSmallMenu === "Все мероприятия" && <UserEvents />}
+            {isOrderModal && <UserModalOrder />}
           </div>
         </div>
       </div>
