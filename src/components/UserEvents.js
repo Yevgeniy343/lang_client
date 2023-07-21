@@ -17,6 +17,7 @@ const UserEvents = () => {
             date2={e.date2}
             description={e.description}
             image={e.image}
+            pdf={e.pdf}
           />
         ))}
       </div>

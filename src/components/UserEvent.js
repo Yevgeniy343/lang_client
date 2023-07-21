@@ -2,13 +2,30 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../components-special/Button";
 import { useSelector, useDispatch } from "react-redux";
-import { orderModalHandler } from "../features/user/userSlise";
+import {
+  orderModalHandler,
+  currentOrderHandler,
+} from "../features/user/userSlise";
 
 const { REACT_APP_URL_API } = process.env;
 
-const UserEvent = ({ name, date1, date2, description, image }) => {
+const UserEvent = ({ name, date1, date2, description, image, pdf }) => {
   const { isOrderModal } = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
+  const orderHandler = () => {
+    dispatch(orderModalHandler(true));
+    dispatch(
+      currentOrderHandler({
+        name: name,
+        date1: date1,
+        date2: date2,
+        description: description,
+        image: image,
+        pdf: pdf,
+      })
+    );
+  };
 
   return (
     <Wrapper>
@@ -19,17 +36,18 @@ const UserEvent = ({ name, date1, date2, description, image }) => {
         <p>{date1}</p>
         <p>{date2}</p>
       </div>
-      {/* <div className="description">
-        <p>{description}</p>
-      </div> */}
+
+      <div className="results">
+        <p>публикация результатов</p>
+      </div>
+      <div className="diploms">
+        <p>скачивание дипломов</p>
+      </div>
       <div className="image">
         <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
       </div>
       <div className="actives">
-        <Button
-          text="Принять участие"
-          onClick={() => dispatch(orderModalHandler(true))}
-        />
+        <Button text="Принять участие" onClick={orderHandler} />
       </div>
     </Wrapper>
   );
@@ -44,7 +62,7 @@ const Wrapper = styled.div`
   border-radius: 10px;
   border: 1px solid var(--main-2);
   transition: var(--transition2);
-  cursor: pointer;
+
   /* :hover {
     box-shadow: var(--dark-shadow2);
   } */
@@ -87,6 +105,20 @@ const Wrapper = styled.div`
     }
     :active {
       box-shadow: none;
+    }
+  }
+  .results,
+  .diploms {
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    p {
+      transition: var(--transition2);
+      font-size: 1rem;
+      color: var(--main-0);
+      :hover {
+        color: var(--main-1);
+        text-decoration: underline;
+      }
     }
   }
   @media (min-width: 576px) {

@@ -36,6 +36,7 @@ const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
         <p>{date1}</p>
         <p>{date2}</p>
       </div>
+
       {/* <div className="description">
         <p>{description}</p>
       </div> */}
