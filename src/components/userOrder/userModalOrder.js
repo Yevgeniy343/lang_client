@@ -72,7 +72,7 @@ const UserModalOrder = () => {
               }
               onClick={() => setChoose("adult")}
             >
-              Участник-ребёнок или молодежь
+              Участник-ребёнок или молодёжь
             </p>
           </div>
           <div className="choose1">
