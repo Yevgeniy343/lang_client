@@ -11,6 +11,7 @@ import AdminPage from "./pages/admin-pages/AdminPage";
 import { Toaster } from "react-hot-toast";
 import AdminEvents from "./pages/admin-pages/AdminEvents";
 import AllEvents from "./pages/admin-pages/AllEvents";
+import AllUsers from "./pages/admin-pages/AllUsers";
 
 function App() {
   return (
@@ -59,6 +60,17 @@ function App() {
             }
           >
             <Route path="/all-events" element={<AllEvents />} />
+          </Route>
+
+          <Route
+            path="/all-users"
+            element={
+              <ProtectedAdmin>
+                <AllUsers />
+              </ProtectedAdmin>
+            }
+          >
+            <Route path="/all-users" element={<AllUsers />} />
           </Route>
 
           {/* <Route path="/landing" element={<Landing />} /> */}

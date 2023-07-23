@@ -5,6 +5,7 @@ import {
   getEventsThunk,
   editEventsThunk,
   deleteEventsThunk,
+  getUsersThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -19,6 +20,7 @@ const initialState = {
   events: [],
   isEventModal: false,
   currentEvent: [],
+  users: [],
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -55,6 +57,14 @@ export const deleteEvents = createAsyncThunk(
   async (info, thunkAPI) => {
     console.log("info", info);
     return deleteEventsThunk(`/admin/deleteevent/${info.id}`, info, thunkAPI);
+  }
+);
+
+export const getUsers = createAsyncThunk(
+  "admin/getUsers",
+  async (info, thunkAPI) => {
+    console.log("info", info);
+    return getUsersThunk(`/admin/getallusers`, info, thunkAPI);
   }
 );
 
@@ -142,6 +152,21 @@ const adminSlice = createSlice({
       toast.success(`Мероприятие удалено!`);
     });
     builder.addCase(deleteEvents.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // getUsers
+    builder.addCase(getUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUsers.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.users = payload.users;
+
+      // toast.success(`Мероприятие удалено!`);
+    });
+    builder.addCase(getUsers.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

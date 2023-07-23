@@ -1,6 +1,10 @@
 import React from "react";
 import logo from "../../images/esebb1n53kocs4kg80gw8owg8k4o80.webp";
-import { AiOutlineClose, AiOutlineUnorderedList } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineUnorderedList,
+  AiOutlineTeam,
+} from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
 import { MdEventAvailable } from "react-icons/md";
 import styled from "styled-components";
@@ -24,6 +28,11 @@ const AdminSideBar = () => {
 
   const allEventsHandler = () => {
     navigate("/all-events");
+    dispatch(sidebarCloseHandler());
+  };
+
+  const allUsersHandler = () => {
+    navigate("/all-users");
     dispatch(sidebarCloseHandler());
   };
 
@@ -56,6 +65,10 @@ const AdminSideBar = () => {
             <AiOutlineUnorderedList />
             <p>Все мероприятия</p>
           </li>
+          <li onClick={allUsersHandler}>
+            <AiOutlineTeam />
+            <p>Все пользователи</p>
+          </li>
           <li onClick={logOutHandler}>
             <GiExitDoor />
             <p>Выйти</p>
@@ -77,13 +90,14 @@ const SidebarContainer = styled.div`
     margin: auto;
   }
   li {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin: 0;
     padding: 2rem;
     padding-left: 2rem;
     color: var(--color-4);
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     transition: var(--transition2);
     width: 100%;
     p {
