@@ -6,6 +6,7 @@ import Button from "../components-special/Button";
 import { editUser } from "../features/user/userSlise";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import ChangePassword from "./ChangePassword";
 
 const Profile = () => {
   const { user, isLoading } = useSelector((store) => store.user);
@@ -159,6 +160,7 @@ const Profile = () => {
           <Button text="Сохранить" type="submit" />
         </div>
       </form>
+      <ChangePassword />
     </Wrapper>
   );
 };
