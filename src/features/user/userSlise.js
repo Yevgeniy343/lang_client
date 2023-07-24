@@ -4,6 +4,7 @@ import {
   loginUserThunk,
   editUserThunk,
   getEventThunk,
+  changeUserPassThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -51,6 +52,14 @@ export const getEvent = createAsyncThunk(
   "user/getEvent",
   async (info, thunkAPI) => {
     return getEventThunk(`/user/get_event/`, info, thunkAPI);
+  }
+);
+
+export const changeUserPass = createAsyncThunk(
+  "user/changepass",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return changeUserPassThunk(`/user/changepass/`, info, thunkAPI);
   }
 );
 
@@ -145,6 +154,19 @@ const userSlice = createSlice({
       state.events = payload.event;
     });
     builder.addCase(getEvent.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // changeUserPass
+    builder.addCase(changeUserPass.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(changeUserPass.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(`Пароль успешно изменен`);
+    });
+    builder.addCase(changeUserPass.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
