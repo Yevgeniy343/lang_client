@@ -33,7 +33,7 @@ const AdminNavBar = () => {
           <div className="nav-header">
             <div className="logo">
               {/* <img src={logo} alt="logo" className="logo" /> */}
-              <h4>Панель администратора</h4>
+              <h4>админ</h4>
             </div>
             <button
               type="button"
