@@ -38,6 +38,8 @@ const Wrapper = styled.div`
     border-radius: 5px;
     cursor: pointer;
     transition: 0.7s;
+    background-color: white;
+
     :hover {
       border: 2px solid var(--main-2);
       background-color: var(--main-3);

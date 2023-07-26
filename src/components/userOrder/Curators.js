@@ -8,7 +8,6 @@ const Curators = ({ amount }) => {
         <div>
           <Input placeholder="ФИО куратора 1" />
           <Input placeholder="Должность куратора 1" />
-          <p>{amount}</p>
         </div>
       )}
       {amount && amount === "2" && (

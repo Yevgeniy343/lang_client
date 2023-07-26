@@ -75,6 +75,7 @@ const Wrapper = styled.div`
     height: 44px;
     /* border-radius: 5px; */
     transition: 1s;
+
     :hover {
       background-color: var(--main-2);
       color: white;
