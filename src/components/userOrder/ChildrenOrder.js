@@ -96,7 +96,7 @@ const ChildrenOrder = () => {
           ref={filePickerRef}
           onChange={pickedHandler}
         />
-        <p className="file-name">{file.name}</p>
+        {file && <p className="file-name">{file.name}</p>}
       </div>
       <div className="i">
         <label>
