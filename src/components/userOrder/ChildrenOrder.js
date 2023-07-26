@@ -262,7 +262,20 @@ const ChildrenOrder = () => {
             </p>
           </div>
         )}
-        <Checkbox label="согласен с условиями конкурса" />
+        <Checkbox label="Согласен с условиями конкурса" />
+      </div>
+      <div className="in">
+        <label>
+          <span>*</span>Согласие с условиями конкурса
+        </label>
+        <p className="term-link" onClick={() => setTerm(!term)}>
+          Развернуть условия конкурса
+        </p>
+
+        <Checkbox label="Согласен на обработку персональных данных" />
+      </div>
+      <div className="actions">
+        <Button text="Отправить заявку" />
       </div>
     </Wrapper>
   );
@@ -341,6 +354,11 @@ const Wrapper = styled.div`
   .term-text {
     font-size: 0.9rem;
     color: var(--gray2);
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
   }
   @media (min-width: 576px) {
   }

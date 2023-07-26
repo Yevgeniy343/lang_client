@@ -44,10 +44,10 @@ const Wrapper = styled.div`
       border: 2px solid var(--main-2);
       background-color: var(--main-3);
     }
-    :active {
+    /* :active {
       border: 2px solid var(--main-0);
       background-color: var(--main-3);
-    }
+    } */
   }
   .active {
     background-color: white;
