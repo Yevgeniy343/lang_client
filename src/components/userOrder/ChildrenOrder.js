@@ -25,7 +25,7 @@ const ChildrenOrder = () => {
   const [values, setValues] = useState(initialState);
   const [curatorsAmount, setCuratorsAmount] = useState(initialState);
   const [state, setState] = useState("");
-  const [term, setTerm] = useState("");
+  const [term, setTerm] = useState(false);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -201,7 +201,7 @@ const ChildrenOrder = () => {
           <span>*</span>Согласие с условиями конкурса
         </label>
         <p className="term-link" onClick={() => setTerm(!term)}>
-          Развернуть условия конкурса
+          {!term ? "Развернуть условия конкурса" : "Свернуть условия конкурса"}
         </p>
         {term && (
           <div className="term">
@@ -266,11 +266,8 @@ const ChildrenOrder = () => {
       </div>
       <div className="in">
         <label>
-          <span>*</span>Согласие с условиями конкурса
+          <span>*</span>Согласие на обработку персональных данных
         </label>
-        <p className="term-link" onClick={() => setTerm(!term)}>
-          Развернуть условия конкурса
-        </p>
 
         <Checkbox label="Согласен на обработку персональных данных" />
       </div>
@@ -358,7 +355,7 @@ const Wrapper = styled.div`
   .actions {
     display: flex;
     justify-content: center;
-    margin: 1rem;
+    margin: ;
   }
   @media (min-width: 576px) {
   }
