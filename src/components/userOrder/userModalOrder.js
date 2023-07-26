@@ -5,6 +5,7 @@ import { orderModalHandler } from "../../features/user/userSlise";
 import { useSelector, useDispatch } from "react-redux";
 import FileDownload from "js-file-download";
 import Axios from "axios";
+import ChildrenOrder from "./ChildrenOrder";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -87,6 +88,7 @@ const UserModalOrder = () => {
             </p>
           </div>
         </div>
+        <ChildrenOrder />
       </div>
     </Wrapper>
   );
@@ -111,7 +113,7 @@ const Wrapper = styled.div`
     height: 90%;
     overflow-y: auto;
     border-radius: 10px;
-    padding: 1rem;
+    padding: 0.5rem 2rem;
   }
   .close {
     display: flex;

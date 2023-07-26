@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import {
-  sidebarOpenHandler,
-  logOutUser,
-  isModalHandler,
-} from "../../features/user/userSlise";
+import { sidebarOpenHandler, logOutUser } from "../../features/user/userSlise";
 import { useDispatch, useSelector } from "react-redux";
 import { GiExitDoor } from "react-icons/gi";
 import { logOutAdmin } from "../../features/adminSlice";
@@ -15,8 +11,6 @@ import {
   AiOutlineTeam,
 } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
-
-import { smallMenuHandler } from "../../features/user/userSlise";
 
 const AdminNavBar = () => {
   const { user, isModal } = useSelector((store) => store.user);

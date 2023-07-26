@@ -79,22 +79,26 @@ const Select = ({ city }) => {
   );
 };
 const Wrapper = styled.div`
+  z-index: 100;
+  margin-top: 0.15rem;
   .select {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
-    border: 2px solid var(--purple-1);
+    border: 1px solid var(--main-0);
     width: 240px;
     height: 44px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     transition: 1s;
     :hover {
-      background-color: var(--purple-2);
+      background-color: var(--main-2);
+      color: white;
     }
   }
   .select_active {
-    background-color: var(--purple-1);
+    background-color: var(--main-1);
+    color: white;
   }
   .city {
     margin: 0;
@@ -109,24 +113,23 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
   .svg_false {
-    color: var(--purple-1);
+    color: var(--purple-0);
   }
   .svg_true {
     color: white;
   }
   .menu {
-    /* margin-right: 0.5rem; */
-    /* padding-right: 0.5rem; */
     display: flex;
     justify-content: center;
-    position: absolute;
-    border-radius: 5px;
-    border-left: 2px solid var(--purple-1);
-    border-right: 2px solid var(--purple-1);
-    border-bottom: 2px solid var(--purple-1);
+    /* position: absolute; */
+    /* border-radius: 5px; */
+    border-left: 1px solid var(--main-1);
+    border-right: 1px solid var(--main-1);
+    border-bottom: 1px solid var(--main-1);
     width: 240px;
     max-height: 200px;
     background-color: white;
+
     p {
       margin: 0;
     }
@@ -136,9 +139,9 @@ const Wrapper = styled.div`
       margin-bottom: 0.4rem;
       padding-left: 1rem;
       transition: 1s;
-      /* margin-left: 0.3rem; */
       :hover {
-        background-color: var(--purple-2);
+        background-color: var(--main-2);
+        color: white;
       }
     }
   }
@@ -154,7 +157,7 @@ const Wrapper = styled.div`
       border-radius: 8px;
     }
     ::-webkit-scrollbar-thumb {
-      background: var(--purple-1);
+      background: var(--main-1);
       border-radius: 10px;
     }
   }

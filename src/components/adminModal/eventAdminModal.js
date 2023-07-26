@@ -125,6 +125,7 @@ const EventAdminModal = () => {
     dispatch(deleteEvents({ id: currentEvent.id }));
     dispatch(eventModalHandler(false));
   };
+
   return (
     <Wrapper>
       <div className="modal">
