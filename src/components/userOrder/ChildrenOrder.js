@@ -6,13 +6,27 @@ import Button from "../../components-special/Button";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../components-special/Checkbox";
+import { curatorHandler } from "../../features/user/userSlise";
+import Curators from "./Curators";
 
 const ChildrenOrder = () => {
   const dispatch = useDispatch();
   const filePickerRef = useRef();
 
+  const [inputList, setInputList] = useState([]);
+  const [inputList2, setInputList2] = useState([]);
+
+  const initialState = {};
+
+  const [values, setValues] = useState(initialState);
+  const [curatorsAmount, setCuratorsAmount] = useState(initialState);
+  console.log(curatorsAmount);
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   const [file, setFile] = useState();
-  console.log(file);
 
   const pickHandler = () => {
     filePickerRef.current.click();
@@ -27,13 +41,51 @@ const ChildrenOrder = () => {
     }
   };
 
+  const onAddBtnClick = (event) => {
+    setInputList(
+      inputList.concat(
+        <Input
+          key={inputList.length}
+          placeholder="ФИО куратора"
+          type="text"
+          name={inputList.length}
+          onChange={changeHandler}
+        />
+      )
+    );
+    setInputList2(
+      inputList2.concat(
+        <Input
+          key={inputList2.length + 1000}
+          placeholder="Должность куратора"
+          type="text"
+          name={inputList2.length + 1000}
+          onChange={changeHandler}
+        />
+      )
+    );
+  };
+
+  const emptyHandler = () => {
+    console.log(values);
+  };
+
+  const curatorsAmountHanler = (amount) => {
+    setCuratorsAmount(amount);
+  };
+
   return (
     <Wrapper>
       <div className="in">
         <label>
           <span>*</span>Фамилия и имя конкурсанта
         </label>
-        <Input />
+        <Input
+          type="text"
+          name="name"
+          value={values.name}
+          onChange={changeHandler}
+        />
       </div>
       <div className="in">
         <label>
@@ -47,7 +99,7 @@ const ChildrenOrder = () => {
         <label>
           <span>*</span>Субъект Российской Федерации
         </label>
-        <Select />
+        <Select passState={emptyHandler} />
       </div>
       <div className="in">
         <label>
@@ -73,7 +125,7 @@ const ChildrenOrder = () => {
         <label>
           <span>*</span>Язык работы
         </label>
-        <Select />
+        <Select passState={emptyHandler} />
       </div>
       <div className="in">
         <label>Укажите язык работы, если его не было в списке выше</label>
@@ -104,6 +156,14 @@ const ChildrenOrder = () => {
           <Checkbox label="один вариант" />
         </div>
       </div>
+
+      <div className="in curator">
+        <label>
+          <span>*</span>Количество кураторов
+        </label>
+        <Select passState={curatorsAmountHanler} />
+        <Curators amount={curatorsAmount} />
+      </div>
     </Wrapper>
   );
 };
@@ -133,6 +193,11 @@ const Wrapper = styled.div`
     justify-content: space-between;
     svg {
       font-size: 2rem;
+    }
+  }
+  .curator {
+    input {
+      margin: 0.5rem 0;
     }
   }
   @media (min-width: 576px) {

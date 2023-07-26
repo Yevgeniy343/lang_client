@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { VscChevronDown, VscChevronUp } from "react-icons/vsc";
 import { motion } from "framer-motion";
@@ -9,9 +9,9 @@ const animations = {
   exit: { opacity: 0, y: -50 },
 };
 
-const Select = ({ city }) => {
-  const [state, setState] = useState("Томск");
-  console.log(state);
+const Select = ({ passState }) => {
+  const [state, setState] = useState("1");
+  passState(state);
   const [arrow, setArrow] = useState(false);
 
   const arrowHandler = () => {
@@ -42,35 +42,19 @@ const Select = ({ city }) => {
         >
           <div className="menu2">
             <p className="item" onClick={itemHandler}>
-              Томск
+              1
             </p>
             <p className="item" onClick={itemHandler}>
-              Омск
+              2
             </p>
             <p className="item" onClick={itemHandler}>
-              Москва
+              3
             </p>
             <p className="item" onClick={itemHandler}>
-              Краснодар
+              4
             </p>
             <p className="item" onClick={itemHandler}>
-              Казань
-            </p>
-            <p className="item" onClick={itemHandler}>
-              Астрахань
-            </p>
-            <p className="item" onClick={itemHandler}>
-              {" "}
-              Челябинск
-            </p>
-            <p className="item" onClick={itemHandler}>
-              Уфа
-            </p>
-            <p className="item" onClick={itemHandler}>
-              Тверь
-            </p>
-            <p className="item" onClick={itemHandler}>
-              Липецк
+              5
             </p>
           </div>
         </motion.div>
@@ -105,8 +89,6 @@ const Wrapper = styled.div`
     letter-spacing: 0.1rem;
   }
 
-  .icon {
-  }
   svg {
     font-size: 1.7rem;
     margin-top: 0.4rem;
