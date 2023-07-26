@@ -146,7 +146,7 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     .choose1 {
-      height: 50px;
+      height: 57px;
       .notice {
         font-size: 0.9rem;
         height: 50px;

@@ -355,7 +355,6 @@ const Wrapper = styled.div`
   .actions {
     display: flex;
     justify-content: center;
-    margin: ;
   }
   @media (min-width: 576px) {
   }

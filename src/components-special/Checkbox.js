@@ -39,10 +39,9 @@ const Wrapper = styled.div`
     cursor: pointer;
     transition: 0.7s;
     background-color: white;
-
     :hover {
       border: 2px solid var(--main-2);
-      background-color: var(--main-3);
+      background: var(--main-3);
     }
     /* :active {
       border: 2px solid var(--main-0);

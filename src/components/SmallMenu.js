@@ -28,14 +28,18 @@ const Wrapper = styled.div`
     background-color: var(--main-2);
     color: var(--gray-0);
   }
-  P {
+  p {
     margin: 0;
+    margin-left: 0.2rem;
     font-size: 1rem;
   }
 
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
+    p {
+      margin: 0;
+    }
   }
   @media (min-width: 992px) {
   }
