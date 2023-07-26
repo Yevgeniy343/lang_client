@@ -86,7 +86,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem;
-    border: 1px solid var(--main-0);
+    border: 2px solid var(--main-0);
     width: 240px;
     height: 44px;
     /* border-radius: 5px; */
@@ -123,9 +123,9 @@ const Wrapper = styled.div`
     justify-content: center;
     /* position: absolute; */
     /* border-radius: 5px; */
-    border-left: 1px solid var(--main-1);
-    border-right: 1px solid var(--main-1);
-    border-bottom: 1px solid var(--main-1);
+    border-left: 2px solid var(--main-1);
+    border-right: 2px solid var(--main-1);
+    border-bottom: 2px solid var(--main-1);
     width: 240px;
     max-height: 200px;
     background-color: white;

@@ -5,6 +5,7 @@ import Select from "../../components-special/Select";
 import Button from "../../components-special/Button";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import Checkbox from "../../components-special/Checkbox";
 
 const ChildrenOrder = () => {
   const dispatch = useDispatch();
@@ -34,13 +35,12 @@ const ChildrenOrder = () => {
         </label>
         <Input />
       </div>
-      <div className="i">
+      <div className="in">
         <label>
           <span>*</span>Возрастная категория
         </label>
         <div>
-          <input type="checkbox" />
-          <label> один вариант</label>
+          <Checkbox label="один вариант" />
         </div>
       </div>
       <div className="in">
@@ -61,14 +61,12 @@ const ChildrenOrder = () => {
         </label>
         <Input />
       </div>
-      <div className="i">
+      <div className="in">
         <label>
           <span>*</span>Выбор номинации
         </label>
-        {/* <Select /> */}
         <div>
-          <input type="checkbox" />
-          <label> один вариант</label>
+          <Checkbox label="один вариант" />
         </div>
       </div>
       <div className="in">
@@ -98,13 +96,12 @@ const ChildrenOrder = () => {
         />
         {file && <p className="file-name">{file.name}</p>}
       </div>
-      <div className="i">
+      <div className="in">
         <label>
           <span>*</span>Тариф
         </label>
         <div>
-          <input type="checkbox" />
-          <label> один вариант</label>
+          <Checkbox label="один вариант" />
         </div>
       </div>
     </Wrapper>

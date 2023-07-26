@@ -14,21 +14,6 @@ const Checkbox = ({ label, onClick }) => {
     setActive(!active);
   };
 
-  useEffect(() => {
-    if (active) {
-      console.log("true");
-      dispatch(
-        sendMail({
-          email: currentEvent.email,
-          name: currentEvent.name,
-          date: currentEvent.date,
-          time: currentEvent.time,
-          location: currentEvent.location,
-        })
-      );
-    }
-  }, [active]);
-
   return (
     <Wrapper onClick={onClick}>
       <div
@@ -46,26 +31,33 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   .checkbox {
+    margin: 0.5rem 0;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--lilac-1);
+    border: 2px solid var(--main-0);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.7s;
     :hover {
-      border: 2px solid var(--lilac-2);
-      background-color: var(--lilac-2);
+      border: 2px solid var(--main-2);
+      background-color: var(--main-3);
     }
     :active {
-      border: 2px solid var(--lilac-1);
-      background-color: var(--lilac-1);
+      border: 2px solid var(--main-0);
+      background-color: var(--main-3);
     }
   }
   .active {
-    background-color: var(--lilac-1);
+    background-color: white;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
     svg {
-      color: white;
-      font-size: 1.1rem;
+      color: green;
+      font-size: 2rem;
+      position: relative;
+      bottom: 11px;
+      right: 4px;
     }
   }
   p {
