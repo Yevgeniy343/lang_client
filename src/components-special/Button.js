@@ -12,6 +12,7 @@ const Button = ({ text, onClick, type }) => {
 };
 const Wrapper = styled.div`
   button {
+    font-family: "Philosopher", sans-serif;
     color: var(--gray-2);
     padding: 0.3rem 0.6rem;
     background-color: transparent;
