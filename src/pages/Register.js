@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import Input from "../components-special/Input";
 import InputPass from "../components-special/InputPass";
 import Button from "../components-special/Button";
+import Loading from "../components/Loading";
 
 const initialState = {
   name: "",
@@ -68,87 +69,91 @@ const Register = () => {
   };
 
   return (
-    <Wrapper>
-      <form className="form" onSubmit={onSubmit}>
-        <h3>{values.isMember ? "Авторизация" : "Регистрация"}</h3>
-        <div className="input-content">
-          {!values.isMember && (
-            <Input
-              placeholder="Name"
-              type="text"
-              name="name"
-              value={values.name}
-              onChange={changeHandler}
-            />
-          )}
-          <Input
-            placeholder="Email"
-            type="email"
-            name="email"
-            value={values.email.toLowerCase()}
-            onChange={changeHandler}
-          />
-          <InputPass
-            placeholder="Password"
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={changeHandler}
-          />
-        </div>
-        <div className="actions">
-          <Button
-            type="submit"
-            className="btn button-form"
-            disabled={isLoading}
-            text={isLoading ? "Думаю ..." : "Подтвердить"}
-          />
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <p className="asq">
-            {values.isMember ? "Нет регистрации? " : "Уже есть регистрация? "}
-            <button
-              type="button"
-              onClick={toggleMemberHandler}
-              className="member-btn"
-            >
-              {values.isMember ? " Регистрация" : "Авторизация"}
-            </button>
-          </p>
-        </div>
-        <div className="remind">
-          <p onClick={() => setRemind(!remind)}>Восстановить пароль</p>
-        </div>
-      </form>
-      {remind && (
-        <div className="form">
-          <h3>Восстановление пароля</h3>
+    <div>
+      {isLoading && <Loading />}
+
+      <Wrapper>
+        <form className="form" onSubmit={onSubmit}>
+          <h3>{values.isMember ? "Авторизация" : "Регистрация"}</h3>
           <div className="input-content">
-            <p className="info">
-              Укажите email, который Вы использовали при регистрации. На него
-              будет высдан новый, сгенерированный пароль, который мы так же
-              рекомендуем в дальнейшем изменить.{" "}
-            </p>
+            {!values.isMember && (
+              <Input
+                placeholder="Name"
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={changeHandler}
+              />
+            )}
             <Input
-              type="email"
-              name="remind"
               placeholder="Email"
-              value={values.remind}
+              type="email"
+              name="email"
+              value={values.email.toLowerCase()}
               onChange={changeHandler}
             />
-            <div className="actions">
-              <Button
+            <InputPass
+              placeholder="Password"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="actions">
+            <Button
+              type="submit"
+              className="btn button-form"
+              disabled={isLoading}
+              text={isLoading ? "Думаю ..." : "Подтвердить"}
+            />
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <p className="asq">
+              {values.isMember ? "Нет регистрации? " : "Уже есть регистрация? "}
+              <button
                 type="button"
-                onClick={onSubmitRemind}
-                className="btn button-form"
-                disabled={isLoading}
-                text={isLoading ? "Думаю ..." : "Отправить пароль"}
+                onClick={toggleMemberHandler}
+                className="member-btn"
+              >
+                {values.isMember ? " Регистрация" : "Авторизация"}
+              </button>
+            </p>
+          </div>
+          <div className="remind">
+            <p onClick={() => setRemind(!remind)}>Восстановить пароль</p>
+          </div>
+        </form>
+        {remind && (
+          <div className="form">
+            <h3>Восстановление пароля</h3>
+            <div className="input-content">
+              <p className="info">
+                Укажите email, который Вы использовали при регистрации. На него
+                будет высдан новый, сгенерированный пароль, который мы так же
+                рекомендуем в дальнейшем изменить.{" "}
+              </p>
+              <Input
+                type="email"
+                name="remind"
+                placeholder="Email"
+                value={values.remind}
+                onChange={changeHandler}
               />
+              <div className="actions">
+                <Button
+                  type="button"
+                  onClick={onSubmitRemind}
+                  className="btn button-form"
+                  disabled={isLoading}
+                  text={isLoading ? "Думаю ..." : "Отправить пароль"}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </Wrapper>
+        )}
+      </Wrapper>
+    </div>
   );
 };
 const Wrapper = styled.main`

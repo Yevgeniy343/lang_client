@@ -140,6 +140,19 @@ const userSlice = createSlice({
       toast.error(payload);
     });
 
+    // remindUser
+    builder.addCase(remindUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(remindUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(payload.msg);
+    });
+    builder.addCase(remindUser.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
     // editUser
     builder.addCase(editUser.pending, (state) => {
       state.isLoading = true;
@@ -154,20 +167,6 @@ const userSlice = createSlice({
       toast.success(`Изменения внесены`);
     });
     builder.addCase(editUser.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      toast.error(payload);
-    });
-
-    // remindUser
-    builder.addCase(remindUser.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(remindUser.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-
-      // toast.success(`Изменения внесены`);
-    });
-    builder.addCase(remindUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
