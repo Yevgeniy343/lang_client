@@ -157,15 +157,13 @@ const Register = () => {
   );
 };
 const Wrapper = styled.main`
+  margin-top: 2rem;
   .form {
-    width: 90vw;
+    width: 95vw;
     max-width: var(--fixed-width);
-    /* background-color: var(--clr-primary-8); */
-    /* box-shadow: var(--shadow-2); */
-    padding: 2rem 2.5rem;
-    margin: 3rem auto;
+    padding: 1rem 2.5rem;
+    margin: 1rem auto;
     transition: var(--transition);
-    /* border-radius: 40px; */
   }
   input {
     margin: 0.5rem 0;
@@ -216,7 +214,7 @@ const Wrapper = styled.main`
   .info {
     text-indent: 1rem;
     text-align: left;
-    margin: 1rem;
+    /* margin: 1rem; */
     color: var(--clr-grey-4);
   }
 
