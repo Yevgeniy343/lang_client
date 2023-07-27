@@ -5,6 +5,7 @@ import {
   editUserThunk,
   getEventThunk,
   changeUserPassThunk,
+  remindUserThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -39,6 +40,14 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
     return loginUserThunk(`/auth/login/`, user, thunkAPI);
+  }
+);
+
+export const remindUser = createAsyncThunk(
+  "user/remindUser",
+  async (user, thunkAPI) => {
+    console.log(user);
+    return remindUserThunk(`/auth/remind/`, user, thunkAPI);
   }
 );
 
@@ -145,6 +154,20 @@ const userSlice = createSlice({
       toast.success(`Изменения внесены`);
     });
     builder.addCase(editUser.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // remindUser
+    builder.addCase(remindUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(remindUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+
+      // toast.success(`Изменения внесены`);
+    });
+    builder.addCase(remindUser.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser, registerUser } from "../features/user/userSlise";
+import {
+  loginUser,
+  registerUser,
+  remindUser,
+} from "../features/user/userSlise";
 import toast from "react-hot-toast";
 import Input from "../components-special/Input";
 import InputPass from "../components-special/InputPass";
@@ -19,6 +23,7 @@ const initialState = {
 const Register = () => {
   const { user, isLoading } = useSelector((store) => store.user);
   const [values, setValues] = useState(initialState);
+  const [remind, setRemind] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,8 +58,9 @@ const Register = () => {
     }
   }, [user]);
 
-  const onSubmitRemind = (e) => {
-    e.preventDefault();
+  const onSubmitRemind = () => {
+    const { remind } = values;
+    dispatch(remindUser({ remind_email: remind }));
   };
 
   return (
@@ -107,35 +113,37 @@ const Register = () => {
           </p>
         </div>
         <div className="remind">
-          <p>Восстановить пароль</p>
+          <p onClick={() => setRemind(!remind)}>Восстановить пароль</p>
         </div>
       </form>
-
-      <form className="form" onSubmit={onSubmitRemind}>
-        <h3>Восстановление пароля</h3>
-        <div className="input-content">
-          <p className="info">
-            Укажите email, который Вы использовали при регистрации. На него
-            будет высдан новый, сгенерированный пароль, который мы так же
-            рекомендуем в дальнейшем изменить.{" "}
-          </p>
-          <Input
-            type="email"
-            name="remind"
-            placeholder="Email"
-            value={values.remind}
-            onChange={changeHandler}
-          />
-          <div className="actions">
-            <Button
-              type="submit"
-              className="btn button-form"
-              disabled={isLoading}
-              text={isLoading ? "Думаю ..." : "Отправить пароль"}
+      {remind && (
+        <div className="form">
+          <h3>Восстановление пароля</h3>
+          <div className="input-content">
+            <p className="info">
+              Укажите email, который Вы использовали при регистрации. На него
+              будет высдан новый, сгенерированный пароль, который мы так же
+              рекомендуем в дальнейшем изменить.{" "}
+            </p>
+            <Input
+              type="email"
+              name="remind"
+              placeholder="Email"
+              value={values.remind}
+              onChange={changeHandler}
             />
+            <div className="actions">
+              <Button
+                type="button"
+                onClick={onSubmitRemind}
+                className="btn button-form"
+                disabled={isLoading}
+                text={isLoading ? "Думаю ..." : "Отправить пароль"}
+              />
+            </div>
           </div>
         </div>
-      </form>
+      )}
     </Wrapper>
   );
 };
@@ -202,6 +210,7 @@ const Wrapper = styled.main`
     margin: 1rem;
     color: var(--clr-grey-4);
   }
+
   @media (min-width: 992px) {
   }
 `;
