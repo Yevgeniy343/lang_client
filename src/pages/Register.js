@@ -60,6 +60,10 @@ const Register = () => {
 
   const onSubmitRemind = () => {
     const { remind } = values;
+    if (!remind) {
+      toast.error("Укажите Email");
+      return;
+    }
     dispatch(remindUser({ remind_email: remind }));
   };
 
