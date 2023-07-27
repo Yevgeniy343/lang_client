@@ -20,6 +20,7 @@ const Wrapper = styled.div`
     border-radius: 5px;
     color: var(--main-0);
     border-color: var(--main-0);
+    /* font-size: 1.3rem; */
     cursor: pointer;
     :hover {
       background-color: var(--main-0);

@@ -42,7 +42,9 @@ const Wrapper = styled.div`
   margin: 1rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  box-shadow: var(--bsh-1);
+
   div {
     margin: 1rem;
     width: 300px;
@@ -53,6 +55,9 @@ const Wrapper = styled.div`
   }
   @media (min-width: 992px) {
     flex-direction: row;
+    div {
+      width: 500px;
+    }
   }
   @media (min-width: 1140px) {
   }
