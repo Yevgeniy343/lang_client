@@ -13,6 +13,7 @@ const initialState = {
   email: "",
   password: "",
   isMember: true,
+  remind: "",
 };
 
 const Register = () => {
@@ -21,9 +22,11 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, email, password, isMember } = values;
@@ -41,6 +44,7 @@ const Register = () => {
   const toggleMemberHandler = () => {
     setValues({ ...values, isMember: !values.isMember });
   };
+
   useEffect(() => {
     if (user) {
       setTimeout(() => {
@@ -49,15 +53,14 @@ const Register = () => {
     }
   }, [user]);
 
+  const onSubmitRemind = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <Wrapper>
       <form className="form" onSubmit={onSubmit}>
-        <div className="header">
-          <p>можно добавить текст или логотип</p>
-        </div>
-        <h3 style={{ textAlign: "center" }}>
-          {values.isMember ? "Авторизация" : "Регистрация"}
-        </h3>
+        <h3>{values.isMember ? "Авторизация" : "Регистрация"}</h3>
         <div className="input-content">
           {!values.isMember && (
             <Input
@@ -92,7 +95,7 @@ const Register = () => {
           />
         </div>
         <div style={{ textAlign: "center" }}>
-          <p>
+          <p className="asq">
             {values.isMember ? "Нет регистрации? " : "Уже есть регистрация? "}
             <button
               type="button"
@@ -102,6 +105,35 @@ const Register = () => {
               {values.isMember ? " Регистрация" : "Авторизация"}
             </button>
           </p>
+        </div>
+        <div className="remind">
+          <p>Восстановить пароль</p>
+        </div>
+      </form>
+
+      <form className="form" onSubmit={onSubmitRemind}>
+        <h3>Восстановление пароля</h3>
+        <div className="input-content">
+          <p className="info">
+            Укажите email, который Вы использовали при регистрации. На него
+            будет высдан новый, сгенерированный пароль, который мы так же
+            рекомендуем в дальнейшем изменить.{" "}
+          </p>
+          <Input
+            type="email"
+            name="remind"
+            placeholder="Email"
+            value={values.remind}
+            onChange={changeHandler}
+          />
+          <div className="actions">
+            <Button
+              type="submit"
+              className="btn button-form"
+              disabled={isLoading}
+              text={isLoading ? "Думаю ..." : "Отправить пароль"}
+            />
+          </div>
         </div>
       </form>
     </Wrapper>
@@ -130,6 +162,7 @@ const Wrapper = styled.main`
   }
   h3 {
     color: var(--main-0);
+    text-align: center;
   }
   button {
     font-size: 1.3rem;
@@ -149,7 +182,26 @@ const Wrapper = styled.main`
       text-decoration: underline;
     }
   }
-
+  .asq {
+    color: var(--clr-grey-4);
+  }
+  .remind {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    cursor: pointer;
+    transition: var(--transition2);
+    color: var(--main-0);
+    :hover {
+      text-decoration: underline;
+    }
+  }
+  .info {
+    text-indent: 1rem;
+    text-align: left;
+    margin: 1rem;
+    color: var(--clr-grey-4);
+  }
   @media (min-width: 992px) {
   }
 `;
