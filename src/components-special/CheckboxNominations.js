@@ -30,7 +30,8 @@ const Wrapper = styled.div`
   align-items: center;
   .checkbox {
     margin: 0.5rem 0;
-    width: 20px;
+    min-width: 20px;
+    max-width: 20px;
     height: 20px;
     border: 2px solid var(--main-0);
     cursor: pointer;

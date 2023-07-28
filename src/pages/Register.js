@@ -53,9 +53,7 @@ const Register = () => {
 
   useEffect(() => {
     if (user) {
-      setTimeout(() => {
-        navigate("/personal-area");
-      }, 2000);
+      navigate("/personal-area");
     }
   }, [user]);
 

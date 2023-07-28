@@ -98,9 +98,6 @@ const userSlice = createSlice({
     currentOrderHandler: (state, { payload }) => {
       state.currentOrder = payload;
     },
-    curatorHandler: (state, { payload }) => {
-      state.curators.push(payload);
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) => {
@@ -206,6 +203,5 @@ export const {
   smallMenuHandler,
   orderModalHandler,
   currentOrderHandler,
-  curatorHandler,
 } = userSlice.actions;
 export default userSlice.reducer;
