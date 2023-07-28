@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import ChildrenOrder from "./ChildrenOrder";
+import AdultOrder from "./AdultOrder";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -68,9 +69,9 @@ const UserModalOrder = () => {
             </p>
             <p
               className={
-                choose === "adult" ? "active choose-button" : "choose-button"
+                choose === "child" ? "active choose-button" : "choose-button"
               }
-              onClick={() => setChoose("adult")}
+              onClick={() => setChoose("child")}
             >
               Участник-ребёнок или молодёжь
             </p>
@@ -79,15 +80,16 @@ const UserModalOrder = () => {
             <p className="notice">Заполняется в конкурсах для педагогов</p>
             <p
               className={
-                choose === "child" ? "active choose-button" : "choose-button"
+                choose === "adult" ? "active choose-button" : "choose-button"
               }
-              onClick={() => setChoose("child")}
+              onClick={() => setChoose("adult")}
             >
               Участник-взрослый (педагог)
             </p>
           </div>
         </div>
-        <ChildrenOrder />
+        {choose === "child" && <ChildrenOrder />}
+        {choose === "adult" && <AdultOrder />}
       </div>
     </Wrapper>
   );
@@ -157,6 +159,7 @@ const Wrapper = styled.div`
         align-items: center;
         background-color: var(--gray-0);
         font-size: 1rem;
+        border: 2px solid var(--main-0);
         cursor: pointer;
         height: 50px;
         width: 100%;

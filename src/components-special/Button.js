@@ -13,14 +13,15 @@ const Button = ({ text, onClick, type }) => {
 const Wrapper = styled.div`
   button {
     font-family: "Philosopher", sans-serif;
+    font-size: 1rem;
     color: var(--gray-2);
     padding: 0.3rem 0.6rem;
     background-color: transparent;
     transition: 0.8s;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     color: var(--main-0);
     border-color: var(--main-0);
-    /* font-size: 1.3rem; */
+    height: 44px;
     cursor: pointer;
     :hover {
       background-color: var(--main-0);
