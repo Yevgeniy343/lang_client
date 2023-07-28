@@ -56,7 +56,6 @@ const UserModalOrder = () => {
           <p className="desc-header">
             Перед тем, как принять участие в конкурсе, изучите положение{" "}
           </p>
-          <p>{currentOrder.description}</p>
         </div>
         <div className="file" onClick={downloadHandler}>
           <AiOutlineFilePdf />
@@ -107,7 +106,6 @@ const Wrapper = styled.div`
   z-index: 999;
   opacity: 1;
   .modal {
-    /* overflow-x: hidden; */
     background-color: white;
     width: 95vw;
     height: 90%;
@@ -143,14 +141,16 @@ const Wrapper = styled.div`
   }
   .choose {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
     .choose1 {
-      height: 57px;
+      height: 50px;
+      /* width: 150px; */
+      margin-bottom: 1rem;
+      margin-top: 1rem;
       .notice {
         font-size: 0.9rem;
-        height: 50px;
-        margin-top: 1rem;
       }
       .choose-button {
         display: flex;
@@ -158,11 +158,12 @@ const Wrapper = styled.div`
         background-color: var(--gray-0);
         font-size: 1rem;
         cursor: pointer;
-        height: 100%;
+        height: 50px;
         width: 100%;
         justify-content: center;
         margin-right: 0.5rem;
         padding-left: 0.5rem;
+
         transition: var(--transition2);
         :hover {
           background-color: var(--main-1);
@@ -228,18 +229,18 @@ const Wrapper = styled.div`
     .choose {
       .choose1 {
         .notice {
-          height: max-content;
+          /* height: max-content; */
         }
       }
     }
   }
   @media (min-width: 768px) {
     .choose {
-      display: flex;
+      flex-direction: row;
       justify-content: space-around;
       .choose1 {
         .choose-button {
-          font-size: 1.3rem;
+          font-size: 1.2rem;
         }
       }
     }
@@ -252,6 +253,12 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 992px) {
+    .choose {
+      justify-content: space-between;
+      .choose1 {
+        /* height: 50px; */
+      }
+    }
     .modal {
       width: 680px;
     }
