@@ -17,12 +17,14 @@ const SmallMenu = ({ item }) => {
   );
 };
 const Wrapper = styled.div`
-  width: 100%;
+  width: 150px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: var(--transition2);
+  background-color: var(--gray-0);
+
   cursor: pointer;
   :hover {
     background-color: var(--main-2);
@@ -42,6 +44,7 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 992px) {
+    width: 100%;
   }
   @media (min-width: 1140px) {
   }

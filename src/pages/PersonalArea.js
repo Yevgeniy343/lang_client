@@ -34,6 +34,7 @@ const PersonamArea = () => {
             <SmallMenu item="Мои заказы" />
             <SmallMenu item="Профиль" />
             <SmallMenu item="Все мероприятия" />
+            <SmallMenu item="Скачать дипломы" />
           </div>
           <div className="right">
             <RightHeader />
@@ -60,12 +61,13 @@ const Wrapper = styled.div`
     .left {
       width: 100%;
       margin-top: 1rem;
-      max-width: 400px;
+      /* max-width: 400px; */
       height: max-content;
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      background-color: var(--gray-0);
+      justify-content: flex-start;
+      /* background-color: var(--gray-0); */
+      flex-wrap: wrap;
     }
     .right {
       width: 100%;

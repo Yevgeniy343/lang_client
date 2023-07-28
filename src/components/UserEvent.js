@@ -37,12 +37,6 @@ const UserEvent = ({ name, date1, date2, description, image, pdf }) => {
         <p>{date2}</p>
       </div>
 
-      <div className="results">
-        <p>публикация результатов</p>
-      </div>
-      <div className="diploms">
-        <p>скачивание дипломов</p>
-      </div>
       <div className="image">
         <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
       </div>
@@ -63,9 +57,6 @@ const Wrapper = styled.div`
   border: 1px solid var(--main-2);
   transition: var(--transition2);
 
-  /* :hover {
-    box-shadow: var(--dark-shadow2);
-  } */
   .name {
     p {
       color: var(--main-0);
@@ -92,12 +83,8 @@ const Wrapper = styled.div`
     justify-content: center;
     height: 100%;
     align-items: end;
-
-    /* align-items: end; */
-    /* margin: auto; */
   }
   button {
-    /* box-shadow: var(--dark-shadow); */
     transition: var(--transition2);
     padding: 0.5rem 0.8rem;
     :hover {
@@ -107,20 +94,7 @@ const Wrapper = styled.div`
       box-shadow: none;
     }
   }
-  .results,
-  .diploms {
-    margin-bottom: 0.5rem;
-    cursor: pointer;
-    p {
-      transition: var(--transition2);
-      font-size: 1rem;
-      color: var(--main-0);
-      :hover {
-        color: var(--main-1);
-        text-decoration: underline;
-      }
-    }
-  }
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
