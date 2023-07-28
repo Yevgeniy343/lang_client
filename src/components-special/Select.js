@@ -9,8 +9,10 @@ const animations = {
   exit: { opacity: 0, y: -50 },
 };
 
-const Select = ({ passState }) => {
-  const [state, setState] = useState("1");
+const Select = ({ passState, data }) => {
+  // console.log(data);
+
+  const [state, setState] = useState();
   passState(state);
   const [arrow, setArrow] = useState(false);
 
@@ -41,10 +43,12 @@ const Select = ({ passState }) => {
           transition={{ duration: 0.5 }}
         >
           <div className="menu2">
-            <p className="item" onClick={itemHandler}>
-              1
-            </p>
-            <p className="item" onClick={itemHandler}>
+            {data.map((d) => (
+              <p key={d.id} className="item" onClick={itemHandler}>
+                {d.label}
+              </p>
+            ))}
+            {/* <p className="item" onClick={itemHandler}>
               2
             </p>
             <p className="item" onClick={itemHandler}>
@@ -55,7 +59,7 @@ const Select = ({ passState }) => {
             </p>
             <p className="item" onClick={itemHandler}>
               5
-            </p>
+            </p> */}
           </div>
         </motion.div>
       )}
@@ -71,9 +75,8 @@ const Wrapper = styled.div`
     justify-content: space-between;
     padding: 0 1.5rem;
     border: 2px solid var(--main-0);
-    width: 240px;
+    width: 280px;
     height: 44px;
-    /* border-radius: 5px; */
     transition: 1s;
 
     :hover {
@@ -109,7 +112,7 @@ const Wrapper = styled.div`
     border-left: 2px solid var(--main-1);
     border-right: 2px solid var(--main-1);
     border-bottom: 2px solid var(--main-1);
-    width: 240px;
+    width: 280px;
     max-height: 200px;
     background-color: white;
 
@@ -129,14 +132,12 @@ const Wrapper = styled.div`
     }
   }
   .menu2 {
-    width: 225px;
+    width: 265px;
     overflow: auto;
     ::-webkit-scrollbar {
       width: 5px;
     }
     ::-webkit-scrollbar-track {
-      /* box-shadow: inset 0 0 5px var(--purple-1); */
-
       border-radius: 8px;
     }
     ::-webkit-scrollbar-thumb {

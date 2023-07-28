@@ -9,6 +9,7 @@ import Checkbox from "../../components-special/Checkbox";
 import { curatorHandler } from "../../features/user/userSlise";
 import Curators from "./Curators";
 import PhoneInput from "react-phone-input-2";
+import { subjects } from "../../data/subject";
 
 const ChildrenOrder = () => {
   const { user } = useSelector((store) => store.user);
@@ -26,6 +27,8 @@ const ChildrenOrder = () => {
   const [curatorsAmount, setCuratorsAmount] = useState(initialState);
   const [state, setState] = useState("");
   const [term, setTerm] = useState(false);
+  const [age, setAge] = useState("");
+  console.log(age);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -60,10 +63,15 @@ const ChildrenOrder = () => {
     }
   };
 
-  const emptyHandler = () => {
-    console.log(values);
+  const emptyHandler = () => {};
+
+  const subjectHandler = (state) => {
+    // console.log(state);
   };
 
+  const ageHandler = (data) => {
+    setAge(data);
+  };
   const curatorsAmountHanler = (amount) => {
     setCuratorsAmount(amount);
   };
@@ -85,15 +93,46 @@ const ChildrenOrder = () => {
         <label>
           <span>*</span>Возрастная категория
         </label>
-        <div>
-          <Checkbox label="один вариант" />
+        <div className="check-group">
+          <div className="box">
+            <Checkbox indicator={age} passState={ageHandler} label="3-5 лет" />
+          </div>
+
+          <div className="box">
+            <Checkbox indicator={age} passState={ageHandler} label="6-8 лет" />
+          </div>
+          <div className="box">
+            <Checkbox indicator={age} passState={ageHandler} label="9-12 лет" />
+          </div>
+          <div className="box">
+            <Checkbox
+              indicator={age}
+              passState={ageHandler}
+              label="13-15 лет"
+            />
+          </div>
+          <div className="box">
+            <Checkbox
+              indicator={age}
+              passState={ageHandler}
+              label="16-18 лет"
+            />
+          </div>
+          <div className="box">
+            <Checkbox
+              indicator={age}
+              passState={ageHandler}
+              label="19-22 лет"
+            />
+          </div>
         </div>
       </div>
+      <p>{age}</p>
       <div className="in">
         <label>
           <span>*</span>Субъект Российской Федерации
         </label>
-        <Select passState={emptyHandler} />
+        <Select passState={subjectHandler} data={subjects} />
       </div>
       <div className="in">
         <label>
@@ -112,7 +151,7 @@ const ChildrenOrder = () => {
           <span>*</span>Выбор номинации
         </label>
         <div>
-          <Checkbox label="один вариант" />
+          {/* <Checkbox passState={emptyHandler} label="один вариант" /> */}
         </div>
       </div>
       <div className="in">
@@ -147,7 +186,7 @@ const ChildrenOrder = () => {
           <span>*</span>Тариф
         </label>
         <div>
-          <Checkbox label="один вариант" />
+          {/* <Checkbox passState={emptyHandler} label="один вариант" /> */}
         </div>
       </div>
       <div className="in curator">
@@ -262,14 +301,20 @@ const ChildrenOrder = () => {
             </p>
           </div>
         )}
-        <Checkbox label="Согласен с условиями конкурса" />
+        {/* <Checkbox
+          passState={emptyHandler}
+          label="Согласен с условиями конкурса"
+        /> */}
       </div>
       <div className="in">
         <label>
           <span>*</span>Согласие на обработку персональных данных
         </label>
 
-        <Checkbox label="Согласен на обработку персональных данных" />
+        {/* <Checkbox
+          passState={emptyHandler}
+          label="Согласен на обработку персональных данных"
+        /> */}
       </div>
       <div className="actions">
         <Button text="Отправить заявку" />
@@ -355,6 +400,13 @@ const Wrapper = styled.div`
   .actions {
     display: flex;
     justify-content: center;
+  }
+  .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    .box {
+      width: 140px;
+    }
   }
   @media (min-width: 576px) {
   }
