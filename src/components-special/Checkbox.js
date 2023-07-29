@@ -15,7 +15,7 @@ const Checkbox = ({ label, onClick, passState, indicator }) => {
   return (
     <Wrapper onClick={onClick}>
       <div
-        className={indicator === label ? "checkbox active" : "checkbox"}
+        className={indicator === label ? "checkbox active1" : "checkbox"}
         onClick={checkboxHandler}
       >
         {indicator === label && <AiOutlineCheck />}
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
       background: var(--main-3);
     }
   }
-  .active {
+  .active1 {
     background-color: white;
     svg {
       display: block;

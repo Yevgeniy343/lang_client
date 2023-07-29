@@ -26,7 +26,6 @@ const initialState = {
   events: [],
   isOrderModal: false,
   currentOrder: [],
-  curators: [],
 };
 
 export const registerUser = createAsyncThunk(

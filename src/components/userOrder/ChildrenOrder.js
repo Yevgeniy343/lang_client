@@ -8,9 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../components-special/Checkbox";
 import CheckboxNominations from "../../components-special/CheckboxNominations";
 
-import Curators from "./Curators";
 import PhoneInput from "react-phone-input-2";
-import { subjects, languages } from "../../data/data-order";
+import { subjects, languages, curators } from "../../data/data-order";
 
 const ChildrenOrder = () => {
   const { user } = useSelector((store) => store.user);
@@ -22,6 +21,17 @@ const ChildrenOrder = () => {
     punct: "",
     graduate: "",
     language2: "",
+    link: "",
+    cur: "",
+  };
+
+  const initialStateCurators = {
+    cf1: "",
+    cd1: "",
+    cf2: "",
+    cd2: "",
+    cf3: "",
+    cd3: "",
   };
 
   const dispatch = useDispatch();
@@ -31,15 +41,20 @@ const ChildrenOrder = () => {
   const [term, setTerm] = useState(false);
 
   const [values, setValues] = useState(initialState);
-  const [curatorsAmount, setCuratorsAmount] = useState(initialState);
   const [age, setAge] = useState("");
   const [subject, setSubject] = useState("");
   const [language, setLanguage] = useState("");
   const [nomination, setNomination] = useState("");
+  const [curatorsAmount, setCuratorsAmount] = useState();
+  const [cur, setCur] = useState(initialStateCurators);
   const [phone, setPhone] = useState(initialState.phone);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const changeCuratorHandler = (e) => {
+    setCur({ ...cur, [e.target.name]: e.target.value });
   };
 
   const [file, setFile] = useState();
@@ -66,12 +81,10 @@ const ChildrenOrder = () => {
     let pickedFile2;
     if (e.target.files && e.target.files.length === 1) {
       pickedFile2 = e.target.files[0];
-      setFile(pickedFile2);
+      setFile2(pickedFile2);
       return;
     }
   };
-
-  const emptyHandler = () => {};
 
   const subjectHandler = (state) => {
     setSubject(state);
@@ -80,7 +93,11 @@ const ChildrenOrder = () => {
   const ageHandler = (data) => {
     setAge(data);
   };
+
   const curatorsAmountHanler = (amount) => {
+    if (amount !== curatorsAmount) {
+      setCur(initialStateCurators);
+    }
     setCuratorsAmount(amount);
   };
 
@@ -103,6 +120,9 @@ const ChildrenOrder = () => {
     console.log("language = ", language);
     console.log("language2 = ", values.language2);
     console.log("nomination = ", nomination);
+    console.log("link = ", values.link);
+    console.log("curatorsAmount = ", curatorsAmount);
+    console.log("curators = ", cur);
   };
 
   return (
@@ -298,7 +318,12 @@ const ChildrenOrder = () => {
           <label>
             Ссылка на работу в номинациях, предполагающих приложение ссылок
           </label>
-          <Input />
+          <Input
+            type="text"
+            name="link"
+            value={values.link}
+            onChange={changeHandler}
+          />
         </div>
         <div className="in">
           <Button
@@ -315,6 +340,109 @@ const ChildrenOrder = () => {
           />
           {file && <p className="file-name">{file.name}</p>}
         </div>
+        <div className="in curator">
+          <label>
+            <span>*</span>Количество кураторов
+          </label>
+          <Select passState={curatorsAmountHanler} data={curators} />
+          {/* <Curators amount={curatorsAmount} passSet={curatorsHandler} /> */}
+          {curatorsAmount === "1" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                onChange={changeCuratorHandler}
+                value={cur.cd1}
+              />
+            </div>
+          )}
+          {curatorsAmount === "2" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+          {curatorsAmount === "3" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 3"
+                type="text"
+                name="cf3"
+                value={cur.cf3}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 3"
+                type="text"
+                name="cd3"
+                value={cur.cd3}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+        </div>
         <div className="in">
           <label>
             <span>*</span>Тариф
@@ -323,27 +451,20 @@ const ChildrenOrder = () => {
             {/* <Checkbox passState={emptyHandler} label="один вариант" /> */}
           </div>
         </div>
-        <div className="in curator">
-          <label>
-            <span>*</span>Количество кураторов
-          </label>
-          {/* <Select passState={curatorsAmountHanler} /> */}
-          <Curators amount={curatorsAmount} />
-        </div>
         <div className="in">
           <label>
             <span>*</span>Квитанция об оплате
           </label>
           <div className="in">
-            <Button text="Загрузить" type="button" onClick={pickHandler} />
+            <Button text="Загрузить" type="button" onClick={pickHandler2} />
             <input
               type="file"
               style={{ display: "none" }}
               // accept=".pdf"
-              ref={filePickerRef}
-              onChange={pickedHandler}
+              ref={filePickerRef2}
+              onChange={pickedHandler2}
             />
-            {file && <p className="file-name">{file.name}</p>}
+            {file2 && <p className="file-name">{file2.name}</p>}
           </div>
         </div>
         <div className="in">
