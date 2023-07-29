@@ -30,7 +30,6 @@ const EventAdminModal = () => {
     name: currentEvent.name,
     date1: currentEvent.date1,
     date2: currentEvent.date2,
-    description: currentEvent.description,
     pdf: currentEvent.pdf,
     image: currentEvent.image,
   };
@@ -52,7 +51,6 @@ const EventAdminModal = () => {
   const [image, setImage] = useState();
   const [del, setDel] = useState(false);
 
-  console.log(file);
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -105,12 +103,11 @@ const EventAdminModal = () => {
   formData.append("name", values.name);
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
-  formData.append("description", values.description);
   formData.append("id", currentEvent.id);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!values.name || !values.date1 || !values.date2 || !values.description) {
+    if (!values.name || !values.date1 || !values.date2) {
       toast.error("Введите все значения");
       return;
     } else {
@@ -170,18 +167,6 @@ const EventAdminModal = () => {
                 onChange={changeHandler}
               />
             </div>
-          </div>
-          <div className="description">
-            <label>
-              <span>*</span>Положение
-            </label>
-            <textarea
-              rows="10"
-              name="description"
-              type="text"
-              value={values.description}
-              onChange={changeHandler}
-            ></textarea>
           </div>
           <div className="upload-pfd">
             <input

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { MdDelete } from "react-icons/md";
 import {
   eventModalHandler,
   currentEventHandler,
@@ -19,7 +18,6 @@ const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
         name: name,
         date1: date1,
         date2: date2,
-        description: description,
         image: image,
         pdf: pdf,
         id: id,
@@ -36,10 +34,6 @@ const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
         <p>{date1}</p>
         <p>{date2}</p>
       </div>
-
-      {/* <div className="description">
-        <p>{description}</p>
-      </div> */}
       <div className="image">
         <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
       </div>

@@ -12,7 +12,6 @@ const initialState = {
   name: "",
   date1: "",
   date2: "",
-  description: "",
 };
 
 const Event = () => {
@@ -80,29 +79,14 @@ const Event = () => {
   formData.append("name", values.name);
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
-  formData.append("description", values.description);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (
-      !file ||
-      !image ||
-      !values.name ||
-      !values.date1 ||
-      !values.date2 ||
-      !values.description
-    ) {
+    if (!file || !image || !values.name || !values.date1 || !values.date2) {
       toast.error("Введите все значения");
       return;
     } else {
       dispatch(createEvent(formData));
-      // setTimeout(() => {
-      //   setpreviewURL(null);
-      //   setImage(null);
-      //   setFile(null);
-      //   setValues(initialState);
-      //   navigate("/all-events");
-      // }, 500);
     }
   };
 
@@ -143,18 +127,6 @@ const Event = () => {
               onChange={changeHandler}
             />
           </div>
-        </div>
-        <div className="description">
-          <label>
-            <span>*</span>Положение
-          </label>
-          <textarea
-            rows="10"
-            name="description"
-            type="text"
-            value={values.description}
-            onChange={changeHandler}
-          ></textarea>
         </div>
         <div className="upload-pfd">
           <input
@@ -203,11 +175,6 @@ const Event = () => {
 };
 
 const Wrapper = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem; */
   span {
     color: var(--clr-red-dark);
   }
@@ -220,7 +187,6 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     input {
-      /* margin: 0 10px; */
       margin-bottom: 1rem;
     }
   }
@@ -264,18 +230,11 @@ const Wrapper = styled.div`
       width: 100%;
     }
   }
-  .description {
-    display: flex;
-    flex-direction: column;
-    label {
-      margin: 0 1rem;
-    }
-  }
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
-    input,
-    textarea {
+    input {
       width: 500px;
     }
     .actions {
@@ -300,29 +259,6 @@ const Wrapper = styled.div`
   @media (min-width: 1340px) {
   }
 
-  textarea {
-    box-sizing: border-box;
-    padding: 1rem;
-    border: none;
-    background: var(--gray-0);
-    border-radius: 5px;
-    font-size: 100%;
-    color: var(--main-0);
-    resize: none;
-
-    ::placeholder {
-      color: var(--gray-1);
-    }
-    :focus-visible {
-      outline: none;
-    }
-
-    :hover {
-      ::placeholder {
-        transition: 0.5s;
-      }
-    }
-  }
   button {
     width: 150px;
   }
