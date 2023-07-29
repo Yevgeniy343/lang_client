@@ -7,6 +7,7 @@ import { MdDelete } from "react-icons/md";
 import { createEvent } from "../../features/adminSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import AdminCheckboxNomination from "../../components-special/AdminCheckboxNomination";
 
 const initialState = {
   name: "",
@@ -89,13 +90,84 @@ const Event = () => {
       dispatch(createEvent(formData));
     }
   };
+  const [childNom_1, setChildNom_1] = useState();
+  const [childNom_2, setChildNom_2] = useState();
+  const [childNom_3, setChildNom_3] = useState();
+  const [childNom_4, setChildNom_4] = useState();
+  const [childNom_5, setChildNom_5] = useState();
+  const [childNom_6, setChildNom_6] = useState();
+  const [childNom_7, setChildNom_7] = useState();
+  const [childNom_8, setChildNom_8] = useState();
+  const [childNom_9, setChildNom_9] = useState();
+  const [childNom_10, setChildNom_10] = useState();
+
+  const childrenNominationHandler_1 = (data) => {
+    setChildNom_1(data);
+  };
+  const childrenNominationHandler_2 = (data) => {
+    setChildNom_2(data);
+  };
+  const childrenNominationHandler_3 = (data) => {
+    setChildNom_3(data);
+  };
+  const childrenNominationHandler_4 = (data) => {
+    setChildNom_4(data);
+  };
+  const childrenNominationHandler_5 = (data) => {
+    setChildNom_5(data);
+  };
+  const childrenNominationHandler_6 = (data) => {
+    setChildNom_6(data);
+  };
+  const childrenNominationHandler_7 = (data) => {
+    setChildNom_7(data);
+  };
+  const childrenNominationHandler_8 = (data) => {
+    setChildNom_8(data);
+  };
+  const childrenNominationHandler_9 = (data) => {
+    setChildNom_9(data);
+  };
+  const childrenNominationHandler_10 = (data) => {
+    setChildNom_10(data);
+  };
+
+  const [adultNom_1, setAdultNom_1] = useState();
+  const [adultNom_2, setAdultNom_2] = useState();
+  const [adultNom_3, setAdultNom_3] = useState();
+  const [adultNom_4, setAdultNom_4] = useState();
+  const [adultNom_5, setAdultNom_5] = useState();
+  const [adultNom_6, setAdultNom_6] = useState();
+  const [adultNom_7, setAdultNom_7] = useState();
+
+  const adultNominationHandler_1 = (data) => {
+    setAdultNom_1(data);
+  };
+  const adultNominationHandler_2 = (data) => {
+    setAdultNom_2(data);
+  };
+  const adultNominationHandler_3 = (data) => {
+    setAdultNom_3(data);
+  };
+  const adultNominationHandler_4 = (data) => {
+    setAdultNom_4(data);
+  };
+  const adultNominationHandler_5 = (data) => {
+    setAdultNom_5(data);
+  };
+  const adultNominationHandler_6 = (data) => {
+    setAdultNom_6(data);
+  };
+  const adultNominationHandler_7 = (data) => {
+    setAdultNom_7(data);
+  };
 
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
         <div className="name">
           <label>
-            <span>*</span>Название мероприятияe
+            <span>*</span>Название мероприятия
           </label>
           <Input
             type="text"
@@ -166,6 +238,137 @@ const Event = () => {
             </div>
           </div>
         </div>
+        <div className="nominations">
+          <label>
+            <span>*</span>Список номинаций для детей
+          </label>
+          <div className="check-group">
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Изобразительное искусство"
+                type="children"
+                passState={childrenNominationHandler_1}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Декоративно-прикладное искусство"
+                type="children"
+                passState={childrenNominationHandler_2}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Фотография в национальном костюме"
+                type="children"
+                passState={childrenNominationHandler_3}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Хореографическое искусство (народные танцы)"
+                type="children"
+                passState={childrenNominationHandler_4}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Вокальное искусство (народные песни)"
+                type="children"
+                passState={childrenNominationHandler_5}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)"
+                type="children"
+                passState={childrenNominationHandler_6}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Литературно-музыкальная композиция"
+                type="children"
+                passState={childrenNominationHandler_7}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Художественное слово (декламация на родном языке)"
+                type="children"
+                passState={childrenNominationHandler_8}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Эссе"
+                type="children"
+                passState={childrenNominationHandler_9}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Презентация"
+                type="children"
+                passState={childrenNominationHandler_10}
+              />
+            </div>
+          </div>
+          <label>
+            <span>*</span>Список номинаций для педагогов
+          </label>
+          <div className="check-group">
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Декламация литературных произведений по тематике конкурса (проза или стихи)"
+                type="adult"
+                passState={adultNominationHandler_1}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Фото в национальном костюме"
+                type="adult"
+                passState={adultNominationHandler_2}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Вокал – исполнение на родном языке"
+                type="adult"
+                passState={adultNominationHandler_3}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Научно-методическая разработка: конспект урока на родном языке, принятый и заверенный образовательной организацией"
+                type="adult"
+                passState={adultNominationHandler_4}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Передовой опыт — презентация: использование инновационных технологий обучения на уроках родного языка"
+                type="adult"
+                passState={adultNominationHandler_5}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Фрагмент внеклассного мероприятия по теме родного языка"
+                type="adult"
+                passState={adultNominationHandler_6}
+              />
+            </div>
+            <div className="box">
+              <AdminCheckboxNomination
+                label="Изобразительное искусство"
+                type="adult"
+                passState={adultNominationHandler_7}
+              />
+            </div>
+          </div>
+        </div>
         <div className="create">
           <Button text="Создать мероприятие" type="submit" />
         </div>
@@ -230,7 +433,9 @@ const Wrapper = styled.div`
       width: 100%;
     }
   }
-
+  .check-group {
+    margin-bottom: 1rem;
+  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
