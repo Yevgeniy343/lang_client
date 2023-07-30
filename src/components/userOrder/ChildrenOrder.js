@@ -12,7 +12,8 @@ import PhoneInput from "react-phone-input-2";
 import { subjects, languages, curators } from "../../data/data-order";
 
 const ChildrenOrder = () => {
-  const { user } = useSelector((store) => store.user);
+  const { user, currentOrder } = useSelector((store) => store.user);
+  console.log(currentOrder);
 
   const initialState = {
     email: user.email,
@@ -22,7 +23,6 @@ const ChildrenOrder = () => {
     graduate: "",
     language2: "",
     link: "",
-    cur: "",
   };
 
   const initialStateCurators = {
@@ -242,76 +242,96 @@ const ChildrenOrder = () => {
             <span>*</span>Выбор номинации
           </label>
           <div className="check-box">
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Изобразительное искусство"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Декоративно-прикладное искусство"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Фотография в национальном костюме"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Хореографическое искусство (народные танцы)"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Вокальное искусство (народные песни)"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Литературно-музыкальная композиция"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Художественное слово (декламация на родном языке)"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Эссе"
-                passState={nominationHandler}
-              />
-            </div>
-            <div className="box">
-              <CheckboxNominations
-                indicator={nomination}
-                label="Презентация"
-                passState={nominationHandler}
-              />
-            </div>
+            {currentOrder.childNom_1 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_1}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_2 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_2}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_3 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_3}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_4 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_4}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_5 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_5}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_6 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_6}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_7 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_7}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_8 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_8}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_9 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_9}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
+            {currentOrder.childNom_10 !== "undefined" && (
+              <div className="box">
+                <CheckboxNominations
+                  indicator={nomination}
+                  label={currentOrder.childNom_10}
+                  passState={nominationHandler}
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="in">
