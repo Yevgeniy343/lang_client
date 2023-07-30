@@ -56,25 +56,25 @@ const EventAdminModal = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const [childNom_1, setChildNom_1] = useState();
+  const [childNom_1, setChildNom_1] = useState(currentEvent.childNom_1);
   console.log(childNom_1);
-  const [childNom_2, setChildNom_2] = useState();
+  const [childNom_2, setChildNom_2] = useState(currentEvent.childNom_2);
   console.log(childNom_2);
-  const [childNom_3, setChildNom_3] = useState();
+  const [childNom_3, setChildNom_3] = useState(currentEvent.childNom_3);
   console.log(childNom_3);
-  const [childNom_4, setChildNom_4] = useState();
+  const [childNom_4, setChildNom_4] = useState(currentEvent.childNom_4);
   console.log(childNom_4);
-  const [childNom_5, setChildNom_5] = useState();
+  const [childNom_5, setChildNom_5] = useState(currentEvent.childNom_5);
   console.log(childNom_5);
-  const [childNom_6, setChildNom_6] = useState();
+  const [childNom_6, setChildNom_6] = useState(currentEvent.childNom_6);
   console.log(childNom_6);
-  const [childNom_7, setChildNom_7] = useState();
+  const [childNom_7, setChildNom_7] = useState(currentEvent.childNom_7);
   console.log(childNom_7);
-  const [childNom_8, setChildNom_8] = useState();
+  const [childNom_8, setChildNom_8] = useState(currentEvent.childNom_8);
   console.log(childNom_8);
-  const [childNom_9, setChildNom_9] = useState();
+  const [childNom_9, setChildNom_9] = useState(currentEvent.childNom_9);
   console.log(childNom_9);
-  const [childNom_10, setChildNom_10] = useState();
+  const [childNom_10, setChildNom_10] = useState(currentEvent.childNom_10);
   console.log(childNom_10);
 
   const childrenNominationHandler_1 = (data) => {
@@ -108,20 +108,19 @@ const EventAdminModal = () => {
     setChildNom_10(data);
   };
 
-  const [adultNom_1, setAdultNom_1] = useState();
-  console.log(childNom_1);
-  const [adultNom_2, setAdultNom_2] = useState();
-  console.log(childNom_2);
-  const [adultNom_3, setAdultNom_3] = useState();
-  console.log(childNom_3);
-  const [adultNom_4, setAdultNom_4] = useState();
-  console.log(childNom_4);
-  const [adultNom_5, setAdultNom_5] = useState();
-  console.log(childNom_5);
-  const [adultNom_6, setAdultNom_6] = useState();
-  console.log(childNom_6);
-  const [adultNom_7, setAdultNom_7] = useState();
-  console.log(childNom_7);
+  const [adultNom_1, setAdultNom_1] = useState(currentEvent.adultNom_1);
+
+  const [adultNom_2, setAdultNom_2] = useState(currentEvent.adultNom_2);
+
+  const [adultNom_3, setAdultNom_3] = useState(currentEvent.adultNom_);
+
+  const [adultNom_4, setAdultNom_4] = useState(currentEvent.adultNom_4);
+
+  const [adultNom_5, setAdultNom_5] = useState(currentEvent.adultNom_5);
+
+  const [adultNom_6, setAdultNom_6] = useState(currentEvent.adultNom_6);
+
+  const [adultNom_7, setAdultNom_7] = useState(currentEvent.adultNom_7);
 
   const adultNominationHandler_1 = (data) => {
     setAdultNom_1(data);
@@ -194,6 +193,23 @@ const EventAdminModal = () => {
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
   formData.append("id", currentEvent.id);
+  formData.append("childNom_1", childNom_1);
+  formData.append("childNom_2", childNom_2);
+  formData.append("childNom_3", childNom_3);
+  formData.append("childNom_4", childNom_4);
+  formData.append("childNom_5", childNom_5);
+  formData.append("childNom_6", childNom_6);
+  formData.append("childNom_7", childNom_7);
+  formData.append("childNom_8", childNom_8);
+  formData.append("childNom_9", childNom_9);
+  formData.append("childNom_10", childNom_10);
+  formData.append("adultNom_1", adultNom_1);
+  formData.append("adultNom_2", adultNom_2);
+  formData.append("adultNom_3", adultNom_3);
+  formData.append("adultNom_4", adultNom_4);
+  formData.append("adultNom_5", adultNom_5);
+  formData.append("adultNom_6", adultNom_6);
+  formData.append("adultNom_7", adultNom_7);
 
   const onSubmit = (e) => {
     e.preventDefault();

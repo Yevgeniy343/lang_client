@@ -11,7 +11,7 @@ const Checkbox = ({ label, onClick, passState, type }) => {
       passState(label);
     } else {
       // passState({ label: label, value: false, type: type });
-      passState("");
+      passState("undefined");
     }
     setActive(!active);
   };
