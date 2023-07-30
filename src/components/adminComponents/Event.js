@@ -28,69 +28,8 @@ const Event = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const pickImageHandler = () => {
-    filePickerRef.current.click();
-  };
-
-  const pickImageHandler2 = () => {
-    filePickerRefImage.current.click();
-  };
-
-  const pickedHandler = (e) => {
-    let pickedFile;
-    if (e.target.files && e.target.files.length === 1) {
-      pickedFile = e.target.files[0];
-      setFile(pickedFile);
-      return;
-    }
-  };
-
-  const pickedHandlerImage = (e) => {
-    let pickedFileImage;
-    if (e.target.files && e.target.files.length === 1) {
-      pickedFileImage = e.target.files[0];
-      setImage(pickedFileImage);
-      return;
-    }
-  };
-
-  useEffect(() => {
-    if (!image) {
-      return;
-    }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setpreviewURL(fileReader.result);
-    };
-    fileReader.readAsDataURL(image);
-  }, [image]);
-
-  const imageRemoveHandler = () => {
-    setImage(null);
-    setpreviewURL(null);
-  };
-
-  const changeHandler = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("image", image);
-  formData.append("name", values.name);
-  formData.append("date1", values.date1);
-  formData.append("date2", values.date2);
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    if (!file || !image || !values.name || !values.date1 || !values.date2) {
-      toast.error("Введите все значения");
-      return;
-    } else {
-      dispatch(createEvent(formData));
-    }
-  };
   const [childNom_1, setChildNom_1] = useState();
+  console.log(childNom_1);
   const [childNom_2, setChildNom_2] = useState();
   const [childNom_3, setChildNom_3] = useState();
   const [childNom_4, setChildNom_4] = useState();
@@ -160,6 +99,87 @@ const Event = () => {
   };
   const adultNominationHandler_7 = (data) => {
     setAdultNom_7(data);
+  };
+
+  const pickImageHandler = () => {
+    filePickerRef.current.click();
+  };
+
+  const pickImageHandler2 = () => {
+    filePickerRefImage.current.click();
+  };
+
+  const pickedHandler = (e) => {
+    let pickedFile;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setFile(pickedFile);
+      return;
+    }
+  };
+
+  const pickedHandlerImage = (e) => {
+    let pickedFileImage;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFileImage = e.target.files[0];
+      setImage(pickedFileImage);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (!image) {
+      return;
+    }
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      setpreviewURL(fileReader.result);
+    };
+    fileReader.readAsDataURL(image);
+  }, [image]);
+
+  const imageRemoveHandler = () => {
+    setImage(null);
+    setpreviewURL(null);
+  };
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("image", image);
+  formData.append("name", values.name);
+  formData.append("date1", values.date1);
+  formData.append("date2", values.date2);
+  formData.append("childNom_1", childNom_1);
+  formData.append("childNom_2", childNom_2);
+  formData.append("childNom_3", childNom_3);
+  formData.append("childNom_4", childNom_4);
+  formData.append("childNom_5", childNom_5);
+  formData.append("childNom_6", childNom_6);
+  formData.append("childNom_7", childNom_7);
+  formData.append("childNom_8", childNom_8);
+  formData.append("childNom_9", childNom_9);
+  formData.append("childNom_10", childNom_10);
+  formData.append("adultNom_1", adultNom_1);
+  formData.append("adultNom_2", adultNom_2);
+  formData.append("adultNom_3", adultNom_3);
+  formData.append("adultNom_4", adultNom_4);
+  formData.append("adultNom_5", adultNom_5);
+  formData.append("adultNom_6", adultNom_6);
+  formData.append("adultNom_7", adultNom_7);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (!file || !image || !values.name || !values.date1 || !values.date2) {
+      toast.error("Введите все значения");
+      return;
+    } else {
+      dispatch(createEvent(formData));
+      console.log(childNom_1);
+    }
   };
 
   return (

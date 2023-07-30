@@ -8,9 +8,10 @@ const Checkbox = ({ label, onClick, passState, type }) => {
 
   const checkboxHandler = () => {
     if (!active) {
-      passState({ label: label, value: true, type: type });
+      passState(label);
     } else {
-      passState({ label: label, value: false, type: type });
+      // passState({ label: label, value: false, type: type });
+      passState("");
     }
     setActive(!active);
   };
