@@ -8,7 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 
 const { REACT_APP_URL_API } = process.env;
 
-const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
+const EventItem = ({
+  name,
+  date1,
+  date2,
+  image,
+  id,
+  pdf,
+  childNom_1,
+  childNom_2,
+  childNom_3,
+  childNom_4,
+  childNom_5,
+  childNom_6,
+  childNom_7,
+  childNom_8,
+  childNom_9,
+  childNom_10,
+  adultNom_1,
+  adultNom_2,
+  adultNom_3,
+  adultNom_4,
+  adultNom_5,
+  adultNom_6,
+  adultNom_7,
+}) => {
   const dispatch = useDispatch();
 
   const modalHandler = () => {
@@ -21,6 +45,23 @@ const EventItem = ({ name, date1, date2, description, image, id, pdf }) => {
         image: image,
         pdf: pdf,
         id: id,
+        childNom_1: childNom_1,
+        childNom_2: childNom_2,
+        childNom_3: childNom_3,
+        childNom_4: childNom_4,
+        childNom_5: childNom_5,
+        childNom_6: childNom_6,
+        childNom_7: childNom_7,
+        childNom_8: childNom_8,
+        childNom_9: childNom_9,
+        childNom_10: childNom_10,
+        adultNom_1: adultNom_1,
+        adultNom_2: adultNom_2,
+        adultNom_3: adultNom_3,
+        adultNom_4: adultNom_4,
+        adultNom_5: adultNom_5,
+        adultNom_6: adultNom_6,
+        adultNom_7: adultNom_7,
       })
     );
   };

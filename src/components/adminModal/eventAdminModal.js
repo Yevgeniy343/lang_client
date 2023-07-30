@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import Axios from "axios";
 import FileDownload from "js-file-download";
 import Loading from "../Loading";
+import AdminCheckboxNominationEdit from "../../components-special/AdminCheckboxNominationEdit";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -53,6 +54,58 @@ const EventAdminModal = () => {
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const [childNom_1, setChildNom_1] = useState();
+  console.log(childNom_1);
+  const [childNom_2, setChildNom_2] = useState();
+  console.log(childNom_2);
+  const [childNom_3, setChildNom_3] = useState();
+  console.log(childNom_3);
+  const [childNom_4, setChildNom_4] = useState();
+  console.log(childNom_4);
+  const [childNom_5, setChildNom_5] = useState();
+  console.log(childNom_5);
+  const [childNom_6, setChildNom_6] = useState();
+  console.log(childNom_6);
+  const [childNom_7, setChildNom_7] = useState();
+  console.log(childNom_7);
+  const [childNom_8, setChildNom_8] = useState();
+  console.log(childNom_8);
+  const [childNom_9, setChildNom_9] = useState();
+  console.log(childNom_9);
+  const [childNom_10, setChildNom_10] = useState();
+  console.log(childNom_10);
+
+  const childrenNominationHandler_1 = (data) => {
+    setChildNom_1(data);
+  };
+  const childrenNominationHandler_2 = (data) => {
+    setChildNom_2(data);
+  };
+  const childrenNominationHandler_3 = (data) => {
+    setChildNom_3(data);
+  };
+  const childrenNominationHandler_4 = (data) => {
+    setChildNom_4(data);
+  };
+  const childrenNominationHandler_5 = (data) => {
+    setChildNom_5(data);
+  };
+  const childrenNominationHandler_6 = (data) => {
+    setChildNom_6(data);
+  };
+  const childrenNominationHandler_7 = (data) => {
+    setChildNom_7(data);
+  };
+  const childrenNominationHandler_8 = (data) => {
+    setChildNom_8(data);
+  };
+  const childrenNominationHandler_9 = (data) => {
+    setChildNom_9(data);
+  };
+  const childrenNominationHandler_10 = (data) => {
+    setChildNom_10(data);
   };
 
   const pickImageHandler = () => {
@@ -223,6 +276,97 @@ const EventAdminModal = () => {
               </div>
             </div>
           </div>
+          <div className="nominations">
+            <label>
+              <span>*</span>Список номинаций для детей
+            </label>
+            <div className="check-group">
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Изобразительное искусство"
+                  type="children"
+                  indicator={currentEvent.childNom_1}
+                  passState={childrenNominationHandler_1}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Декоративно-прикладное искусство"
+                  type="children"
+                  indicator={currentEvent.childNom_2}
+                  passState={childrenNominationHandler_2}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Фотография в национальном костюме"
+                  type="children"
+                  indicator={currentEvent.childNom_3}
+                  passState={childrenNominationHandler_3}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Хореографическое искусство (народные танцы)"
+                  type="children"
+                  indicator={currentEvent.childNom_4}
+                  passState={childrenNominationHandler_4}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Вокальное искусство (народные песни)"
+                  type="children"
+                  indicator={currentEvent.childNom_5}
+                  passState={childrenNominationHandler_5}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)"
+                  type="children"
+                  indicator={currentEvent.childNom_6}
+                  passState={childrenNominationHandler_6}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Литературно-музыкальная композиция"
+                  type="children"
+                  indicator={currentEvent.childNom_7}
+                  passState={childrenNominationHandler_7}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Художественное слово (декламация на родном языке)"
+                  type="children"
+                  indicator={currentEvent.childNom_8}
+                  passState={childrenNominationHandler_8}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Эссе"
+                  type="children"
+                  indicator={currentEvent.childNom_9}
+                  passState={childrenNominationHandler_9}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Презентация"
+                  type="children"
+                  indicator={currentEvent.childNom_10}
+                  passState={childrenNominationHandler_10}
+                />
+              </div>
+            </div>
+            <label>
+              <span>*</span>Список номинаций для педагогов
+            </label>
+            <div className="check-group">ververe</div>
+          </div>
           <div className="create">
             <Button text="Сохраниить изменения" type="submit" />
           </div>
@@ -282,8 +426,7 @@ const Wrapper = styled.div`
       font-size: 1.3rem;
     }
   }
-  input,
-  textarea {
+  input {
     margin-bottom: 1rem;
     width: 300px;
   }
@@ -291,17 +434,10 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     input {
-      /* margin: 0 10px; */
       margin-bottom: 1rem;
     }
   }
-  .description {
-    display: flex;
-    flex-direction: column;
-    label {
-      margin: 0 1rem;
-    }
-  }
+
   .actions {
     display: flex;
     flex-direction: column;
@@ -360,6 +496,13 @@ const Wrapper = styled.div`
       }
     }
   }
+  .nominations {
+    margin: 1rem;
+    .check-group {
+      margin-bottom: 1rem;
+    }
+  }
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
