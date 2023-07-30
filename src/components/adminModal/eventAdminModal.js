@@ -108,6 +108,43 @@ const EventAdminModal = () => {
     setChildNom_10(data);
   };
 
+  const [adultNom_1, setAdultNom_1] = useState();
+  console.log(childNom_1);
+  const [adultNom_2, setAdultNom_2] = useState();
+  console.log(childNom_2);
+  const [adultNom_3, setAdultNom_3] = useState();
+  console.log(childNom_3);
+  const [adultNom_4, setAdultNom_4] = useState();
+  console.log(childNom_4);
+  const [adultNom_5, setAdultNom_5] = useState();
+  console.log(childNom_5);
+  const [adultNom_6, setAdultNom_6] = useState();
+  console.log(childNom_6);
+  const [adultNom_7, setAdultNom_7] = useState();
+  console.log(childNom_7);
+
+  const adultNominationHandler_1 = (data) => {
+    setAdultNom_1(data);
+  };
+  const adultNominationHandler_2 = (data) => {
+    setAdultNom_2(data);
+  };
+  const adultNominationHandler_3 = (data) => {
+    setAdultNom_3(data);
+  };
+  const adultNominationHandler_4 = (data) => {
+    setAdultNom_4(data);
+  };
+  const adultNominationHandler_5 = (data) => {
+    setAdultNom_5(data);
+  };
+  const adultNominationHandler_6 = (data) => {
+    setAdultNom_6(data);
+  };
+  const adultNominationHandler_7 = (data) => {
+    setAdultNom_7(data);
+  };
+
   const pickImageHandler = () => {
     filePickerRef.current.click();
   };
@@ -365,7 +402,64 @@ const EventAdminModal = () => {
             <label>
               <span>*</span>Список номинаций для педагогов
             </label>
-            <div className="check-group">ververe</div>
+            <div className="check-group">
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Декламация литературных произведений по тематике конкурса (проза или стихи)"
+                  type="adult"
+                  indicator={currentEvent.adultNom_1}
+                  passState={adultNominationHandler_1}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Фото в национальном костюме"
+                  type="adult"
+                  indicator={currentEvent.adultNom_2}
+                  passState={adultNominationHandler_2}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Вокал – исполнение на родном языке"
+                  type="adult"
+                  indicator={currentEvent.adultNom_3}
+                  passState={adultNominationHandler_3}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Научно-методическая разработка: конспект урока на родном языке, принятый и заверенный образовательной организацией"
+                  type="adult"
+                  indicator={currentEvent.adultNom_4}
+                  passState={adultNominationHandler_4}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Передовой опыт — презентация: использование инновационных технологий обучения на уроках родного языка"
+                  type="adult"
+                  indicator={currentEvent.adultNom_5}
+                  passState={adultNominationHandler_5}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Фрагмент внеклассного мероприятия по теме родного языка"
+                  type="adult"
+                  indicator={currentEvent.adultNom_6}
+                  passState={adultNominationHandler_6}
+                />
+              </div>
+              <div className="box">
+                <AdminCheckboxNominationEdit
+                  label="Изобразительное искусство"
+                  type="adult"
+                  indicator={currentEvent.adultNom_7}
+                  passState={adultNominationHandler_7}
+                />
+              </div>
+            </div>
           </div>
           <div className="create">
             <Button text="Сохраниить изменения" type="submit" />
