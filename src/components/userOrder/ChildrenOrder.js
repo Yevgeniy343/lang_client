@@ -7,8 +7,9 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../components-special/Checkbox";
 import CheckboxNominations from "../../components-special/CheckboxNominations";
-
+import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
+import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import { subjects, languages, curators } from "../../data/data-order";
 
 const ChildrenOrder = () => {
@@ -45,9 +46,14 @@ const ChildrenOrder = () => {
   const [subject, setSubject] = useState("");
   const [language, setLanguage] = useState("");
   const [nomination, setNomination] = useState("");
+  const [tarif, setTarif] = useState("");
   const [curatorsAmount, setCuratorsAmount] = useState();
   const [cur, setCur] = useState(initialStateCurators);
   const [phone, setPhone] = useState(initialState.phone);
+  const [agreement, setAgreement] = useState(false);
+  const [condition, setCondition] = useState(false);
+  console.log(agreement);
+  console.log(condition);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -109,6 +115,18 @@ const ChildrenOrder = () => {
     setNomination(data);
   };
 
+  const tarifHandler = (data) => {
+    setTarif(data);
+  };
+
+  const agreementHandler = (data) => {
+    setAgreement(data);
+  };
+
+  const conditionHandler = (data) => {
+    setCondition(data);
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("--------------");
@@ -123,6 +141,10 @@ const ChildrenOrder = () => {
     console.log("link = ", values.link);
     console.log("curatorsAmount = ", curatorsAmount);
     console.log("curators = ", cur);
+    console.log("nomination = ", nomination);
+    console.log("tarif = ", tarif);
+    console.log("email = ", values.email);
+    console.log("phone = ", phone);
   };
 
   return (
@@ -468,7 +490,21 @@ const ChildrenOrder = () => {
             <span>*</span>Тариф
           </label>
           <div>
-            {/* <Checkbox passState={emptyHandler} label="один вариант" /> */}
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Одиночный участник"
+            />
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Соавторство"
+            />
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Коллективный"
+            />
           </div>
         </div>
         <div className="in">
@@ -514,6 +550,7 @@ const ChildrenOrder = () => {
           <label>
             <span>*</span>Согласие с условиями конкурса
           </label>
+
           <p className="term-link" onClick={() => setTerm(!term)}>
             {!term
               ? "Развернуть условия конкурса"
@@ -579,23 +616,23 @@ const ChildrenOrder = () => {
               </p>
             </div>
           )}
-          {/* <Checkbox
-          passState={emptyHandler}
-          label="Согласен с условиями конкурса"
-        /> */}
+          <CheckboxAgreement
+            passState={agreementHandler}
+            label="Согласен с условияями конкурса"
+          />
         </div>
         <div className="in">
           <label>
             <span>*</span>Согласие на обработку персональных данных
           </label>
 
-          {/* <Checkbox
-          passState={emptyHandler}
-          label="Согласен на обработку персональных данных"
-        /> */}
+          <CheckboxAgreement
+            passState={conditionHandler}
+            label="Согласен на обработку персональных данных"
+          />
         </div>
         <div className="actions">
-          <Button text="Отправить заявку" />
+          <Button text="Отправить заявку" disabled={!agreement || !condition} />
         </div>
       </form>
     </Wrapper>

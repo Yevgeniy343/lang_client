@@ -1,10 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({ text, onClick, type }) => {
+const Button = ({ text, onClick, type, disabled }) => {
   return (
     <Wrapper>
-      <button onClick={onClick} type={type}>
+      <button
+        onClick={onClick}
+        type={type}
+        disabled={disabled}
+        className={disabled ? "disabled" : ""}
+      >
         {text}
       </button>
     </Wrapper>
@@ -29,6 +34,14 @@ const Wrapper = styled.div`
     }
     :active {
       background-color: var(--clr-grey-9);
+    }
+  }
+  .disabled {
+    cursor: not-allowed;
+    background-color: var(--gray-1);
+    :hover {
+      background-color: var(--gray-1);
+      color: var(--main-0);
     }
   }
   @media (min-width: 576px) {
