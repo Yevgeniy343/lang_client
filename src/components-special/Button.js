@@ -38,10 +38,12 @@ const Wrapper = styled.div`
   }
   .disabled {
     cursor: not-allowed;
-    background-color: var(--gray-1);
+    background-color: var(--gray-0);
+    color: var(--clr-grey-5);
+    /* border: var(--clr-grey-5); */
     :hover {
-      background-color: var(--gray-1);
-      color: var(--main-0);
+      background-color: var(--gray-0);
+      color: var(--clr-grey-5);
     }
   }
   @media (min-width: 576px) {

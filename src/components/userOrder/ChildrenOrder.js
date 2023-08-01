@@ -239,7 +239,6 @@ const ChildrenOrder = () => {
             onChange={changeHandler}
           />
         </div>
-
         <div className="in">
           <label>
             <span>*</span>Язык работы
@@ -495,16 +494,60 @@ const ChildrenOrder = () => {
               passState={tarifHandler}
               label="Одиночный участник"
             />
+            <div className="about-tarif">
+              <p className="include-about">
+                Общий наградной пакет: "Одиночный участник". Оплачивается 450
+                рублей. Включает:{" "}
+              </p>
+              <p className="include">● Диплом в электронном варианте</p>
+              <p className="include">
+                ● Благодарность куратору в электронном варианте
+              </p>
+            </div>
             <CheckboxTarif
               indicator={tarif}
               passState={tarifHandler}
               label="Соавторство"
             />
+            <div className="about-tarif">
+              <p className="include-about">
+                Наградной пакет «Соавторство»: задействовано не более 3-х
+                авторов. Оплачивается по 450 руб. за каждого участника.
+                Включает:
+              </p>
+              <p className="include">
+                ● Диплом в электронном варианте на каждого участника
+              </p>
+              <p className="include">
+                ● Благодарность куратору в электронном варианте
+              </p>
+            </div>
             <CheckboxTarif
               indicator={tarif}
               passState={tarifHandler}
               label="Коллективный"
             />
+            <div className="about-tarif">
+              <p className="include-about">
+                Наградной пакет «Коллективный»: задействован творческий
+                коллектив более 3-х человек. Оплачивается 800 руб. Включает:
+              </p>
+              <p className="include">
+                ● Коллективный диплом (победителя, лауреата или участника) в
+                электронном варианте
+              </p>
+              <p className="include">
+                ● Благодарность руководителю работы в электронном варианте – 1
+                шт.
+              </p>
+            </div>
+            <div className="about-tarif">
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
+              </p>
+            </div>
           </div>
         </div>
         <div className="in">
@@ -644,6 +687,7 @@ const Wrapper = styled.div`
 
   .in {
     margin: 1rem 0;
+    margin-bottom: 2rem;
   }
   .i {
     display: flex;
@@ -724,12 +768,28 @@ const Wrapper = styled.div`
       width: 140px;
     }
   }
+  .about-tarif {
+    margin-bottom: 1rem;
+    color: var(--clr-primary-4);
+    font-style: italic;
+    .include-about {
+      margin-bottom: 1rem;
+    }
+    .include {
+    }
+  }
+  .small {
+    font-size: 0.8rem;
+  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
     margin-top: 3rem;
   }
   @media (min-width: 992px) {
+    .about-tarif {
+      margin-left: 2rem;
+    }
   }
   @media (min-width: 1140px) {
   }
