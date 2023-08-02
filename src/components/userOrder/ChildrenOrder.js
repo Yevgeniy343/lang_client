@@ -239,25 +239,7 @@ const ChildrenOrder = () => {
             onChange={changeHandler}
           />
         </div>
-        <div className="in">
-          <label>
-            <span>*</span>Язык работы
-          </label>
-          <Select passState={languageHandler} data={languages} />
-        </div>
-        {language === "нет в списке" && (
-          <div className="in">
-            <label>
-              <span>*</span>Укажите язык работы, если его не было в списке выше
-            </label>
-            <Input
-              type="text"
-              name="language2"
-              value={values.language2}
-              onChange={changeHandler}
-            />
-          </div>
-        )}
+
         <div className="in">
           <label>
             <span>*</span>Выбор номинации
@@ -357,30 +339,70 @@ const ChildrenOrder = () => {
         </div>
         <div className="in">
           <label>
-            Ссылка на работу в номинациях, предполагающих приложение ссылок
+            <span>*</span>Язык работы
           </label>
-          <Input
-            type="text"
-            name="link"
-            value={values.link}
-            onChange={changeHandler}
-          />
+          <Select passState={languageHandler} data={languages} />
         </div>
-        <div className="in">
-          <Button
-            text="Прикрепить работу"
-            type="button"
-            onClick={pickHandler}
-          />
-          <input
-            type="file"
-            style={{ display: "none" }}
-            // accept=".pdf"
-            ref={filePickerRef}
-            onChange={pickedHandler}
-          />
-          {file && <p className="file-name">{file.name}</p>}
-        </div>
+        {language === "нет в списке" && (
+          <div className="in">
+            <label>
+              <span>*</span>Укажите язык работы, если его не было в списке выше
+            </label>
+            <Input
+              type="text"
+              name="language2"
+              value={values.language2}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {/* ------------------------------------------------------------- */}
+        {(nomination === "Хореографическое искусство (народные танцы)" ||
+          nomination === "Вокальное искусство (народные песни)" ||
+          nomination ===
+            "Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)" ||
+          nomination === "Литературно-музыкальная композиция" ||
+          nomination ===
+            "Художественное слово (декламация на родном языке)") && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              Ссылка на работу в номинациях, предполагающих приложение ссылок
+            </label>
+            <Input
+              type="text"
+              name="link"
+              value={values.link}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {(nomination === "Изобразительное искусство" ||
+          nomination === "Декоративно-прикладное искусство" ||
+          nomination === "Фотография в национальном костюме" ||
+          nomination === "Эссе" ||
+          nomination === "Презентация") && (
+          <div className="in">
+            <label>
+              <span>*</span>Прикрепить работу
+            </label>
+            <Button
+              text="Прикрепить работу"
+              type="button"
+              onClick={pickHandler}
+            />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              // accept=".pdf"
+              ref={filePickerRef}
+              onChange={pickedHandler}
+            />
+            {file && <p className="file-name">{file.name}</p>}
+          </div>
+        )}
+        {/* ------------------------------------------------------------- */}
+
         <div className="in curator">
           <label>
             <span>*</span>Количество кураторов
