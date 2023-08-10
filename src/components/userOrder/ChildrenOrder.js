@@ -356,7 +356,7 @@ const ChildrenOrder = () => {
             />
           </div>
         )}
-        {/* ------------------------------------------------------------- */}
+
         {(nomination === "Хореографическое искусство (народные танцы)" ||
           nomination === "Вокальное искусство (народные песни)" ||
           nomination ===
@@ -367,7 +367,7 @@ const ChildrenOrder = () => {
           <div className="in">
             <label>
               <span>*</span>
-              Ссылка на работу в номинациях, предполагающих приложение ссылок
+              Ссылка на работу
             </label>
             <Input
               type="text"
@@ -401,7 +401,6 @@ const ChildrenOrder = () => {
             {file && <p className="file-name">{file.name}</p>}
           </div>
         )}
-        {/* ------------------------------------------------------------- */}
 
         <div className="in curator">
           <label>
@@ -525,6 +524,11 @@ const ChildrenOrder = () => {
               <p className="include">
                 ● Благодарность куратору в электронном варианте
               </p>
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
+              </p>
             </div>
             <CheckboxTarif
               indicator={tarif}
@@ -542,6 +546,11 @@ const ChildrenOrder = () => {
               </p>
               <p className="include">
                 ● Благодарность куратору в электронном варианте
+              </p>
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
               </p>
             </div>
             <CheckboxTarif
@@ -562,14 +571,13 @@ const ChildrenOrder = () => {
                 ● Благодарность руководителю работы в электронном варианте – 1
                 шт.
               </p>
-            </div>
-            <div className="about-tarif">
               <p className="include small">
                 * Работы, в которых участвуют 2 и более руководителя,
                 оплачиваются + 100 рублей к стоимости оргвзноса за каждого
                 руководителя.
               </p>
             </div>
+            {/* <div className="about-tarif"></div> */}
           </div>
         </div>
         <div className="in">
@@ -802,6 +810,7 @@ const Wrapper = styled.div`
   }
   .small {
     font-size: 0.8rem;
+    margin-top: 1rem;
   }
   @media (min-width: 576px) {
   }

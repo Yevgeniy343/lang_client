@@ -187,7 +187,7 @@ const Event = () => {
       <form onSubmit={onSubmit}>
         <div className="name">
           <label>
-            <span>*</span>Название мероприятия111
+            <span>*</span>Название мероприятия
           </label>
           <Input
             type="text"
