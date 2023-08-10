@@ -12,6 +12,7 @@ import { Toaster } from "react-hot-toast";
 import AdminEvents from "./pages/admin-pages/AdminEvents";
 import AllEvents from "./pages/admin-pages/AllEvents";
 import AllUsers from "./pages/admin-pages/AllUsers";
+import Nominations from "./pages/admin-pages/Nominations";
 
 function App() {
   return (
@@ -71,6 +72,17 @@ function App() {
             }
           >
             <Route path="/all-users" element={<AllUsers />} />
+          </Route>
+
+          <Route
+            path="/nominations"
+            element={
+              <ProtectedAdmin>
+                <Nominations />
+              </ProtectedAdmin>
+            }
+          >
+            <Route path="/nominations" element={<Nominations />} />
           </Route>
 
           {/* <Route path="/landing" element={<Landing />} /> */}

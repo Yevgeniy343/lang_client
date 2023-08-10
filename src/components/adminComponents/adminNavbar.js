@@ -9,6 +9,7 @@ import {
   AiOutlineMenu,
   AiOutlineUnorderedList,
   AiOutlineTeam,
+  AiFillDatabase,
 } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
 
@@ -38,6 +39,10 @@ const AdminNavBar = () => {
             </button>
           </div>
           <ul className="nav-links">
+            <li onClick={() => navigate("/nominations")}>
+              <AiFillDatabase />
+              <p>Номинации</p>
+            </li>
             <li onClick={() => navigate("/new-event")}>
               <MdEventAvailable />
               <p>Новое мероприятие</p>
