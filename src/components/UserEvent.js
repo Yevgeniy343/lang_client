@@ -81,6 +81,9 @@ const UserEvent = ({
           <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
         </div>
       </div>
+      <div className="actives">
+        <Button text="Принять участие" onClick={orderHandler} />
+      </div>
       {/* <div className="date">
         <p>{date1}</p>
         <p>{date2}</p>
