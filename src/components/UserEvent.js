@@ -84,17 +84,6 @@ const UserEvent = ({
       <div className="actives">
         <Button text="Принять участие" onClick={orderHandler} />
       </div>
-      {/* <div className="date">
-        <p>{date1}</p>
-        <p>{date2}</p>
-      </div>
-
-      <div className="image">
-        <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
-      </div>
-      <div className="actives">
-        <Button text="Принять участие" onClick={orderHandler} />
-      </div> */}
     </Wrapper>
   );
 };
@@ -108,7 +97,6 @@ const Wrapper = styled.div`
   border-radius: 10px;
   border: 1px solid var(--main-2);
   transition: var(--transition2);
-  /* height: 300px; */
 
   .name {
     display: flex;
@@ -149,7 +137,6 @@ const Wrapper = styled.div`
   img {
     height: 150px;
     width: 240px;
-    /* height: 100%; */
   }
 
   .actives {

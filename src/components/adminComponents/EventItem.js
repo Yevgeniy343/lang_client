@@ -71,17 +71,21 @@ const EventItem = ({
       <div className="name">
         <p>{name}</p>
       </div>
-      <div className="date">
-        <p>{date1}</p>
-        <p>{date2}</p>
-      </div>
-      <div className="image">
-        <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
+
+      <div className="content2">
+        <div className="left2">
+          <p>{date1}</p>
+          <p>{date2}</p>
+        </div>
+        <div className="right2">
+          <img src={`${REACT_APP_URL_API}/${image}`} alt="" />
+        </div>
       </div>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
+  width: 90vw;
   display: flex;
   flex-direction: column;
   margin: 1rem;
@@ -95,28 +99,47 @@ const Wrapper = styled.div`
     box-shadow: var(--dark-shadow2);
   }
   .name {
-    max-width: 200px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
     p {
       color: var(--main-0);
       font-size: 1.3rem;
-      word-break: break-all;
     }
   }
-  .date {
-    margin: 0.5rem 0;
-    p {
-      color: var(--gray-6);
+  .content2 {
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+    justify-content: space-around;
+
+    .left2 {
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      /* height: 100%; */
+      p {
+        font-size: 1rem;
+        margin: 0.5rem;
+      }
+    }
+    .right2 {
+      width: 250px;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      margin: 0;
     }
   }
   img {
-    width: 200px;
+    height: 150px;
+    width: 240px;
   }
-  .date {
-    display: flex;
 
-    justify-content: space-between;
-  }
   @media (min-width: 576px) {
+    width: 450px;
   }
   @media (min-width: 768px) {
   }
