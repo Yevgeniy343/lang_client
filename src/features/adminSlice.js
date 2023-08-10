@@ -6,6 +6,7 @@ import {
   editEventsThunk,
   deleteEventsThunk,
   getUsersThunk,
+  createNomThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -21,6 +22,7 @@ const initialState = {
   isEventModal: false,
   currentEvent: [],
   users: [],
+  nominations: [],
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -47,7 +49,6 @@ export const getEvents = createAsyncThunk(
 export const editEvents = createAsyncThunk(
   "admin/editevent",
   async (info, thunkAPI) => {
-    console.log("info", info);
     return editEventsThunk(`/admin/editevent/`, info, thunkAPI);
   }
 );
@@ -55,7 +56,6 @@ export const editEvents = createAsyncThunk(
 export const deleteEvents = createAsyncThunk(
   "admin/deleteevent",
   async (info, thunkAPI) => {
-    console.log("info", info);
     return deleteEventsThunk(`/admin/deleteevent/${info.id}`, info, thunkAPI);
   }
 );
@@ -63,8 +63,15 @@ export const deleteEvents = createAsyncThunk(
 export const getUsers = createAsyncThunk(
   "admin/getUsers",
   async (info, thunkAPI) => {
-    console.log("info", info);
     return getUsersThunk(`/admin/getallusers`, info, thunkAPI);
+  }
+);
+
+export const createNom = createAsyncThunk(
+  "admin/createNom",
+  async (info, thunkAPI) => {
+    console.log("info", info);
+    return getUsersThunk(`/admin/createnom`, info, thunkAPI);
   }
 );
 
@@ -167,6 +174,21 @@ const adminSlice = createSlice({
       // toast.success(`Мероприятие удалено!`);
     });
     builder.addCase(getUsers.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // createNom
+    builder.addCase(createNom.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createNom.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.nominations.push(payload);
+
+      // toast.success(`Мероприятие удалено!`);
+    });
+    builder.addCase(createNom.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

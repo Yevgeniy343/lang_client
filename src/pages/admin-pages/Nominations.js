@@ -5,6 +5,9 @@ import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Checkbox from "../../components-special/Checkbox";
 import Button from "../../components-special/Button";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
+import { createNom } from "../../features/adminSlice";
 
 const initialState = [
   {
@@ -13,8 +16,26 @@ const initialState = [
 ];
 const Nominations = () => {
   const [nom, setNom] = useState(initialState);
+  const [values, setValues] = useState(initialState);
+  const dispatch = useDispatch();
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   const nomHandler = (data) => {
     setNom(data);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (!values.name || !nom) {
+      toast.error("Введите все значения");
+      return;
+    }
+
+    dispatch(createNom({ name: values.name, condition: nom }));
   };
 
   return (
@@ -25,13 +46,15 @@ const Nominations = () => {
         <div className="header">
           <h4>Управление номинациями</h4>
         </div>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="add">
             <p>Новая номинация</p>
             <Input
               type="text"
-              name="nomination"
+              name="name"
               placeholder="название номинации"
+              value={values.name}
+              onChange={changeHandler}
             />
             <Checkbox
               passState={nomHandler}
