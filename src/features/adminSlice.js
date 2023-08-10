@@ -8,6 +8,7 @@ import {
   getUsersThunk,
   createNomThunk,
   getNomThunk,
+  deleteNomThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -79,6 +80,14 @@ export const getNom = createAsyncThunk(
   "admin/getNom",
   async (info, thunkAPI) => {
     return getNomThunk(`/admin/getnom`, info, thunkAPI);
+  }
+);
+
+export const deleteNom = createAsyncThunk(
+  "admin/deleteNom",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return deleteNomThunk(`/admin/deletenom/${info.id}`, info, thunkAPI);
   }
 );
 
@@ -211,6 +220,20 @@ const adminSlice = createSlice({
       // toast.success(`Мероприятие удалено!`);
     });
     builder.addCase(getNom.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+    // geteNom
+    builder.addCase(deleteNom.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteNom.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.nominations = payload;
+
+      // toast.success(`Мероприятие удалено!`);
+    });
+    builder.addCase(deleteNom.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

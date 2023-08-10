@@ -72,3 +72,12 @@ export const getNomThunk = async (url, info, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
+
+export const deleteNomThunk = async (url, info, thunkAPI) => {
+  try {
+    const resp = await customFetch.delete(url, info);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};

@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { MdDelete } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { deleteNom } from "../features/adminSlice";
 
 const Nomination = ({ name, link, file, id }) => {
+  const dispatch = useDispatch();
+
   return (
     <Wrapper>
       <p className="name">{name}</p>
       {link && <p>доступно прикрепление ссылки</p>}
       {!link && <p>доступно прикрепление файла</p>}
 
-      <MdDelete />
+      <MdDelete onClick={() => dispatch(deleteNom({ id: id }))} />
     </Wrapper>
   );
 };
