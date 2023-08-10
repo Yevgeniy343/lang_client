@@ -5,9 +5,10 @@ import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Checkbox from "../../components-special/Checkbox";
 import Button from "../../components-special/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { createNom } from "../../features/adminSlice";
+import { createNom, getNom } from "../../features/adminSlice";
+import Nomination from "../../components/Nomination";
 
 const initialState = [
   {
@@ -15,9 +16,14 @@ const initialState = [
   },
 ];
 const Nominations = () => {
+  const { nominations } = useSelector((store) => store.admin);
   const [nom, setNom] = useState(initialState);
   const [values, setValues] = useState(initialState);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getNom());
+  }, []);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -75,6 +81,15 @@ const Nominations = () => {
         <div className="header">
           <h4>Созданные номинации</h4>
         </div>
+        {nominations.map((n) => (
+          <Nomination
+            key={n._id}
+            name={n.name}
+            link={n.link}
+            file={n.file}
+            id={n._id}
+          />
+        ))}
       </Wrapper>
     </div>
   );
