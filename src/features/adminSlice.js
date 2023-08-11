@@ -115,6 +115,12 @@ const adminSlice = createSlice({
     adultNominationHandler: (state, { payload }) => {
       state.adultNominations = payload;
     },
+    childNominationHandlerClean: (state) => {
+      state.childNominations = [];
+    },
+    adultNominationHandlerClean: (state) => {
+      state.adultNominations = [];
+    },
   },
   extraReducers: (builder) => {
     // loginAdmin
@@ -257,5 +263,7 @@ export const {
   currentEventHandler,
   childNominationHandler,
   adultNominationHandler,
+  childNominationHandlerClean,
+  adultNominationHandlerClean,
 } = adminSlice.actions;
 export default adminSlice.reducer;

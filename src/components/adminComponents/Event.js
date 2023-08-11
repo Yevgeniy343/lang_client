@@ -4,7 +4,12 @@ import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
-import { createEvent, getNom } from "../../features/adminSlice";
+import {
+  createEvent,
+  getNom,
+  childNominationHandlerClean,
+  adultNominationHandlerClean,
+} from "../../features/adminSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import CheckboxChild from "../../components-special/Checkbox-child";
@@ -19,6 +24,11 @@ const initialState = {
 const Event = () => {
   useEffect(() => {
     dispatch(getNom());
+  }, []);
+
+  useEffect(() => {
+    dispatch(childNominationHandlerClean());
+    dispatch(adultNominationHandlerClean());
   }, []);
 
   const { nominations, childNominations, adultNominations } = useSelector(

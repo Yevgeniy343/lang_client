@@ -6,6 +6,9 @@ import {
   eventModalHandler,
   editEvents,
   deleteEvents,
+  getNom,
+  childNominationHandlerClean,
+  adultNominationHandlerClean,
 } from "../../features/adminSlice";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
@@ -14,13 +17,26 @@ import toast from "react-hot-toast";
 import Axios from "axios";
 import FileDownload from "js-file-download";
 import Loading from "../Loading";
+import CheckboxChild from "../../components-special/Checkbox-child";
+import CheckboxAdult from "../../components-special/Checkbox-adult";
 
 const { REACT_APP_URL_API } = process.env;
 
 const EventAdminModal = () => {
-  const { isEventModal, currentEvent, isLoading } = useSelector(
+  useEffect(() => {
+    dispatch(getNom());
+  }, []);
+  useEffect(() => {
+    dispatch(childNominationHandlerClean());
+    dispatch(adultNominationHandlerClean());
+  }, []);
+
+  const { currentEvent, isLoading, nominations, nomE } = useSelector(
     (store) => store.admin
   );
+
+  // const thisNom = nomE.find((n) => n.eventId === currentEvent.id);
+  // console.log(thisNom);
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -223,12 +239,25 @@ const EventAdminModal = () => {
               </div>
             </div>
           </div>
+          {/* ___________________________________________________________ */}
+
           <div className="nominations">
             <label>
               <span>*</span>Список номинаций для детей
             </label>
-            <div className="check-group"></div>
+            {nominations.map((n) => (
+              <CheckboxChild key={n._id} label={n.name} />
+            ))}
+
+            <label>
+              <span>*</span>Список номинаций для педагогов
+            </label>
+            {nominations.map((n) => (
+              <CheckboxAdult key={n._id} label={n.name} />
+            ))}
           </div>
+          {/* ___________________________________________________________ */}
+
           <div className="create">
             <Button text="Сохраниить изменения" type="submit" />
           </div>
@@ -359,8 +388,9 @@ const Wrapper = styled.div`
     }
   }
   .nominations {
+    align-self: flex-start;
     margin: 1rem;
-    .check-group {
+    s .check-group {
       margin-bottom: 1rem;
     }
   }
