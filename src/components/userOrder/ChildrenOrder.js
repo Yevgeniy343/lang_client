@@ -11,10 +11,17 @@ import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import { subjects, languages, curators } from "../../data/data-order";
+import _ from "lodash";
+
+import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
 const ChildrenOrder = () => {
-  const { user, currentOrder } = useSelector((store) => store.user);
-  console.log(currentOrder);
+  const { user, currentOrder, noms, nomPul } = useSelector(
+    (store) => store.user
+  );
+
+  const thisNom = noms.find((n) => n.eventId === currentOrder.id);
+  const array = _.split(thisNom.childNoms, ",");
 
   const initialState = {
     email: user.email,
@@ -237,13 +244,17 @@ const ChildrenOrder = () => {
             onChange={changeHandler}
           />
         </div>
-
+        {/* ___________________________________________________________ */}
         <div className="in">
           <label>
             <span>*</span>Выбор номинации
           </label>
-          <div className="check-box"></div>
+          {array.map((n, index) => (
+            <CheckboxNomUser key={index} label={n} />
+          ))}
         </div>
+        {/* ___________________________________________________________ */}
+
         <div className="in">
           <label>
             <span>*</span>Язык работы

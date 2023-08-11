@@ -31,12 +31,17 @@ const EventAdminModal = () => {
     dispatch(adultNominationHandlerClean());
   }, []);
 
-  const { currentEvent, isLoading, nominations, nomE } = useSelector(
-    (store) => store.admin
-  );
+  const {
+    currentEvent,
+    isLoading,
+    nominations,
+    nomE,
+    childNominations,
+    adultNominations,
+  } = useSelector((store) => store.admin);
 
-  // const thisNom = nomE.find((n) => n.eventId === currentEvent.id);
-  // console.log(thisNom);
+  const thisNom = nomE.find((n) => n.eventId === currentEvent.id);
+  console.log(thisNom);
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -120,6 +125,9 @@ const EventAdminModal = () => {
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
   formData.append("id", currentEvent.id);
+  formData.append("childNoms", childNominations);
+  formData.append("adultNoms", adultNominations);
+  formData.append("nomId", thisNom._id);
 
   const onSubmit = (e) => {
     e.preventDefault();

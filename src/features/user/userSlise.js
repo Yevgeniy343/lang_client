@@ -26,6 +26,9 @@ const initialState = {
   events: [],
   isOrderModal: false,
   currentOrder: [],
+  noms: [],
+  nomins: [],
+  nomPul: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -96,6 +99,9 @@ const userSlice = createSlice({
     },
     currentOrderHandler: (state, { payload }) => {
       state.currentOrder = payload;
+    },
+    nominationHandler: (state, { payload }) => {
+      state.nomPul = payload;
     },
   },
   extraReducers: (builder) => {
@@ -174,6 +180,8 @@ const userSlice = createSlice({
     builder.addCase(getEvent.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.events = payload.event;
+      state.noms = payload.noms;
+      state.nomins = payload.nominations;
     });
     builder.addCase(getEvent.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -202,5 +210,6 @@ export const {
   smallMenuHandler,
   orderModalHandler,
   currentOrderHandler,
+  nominationHandler,
 } = userSlice.actions;
 export default userSlice.reducer;
