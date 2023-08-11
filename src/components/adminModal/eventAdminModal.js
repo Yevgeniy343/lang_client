@@ -53,6 +53,9 @@ const EventAdminModal = () => {
     date2: currentEvent.date2,
     pdf: currentEvent.pdf,
     image: currentEvent.image,
+    extra1: currentEvent.extra1 ? currentEvent.extra1 : "",
+    extra2: currentEvent.extra2 ? currentEvent.extra2 : "",
+    extra3: currentEvent.extra3 ? currentEvent.extra3 : "",
   };
 
   const downloadHandler = (e) => {
@@ -128,6 +131,9 @@ const EventAdminModal = () => {
   formData.append("childNoms", childNominations);
   formData.append("adultNoms", adultNominations);
   formData.append("nomId", thisNom._id);
+  formData.append("extra1", values.extra1);
+  formData.append("extra2", values.extra2);
+  formData.append("extra3", values.extra3);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -247,7 +253,6 @@ const EventAdminModal = () => {
               </div>
             </div>
           </div>
-          {/* ___________________________________________________________ */}
 
           <div className="nominations">
             <label>
@@ -264,6 +269,34 @@ const EventAdminModal = () => {
               <CheckboxAdult key={n._id} label={n.name} />
             ))}
           </div>
+
+          <div className="extra">
+            <label>
+              <span>*</span>Дополнительные поля
+            </label>
+            <Input
+              type="text"
+              name="extra1"
+              value={values.extra1}
+              onChange={changeHandler}
+              placeholder="Название поля"
+            />
+            <Input
+              type="text"
+              name="extra2"
+              value={values.extra2}
+              onChange={changeHandler}
+              placeholder="Название поля"
+            />
+            <Input
+              type="text"
+              name="extra3"
+              value={values.extra3}
+              onChange={changeHandler}
+              placeholder="Название поля"
+            />
+          </div>
+
           {/* ___________________________________________________________ */}
 
           <div className="create">
@@ -398,9 +431,13 @@ const Wrapper = styled.div`
   .nominations {
     align-self: flex-start;
     margin: 1rem;
-    s .check-group {
+    .check-group {
       margin-bottom: 1rem;
     }
+  }
+  .extra {
+    align-self: flex-start;
+    margin: 1rem;
   }
 
   @media (min-width: 576px) {

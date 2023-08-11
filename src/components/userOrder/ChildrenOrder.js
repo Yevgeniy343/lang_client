@@ -34,6 +34,9 @@ const ChildrenOrder = () => {
     graduate: "",
     language2: "",
     link: "",
+    extra1: "",
+    extra2: "",
+    extra3: "",
   };
 
   const initialStateCurators = {
@@ -247,7 +250,7 @@ const ChildrenOrder = () => {
             onChange={changeHandler}
           />
         </div>
-        {/* ___________________________________________________________ */}
+
         <div className="in">
           <label>
             <span>*</span>Выбор номинации
@@ -256,7 +259,6 @@ const ChildrenOrder = () => {
             <CheckboxNomUser key={index} label={n} indicator={nomPul} />
           ))}
         </div>
-        {/* ___________________________________________________________ */}
 
         <div className="in">
           <label>
@@ -529,6 +531,51 @@ const ChildrenOrder = () => {
             onChange={(phone) => setPhone({ phone })}
           />
         </div>
+        {/* ___________________________________________________________ */}
+        {currentOrder.extra1 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra1}
+            </label>
+            <Input
+              type="text"
+              name="extra1"
+              value={values.extra1}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {currentOrder.extra2 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra2}
+            </label>
+            <Input
+              type="text"
+              name="extra2"
+              value={values.extra2}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {currentOrder.extra3 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra3}
+            </label>
+            <Input
+              type="text"
+              name="extra3"
+              value={values.extra3}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {/* ___________________________________________________________ */}
+
         <div className="in">
           <label>
             <span>*</span>Согласие с условиями конкурса

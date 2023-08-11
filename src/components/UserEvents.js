@@ -18,6 +18,9 @@ const UserEvents = () => {
             image={e.image}
             pdf={e.pdf}
             id={e._id}
+            extra1={e.extra1}
+            extra2={e.extra2}
+            extra3={e.extra3}
           />
         ))}
       </div>

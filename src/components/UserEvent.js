@@ -9,7 +9,17 @@ import {
 
 const { REACT_APP_URL_API } = process.env;
 
-const UserEvent = ({ name, date1, date2, image, pdf, id }) => {
+const UserEvent = ({
+  name,
+  date1,
+  date2,
+  image,
+  pdf,
+  id,
+  extra1,
+  extra2,
+  extra3,
+}) => {
   const { isOrderModal } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
@@ -23,6 +33,9 @@ const UserEvent = ({ name, date1, date2, image, pdf, id }) => {
         image: image,
         pdf: pdf,
         id: id,
+        extra1: extra1,
+        extra2: extra2,
+        extra3: extra3,
       })
     );
   };
