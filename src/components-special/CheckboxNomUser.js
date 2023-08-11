@@ -6,7 +6,7 @@ import { nominationHandler } from "../features/user/userSlise";
 
 import _ from "lodash";
 
-const CheckboxChild = ({ label, onClick }) => {
+const CheckboxChild = ({ label, onClick, indicator }) => {
   const { nomPul } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
@@ -15,22 +15,21 @@ const CheckboxChild = ({ label, onClick }) => {
 
   const checkboxHandler = () => {
     let updatedNomPul;
-    if (!active) {
-      updatedNomPul = [...nomPul, label];
+    if (label !== indicator) {
+      updatedNomPul = label;
     } else {
-      updatedNomPul = nomPul.filter((n) => n !== label);
+      updatedNomPul = "";
     }
     dispatch(nominationHandler(updatedNomPul));
-    setActive(!active);
   };
 
   return (
     <Wrapper onClick={onClick}>
       <div
-        className={active ? "checkbox active1" : "checkbox"}
+        className={indicator === label ? "checkbox active1" : "checkbox"}
         onClick={checkboxHandler}
       >
-        {active && <AiOutlineCheck />}
+        {indicator === label && <AiOutlineCheck />}
       </div>
       <p>{label}</p>
     </Wrapper>

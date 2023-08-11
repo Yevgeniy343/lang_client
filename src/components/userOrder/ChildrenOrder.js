@@ -16,11 +16,14 @@ import _ from "lodash";
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
 const ChildrenOrder = () => {
-  const { user, currentOrder, noms, nomPul } = useSelector(
+  const { user, currentOrder, noms, nomPul, nomins } = useSelector(
     (store) => store.user
   );
 
   const thisNom = noms.find((n) => n.eventId === currentOrder.id);
+  const thisNomLF = nomins.find((n) => n.name === nomPul);
+  // console.log(thisNomLF);
+
   const array = _.split(thisNom.childNoms, ",");
 
   const initialState = {
@@ -250,7 +253,7 @@ const ChildrenOrder = () => {
             <span>*</span>Выбор номинации
           </label>
           {array.map((n, index) => (
-            <CheckboxNomUser key={index} label={n} />
+            <CheckboxNomUser key={index} label={n} indicator={nomPul} />
           ))}
         </div>
         {/* ___________________________________________________________ */}
@@ -274,38 +277,40 @@ const ChildrenOrder = () => {
             />
           </div>
         )}
-
-        <div className="in">
-          <label>
-            <span>*</span>
-            Ссылка на работу
-          </label>
-          <Input
-            type="text"
-            name="link"
-            value={values.link}
-            onChange={changeHandler}
-          />
-        </div>
-
-        <div className="in">
-          <label>
-            <span>*</span>Прикрепить работу
-          </label>
-          <Button
-            text="Прикрепить работу"
-            type="button"
-            onClick={pickHandler}
-          />
-          <input
-            type="file"
-            style={{ display: "none" }}
-            // accept=".pdf"
-            ref={filePickerRef}
-            onChange={pickedHandler}
-          />
-          {file && <p className="file-name">{file.name}</p>}
-        </div>
+        {thisNomLF?.file && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              Ссылка на работу
+            </label>
+            <Input
+              type="text"
+              name="link"
+              value={values.link}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {thisNomLF?.link && (
+          <div className="in">
+            <label>
+              <span>*</span>Прикрепить работу
+            </label>
+            <Button
+              text="Прикрепить работу"
+              type="button"
+              onClick={pickHandler}
+            />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              // accept=".pdf"
+              ref={filePickerRef}
+              onChange={pickedHandler}
+            />
+            {file && <p className="file-name">{file.name}</p>}
+          </div>
+        )}
 
         <div className="in curator">
           <label>
