@@ -7,7 +7,8 @@ import { MdDelete } from "react-icons/md";
 import { createEvent, getNom } from "../../features/adminSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import AdminCheckboxNomination from "../../components-special/AdminCheckboxNomination";
+import CheckboxChild from "../../components-special/Checkbox-child";
+import CheckboxAdult from "../../components-special/Checkbox-adult";
 
 const initialState = {
   name: "",
@@ -19,8 +20,10 @@ const Event = () => {
   useEffect(() => {
     dispatch(getNom());
   }, []);
-  const { nominations } = useSelector((store) => store.admin);
-  console.log(nominations);
+
+  const { nominations, childNominations, adultNominations } = useSelector(
+    (store) => store.admin
+  );
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const [values, setValues] = useState(initialState);
@@ -85,6 +88,8 @@ const Event = () => {
   formData.append("name", values.name);
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
+  formData.append("childNom", childNominations);
+  formData.append("adultNom", adultNominations);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -172,16 +177,25 @@ const Event = () => {
             </div>
           </div>
         </div>
+        {/* ___________________________________________________________ */}
         <div className="nominations">
           <label>
             <span>*</span>Список номинаций для детей
           </label>
+          {nominations.map((n) => (
+            <CheckboxChild key={n._id} label={n.name} />
+          ))}
           <div className="check-group"></div>
           <label>
             <span>*</span>Список номинаций для педагогов
           </label>
+          {nominations.map((n) => (
+            <CheckboxAdult key={n._id} label={n.name} />
+          ))}
           <div className="check-group"></div>
         </div>
+        {/* ___________________________________________________________ */}
+
         <div className="create">
           <Button text="Создать мероприятие" type="submit" />
         </div>

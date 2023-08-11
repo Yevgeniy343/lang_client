@@ -16,6 +16,7 @@ import {
   removeAdminFromLocalStorage,
   getAdminFromLocalStorage,
 } from "../utils/localStorage";
+import _ from "lodash";
 
 const initialState = {
   isLoading: false,
@@ -25,6 +26,9 @@ const initialState = {
   currentEvent: [],
   users: [],
   nominations: [],
+  childNominations: [],
+  adultNominations: [],
+  nomE: [],
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -86,7 +90,6 @@ export const getNom = createAsyncThunk(
 export const deleteNom = createAsyncThunk(
   "admin/deleteNom",
   async (info, thunkAPI) => {
-    console.log(info);
     return deleteNomThunk(`/admin/deletenom/${info.id}`, info, thunkAPI);
   }
 );
@@ -105,6 +108,12 @@ const adminSlice = createSlice({
     },
     currentEventHandler: (state, { payload }) => {
       state.currentEvent = payload;
+    },
+    childNominationHandler: (state, { payload }) => {
+      state.childNominations = payload;
+    },
+    adultNominationHandler: (state, { payload }) => {
+      state.adultNominations = payload;
     },
   },
   extraReducers: (builder) => {
@@ -145,6 +154,8 @@ const adminSlice = createSlice({
     builder.addCase(getEvents.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.events = payload.events;
+      state.nomE = payload.noms;
+      console.log(payload);
     });
     builder.addCase(getEvents.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -240,6 +251,11 @@ const adminSlice = createSlice({
   },
 });
 
-export const { logOutAdmin, eventModalHandler, currentEventHandler } =
-  adminSlice.actions;
+export const {
+  logOutAdmin,
+  eventModalHandler,
+  currentEventHandler,
+  childNominationHandler,
+  adultNominationHandler,
+} = adminSlice.actions;
 export default adminSlice.reducer;

@@ -2,19 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
+import { adultNominationHandler } from "../features/adminSlice";
 
-const Checkbox = ({ label, onClick, passState, type, indicator }) => {
-  const [active, setActive] = useState(
-    true ? indicator !== "undefined" : false
-  );
+const CheckboxAdult = ({ label, onClick }) => {
+  const { adultNominations } = useSelector((store) => store.admin);
+
+  const dispatch = useDispatch();
+
+  const [active, setActive] = useState(false);
 
   const checkboxHandler = () => {
+    let updatedAdultNominations;
     if (!active) {
-      passState(label);
+      updatedAdultNominations = [...adultNominations, label];
     } else {
-      // passState({ label: label, value: false, type: type });
-      passState("undefined");
+      updatedAdultNominations = adultNominations.filter((n) => n !== label);
     }
+    dispatch(adultNominationHandler(updatedAdultNominations));
     setActive(!active);
   };
 
@@ -36,8 +40,7 @@ const Wrapper = styled.div`
   align-items: center;
   .checkbox {
     margin: 0.5rem 0;
-    min-width: 20px;
-    max-width: 20px;
+    width: 20px;
     height: 20px;
     border: 2px solid var(--main-0);
     cursor: pointer;
@@ -77,4 +80,4 @@ const Wrapper = styled.div`
   @media (min-width: 1340px) {
   }
 `;
-export default Checkbox;
+export default CheckboxAdult;
