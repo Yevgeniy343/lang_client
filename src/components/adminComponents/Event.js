@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Input from "../../components-special/Input";
 import Button from "../../components-special/Button";
 import { MdDelete } from "react-icons/md";
-import { createEvent } from "../../features/adminSlice";
+import { createEvent, getNom } from "../../features/adminSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AdminCheckboxNomination from "../../components-special/AdminCheckboxNomination";
@@ -16,6 +16,11 @@ const initialState = {
 };
 
 const Event = () => {
+  useEffect(() => {
+    dispatch(getNom());
+  }, []);
+  const { nominations } = useSelector((store) => store.admin);
+  console.log(nominations);
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const [values, setValues] = useState(initialState);
@@ -27,79 +32,6 @@ const Event = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [childNom_1, setChildNom_1] = useState();
-  console.log(childNom_1);
-  const [childNom_2, setChildNom_2] = useState();
-  const [childNom_3, setChildNom_3] = useState();
-  const [childNom_4, setChildNom_4] = useState();
-  const [childNom_5, setChildNom_5] = useState();
-  const [childNom_6, setChildNom_6] = useState();
-  const [childNom_7, setChildNom_7] = useState();
-  const [childNom_8, setChildNom_8] = useState();
-  const [childNom_9, setChildNom_9] = useState();
-  const [childNom_10, setChildNom_10] = useState();
-
-  const childrenNominationHandler_1 = (data) => {
-    setChildNom_1(data);
-  };
-  const childrenNominationHandler_2 = (data) => {
-    setChildNom_2(data);
-  };
-  const childrenNominationHandler_3 = (data) => {
-    setChildNom_3(data);
-  };
-  const childrenNominationHandler_4 = (data) => {
-    setChildNom_4(data);
-  };
-  const childrenNominationHandler_5 = (data) => {
-    setChildNom_5(data);
-  };
-  const childrenNominationHandler_6 = (data) => {
-    setChildNom_6(data);
-  };
-  const childrenNominationHandler_7 = (data) => {
-    setChildNom_7(data);
-  };
-  const childrenNominationHandler_8 = (data) => {
-    setChildNom_8(data);
-  };
-  const childrenNominationHandler_9 = (data) => {
-    setChildNom_9(data);
-  };
-  const childrenNominationHandler_10 = (data) => {
-    setChildNom_10(data);
-  };
-
-  const [adultNom_1, setAdultNom_1] = useState();
-  const [adultNom_2, setAdultNom_2] = useState();
-  const [adultNom_3, setAdultNom_3] = useState();
-  const [adultNom_4, setAdultNom_4] = useState();
-  const [adultNom_5, setAdultNom_5] = useState();
-  const [adultNom_6, setAdultNom_6] = useState();
-  const [adultNom_7, setAdultNom_7] = useState();
-
-  const adultNominationHandler_1 = (data) => {
-    setAdultNom_1(data);
-  };
-  const adultNominationHandler_2 = (data) => {
-    setAdultNom_2(data);
-  };
-  const adultNominationHandler_3 = (data) => {
-    setAdultNom_3(data);
-  };
-  const adultNominationHandler_4 = (data) => {
-    setAdultNom_4(data);
-  };
-  const adultNominationHandler_5 = (data) => {
-    setAdultNom_5(data);
-  };
-  const adultNominationHandler_6 = (data) => {
-    setAdultNom_6(data);
-  };
-  const adultNominationHandler_7 = (data) => {
-    setAdultNom_7(data);
-  };
 
   const pickImageHandler = () => {
     filePickerRef.current.click();
@@ -153,23 +85,6 @@ const Event = () => {
   formData.append("name", values.name);
   formData.append("date1", values.date1);
   formData.append("date2", values.date2);
-  formData.append("childNom_1", childNom_1);
-  formData.append("childNom_2", childNom_2);
-  formData.append("childNom_3", childNom_3);
-  formData.append("childNom_4", childNom_4);
-  formData.append("childNom_5", childNom_5);
-  formData.append("childNom_6", childNom_6);
-  formData.append("childNom_7", childNom_7);
-  formData.append("childNom_8", childNom_8);
-  formData.append("childNom_9", childNom_9);
-  formData.append("childNom_10", childNom_10);
-  formData.append("adultNom_1", adultNom_1);
-  formData.append("adultNom_2", adultNom_2);
-  formData.append("adultNom_3", adultNom_3);
-  formData.append("adultNom_4", adultNom_4);
-  formData.append("adultNom_5", adultNom_5);
-  formData.append("adultNom_6", adultNom_6);
-  formData.append("adultNom_7", adultNom_7);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -178,7 +93,6 @@ const Event = () => {
       return;
     } else {
       dispatch(createEvent(formData));
-      console.log(childNom_1);
     }
   };
 
@@ -262,132 +176,11 @@ const Event = () => {
           <label>
             <span>*</span>Список номинаций для детей
           </label>
-          <div className="check-group">
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Изобразительное искусство"
-                type="children"
-                passState={childrenNominationHandler_1}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Декоративно-прикладное искусство"
-                type="children"
-                passState={childrenNominationHandler_2}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Фотография в национальном костюме"
-                type="children"
-                passState={childrenNominationHandler_3}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Хореографическое искусство (народные танцы)"
-                type="children"
-                passState={childrenNominationHandler_4}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Вокальное искусство (народные песни)"
-                type="children"
-                passState={childrenNominationHandler_5}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)"
-                type="children"
-                passState={childrenNominationHandler_6}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Литературно-музыкальная композиция"
-                type="children"
-                passState={childrenNominationHandler_7}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Художественное слово (декламация на родном языке)"
-                type="children"
-                passState={childrenNominationHandler_8}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Эссе"
-                type="children"
-                passState={childrenNominationHandler_9}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Презентация"
-                type="children"
-                passState={childrenNominationHandler_10}
-              />
-            </div>
-          </div>
+          <div className="check-group"></div>
           <label>
             <span>*</span>Список номинаций для педагогов
           </label>
-          <div className="check-group">
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Декламация литературных произведений по тематике конкурса (проза или стихи)"
-                type="adult"
-                passState={adultNominationHandler_1}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Фото в национальном костюме"
-                type="adult"
-                passState={adultNominationHandler_2}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Вокал – исполнение на родном языке"
-                type="adult"
-                passState={adultNominationHandler_3}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Научно-методическая разработка: конспект урока на родном языке, принятый и заверенный образовательной организацией"
-                type="adult"
-                passState={adultNominationHandler_4}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Передовой опыт — презентация: использование инновационных технологий обучения на уроках родного языка"
-                type="adult"
-                passState={adultNominationHandler_5}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Фрагмент внеклассного мероприятия по теме родного языка"
-                type="adult"
-                passState={adultNominationHandler_6}
-              />
-            </div>
-            <div className="box">
-              <AdminCheckboxNomination
-                label="Изобразительное искусство"
-                type="adult"
-                passState={adultNominationHandler_7}
-              />
-            </div>
-          </div>
+          <div className="check-group"></div>
         </div>
         <div className="create">
           <Button text="Создать мероприятие" type="submit" />

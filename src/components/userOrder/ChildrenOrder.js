@@ -6,7 +6,7 @@ import Button from "../../components-special/Button";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../components-special/Checkbox";
-import CheckboxNominations from "../../components-special/CheckboxNominations";
+
 import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
@@ -52,8 +52,6 @@ const ChildrenOrder = () => {
   const [phone, setPhone] = useState(initialState.phone);
   const [agreement, setAgreement] = useState(false);
   const [condition, setCondition] = useState(false);
-  console.log(agreement);
-  console.log(condition);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -244,98 +242,7 @@ const ChildrenOrder = () => {
           <label>
             <span>*</span>Выбор номинации
           </label>
-          <div className="check-box">
-            {currentOrder.childNom_1 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_1}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_2 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_2}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_3 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_3}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_4 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_4}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_5 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_5}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_6 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_6}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_7 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_7}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_8 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_8}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_9 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_9}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-            {currentOrder.childNom_10 !== "undefined" && (
-              <div className="box">
-                <CheckboxNominations
-                  indicator={nomination}
-                  label={currentOrder.childNom_10}
-                  passState={nominationHandler}
-                />
-              </div>
-            )}
-          </div>
+          <div className="check-box"></div>
         </div>
         <div className="in">
           <label>
@@ -357,50 +264,37 @@ const ChildrenOrder = () => {
           </div>
         )}
 
-        {(nomination === "Хореографическое искусство (народные танцы)" ||
-          nomination === "Вокальное искусство (народные песни)" ||
-          nomination ===
-            "Театральное искусство (отрывок из постановки народных сказок, легенд и т.п.)" ||
-          nomination === "Литературно-музыкальная композиция" ||
-          nomination ===
-            "Художественное слово (декламация на родном языке)") && (
-          <div className="in">
-            <label>
-              <span>*</span>
-              Ссылка на работу
-            </label>
-            <Input
-              type="text"
-              name="link"
-              value={values.link}
-              onChange={changeHandler}
-            />
-          </div>
-        )}
-        {(nomination === "Изобразительное искусство" ||
-          nomination === "Декоративно-прикладное искусство" ||
-          nomination === "Фотография в национальном костюме" ||
-          nomination === "Эссе" ||
-          nomination === "Презентация") && (
-          <div className="in">
-            <label>
-              <span>*</span>Прикрепить работу
-            </label>
-            <Button
-              text="Прикрепить работу"
-              type="button"
-              onClick={pickHandler}
-            />
-            <input
-              type="file"
-              style={{ display: "none" }}
-              // accept=".pdf"
-              ref={filePickerRef}
-              onChange={pickedHandler}
-            />
-            {file && <p className="file-name">{file.name}</p>}
-          </div>
-        )}
+        <div className="in">
+          <label>
+            <span>*</span>
+            Ссылка на работу
+          </label>
+          <Input
+            type="text"
+            name="link"
+            value={values.link}
+            onChange={changeHandler}
+          />
+        </div>
+
+        <div className="in">
+          <label>
+            <span>*</span>Прикрепить работу
+          </label>
+          <Button
+            text="Прикрепить работу"
+            type="button"
+            onClick={pickHandler}
+          />
+          <input
+            type="file"
+            style={{ display: "none" }}
+            // accept=".pdf"
+            ref={filePickerRef}
+            onChange={pickedHandler}
+          />
+          {file && <p className="file-name">{file.name}</p>}
+        </div>
 
         <div className="in curator">
           <label>
