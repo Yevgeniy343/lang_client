@@ -29,6 +29,9 @@ const UserModalOrder = () => {
   return (
     <Wrapper>
       <div className="modal">
+        <div className="price">
+          <p>0 р.</p>
+        </div>
         <div
           className="close"
           onClick={() => dispatch(orderModalHandler(false))}
@@ -113,7 +116,7 @@ const Wrapper = styled.div`
     height: 90%;
     overflow-y: auto;
     border-radius: 10px;
-    padding: 0.5rem 2rem;
+    padding: 0 2rem;
     overflow-y: auto;
     ::-webkit-scrollbar {
       width: 10px;
@@ -131,6 +134,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: end;
     margin: 1rem;
+    margin-top: 3rem;
     svg {
       font-size: 2rem;
       color: var(--main-0);
@@ -228,6 +232,19 @@ const Wrapper = styled.div`
       }
     }
   }
+  .price {
+    height: 40px;
+    width: 95vw;
+    position: fixed;
+    background-color: white;
+    opacity: 0.9;
+
+    p {
+      color: green;
+      margin-top: 0.5rem;
+      font-size: 1.5rem;
+    }
+  }
   @media (min-width: 576px) {
     .choose {
       .choose1 {
@@ -264,6 +281,9 @@ const Wrapper = styled.div`
     }
     .modal {
       width: 680px;
+    }
+    .price {
+      width: 630px;
     }
   }
   @media (min-width: 1140px) {

@@ -187,7 +187,7 @@ const Event = () => {
             </div>
           </div>
         </div>
-        {/* ___________________________________________________________ */}
+
         <div className="nominations">
           <label>
             <span>*</span>Список номинаций для детей
@@ -203,6 +203,45 @@ const Event = () => {
             <CheckboxAdult key={n._id} label={n.name} />
           ))}
           <div className="check-group"></div>
+        </div>
+        {/* ___________________________________________________________ */}
+        <div className="extra">
+          <label>
+            <span>*</span>Стоимость тарифа "Одиночный участник"
+          </label>
+          <Input
+            type="text"
+            name="date1"
+            value={values.date1}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость тарифа "Соавторство"
+          </label>
+          <Input
+            type="text"
+            name="date1"
+            value={values.date1}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость тарифа "Коллективный"
+          </label>
+          <Input
+            type="text"
+            name="date1"
+            value={values.date1}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость дополнительного руководителя
+          </label>
+          <Input
+            type="text"
+            name="date1"
+            value={values.date1}
+            onChange={changeHandler}
+          />
         </div>
         {/* ___________________________________________________________ */}
 
