@@ -234,7 +234,7 @@ const Wrapper = styled.div`
   }
   .price {
     height: 40px;
-    width: 95vw;
+    width: 80vw;
     position: fixed;
     background-color: white;
     opacity: 0.9;
