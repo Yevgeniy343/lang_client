@@ -15,6 +15,11 @@ import _ from "lodash";
 
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
+const data = [
+  { id: 2, label: "2" },
+  { id: 3, label: "3" },
+];
+
 const ChildrenOrder = () => {
   const { user, currentOrder, noms, nomPul, nomins } = useSelector(
     (store) => store.user
@@ -30,6 +35,8 @@ const ChildrenOrder = () => {
     email: user.email,
     phone: user.phone,
     name: "",
+    name2: "",
+    name3: "",
     punct: "",
     graduate: "",
     language2: "",
@@ -65,6 +72,7 @@ const ChildrenOrder = () => {
   const [phone, setPhone] = useState(initialState.phone);
   const [agreement, setAgreement] = useState(false);
   const [condition, setCondition] = useState(false);
+  const [part, setPart] = useState("");
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -142,6 +150,8 @@ const ChildrenOrder = () => {
     e.preventDefault();
     console.log("--------------");
     console.log("name = ", values.name);
+    console.log("name2 = ", values.name2);
+    console.log("name3 = ", values.name3);
     console.log("age = ", age);
     console.log("subject = ", subject);
     console.log("punct = ", values.punct);
@@ -156,11 +166,103 @@ const ChildrenOrder = () => {
     console.log("tarif = ", tarif);
     console.log("email = ", values.email);
     console.log("phone = ", phone);
+    console.log("extra1 = ", values.extra1);
+    console.log("extra2 = ", values.extra2);
+    console.log("extra3 = ", values.extra3);
   };
 
+  const amountPartHandler = (part) => {
+    setPart(part);
+  };
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
+        <div className="in">
+          <label>
+            <span>*</span>Вариант участия
+          </label>
+          <div>
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Одиночный участник"
+            />
+            <div className="about-tarif">
+              <p className="include-about">
+                Общий наградной пакет: "Одиночный участник". Оплачивается 450
+                рублей. Включает:{" "}
+              </p>
+              <p className="include">● Диплом в электронном варианте</p>
+              <p className="include">
+                ● Благодарность куратору в электронном варианте
+              </p>
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
+              </p>
+            </div>
+            {/* ___________________________________________________________ */}
+
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Соавторство"
+            />
+            <div className="about-tarif">
+              <p className="include-about">
+                Наградной пакет «Соавторство»: задействовано не более 3-х
+                авторов. Оплачивается по 450 руб. за каждого участника.
+                Включает:
+              </p>
+              <p className="include">
+                ● Диплом в электронном варианте на каждого участника
+              </p>
+              <p className="include">
+                ● Благодарность куратору в электронном варианте
+              </p>
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
+              </p>
+            </div>
+            {tarif === "Соавторство" && (
+              <div className="in">
+                <label>
+                  <span>*</span> Количество участников
+                </label>
+                <Select passState={amountPartHandler} data={data} />
+              </div>
+            )}
+            {/* ___________________________________________________________ */}
+
+            <CheckboxTarif
+              indicator={tarif}
+              passState={tarifHandler}
+              label="Коллективный"
+            />
+            <div className="about-tarif">
+              <p className="include-about">
+                Наградной пакет «Коллективный»: задействован творческий
+                коллектив более 3-х человек. Оплачивается 800 руб. Включает:
+              </p>
+              <p className="include">
+                ● Коллективный диплом (победителя, лауреата или участника) в
+                электронном варианте
+              </p>
+              <p className="include">
+                ● Благодарность руководителю работы в электронном варианте – 1
+                шт.
+              </p>
+              <p className="include small">
+                * Работы, в которых участвуют 2 и более руководителя,
+                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
+                руководителя.
+              </p>
+            </div>
+          </div>
+        </div>
         <div className="in">
           <label>
             <span>*</span>Фамилия и имя конкурсанта
@@ -172,6 +274,35 @@ const ChildrenOrder = () => {
             onChange={changeHandler}
           />
         </div>
+        {/* ___________________________________________________________ */}
+        {(part === "2" || part === "3") && tarif === "Соавторство" && (
+          <div className="in">
+            <label>
+              <span>*</span>Фамилия и имя второго конкурсанта
+            </label>
+            <Input
+              type="text"
+              name="name2"
+              value={values.name2}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {part === "3" && tarif === "Соавторство" && (
+          <div className="in">
+            <label>
+              <span>*</span>Фамилия и имя третьего конкурсанта
+            </label>
+            <Input
+              type="text"
+              name="name3"
+              value={values.name3}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {/* ___________________________________________________________ */}
+
         <div className="in">
           <label>
             <span>*</span>Возрастная категория
@@ -419,81 +550,6 @@ const ChildrenOrder = () => {
         </div>
         <div className="in">
           <label>
-            <span>*</span>Тариф
-          </label>
-          <div>
-            <CheckboxTarif
-              indicator={tarif}
-              passState={tarifHandler}
-              label="Одиночный участник"
-            />
-            <div className="about-tarif">
-              <p className="include-about">
-                Общий наградной пакет: "Одиночный участник". Оплачивается 450
-                рублей. Включает:{" "}
-              </p>
-              <p className="include">● Диплом в электронном варианте</p>
-              <p className="include">
-                ● Благодарность куратору в электронном варианте
-              </p>
-              <p className="include small">
-                * Работы, в которых участвуют 2 и более руководителя,
-                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
-                руководителя.
-              </p>
-            </div>
-            <CheckboxTarif
-              indicator={tarif}
-              passState={tarifHandler}
-              label="Соавторство"
-            />
-            <div className="about-tarif">
-              <p className="include-about">
-                Наградной пакет «Соавторство»: задействовано не более 3-х
-                авторов. Оплачивается по 450 руб. за каждого участника.
-                Включает:
-              </p>
-              <p className="include">
-                ● Диплом в электронном варианте на каждого участника
-              </p>
-              <p className="include">
-                ● Благодарность куратору в электронном варианте
-              </p>
-              <p className="include small">
-                * Работы, в которых участвуют 2 и более руководителя,
-                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
-                руководителя.
-              </p>
-            </div>
-            <CheckboxTarif
-              indicator={tarif}
-              passState={tarifHandler}
-              label="Коллективный"
-            />
-            <div className="about-tarif">
-              <p className="include-about">
-                Наградной пакет «Коллективный»: задействован творческий
-                коллектив более 3-х человек. Оплачивается 800 руб. Включает:
-              </p>
-              <p className="include">
-                ● Коллективный диплом (победителя, лауреата или участника) в
-                электронном варианте
-              </p>
-              <p className="include">
-                ● Благодарность руководителю работы в электронном варианте – 1
-                шт.
-              </p>
-              <p className="include small">
-                * Работы, в которых участвуют 2 и более руководителя,
-                оплачиваются + 100 рублей к стоимости оргвзноса за каждого
-                руководителя.
-              </p>
-            </div>
-            {/* <div className="about-tarif"></div> */}
-          </div>
-        </div>
-        <div className="in">
-          <label>
             <span>*</span>Квитанция об оплате
           </label>
           <div className="in">
@@ -531,7 +587,6 @@ const ChildrenOrder = () => {
             onChange={(phone) => setPhone({ phone })}
           />
         </div>
-        {/* ___________________________________________________________ */}
         {currentOrder.extra1 && (
           <div className="in">
             <label>
@@ -574,7 +629,6 @@ const ChildrenOrder = () => {
             />
           </div>
         )}
-        {/* ___________________________________________________________ */}
 
         <div className="in">
           <label>
