@@ -100,6 +100,10 @@ const Event = () => {
   formData.append("date2", values.date2);
   formData.append("childNom", childNominations);
   formData.append("adultNom", adultNominations);
+  formData.append("tarif_1", values.tarif_1);
+  formData.append("tarif_2", values.tarif_2);
+  formData.append("tarif_3", values.tarif_3);
+  formData.append("supervisor", values.supervisor);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -187,23 +191,24 @@ const Event = () => {
             </div>
           </div>
         </div>
-
-        <div className="nominations">
-          <label>
-            <span>*</span>Список номинаций для детей
-          </label>
-          {nominations.map((n) => (
-            <CheckboxChild key={n._id} label={n.name} />
-          ))}
-          <div className="check-group"></div>
-          <label>
-            <span>*</span>Список номинаций для педагогов
-          </label>
-          {nominations.map((n) => (
-            <CheckboxAdult key={n._id} label={n.name} />
-          ))}
-          <div className="check-group"></div>
-        </div>
+        {nominations && (
+          <div className="nominations">
+            <label>
+              <span>*</span>Список номинаций для детей
+            </label>
+            {nominations.map((n) => (
+              <CheckboxChild key={n._id} label={n.name} />
+            ))}
+            <div className="check-group"></div>
+            <label>
+              <span>*</span>Список номинаций для педагогов
+            </label>
+            {nominations.map((n) => (
+              <CheckboxAdult key={n._id} label={n.name} />
+            ))}
+            <div className="check-group"></div>
+          </div>
+        )}
         {/* ___________________________________________________________ */}
         <div className="extra">
           <label>
@@ -211,8 +216,8 @@ const Event = () => {
           </label>
           <Input
             type="text"
-            name="date1"
-            value={values.date1}
+            name="tarif_1"
+            value={values.tarif_1}
             onChange={changeHandler}
           />
           <label>
@@ -220,8 +225,8 @@ const Event = () => {
           </label>
           <Input
             type="text"
-            name="date1"
-            value={values.date1}
+            name="tarif_2"
+            value={values.tarif_2}
             onChange={changeHandler}
           />
           <label>
@@ -229,8 +234,8 @@ const Event = () => {
           </label>
           <Input
             type="text"
-            name="date1"
-            value={values.date1}
+            name="tarif_3"
+            value={values.tarif_3}
             onChange={changeHandler}
           />
           <label>
@@ -238,8 +243,8 @@ const Event = () => {
           </label>
           <Input
             type="text"
-            name="date1"
-            value={values.date1}
+            name="supervisor"
+            value={values.supervisor}
             onChange={changeHandler}
           />
         </div>

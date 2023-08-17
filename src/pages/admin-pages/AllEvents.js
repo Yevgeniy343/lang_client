@@ -25,22 +25,24 @@ const AllEvents = () => {
       <AdminNavBar />
       <AdminSideBar />
       {isLoading && <Loading />}
-      <Wrapper>
-        {events.map((e) => (
-          <EventItem
-            key={e._id}
-            name={e.name}
-            date1={e.date1}
-            date2={e.date2}
-            image={e.image}
-            id={e._id}
-            pdf={e.pdf}
-            extra1={e.extra1}
-            extra2={e.extra2}
-            extra3={e.extra3}
-          />
-        ))}
-      </Wrapper>
+      {events && (
+        <Wrapper>
+          {events.map((e) => (
+            <EventItem
+              key={e._id}
+              name={e.name}
+              date1={e.date1}
+              date2={e.date2}
+              image={e.image}
+              id={e._id}
+              pdf={e.pdf}
+              extra1={e.extra1}
+              extra2={e.extra2}
+              extra3={e.extra3}
+            />
+          ))}
+        </Wrapper>
+      )}
       {isEventModal && <EventAdminModal />}
     </div>
   );
