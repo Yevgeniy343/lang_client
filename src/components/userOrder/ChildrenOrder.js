@@ -13,12 +13,14 @@ import { subjects, languages, curators } from "../../data/data-order";
 import _ from "lodash";
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
+import useCalculator from "../../hooks/calculator";
+
 const data = [
   { id: 2, label: "2" },
   { id: 3, label: "3" },
 ];
 
-const ChildrenOrder = () => {
+const ChildrenOrder = ({ passCalculate }) => {
   const { user, currentOrder, noms, nomPul, nomins } = useSelector(
     (store) => store.user
   );
@@ -52,6 +54,7 @@ const ChildrenOrder = () => {
     cf3: "",
     cd3: "",
   };
+  const defaultValue = 1;
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -65,7 +68,8 @@ const ChildrenOrder = () => {
   const [language, setLanguage] = useState("");
   const [nomination, setNomination] = useState("");
   const [tarif, setTarif] = useState("");
-  const [curatorsAmount, setCuratorsAmount] = useState();
+
+  const [curatorsAmount, setCuratorsAmount] = useState(defaultValue);
   const [cur, setCur] = useState(initialStateCurators);
   const [phone, setPhone] = useState(initialState.phone);
   const [agreement, setAgreement] = useState(false);
@@ -128,10 +132,6 @@ const ChildrenOrder = () => {
     setLanguage(lang);
   };
 
-  const nominationHandler = (data) => {
-    setNomination(data);
-  };
-
   const tarifHandler = (data) => {
     setTarif(data);
   };
@@ -173,6 +173,29 @@ const ChildrenOrder = () => {
   const amountPartHandler = (part) => {
     setPart(part);
   };
+
+  useEffect(() => {
+    let calculate;
+    const defaultAmount = curatorsAmount !== undefined ? curatorsAmount : 1;
+    const defaultPart = part !== undefined ? part : 1;
+    if (tarif === "Одиночный участник") {
+      calculate =
+        currentOrder.tarif_1 + defaultAmount * currentOrder.supervisor;
+      passCalculate(calculate);
+    } else if (tarif === "Соавторство") {
+      calculate =
+        currentOrder.tarif_2 * defaultPart +
+        defaultAmount * currentOrder.supervisor;
+      passCalculate(calculate);
+    } else if (tarif === "Коллективный") {
+      calculate =
+        currentOrder.tarif_3 + defaultAmount * currentOrder.supervisor;
+      passCalculate(calculate);
+    } else if (!tarif) {
+      calculate = 0;
+      passCalculate(calculate);
+    }
+  }, [tarif, curatorsAmount, part]);
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
@@ -300,6 +323,109 @@ const ChildrenOrder = () => {
             />
           </div>
         )}
+        <div className="in curator">
+          <label>
+            <span>*</span>Количество кураторов
+          </label>
+          <Select passState={curatorsAmountHanler} data={curators} />
+          {/* <Curators amount={curatorsAmount} passSet={curatorsHandler} /> */}
+          {curatorsAmount === "1" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                onChange={changeCuratorHandler}
+                value={cur.cd1}
+              />
+            </div>
+          )}
+          {curatorsAmount === "2" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+          {curatorsAmount === "3" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 3"
+                type="text"
+                name="cf3"
+                value={cur.cf3}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность куратора 3"
+                type="text"
+                name="cd3"
+                value={cur.cd3}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+        </div>
         {/* ___________________________________________________________ */}
 
         <div className="in">
@@ -443,110 +569,6 @@ const ChildrenOrder = () => {
             {file && <p className="file-name">{file.name}</p>}
           </div>
         )}
-
-        <div className="in curator">
-          <label>
-            <span>*</span>Количество кураторов
-          </label>
-          <Select passState={curatorsAmountHanler} data={curators} />
-          {/* <Curators amount={curatorsAmount} passSet={curatorsHandler} /> */}
-          {curatorsAmount === "1" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 1"
-                type="text"
-                name="cd1"
-                onChange={changeCuratorHandler}
-                value={cur.cd1}
-              />
-            </div>
-          )}
-          {curatorsAmount === "2" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 1"
-                type="text"
-                name="cd1"
-                value={cur.cd1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 2"
-                type="text"
-                name="cf2"
-                value={cur.cf2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 2"
-                type="text"
-                name="cd2"
-                value={cur.cd2}
-                onChange={changeCuratorHandler}
-              />
-            </div>
-          )}
-          {curatorsAmount === "3" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 1"
-                type="text"
-                name="cd1"
-                value={cur.cd1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 2"
-                type="text"
-                name="cf2"
-                value={cur.cf2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 2"
-                type="text"
-                name="cd2"
-                value={cur.cd2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 3"
-                type="text"
-                name="cf3"
-                value={cur.cf3}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность куратора 3"
-                type="text"
-                name="cd3"
-                value={cur.cd3}
-                onChange={changeCuratorHandler}
-              />
-            </div>
-          )}
-        </div>
         <div className="in">
           <label>
             <span>*</span>Квитанция об оплате

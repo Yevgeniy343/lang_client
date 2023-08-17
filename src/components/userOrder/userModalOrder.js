@@ -13,6 +13,7 @@ const { REACT_APP_URL_API } = process.env;
 const UserModalOrder = () => {
   const { currentOrder } = useSelector((store) => store.user);
   const [choose, setChoose] = useState();
+  const [amount, setAmount] = useState(0);
   const dispatch = useDispatch();
 
   const downloadHandler = (e) => {
@@ -26,11 +27,15 @@ const UserModalOrder = () => {
     });
   };
 
+  const totalAmountHandler = (totalAmount) => {
+    setAmount(totalAmount);
+  };
+
   return (
     <Wrapper>
       <div className="modal">
         <div className="price">
-          <p>0 р.</p>
+          <p>{amount} р.</p>
         </div>
         <div
           className="close"
@@ -91,7 +96,9 @@ const UserModalOrder = () => {
             </p>
           </div>
         </div>
-        {choose === "child" && <ChildrenOrder />}
+        {choose === "child" && (
+          <ChildrenOrder passCalculate={totalAmountHandler} />
+        )}
         {choose === "adult" && <AdultOrder />}
       </div>
     </Wrapper>
