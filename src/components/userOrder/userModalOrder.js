@@ -11,7 +11,7 @@ import AdultOrder from "./AdultOrder";
 const { REACT_APP_URL_API } = process.env;
 
 const UserModalOrder = () => {
-  const { isOrderModal, currentOrder } = useSelector((store) => store.user);
+  const { currentOrder } = useSelector((store) => store.user);
   const [choose, setChoose] = useState();
   const dispatch = useDispatch();
 

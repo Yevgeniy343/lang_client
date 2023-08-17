@@ -6,13 +6,11 @@ import Button from "../../components-special/Button";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../components-special/Checkbox";
-
 import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import { subjects, languages, curators } from "../../data/data-order";
 import _ from "lodash";
-
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
 const data = [
@@ -169,6 +167,7 @@ const ChildrenOrder = () => {
     console.log("extra1 = ", values.extra1);
     console.log("extra2 = ", values.extra2);
     console.log("extra3 = ", values.extra3);
+    console.log("part = ", part);
   };
 
   const amountPartHandler = (part) => {
