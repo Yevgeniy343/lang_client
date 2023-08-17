@@ -107,7 +107,17 @@ const Event = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!file || !image || !values.name || !values.date1 || !values.date2) {
+    if (
+      !file ||
+      !image ||
+      !values.name ||
+      !values.date1 ||
+      !values.date2 ||
+      !values.tarif_1 ||
+      !values.tarif_2 ||
+      !values.tarif_3 ||
+      !values.supervisor
+    ) {
       toast.error("Введите все значения");
       return;
     } else {

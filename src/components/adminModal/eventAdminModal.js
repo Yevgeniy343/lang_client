@@ -41,7 +41,6 @@ const EventAdminModal = () => {
   } = useSelector((store) => store.admin);
 
   const thisNom = nomE.find((n) => n.eventId === currentEvent.id);
-  console.log(thisNom);
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -51,6 +50,10 @@ const EventAdminModal = () => {
     name: currentEvent.name,
     date1: currentEvent.date1,
     date2: currentEvent.date2,
+    tarif_1: currentEvent.tarif_1,
+    tarif_2: currentEvent.tarif_2,
+    tarif_3: currentEvent.tarif_3,
+    supervisor: currentEvent.supervisor,
     pdf: currentEvent.pdf,
     image: currentEvent.image,
     extra1: currentEvent.extra1 ? currentEvent.extra1 : "",
@@ -134,10 +137,22 @@ const EventAdminModal = () => {
   formData.append("extra1", values.extra1);
   formData.append("extra2", values.extra2);
   formData.append("extra3", values.extra3);
+  formData.append("tarif_1", values.tarif_1);
+  formData.append("tarif_2", values.tarif_2);
+  formData.append("tarif_3", values.tarif_3);
+  formData.append("supervisor", values.supervisor);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!values.name || !values.date1 || !values.date2) {
+    if (
+      !values.name ||
+      !values.date1 ||
+      !values.date2 ||
+      !values.tarif_1 ||
+      !values.tarif_2 ||
+      !values.tarif_3 ||
+      !values.supervisor
+    ) {
       toast.error("Введите все значения");
       return;
     } else {
@@ -271,9 +286,7 @@ const EventAdminModal = () => {
           </div>
 
           <div className="extra">
-            <label>
-              <span>*</span>Дополнительные поля
-            </label>
+            <label>Дополнительные поля</label>
             <Input
               type="text"
               name="extra1"
@@ -297,6 +310,46 @@ const EventAdminModal = () => {
             />
           </div>
 
+          {/* ___________________________________________________________ */}
+
+          <div className="extra">
+            <label>
+              <span>*</span>Стоимость тарифа "Одиночный участник"
+            </label>
+            <Input
+              type="text"
+              name="tarif_1"
+              value={values.tarif_1}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость тарифа "Соавторство"
+            </label>
+            <Input
+              type="text"
+              name="tarif_2"
+              value={values.tarif_2}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость тарифа "Коллективный"
+            </label>
+            <Input
+              type="text"
+              name="tarif_3"
+              value={values.tarif_3}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость дополнительного руководителя
+            </label>
+            <Input
+              type="text"
+              name="supervisor"
+              value={values.supervisor}
+              onChange={changeHandler}
+            />
+          </div>
           {/* ___________________________________________________________ */}
 
           <div className="create">
