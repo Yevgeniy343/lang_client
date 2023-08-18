@@ -9,17 +9,21 @@ const Nomination = ({ name, link, file, id }) => {
 
   return (
     <Wrapper>
-      <p className="name">{name}</p>
-      {link && <p>доступно прикрепление ссылки</p>}
-      {!link && <p>доступно прикрепление файла</p>}
+      <div className="div">
+        <p className="name">{name}</p>
+        {link && <p>доступно прикрепление ссылки</p>}
+        {!link && <p>доступно прикрепление файла</p>}
 
-      <MdDelete onClick={() => dispatch(deleteNom({ id: id }))} />
+        <MdDelete onClick={() => dispatch(deleteNom({ id: id }))} />
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   margin: 1rem;
+  display: flex;
+  width: 300px;
   .name {
     color: var(--main-0);
     font-size: 1.2rem;
@@ -36,8 +40,10 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 576px) {
+    width: 400px;
   }
   @media (min-width: 768px) {
+    width: 700px;
   }
   @media (min-width: 992px) {
   }

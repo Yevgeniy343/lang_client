@@ -180,16 +180,18 @@ const ChildrenOrder = ({ passCalculate }) => {
     const defaultPart = part !== undefined ? part : 1;
     if (tarif === "Одиночный участник") {
       calculate =
-        currentOrder.tarif_1 + defaultAmount * currentOrder.supervisor;
+        currentOrder.tarif_1 +
+        (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
       passCalculate(calculate);
     } else if (tarif === "Соавторство") {
       calculate =
         currentOrder.tarif_2 * defaultPart +
-        defaultAmount * currentOrder.supervisor;
+        (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
       passCalculate(calculate);
     } else if (tarif === "Коллективный") {
       calculate =
-        currentOrder.tarif_3 + defaultAmount * currentOrder.supervisor;
+        currentOrder.tarif_3 +
+        (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
       passCalculate(calculate);
     } else if (!tarif) {
       calculate = 0;
@@ -224,6 +226,19 @@ const ChildrenOrder = ({ passCalculate }) => {
                 оргвзноса за каждого руководителя.
               </p>
             </div>
+            {tarif === "Одиночный участник" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Фамилия и имя конкурсанта
+                </label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
             {/* ___________________________________________________________ */}
 
             <CheckboxTarif
@@ -257,6 +272,45 @@ const ChildrenOrder = ({ passCalculate }) => {
                 <Select passState={amountPartHandler} data={data} />
               </div>
             )}
+            {tarif === "Соавторство" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Фамилия и имя конкурсанта
+                </label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
+            {(part === "2" || part === "3") && tarif === "Соавторство" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Фамилия и имя второго конкурсанта
+                </label>
+                <Input
+                  type="text"
+                  name="name2"
+                  value={values.name2}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
+            {part === "3" && tarif === "Соавторство" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Фамилия и имя третьего конкурсанта
+                </label>
+                <Input
+                  type="text"
+                  name="name3"
+                  value={values.name3}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
             {/* ___________________________________________________________ */}
 
             <CheckboxTarif
@@ -285,45 +339,23 @@ const ChildrenOrder = ({ passCalculate }) => {
               </p>
             </div>
           </div>
+          {tarif === "Коллективный" && (
+            <div className="in">
+              <label>
+                <span>*</span>Название коллектива
+              </label>
+              <Input
+                type="text"
+                name="name"
+                value={values.name}
+                onChange={changeHandler}
+              />
+            </div>
+          )}
         </div>
-        <div className="in">
-          <label>
-            <span>*</span>Фамилия и имя конкурсанта
-          </label>
-          <Input
-            type="text"
-            name="name"
-            value={values.name}
-            onChange={changeHandler}
-          />
-        </div>
+
         {/* ___________________________________________________________ */}
-        {(part === "2" || part === "3") && tarif === "Соавторство" && (
-          <div className="in">
-            <label>
-              <span>*</span>Фамилия и имя второго конкурсанта
-            </label>
-            <Input
-              type="text"
-              name="name2"
-              value={values.name2}
-              onChange={changeHandler}
-            />
-          </div>
-        )}
-        {part === "3" && tarif === "Соавторство" && (
-          <div className="in">
-            <label>
-              <span>*</span>Фамилия и имя третьего конкурсанта
-            </label>
-            <Input
-              type="text"
-              name="name3"
-              value={values.name3}
-              onChange={changeHandler}
-            />
-          </div>
-        )}
+
         <div className="in curator">
           <label>
             <span>*</span>Количество кураторов
