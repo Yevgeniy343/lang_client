@@ -237,7 +237,6 @@ const ChildrenOrder = ({ passCalculate }) => {
                 />
               </div>
             )}
-            {/* ___________________________________________________________ */}
 
             <CheckboxTarif
               indicator={tarif}
@@ -542,7 +541,6 @@ const ChildrenOrder = ({ passCalculate }) => {
           ))}
         </div>
 
-        {/* ___________________________________________________________ */}
         {thisNomLF?.language && (
           <div>
             <div className="in">
@@ -567,8 +565,6 @@ const ChildrenOrder = ({ passCalculate }) => {
             )}
           </div>
         )}
-
-        {/* ___________________________________________________________ */}
 
         {thisNomLF?.link && (
           <div className="in">
