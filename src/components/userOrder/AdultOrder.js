@@ -9,7 +9,8 @@ import Checkbox from "../../components-special/Checkbox";
 import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
-import { subjects, languages } from "../../data/data-order";
+import { subjects, languages, curators } from "../../data/data-order";
+import CheckboxNomUser from "../../components-special/CheckboxNomUser2";
 
 import _ from "lodash";
 
@@ -18,10 +19,19 @@ const data = [
   { id: 3, label: "3" },
 ];
 
-const AdultOrder = () => {
+const AdultOrder = ({ passCalculate }) => {
   const { user, currentOrder, noms, nomPul, nomins } = useSelector(
     (store) => store.user
   );
+
+  const dispatch = useDispatch();
+  const filePickerRef = useRef();
+  const filePickerRef2 = useRef();
+
+  const thisNom = noms.find((n) => n.eventId === currentOrder.id);
+  const thisNomLF = nomins.find((n) => n.name === nomPul);
+
+  const array = _.split(thisNom.adultNoms, ",");
 
   const initialState = {
     email: user.email,
@@ -47,15 +57,43 @@ const AdultOrder = () => {
     extra3: "",
   };
 
+  const initialStateCurators = {
+    cf1: "",
+    cd1: "",
+    cf2: "",
+    cd2: "",
+    cf3: "",
+    cd3: "",
+  };
+
+  const defaultValue = 1;
+
   const [values, setValues] = useState(initialState);
   const [tarif, setTarif] = useState("");
   const [part, setPart] = useState("");
   const [subject, setSubject] = useState("");
   const [subject2, setSubject2] = useState("");
   const [subject3, setSubject3] = useState("");
+  const [extraDiplom, setExtraDiplom] = useState(false);
+  const [curatorsAmount, setCuratorsAmount] = useState(defaultValue);
+  console.log(curatorsAmount);
+  const [cur, setCur] = useState(initialStateCurators);
+  const [phone, setPhone] = useState(initialState.phone);
+  const [agreement, setAgreement] = useState(false);
+  const [term, setTerm] = useState(false);
+  const [condition, setCondition] = useState(false);
+  const [language, setLanguage] = useState("");
+  const [file, setFile] = useState();
+  const [file2, setFile2] = useState();
+
+  console.log(extraDiplom);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const changeCuratorHandler = (e) => {
+    setCur({ ...cur, [e.target.name]: e.target.value });
   };
 
   const onSubmit = (e) => {
@@ -76,13 +114,111 @@ const AdultOrder = () => {
   };
 
   const subjectHandler2 = (state) => {
-    setSubject(state);
+    setSubject2(state);
   };
 
   const subjectHandler3 = (state) => {
-    setSubject(state);
+    setSubject3(state);
   };
 
+  const extraDiplomHandler = (data) => {
+    setExtraDiplom(data);
+  };
+
+  const curatorsAmountHanler = (amount) => {
+    if (amount !== curatorsAmount) {
+      setCur(initialStateCurators);
+    }
+    setCuratorsAmount(amount);
+  };
+
+  const agreementHandler = (data) => {
+    setAgreement(data);
+  };
+
+  const conditionHandler = (data) => {
+    setCondition(data);
+  };
+
+  const languageHandler = (lang) => {
+    setLanguage(lang);
+  };
+
+  const pickHandler = () => {
+    filePickerRef.current.click();
+  };
+
+  const pickHandler2 = () => {
+    filePickerRef2.current.click();
+  };
+
+  const pickedHandler = (e) => {
+    let pickedFile;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setFile(pickedFile);
+      return;
+    }
+  };
+
+  const pickedHandler2 = (e) => {
+    let pickedFile2;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile2 = e.target.files[0];
+      setFile2(pickedFile2);
+      return;
+    }
+  };
+
+  useEffect(() => {
+    let calculate;
+    const defaultAmount = curatorsAmount !== undefined ? curatorsAmount : 1;
+    const defaultPart = part !== undefined ? part : 1;
+    if (extraDiplom) {
+      if (tarif === "Одиночный участник") {
+        calculate =
+          curatorsAmount * 150 +
+          currentOrder.tarif_1 +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (tarif === "Соавторство") {
+        calculate =
+          curatorsAmount * 150 +
+          currentOrder.tarif_2 * defaultPart +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (tarif === "Коллективный") {
+        calculate =
+          curatorsAmount * 150 +
+          currentOrder.tarif_3 +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (!tarif) {
+        calculate = 0;
+        passCalculate(calculate);
+      }
+    } else {
+      if (tarif === "Одиночный участник") {
+        calculate =
+          currentOrder.tarif_1 +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (tarif === "Соавторство") {
+        calculate =
+          currentOrder.tarif_2 * defaultPart +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (tarif === "Коллективный") {
+        calculate =
+          currentOrder.tarif_3 +
+          (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        passCalculate(calculate);
+      } else if (!tarif) {
+        calculate = 0;
+        passCalculate(calculate);
+      }
+    }
+  }, [tarif, curatorsAmount, part, extraDiplom]);
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
@@ -436,6 +572,350 @@ const AdultOrder = () => {
             </div>
           )}
         </div>
+        <div className="in">
+          <label>
+            <span>*</span>Нужен ли дополнительный диплом для куратора
+            (руководителя) работы?
+          </label>
+          <CheckboxAgreement passState={extraDiplomHandler} label="Да" />
+        </div>
+        <div className="in curator">
+          <label>
+            <span>*</span>Количество кураторов
+          </label>
+          <Select passState={curatorsAmountHanler} data={curators} />
+          {curatorsAmount === "1" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 1"
+                type="text"
+                name="cd1"
+                onChange={changeCuratorHandler}
+                value={cur.cd1}
+              />
+            </div>
+          )}
+          {curatorsAmount === "2" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+          {curatorsAmount === "3" && (
+            <div className="curator-amount">
+              <Input
+                placeholder="ФИО куратора 1"
+                type="text"
+                name="cf1"
+                value={cur.cf1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 1"
+                type="text"
+                name="cd1"
+                value={cur.cd1}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 2"
+                type="text"
+                name="cf2"
+                value={cur.cf2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 2"
+                type="text"
+                name="cd2"
+                value={cur.cd2}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="ФИО куратора 3"
+                type="text"
+                name="cf3"
+                value={cur.cf3}
+                onChange={changeCuratorHandler}
+              />
+              <Input
+                placeholder="Должность и место работы куратора 3"
+                type="text"
+                name="cd3"
+                value={cur.cd3}
+                onChange={changeCuratorHandler}
+              />
+            </div>
+          )}
+        </div>
+        <div className="in">
+          <label>
+            <span>*</span>Выбор номинации
+          </label>
+          {array.map((n, index) => (
+            <CheckboxNomUser key={index} label={n} indicator={nomPul} />
+          ))}
+        </div>
+        {thisNomLF?.language && (
+          <div>
+            <div className="in">
+              <label>
+                <span>*</span>Язык работы
+              </label>
+              <Select passState={languageHandler} data={languages} />
+            </div>
+            {language === "нет в списке" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Укажите язык работы, если его не было в списке
+                  выше
+                </label>
+                <Input
+                  type="text"
+                  name="language2"
+                  value={values.language2}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
+          </div>
+        )}
+        {thisNomLF?.link && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              Ссылка на работу
+            </label>
+            <Input
+              type="text"
+              name="link"
+              value={values.link}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {thisNomLF?.file && (
+          <div className="in">
+            <label>
+              <span>*</span>Прикрепить работу
+            </label>
+            <Button
+              text="Прикрепить работу"
+              type="button"
+              onClick={pickHandler}
+            />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              // accept=".pdf"
+              ref={filePickerRef}
+              onChange={pickedHandler}
+            />
+            {file && <p className="file-name">{file.name}</p>}
+          </div>
+        )}
+        <div className="in">
+          <label>
+            <span>*</span>Квитанция об оплате
+          </label>
+          <div className="in">
+            <Button text="Загрузить" type="button" onClick={pickHandler2} />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              // accept=".pdf"
+              ref={filePickerRef2}
+              onChange={pickedHandler2}
+            />
+            {file2 && <p className="file-name">{file2.name}</p>}
+          </div>
+        </div>
+        <div className="in">
+          <label>
+            <span>*</span>Укажите, пожалуйста, вашу электронную почту
+          </label>
+          <Input
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={changeHandler}
+          />
+        </div>
+        <div className="in">
+          <label>
+            <span>*</span>Ваш номер телефона для связи
+          </label>
+          <PhoneInput
+            className="i"
+            value={initialState.phone}
+            inputProps={{ name: "phone" }}
+            country="ru"
+            onChange={(phone) => setPhone({ phone })}
+          />
+        </div>
+        {currentOrder.extra1 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra1}
+            </label>
+            <Input
+              type="text"
+              name="extra1"
+              value={values.extra1}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {currentOrder.extra2 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra2}
+            </label>
+            <Input
+              type="text"
+              name="extra2"
+              value={values.extra2}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        {currentOrder.extra3 && (
+          <div className="in">
+            <label>
+              <span>*</span>
+              {currentOrder.extra3}
+            </label>
+            <Input
+              type="text"
+              name="extra3"
+              value={values.extra3}
+              onChange={changeHandler}
+            />
+          </div>
+        )}
+        <div className="in">
+          <label>
+            <span>*</span>Согласие с условиями конкурса
+          </label>
+
+          <p className="term-link" onClick={() => setTerm(!term)}>
+            {!term
+              ? "Развернуть условия конкурса"
+              : "Свернуть условия конкурса"}
+          </p>
+          {term && (
+            <div className="term">
+              <p className="term-text">
+                Далеко-далеко за словесными горами в стране гласных и согласных
+                живут рыбные тексты. Коварных языком свой эта предупреждал
+                рыбного за оксмокс толку всеми она но ipsum семь над рукописи
+                составитель проектах, на берегу коварный? Пустился собрал живет
+                скатился если, большого вершину, снова пояс букв агентство
+                жаренные большой. Скатился, но текст которой прямо это наш ты
+                вдали выйти! Эта пояс своих парадигматическая гор себя силуэт.
+                Всеми, взгляд она оксмокс напоивший lorem, дороге себя
+                возвращайся, несколько решила которое первую пустился переписали
+                вдали до однажды большой буквоград на берегу назад подпоясал
+                встретил ты своих вершину. Однажды, lorem! Силуэт? Грустный
+                запятых жаренные решила речью, бросил безорфографичный, вершину
+                заголовок безопасную своих толку предупреждал она? Знаках
+                залетают толку ему, имени своих ее не составитель. Свой коварных
+                силуэт диких выйти прямо до? Буквенных ее заглавных оксмокс
+                диких от всех жаренные не власти даль силуэт первую вершину
+                имеет своего правилами, мир снова всеми по всей страну над
+                бросил переулка ручеек на берегу наш толку. Толку, журчит.
+                Далеко-далеко за словесными горами в стране гласных и согласных
+                живут рыбные тексты. Коварных языком свой эта предупреждал
+                рыбного за оксмокс толку всеми она но ipsum семь над рукописи
+                составитель проектах, на берегу коварный? Пустился собрал живет
+                скатился если, большого вершину, снова пояс букв агентство
+                жаренные большой. Скатился, но текст которой прямо это наш ты
+                вдали выйти! Эта пояс своих парадигматическая гор себя силуэт.
+                Всеми, взгляд она оксмокс напоивший lorem, дороге себя
+                возвращайся, несколько решила которое первую пустился переписали
+                вдали до однажды большой буквоград на берегу назад подпоясал
+                встретил ты своих вершину. Однажды, lorem! Силуэт? Грустный
+                запятых жаренные решила речью, бросил безорфографичный, вершину
+                заголовок безопасную своих толку предупреждал она? Знаках
+                залетают толку ему, имени своих ее не составитель. Свой коварных
+                силуэт диких выйти прямо до? Буквенных ее заглавных оксмокс
+                диких от всех жаренные не власти даль силуэт первую вершину
+                имеет своего правилами, мир снова всеми по всей страну над
+                бросил переулка ручеек на берегу наш толку. Толку, журчит.
+                Далеко-далеко за словесными горами в стране гласных и согласных
+                живут рыбные тексты. Коварных языком свой эта предупреждал
+                рыбного за оксмокс толку всеми она но ipsum семь над рукописи
+                составитель проектах, на берегу коварный? Пустился собрал живет
+                скатился если, большого вершину, снова пояс букв агентство
+                жаренные большой. Скатился, но текст которой прямо это наш ты
+                вдали выйти! Эта пояс своих парадигматическая гор себя силуэт.
+                Всеми, взгляд она оксмокс напоивший lorem, дороге себя
+                возвращайся, несколько решила которое первую пустился переписали
+                вдали до однажды большой буквоград на берегу назад подпоясал
+                встретил ты своих вершину. Однажды, lorem! Силуэт? Грустный
+                запятых жаренные решила речью, бросил безорфографичный, вершину
+                заголовок безопасную своих толку предупреждал она? Знаках
+                залетают толку ему, имени своих ее не составитель. Свой коварных
+                силуэт диких выйти прямо до? Буквенных ее заглавных оксмокс
+                диких от всех жаренные не власти даль силуэт первую вершину
+                имеет своего правилами, мир снова всеми по всей страну над
+                бросил переулка ручеек на берегу наш толку. Толку, журчит.
+              </p>
+            </div>
+          )}
+          <CheckboxAgreement
+            passState={agreementHandler}
+            label="Согласен с условияями конкурса"
+          />
+        </div>
+        <div className="in">
+          <label>
+            <span>*</span>Согласие на обработку персональных данных
+          </label>
+
+          <CheckboxAgreement
+            passState={conditionHandler}
+            label="Согласен на обработку персональных данных"
+          />
+        </div>
+        <div className="actions">
+          <Button text="Отправить заявку" disabled={!agreement || !condition} />
+        </div>
       </form>
     </Wrapper>
   );
@@ -539,6 +1019,9 @@ const Wrapper = styled.div`
   .small {
     font-size: 0.8rem;
     margin-top: 1rem;
+  }
+  form {
+    margin-bottom: 2rem;
   }
   @media (min-width: 576px) {
   }

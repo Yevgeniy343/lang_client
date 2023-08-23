@@ -99,7 +99,9 @@ const UserModalOrder = () => {
         {choose === "child" && (
           <ChildrenOrder passCalculate={totalAmountHandler} />
         )}
-        {choose === "adult" && <AdultOrder />}
+        {choose === "adult" && (
+          <AdultOrder passCalculate={totalAmountHandler} />
+        )}
       </div>
     </Wrapper>
   );

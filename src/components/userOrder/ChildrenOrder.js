@@ -25,7 +25,6 @@ const ChildrenOrder = ({ passCalculate }) => {
 
   const thisNom = noms.find((n) => n.eventId === currentOrder.id);
   const thisNomLF = nomins.find((n) => n.name === nomPul);
-  console.log(thisNomLF);
 
   const array = _.split(thisNom.childNoms, ",");
 
@@ -354,7 +353,6 @@ const ChildrenOrder = ({ passCalculate }) => {
             <span>*</span>Количество кураторов
           </label>
           <Select passState={curatorsAmountHanler} data={curators} />
-          {/* <Curators amount={curatorsAmount} passSet={curatorsHandler} /> */}
           {curatorsAmount === "1" && (
             <div className="curator-amount">
               <Input
@@ -681,12 +679,10 @@ const ChildrenOrder = ({ passCalculate }) => {
             />
           </div>
         )}
-
         <div className="in">
           <label>
             <span>*</span>Согласие с условиями конкурса
           </label>
-
           <p className="term-link" onClick={() => setTerm(!term)}>
             {!term
               ? "Развернуть условия конкурса"
@@ -874,6 +870,9 @@ const Wrapper = styled.div`
   .small {
     font-size: 0.8rem;
     margin-top: 1rem;
+  }
+  form {
+    margin-bottom: 2rem;
   }
   @media (min-width: 576px) {
   }
