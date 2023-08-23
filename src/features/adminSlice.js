@@ -219,7 +219,7 @@ const adminSlice = createSlice({
       state.isLoading = false;
       state.nominations.push(payload);
 
-      // toast.success(`Мероприятие удалено!`);
+      toast.success(`Номинация создана !`);
     });
     builder.addCase(createNom.rejected, (state, { payload }) => {
       state.isLoading = false;

@@ -13,8 +13,6 @@ import { subjects, languages, curators } from "../../data/data-order";
 import _ from "lodash";
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
 
-import useCalculator from "../../hooks/calculator";
-
 const data = [
   { id: 2, label: "2" },
   { id: 3, label: "3" },
@@ -27,7 +25,7 @@ const ChildrenOrder = ({ passCalculate }) => {
 
   const thisNom = noms.find((n) => n.eventId === currentOrder.id);
   const thisNomLF = nomins.find((n) => n.name === nomPul);
-  // console.log(thisNomLF);
+  console.log(thisNomLF);
 
   const array = _.split(thisNom.childNoms, ",");
 
@@ -311,8 +309,6 @@ const ChildrenOrder = ({ passCalculate }) => {
                 />
               </div>
             )}
-            {/* ___________________________________________________________ */}
-
             <CheckboxTarif
               indicator={tarif}
               passState={tarifHandler}
@@ -353,8 +349,6 @@ const ChildrenOrder = ({ passCalculate }) => {
             </div>
           )}
         </div>
-
-        {/* ___________________________________________________________ */}
 
         <div className="in curator">
           <label>
@@ -459,7 +453,6 @@ const ChildrenOrder = ({ passCalculate }) => {
             </div>
           )}
         </div>
-        {/* ___________________________________________________________ */}
 
         <div className="in">
           <label>
@@ -549,26 +542,35 @@ const ChildrenOrder = ({ passCalculate }) => {
           ))}
         </div>
 
-        <div className="in">
-          <label>
-            <span>*</span>Язык работы
-          </label>
-          <Select passState={languageHandler} data={languages} />
-        </div>
-        {language === "нет в списке" && (
-          <div className="in">
-            <label>
-              <span>*</span>Укажите язык работы, если его не было в списке выше
-            </label>
-            <Input
-              type="text"
-              name="language2"
-              value={values.language2}
-              onChange={changeHandler}
-            />
+        {/* ___________________________________________________________ */}
+        {thisNomLF?.language && (
+          <div>
+            <div className="in">
+              <label>
+                <span>*</span>Язык работы
+              </label>
+              <Select passState={languageHandler} data={languages} />
+            </div>
+            {language === "нет в списке" && (
+              <div className="in">
+                <label>
+                  <span>*</span>Укажите язык работы, если его не было в списке
+                  выше
+                </label>
+                <Input
+                  type="text"
+                  name="language2"
+                  value={values.language2}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
           </div>
         )}
-        {thisNomLF?.file && (
+
+        {/* ___________________________________________________________ */}
+
+        {thisNomLF?.link && (
           <div className="in">
             <label>
               <span>*</span>
@@ -582,7 +584,7 @@ const ChildrenOrder = ({ passCalculate }) => {
             />
           </div>
         )}
-        {thisNomLF?.link && (
+        {thisNomLF?.file && (
           <div className="in">
             <label>
               <span>*</span>Прикрепить работу

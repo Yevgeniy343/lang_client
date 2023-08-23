@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { deleteNom } from "../features/adminSlice";
 
-const Nomination = ({ name, link, file, id }) => {
+const Nomination = ({ name, link, file, language, id }) => {
   const dispatch = useDispatch();
 
   return (
@@ -12,8 +12,8 @@ const Nomination = ({ name, link, file, id }) => {
       <div className="div">
         <p className="name">{name}</p>
         {link && <p>доступно прикрепление ссылки</p>}
-        {!link && <p>доступно прикрепление файла</p>}
-
+        {file && <p>доступно прикрепление файла</p>}
+        {language && <p>доступен выбор языка</p>}
         <MdDelete onClick={() => dispatch(deleteNom({ id: id }))} />
       </div>
     </Wrapper>

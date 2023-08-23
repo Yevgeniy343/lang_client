@@ -12,14 +12,21 @@ import Nomination from "../../components/Nomination";
 
 const initialState = [
   {
-    nom: "",
+    nom1: "",
+    nom2: "",
+    nom3: "",
   },
 ];
 const Nominations = () => {
   const { nominations } = useSelector((store) => store.admin);
-  const [nom, setNom] = useState(initialState);
+  const [nom1, setNom1] = useState(initialState);
+  const [nom2, setNom2] = useState(initialState);
+  const [nom3, setNom3] = useState(initialState);
   const [values, setValues] = useState(initialState);
   const dispatch = useDispatch();
+  console.log(nom1);
+  console.log(nom2);
+  console.log(nom3);
 
   useEffect(() => {
     dispatch(getNom());
@@ -29,19 +36,32 @@ const Nominations = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const nomHandler = (data) => {
-    setNom(data);
+  const nomHandler1 = (data) => {
+    setNom1(data);
+  };
+  const nomHandler2 = (data) => {
+    setNom2(data);
+  };
+  const nomHandler3 = (data) => {
+    setNom3(data);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (!values.name || !nom) {
+    if (!values.name) {
       toast.error("Введите все значения");
       return;
     }
 
-    dispatch(createNom({ name: values.name, condition: nom }));
+    dispatch(
+      createNom({
+        name: values.name,
+        condition1: nom1,
+        condition2: nom2,
+        condition3: nom3,
+      })
+    );
   };
 
   return (
@@ -63,14 +83,19 @@ const Nominations = () => {
               onChange={changeHandler}
             />
             <Checkbox
-              passState={nomHandler}
+              passState={nomHandler1}
               label="доступно прикрепление ссылки"
-              indicator={nom}
+              indicator={nom1}
             />
             <Checkbox
-              passState={nomHandler}
+              passState={nomHandler2}
               label="доступно прикрепление файла"
-              indicator={nom}
+              indicator={nom2}
+            />
+            <Checkbox
+              passState={nomHandler3}
+              label="доступен выбор языка"
+              indicator={nom3}
             />
           </div>
 
@@ -87,6 +112,7 @@ const Nominations = () => {
             name={n.name}
             link={n.link}
             file={n.file}
+            language={n.language}
             id={n._id}
           />
         ))}
