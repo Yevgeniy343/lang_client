@@ -88,6 +88,12 @@ const AdultOrder = ({ passCalculate }) => {
 
   console.log(extraDiplom);
 
+  useEffect(() => {
+    if (!extraDiplom) {
+      setCuratorsAmount(1);
+    }
+  }, [extraDiplom]);
+
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
@@ -173,26 +179,28 @@ const AdultOrder = ({ passCalculate }) => {
   useEffect(() => {
     let calculate;
     const defaultAmount = curatorsAmount !== undefined ? curatorsAmount : 1;
+    const defaultCurators = curatorsAmount !== undefined ? curatorsAmount : 1;
     const defaultPart = part !== undefined ? part : 1;
     if (extraDiplom) {
       if (tarif === "Одиночный участник") {
         calculate =
-          curatorsAmount * 150 +
+          defaultCurators * 150 +
           currentOrder.tarif_1 +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Соавторство") {
         calculate =
-          curatorsAmount * 150 +
+          defaultCurators * 150 +
           currentOrder.tarif_2 * defaultPart +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Коллективный") {
         calculate =
-          curatorsAmount * 150 +
+          defaultCurators * 150 +
           currentOrder.tarif_3 +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
+        console.log(calculate);
       } else if (!tarif) {
         calculate = 0;
         passCalculate(calculate);
@@ -212,6 +220,7 @@ const AdultOrder = ({ passCalculate }) => {
         calculate =
           currentOrder.tarif_3 +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
+        console.log(calculate);
         passCalculate(calculate);
       } else if (!tarif) {
         calculate = 0;
@@ -248,7 +257,7 @@ const AdultOrder = ({ passCalculate }) => {
               <div>
                 <div className="in">
                   <label>
-                    <span>*</span>Фамилия и имя конкурсанта
+                    <span>*</span>Фамилия имя отчество участника
                   </label>
                   <Input
                     type="text"
@@ -270,20 +279,14 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы
+                    <span>*</span>Место работы
                   </label>
                   <Input
                     type="text"
-                    name="internship"
-                    value={values.internship}
+                    name="job"
+                    value={values.job}
                     onChange={changeHandler}
                   />
-                </div>
-                <div className="in">
-                  <label>
-                    <span>*</span>Субъект Российской Федерации
-                  </label>
-                  <Select passState={subjectHandler} data={subjects} />
                 </div>
                 <div className="in">
                   <label>
@@ -298,12 +301,18 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Место работы
+                    <span>*</span>Субъект Российской Федерации
+                  </label>
+                  <Select passState={subjectHandler} data={subjects} />
+                </div>
+                <div className="in">
+                  <label>
+                    <span>*</span>Стаж педагогичческой работы
                   </label>
                   <Input
                     type="text"
-                    name="job"
-                    value={values.job}
+                    name="internship"
+                    value={values.internship}
                     onChange={changeHandler}
                   />
                 </div>
@@ -340,7 +349,7 @@ const AdultOrder = ({ passCalculate }) => {
               <div>
                 <div className="in">
                   <label>
-                    <span>*</span>Фамилия и имя участника
+                    <span>*</span>Фамилия имя отчество участника
                   </label>
                   <Input
                     type="text"
@@ -362,20 +371,14 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы
+                    <span>*</span>Место работы
                   </label>
                   <Input
                     type="text"
-                    name="internship"
-                    value={values.internship}
+                    name="job"
+                    value={values.job}
                     onChange={changeHandler}
                   />
-                </div>
-                <div className="in">
-                  <label>
-                    <span>*</span>Субъект Российской Федерации
-                  </label>
-                  <Select passState={subjectHandler2} data={subjects} />
                 </div>
                 <div className="in">
                   <label>
@@ -390,12 +393,18 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Место работы
+                    <span>*</span>Субъект Российской Федерации
+                  </label>
+                  <Select passState={subjectHandler2} data={subjects} />
+                </div>
+                <div className="in">
+                  <label>
+                    <span>*</span>Стаж педагогичческой работы
                   </label>
                   <Input
                     type="text"
-                    name="job"
-                    value={values.job}
+                    name="internship"
+                    value={values.internship}
                     onChange={changeHandler}
                   />
                 </div>
@@ -405,7 +414,7 @@ const AdultOrder = ({ passCalculate }) => {
               <div>
                 <div className="in">
                   <label>
-                    <span>*</span>Фамилия и имя второго участника
+                    <span>*</span>Фамилия имя отчество второго участника
                   </label>
                   <Input
                     type="text"
@@ -427,20 +436,14 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы второго участника
+                    <span>*</span>Место работы второго участника
                   </label>
                   <Input
                     type="text"
-                    name="internship2"
-                    value={values.internship2}
+                    name="job2"
+                    value={values.job2}
                     onChange={changeHandler}
                   />
-                </div>
-                <div className="in">
-                  <label>
-                    <span>*</span>Субъект Российской Федерации второго участника
-                  </label>
-                  <Select passState={subjectHandler2} data={subjects} />
                 </div>
                 <div className="in">
                   <label>
@@ -455,12 +458,18 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Место работы второго участника
+                    <span>*</span>Субъект Российской Федерации второго участника
+                  </label>
+                  <Select passState={subjectHandler2} data={subjects} />
+                </div>
+                <div className="in">
+                  <label>
+                    <span>*</span>Стаж педагогичческой работы второго участника
                   </label>
                   <Input
                     type="text"
-                    name="job2"
-                    value={values.job2}
+                    name="internship2"
+                    value={values.internship2}
                     onChange={changeHandler}
                   />
                 </div>
@@ -470,7 +479,7 @@ const AdultOrder = ({ passCalculate }) => {
               <div>
                 <div className="in">
                   <label>
-                    <span>*</span>Фамилия и имя третьего участника
+                    <span>*</span>Фамилия имя отчество третьего участника
                   </label>
                   <Input
                     type="text"
@@ -492,21 +501,14 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы третьего участника
+                    <span>*</span>Место работы третьего участника
                   </label>
                   <Input
                     type="text"
-                    name="internship2"
-                    value={values.internship3}
+                    name="job3"
+                    value={values.job3}
                     onChange={changeHandler}
                   />
-                </div>
-                <div className="in">
-                  <label>
-                    <span>*</span>Субъект Российской Федерации третьего
-                    участника
-                  </label>
-                  <Select passState={subjectHandler3} data={subjects} />
                 </div>
                 <div className="in">
                   <label>
@@ -521,12 +523,19 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Место работы третьего участника
+                    <span>*</span>Субъект Российской Федерации третьего
+                    участника
+                  </label>
+                  <Select passState={subjectHandler3} data={subjects} />
+                </div>
+                <div className="in">
+                  <label>
+                    <span>*</span>Стаж педагогичческой работы третьего участника
                   </label>
                   <Input
                     type="text"
-                    name="job3"
-                    value={values.job3}
+                    name="internship2"
+                    value={values.internship3}
                     onChange={changeHandler}
                   />
                 </div>
@@ -540,7 +549,7 @@ const AdultOrder = ({ passCalculate }) => {
             <div className="about-tarif">
               <p className="include-about">
                 Наградной пакет «Коллективный»: задействован творческий
-                коллектив более 3-х человек. {currentOrder.tarif_3} руб.
+                коллектив от 3-х и более человек. {currentOrder.tarif_3} руб.
                 Включает:
               </p>
               <p className="include">
@@ -559,16 +568,35 @@ const AdultOrder = ({ passCalculate }) => {
             </div>
           </div>
           {tarif === "Коллективный" && (
-            <div className="in">
-              <label>
-                <span>*</span>Название коллектива
-              </label>
-              <Input
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={changeHandler}
-              />
+            <div>
+              <div className="in">
+                <label>
+                  <span>*</span>Название коллектива
+                </label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={changeHandler}
+                />
+              </div>
+              <div className="in">
+                <label>
+                  <span>*</span>Населенный пункт
+                </label>
+                <Input
+                  type="text"
+                  name="punct"
+                  value={values.punct}
+                  onChange={changeHandler}
+                />
+              </div>
+              <div className="in">
+                <label>
+                  <span>*</span>Субъект Российской Федерации
+                </label>
+                <Select passState={subjectHandler} data={subjects} />
+              </div>
             </div>
           )}
         </div>
@@ -579,108 +607,111 @@ const AdultOrder = ({ passCalculate }) => {
           </label>
           <CheckboxAgreement passState={extraDiplomHandler} label="Да" />
         </div>
-        <div className="in curator">
-          <label>
-            <span>*</span>Количество кураторов
-          </label>
-          <Select passState={curatorsAmountHanler} data={curators} />
-          {curatorsAmount === "1" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 1"
-                type="text"
-                name="cd1"
-                onChange={changeCuratorHandler}
-                value={cur.cd1}
-              />
-            </div>
-          )}
-          {curatorsAmount === "2" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 1"
-                type="text"
-                name="cd1"
-                value={cur.cd1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 2"
-                type="text"
-                name="cf2"
-                value={cur.cf2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 2"
-                type="text"
-                name="cd2"
-                value={cur.cd2}
-                onChange={changeCuratorHandler}
-              />
-            </div>
-          )}
-          {curatorsAmount === "3" && (
-            <div className="curator-amount">
-              <Input
-                placeholder="ФИО куратора 1"
-                type="text"
-                name="cf1"
-                value={cur.cf1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 1"
-                type="text"
-                name="cd1"
-                value={cur.cd1}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 2"
-                type="text"
-                name="cf2"
-                value={cur.cf2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 2"
-                type="text"
-                name="cd2"
-                value={cur.cd2}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="ФИО куратора 3"
-                type="text"
-                name="cf3"
-                value={cur.cf3}
-                onChange={changeCuratorHandler}
-              />
-              <Input
-                placeholder="Должность и место работы куратора 3"
-                type="text"
-                name="cd3"
-                value={cur.cd3}
-                onChange={changeCuratorHandler}
-              />
-            </div>
-          )}
-        </div>
+        {extraDiplom && (
+          <div className="in curator">
+            <label>
+              <span>*</span>Количество кураторов
+            </label>
+            <Select passState={curatorsAmountHanler} data={curators} />
+            {curatorsAmount === "1" && (
+              <div className="curator-amount">
+                <Input
+                  placeholder="ФИО куратора 1"
+                  type="text"
+                  name="cf1"
+                  value={cur.cf1}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 1"
+                  type="text"
+                  name="cd1"
+                  onChange={changeCuratorHandler}
+                  value={cur.cd1}
+                />
+              </div>
+            )}
+            {curatorsAmount === "2" && (
+              <div className="curator-amount">
+                <Input
+                  placeholder="ФИО куратора 1"
+                  type="text"
+                  name="cf1"
+                  value={cur.cf1}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 1"
+                  type="text"
+                  name="cd1"
+                  value={cur.cd1}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="ФИО куратора 2"
+                  type="text"
+                  name="cf2"
+                  value={cur.cf2}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 2"
+                  type="text"
+                  name="cd2"
+                  value={cur.cd2}
+                  onChange={changeCuratorHandler}
+                />
+              </div>
+            )}
+            {curatorsAmount === "3" && (
+              <div className="curator-amount">
+                <Input
+                  placeholder="ФИО куратора 1"
+                  type="text"
+                  name="cf1"
+                  value={cur.cf1}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 1"
+                  type="text"
+                  name="cd1"
+                  value={cur.cd1}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="ФИО куратора 2"
+                  type="text"
+                  name="cf2"
+                  value={cur.cf2}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 2"
+                  type="text"
+                  name="cd2"
+                  value={cur.cd2}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="ФИО куратора 3"
+                  type="text"
+                  name="cf3"
+                  value={cur.cf3}
+                  onChange={changeCuratorHandler}
+                />
+                <Input
+                  placeholder="Должность и место работы куратора 3"
+                  type="text"
+                  name="cd3"
+                  value={cur.cd3}
+                  onChange={changeCuratorHandler}
+                />
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="in">
           <label>
             <span>*</span>Выбор номинации
