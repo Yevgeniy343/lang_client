@@ -11,11 +11,7 @@ import { MdEventAvailable } from "react-icons/md";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  toggleHandler,
-  smallMenuHandler,
-  sidebarCloseHandler,
-} from "../../features/user/userSlise";
+import { sidebarCloseHandler } from "../../features/user/userSlise";
 import { logOutAdmin } from "../../features/adminSlice";
 
 const AdminSideBar = () => {
