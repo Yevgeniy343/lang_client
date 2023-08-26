@@ -4,6 +4,7 @@ import {
   AiOutlineClose,
   AiOutlineUnorderedList,
   AiOutlineTeam,
+  AiFillDatabase,
 } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
 import { MdEventAvailable } from "react-icons/md";
@@ -41,6 +42,11 @@ const AdminSideBar = () => {
     dispatch(sidebarCloseHandler());
   };
 
+  const nominationsHandler = () => {
+    navigate("/nominations");
+    dispatch(sidebarCloseHandler());
+  };
+
   const { isSidebarOpen, user } = useSelector((store) => store.user);
   return (
     <SidebarContainer>
@@ -57,6 +63,11 @@ const AdminSideBar = () => {
           </button>
         </div>
         <ul className="links">
+          <li onClick={nominationsHandler}>
+            <AiFillDatabase />
+
+            <p>Номинации</p>
+          </li>
           <li onClick={newEventHandler}>
             <MdEventAvailable />
             <p>Новое мероприятие</p>
