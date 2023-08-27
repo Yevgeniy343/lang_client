@@ -53,7 +53,11 @@ const EventAdminModal = () => {
     tarif_1: currentEvent.tarif_1,
     tarif_2: currentEvent.tarif_2,
     tarif_3: currentEvent.tarif_3,
+    tarif_1a: currentEvent.tarif_1a,
+    tarif_2a: currentEvent.tarif_2a,
+    tarif_3a: currentEvent.tarif_3a,
     supervisor: currentEvent.supervisor,
+    diplom: currentEvent.diplom,
     pdf: currentEvent.pdf,
     image: currentEvent.image,
     extra1: currentEvent.extra1 ? currentEvent.extra1 : "",
@@ -140,7 +144,11 @@ const EventAdminModal = () => {
   formData.append("tarif_1", values.tarif_1);
   formData.append("tarif_2", values.tarif_2);
   formData.append("tarif_3", values.tarif_3);
+  formData.append("tarif_1a", values.tarif_1a);
+  formData.append("tarif_2a", values.tarif_2a);
+  formData.append("tarif_3a", values.tarif_3a);
   formData.append("supervisor", values.supervisor);
+  formData.append("diplom", values.diplom);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -151,15 +159,19 @@ const EventAdminModal = () => {
       !values.tarif_1 ||
       !values.tarif_2 ||
       !values.tarif_3 ||
-      !values.supervisor
+      !values.tarif_1a ||
+      !values.tarif_2a ||
+      !values.tarif_3a ||
+      !values.supervisor ||
+      !values.diplom
     ) {
       toast.error("Введите все значения");
       return;
     } else {
       dispatch(editEvents(formData));
-      setTimeout(() => {
-        dispatch(eventModalHandler(false));
-      }, 1000);
+      // setTimeout(() => {
+      //   dispatch(eventModalHandler(false));
+      // }, 1000);
     }
   };
 
@@ -314,7 +326,7 @@ const EventAdminModal = () => {
 
           <div className="extra">
             <label>
-              <span>*</span>Стоимость тарифа "Одиночный участник"
+              <span>*</span>Стоимость тарифа "Одиночный участник" (для детей)
             </label>
             <Input
               type="text"
@@ -323,7 +335,7 @@ const EventAdminModal = () => {
               onChange={changeHandler}
             />
             <label>
-              <span>*</span>Стоимость тарифа "Соавторство"
+              <span>*</span>Стоимость тарифа "Соавторство" (для детей)
             </label>
             <Input
               type="text"
@@ -332,12 +344,39 @@ const EventAdminModal = () => {
               onChange={changeHandler}
             />
             <label>
-              <span>*</span>Стоимость тарифа "Коллективный"
+              <span>*</span>Стоимость тарифа "Коллективный" (для детей)
             </label>
             <Input
               type="text"
               name="tarif_3"
               value={values.tarif_3}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость тарифа "Одиночный участник" (для взрослых)
+            </label>
+            <Input
+              type="text"
+              name="tarif_1a"
+              value={values.tarif_1a}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость тарифа "Соавторство" (для взрослых)
+            </label>
+            <Input
+              type="text"
+              name="tarif_2a"
+              value={values.tarif_2a}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость тарифа "Коллективный" (для взрослых)
+            </label>
+            <Input
+              type="text"
+              name="tarif_3a"
+              value={values.tarif_3a}
               onChange={changeHandler}
             />
             <label>
@@ -347,6 +386,15 @@ const EventAdminModal = () => {
               type="text"
               name="supervisor"
               value={values.supervisor}
+              onChange={changeHandler}
+            />
+            <label>
+              <span>*</span>Стоимость диплома для куратора (руководителя)
+            </label>
+            <Input
+              type="text"
+              name="diplom"
+              value={values.diplom}
               onChange={changeHandler}
             />
           </div>

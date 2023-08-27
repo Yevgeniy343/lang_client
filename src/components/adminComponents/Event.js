@@ -103,7 +103,11 @@ const Event = () => {
   formData.append("tarif_1", values.tarif_1);
   formData.append("tarif_2", values.tarif_2);
   formData.append("tarif_3", values.tarif_3);
+  formData.append("tarif_1a", values.tarif_1a);
+  formData.append("tarif_2a", values.tarif_2a);
+  formData.append("tarif_3a", values.tarif_3a);
   formData.append("supervisor", values.supervisor);
+  formData.append("diplom", values.diplom);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -116,7 +120,11 @@ const Event = () => {
       !values.tarif_1 ||
       !values.tarif_2 ||
       !values.tarif_3 ||
-      !values.supervisor
+      !values.tarif_1a ||
+      !values.tarif_2a ||
+      !values.tarif_3a ||
+      !values.supervisor ||
+      !values.diplom
     ) {
       toast.error("Введите все значения");
       return;
@@ -222,7 +230,7 @@ const Event = () => {
         {/* ___________________________________________________________ */}
         <div className="extra">
           <label>
-            <span>*</span>Стоимость тарифа "Одиночный участник"
+            <span>*</span>Стоимость тарифа "Одиночный участник" (для детей)
           </label>
           <Input
             type="text"
@@ -231,7 +239,7 @@ const Event = () => {
             onChange={changeHandler}
           />
           <label>
-            <span>*</span>Стоимость тарифа "Соавторство"
+            <span>*</span>Стоимость тарифа "Соавторство" (для детей)
           </label>
           <Input
             type="text"
@@ -240,12 +248,39 @@ const Event = () => {
             onChange={changeHandler}
           />
           <label>
-            <span>*</span>Стоимость тарифа "Коллективный"
+            <span>*</span>Стоимость тарифа "Коллективный" (для детей)
           </label>
           <Input
             type="text"
             name="tarif_3"
             value={values.tarif_3}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость тарифа "Одиночный участник" (для взрослых)
+          </label>
+          <Input
+            type="text"
+            name="tarif_1a"
+            value={values.tarif_1a}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость тарифа "Соавторство" (для взрослых)
+          </label>
+          <Input
+            type="text"
+            name="tarif_2a"
+            value={values.tarif_2a}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость тарифа "Коллективный" (для взрослых)
+          </label>
+          <Input
+            type="text"
+            name="tarif_3a"
+            value={values.tarif_3a}
             onChange={changeHandler}
           />
           <label>
@@ -255,6 +290,15 @@ const Event = () => {
             type="text"
             name="supervisor"
             value={values.supervisor}
+            onChange={changeHandler}
+          />
+          <label>
+            <span>*</span>Стоимость диплома для куратора (руководителя)
+          </label>
+          <Input
+            type="text"
+            name="diplom"
+            value={values.diplom}
             onChange={changeHandler}
           />
         </div>

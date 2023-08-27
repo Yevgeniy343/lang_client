@@ -76,7 +76,7 @@ const AdultOrder = ({ passCalculate }) => {
   const [subject3, setSubject3] = useState("");
   const [extraDiplom, setExtraDiplom] = useState(false);
   const [curatorsAmount, setCuratorsAmount] = useState(defaultValue);
-  console.log(curatorsAmount);
+
   const [cur, setCur] = useState(initialStateCurators);
   const [phone, setPhone] = useState(initialState.phone);
   const [agreement, setAgreement] = useState(false);
@@ -184,20 +184,20 @@ const AdultOrder = ({ passCalculate }) => {
     if (extraDiplom) {
       if (tarif === "Одиночный участник") {
         calculate =
-          defaultCurators * 150 +
-          currentOrder.tarif_1 +
+          defaultCurators * currentOrder.diplom +
+          currentOrder.tarif_1a +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Соавторство") {
         calculate =
-          defaultCurators * 150 +
-          currentOrder.tarif_2 * defaultPart +
+          defaultCurators * currentOrder.diplom +
+          currentOrder.tarif_2a * defaultPart +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Коллективный") {
         calculate =
-          defaultCurators * 150 +
-          currentOrder.tarif_3 +
+          defaultCurators * currentOrder.diplom +
+          currentOrder.tarif_3a +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
         console.log(calculate);
@@ -208,17 +208,17 @@ const AdultOrder = ({ passCalculate }) => {
     } else {
       if (tarif === "Одиночный участник") {
         calculate =
-          currentOrder.tarif_1 +
+          currentOrder.tarif_1a +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Соавторство") {
         calculate =
-          currentOrder.tarif_2 * defaultPart +
+          currentOrder.tarif_2a * defaultPart +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         passCalculate(calculate);
       } else if (tarif === "Коллективный") {
         calculate =
-          currentOrder.tarif_3 +
+          currentOrder.tarif_3a +
           (defaultAmount * currentOrder.supervisor - currentOrder.supervisor);
         console.log(calculate);
         passCalculate(calculate);
@@ -399,7 +399,7 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы
+                    <span>*</span>Стаж педагогической работы
                   </label>
                   <Input
                     type="text"
@@ -464,7 +464,7 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы второго участника
+                    <span>*</span>Стаж педагогической работы второго участника
                   </label>
                   <Input
                     type="text"
@@ -530,7 +530,7 @@ const AdultOrder = ({ passCalculate }) => {
                 </div>
                 <div className="in">
                   <label>
-                    <span>*</span>Стаж педагогичческой работы третьего участника
+                    <span>*</span>Стаж педагогической работы третьего участника
                   </label>
                   <Input
                     type="text"

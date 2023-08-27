@@ -22,6 +22,10 @@ const EventItem = ({
   tarif_2,
   tarif_3,
   supervisor,
+  tarif_1a,
+  tarif_2a,
+  tarif_3a,
+  diplom,
 }) => {
   const dispatch = useDispatch();
 
@@ -42,6 +46,10 @@ const EventItem = ({
         tarif_2: tarif_2,
         tarif_3: tarif_3,
         supervisor: supervisor,
+        tarif_1a: tarif_1a,
+        tarif_2a: tarif_2a,
+        tarif_3a: tarif_3a,
+        diplom: diplom,
       })
     );
   };

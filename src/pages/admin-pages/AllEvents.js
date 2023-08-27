@@ -43,6 +43,10 @@ const AllEvents = () => {
               tarif_2={e.tarif_2}
               tarif_3={e.tarif_3}
               supervisor={e.supervisor}
+              tarif_1a={e.tarif_1a}
+              tarif_2a={e.tarif_2a}
+              tarif_3a={e.tarif_3a}
+              diplom={e.diplom}
             />
           ))}
         </Wrapper>

@@ -24,7 +24,11 @@ const UserEvents = () => {
             tarif_1={e.tarif_1}
             tarif_2={e.tarif_2}
             tarif_3={e.tarif_3}
+            tarif_1a={e.tarif_1a}
+            tarif_2a={e.tarif_2a}
+            tarif_3a={e.tarif_3a}
             supervisor={e.supervisor}
+            diplom={e.diplom}
           />
         ))}
       </div>

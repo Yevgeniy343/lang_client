@@ -23,6 +23,10 @@ const UserEvent = ({
   tarif_2,
   tarif_3,
   supervisor,
+  tarif_1a,
+  tarif_2a,
+  tarif_3a,
+  diplom,
 }) => {
   const { isOrderModal } = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -44,6 +48,10 @@ const UserEvent = ({
         tarif_2: tarif_2,
         tarif_3: tarif_3,
         supervisor: supervisor,
+        tarif_1a: tarif_1a,
+        tarif_2a: tarif_2a,
+        tarif_3a: tarif_3a,
+        diplom: diplom,
       })
     );
   };
