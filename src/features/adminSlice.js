@@ -9,6 +9,7 @@ import {
   createNomThunk,
   getNomThunk,
   deleteNomThunk,
+  getChildOrdersThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -29,6 +30,7 @@ const initialState = {
   childNominations: [],
   adultNominations: [],
   nomE: [],
+  childOrders: [],
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -91,6 +93,13 @@ export const deleteNom = createAsyncThunk(
   "admin/deleteNom",
   async (info, thunkAPI) => {
     return deleteNomThunk(`/admin/deletenom/${info.id}`, info, thunkAPI);
+  }
+);
+
+export const getChildOrders = createAsyncThunk(
+  "admin/getChildOrders",
+  async (info, thunkAPI) => {
+    return getChildOrdersThunk(`/admin/getChildOrders/`, info, thunkAPI);
   }
 );
 
@@ -251,6 +260,19 @@ const adminSlice = createSlice({
       // toast.success(`Мероприятие удалено!`);
     });
     builder.addCase(deleteNom.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // getChildOrders
+    builder.addCase(getChildOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getChildOrders.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.childOrders = payload;
+    });
+    builder.addCase(getChildOrders.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
