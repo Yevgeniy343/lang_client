@@ -12,6 +12,7 @@ import { getChildOrders } from "../../features/adminSlice";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
+  const { childOrders } = useSelector((store) => store.admin);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -45,7 +46,35 @@ const AdminOrdersPage = () => {
         </div>
         {state === "child" && (
           <div className="child_orders">
-            <AdminChildOrder />
+            {childOrders?.map((order) => (
+              <AdminChildOrder
+                key={order._id}
+                id={order._id}
+                eventId={order.eventId}
+                name={order.name}
+                name2={order.name2}
+                name3={order.name3}
+                part={order.part}
+                curatorsAmount={order.curatorsAmount}
+                cur={order.cur}
+                age={order.age}
+                subject={order.subject}
+                punct={order.punct}
+                graduate={order.graduate}
+                nomPul={order.nomPul}
+                language={order.language}
+                language2={order.language2}
+                file={order.file}
+                link={order.link}
+                file2={order.file2}
+                email={order.email}
+                phone={order.phone}
+                extra1={order.extra1}
+                extra2={order.extra2}
+                extra3={order.extra3}
+                createdAt={order.createdAt}
+              />
+            ))}
           </div>
         )}
       </Wrapper>
@@ -96,6 +125,9 @@ const Wrapper = styled.div`
   }
   .active {
     background-color: var(--main-0);
+  }
+  .child_orders {
+    width: 100%;
   }
   @media (min-width: 576px) {
   }

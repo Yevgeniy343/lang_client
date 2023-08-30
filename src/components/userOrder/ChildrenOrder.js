@@ -145,7 +145,7 @@ const ChildrenOrder = ({ passCalculate }) => {
   const formData = new FormData();
   formData.append("file", file ? file : "false");
   formData.append("file2", file2 ? file2 : "false");
-  formData.append("eventId", currentOrder);
+  formData.append("eventId", currentOrder.id);
   formData.append("tarif", tarif);
   formData.append("name", values.name);
   formData.append("name2", values.name2);
