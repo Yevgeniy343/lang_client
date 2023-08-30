@@ -10,6 +10,7 @@ import {
   AiOutlineUnorderedList,
   AiOutlineTeam,
   AiFillDatabase,
+  AiOutlineAliwangwang,
 } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
 
@@ -39,6 +40,10 @@ const AdminNavBar = () => {
             </button>
           </div>
           <ul className="nav-links">
+            <li onClick={() => navigate("/orders")}>
+              <AiOutlineAliwangwang />
+              <p>Заявки</p>
+            </li>
             <li onClick={() => navigate("/nominations")}>
               <AiFillDatabase />
               <p>Номинации</p>

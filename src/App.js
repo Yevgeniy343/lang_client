@@ -13,6 +13,7 @@ import AdminEvents from "./pages/admin-pages/AdminEvents";
 import AllEvents from "./pages/admin-pages/AllEvents";
 import AllUsers from "./pages/admin-pages/AllUsers";
 import Nominations from "./pages/admin-pages/Nominations";
+import AdminOrdersPage from "./pages/admin-pages/AdminOrdersPage";
 
 function App() {
   return (
@@ -83,6 +84,17 @@ function App() {
             }
           >
             <Route path="/nominations" element={<Nominations />} />
+          </Route>
+
+          <Route
+            path="/orders"
+            element={
+              <ProtectedAdmin>
+                <AdminOrdersPage />
+              </ProtectedAdmin>
+            }
+          >
+            <Route path="/orders" element={<AdminOrdersPage />} />
           </Route>
 
           {/* <Route path="/landing" element={<Landing />} /> */}
