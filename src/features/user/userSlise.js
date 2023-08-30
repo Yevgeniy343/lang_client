@@ -6,6 +6,7 @@ import {
   getEventThunk,
   changeUserPassThunk,
   remindUserThunk,
+  createChildOrderThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -28,7 +29,7 @@ const initialState = {
   currentOrder: [],
   noms: [],
   nomins: [],
-  nomPul: [],
+  nomPul: "",
 };
 
 export const registerUser = createAsyncThunk(
@@ -70,8 +71,15 @@ export const getEvent = createAsyncThunk(
 export const changeUserPass = createAsyncThunk(
   "user/changepass",
   async (info, thunkAPI) => {
-    console.log(info);
     return changeUserPassThunk(`/user/changepass/`, info, thunkAPI);
+  }
+);
+
+export const createChildOrder = createAsyncThunk(
+  "user/createchildorder",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return createChildOrderThunk(`/user/createChildOrder/`, info, thunkAPI);
   }
 );
 
@@ -197,6 +205,19 @@ const userSlice = createSlice({
       toast.success(`Пароль успешно изменен`);
     });
     builder.addCase(changeUserPass.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // createChildOrder
+    builder.addCase(createChildOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createChildOrder.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(`Ваша заявка принята на рассмотрение модератору.`);
+    });
+    builder.addCase(createChildOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

@@ -12,6 +12,7 @@ import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import { subjects, languages, curators } from "../../data/data-order";
 import _ from "lodash";
 import CheckboxNomUser from "../../components-special/CheckboxNomUser";
+import { createChildOrder } from "../../features/user/userSlise";
 
 const data = [
   { id: 2, label: "2" },
@@ -141,30 +142,36 @@ const ChildrenOrder = ({ passCalculate }) => {
     setCondition(data);
   };
 
+  const formData = new FormData();
+  formData.append("file", file ? file : "false");
+  formData.append("file2", file2 ? file2 : "false");
+
   const onSubmit = (e) => {
     e.preventDefault();
+    dispatch(createChildOrder(formData));
     console.log("--------------");
+    console.log("tarif = ", tarif);
     console.log("name = ", values.name);
     console.log("name2 = ", values.name2);
     console.log("name3 = ", values.name3);
+    console.log("part = ", part);
+    console.log("curatorsAmount = ", curatorsAmount);
+    console.log("curators = ", cur);
     console.log("age = ", age);
     console.log("subject = ", subject);
     console.log("punct = ", values.punct);
     console.log("graduate = ", values.graduate);
+    console.log("nomination = ", nomPul);
     console.log("language = ", language);
     console.log("language2 = ", values.language2);
-    console.log("nomination = ", nomination);
     console.log("link = ", values.link);
-    console.log("curatorsAmount = ", curatorsAmount);
-    console.log("curators = ", cur);
-    console.log("nomination = ", nomination);
-    console.log("tarif = ", tarif);
+    console.log("file 1 ", file);
+    console.log("file 2 ", file2);
     console.log("email = ", values.email);
     console.log("phone = ", phone);
     console.log("extra1 = ", values.extra1);
     console.log("extra2 = ", values.extra2);
     console.log("extra3 = ", values.extra3);
-    console.log("part = ", part);
   };
 
   const amountPartHandler = (part) => {
@@ -195,6 +202,7 @@ const ChildrenOrder = ({ passCalculate }) => {
       passCalculate(calculate);
     }
   }, [tarif, curatorsAmount, part]);
+
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
@@ -625,6 +633,7 @@ const ChildrenOrder = ({ passCalculate }) => {
             onChange={changeHandler}
           />
         </div>
+        {/* --------------------------------------------------------------------- */}
         <div className="in">
           <label>
             <span>*</span>Ваш номер телефона для связи
