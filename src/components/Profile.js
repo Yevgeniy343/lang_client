@@ -7,6 +7,10 @@ import { editUser } from "../features/user/userSlise";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import ChangePassword from "./ChangePassword";
+import { AiOutlineCopy } from "react-icons/ai";
+import copy from "copy-to-clipboard";
+
+const { REACT_APP_URL_API } = process.env;
 
 const Profile = () => {
   const { user, isLoading } = useSelector((store) => store.user);
@@ -47,6 +51,10 @@ const Profile = () => {
         id: user._id,
       })
     );
+  };
+
+  const copyHandler = () => {
+    copy(`${REACT_APP_URL_API}/register/${user.referal}`);
   };
 
   return (
@@ -160,6 +168,23 @@ const Profile = () => {
           <Button text="Сохранить" type="submit" />
         </div>
       </form>
+      <div className="referal">
+        <label>Ваша реферальная ссылка:</label>
+        {user.referal && (
+          <div className="ref">
+            <p className="referal_link" id="link">
+              {REACT_APP_URL_API}/register/{user.referal}
+            </p>
+            <AiOutlineCopy onClick={copyHandler} />
+          </div>
+        )}
+        {!user.referal && (
+          <p className="referal_link">
+            Реферальная ссылка генерируется при регистрации. Вам необходимо
+            зарегистрирваться повторно
+          </p>
+        )}
+      </div>
       <ChangePassword />
     </Wrapper>
   );
@@ -207,7 +232,24 @@ const Wrapper = styled.div`
     border: none;
     height: 50px;
   }
-
+  .referal_link {
+    color: var(--main-0);
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
+  .ref {
+    display: flex;
+    align-items: center;
+    svg {
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--main-0);
+      transition: 0.6s;
+      :hover {
+        color: var(--main-1);
+      }
+    }
+  }
   @media (min-width: 576px) {
     .name,
     .contacts,

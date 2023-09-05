@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 
+const { REACT_APP_URL_API } = process.env;
+
 const AdminUser = ({
   name,
   second_name,
@@ -14,6 +16,7 @@ const AdminUser = ({
   created,
   updated,
   id,
+  referal,
 }) => {
   return (
     <Wrapper>
@@ -30,6 +33,12 @@ const AdminUser = ({
         <p>Дата рождения: {date}</p>
       </div>
       <div className="extra2-info">
+        {referal && (
+          <p>
+            Реферальная ссылка:
+            {REACT_APP_URL_API}/register/{referal}
+          </p>
+        )}
         <p>Дата регистрации: {moment(created).format("lll")}</p>
         <p>Дата изменений: {moment(updated).format("lll")}</p>
         <p>id: {id}</p>

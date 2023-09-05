@@ -36,7 +36,7 @@ const AdminChildOrder = ({
 }) => {
   const { events } = useSelector((store) => store.admin);
 
-  const thisEvent = events.find((ev) => ev._id === eventId);
+  const thisEvent = events?.find((ev) => ev._id === eventId);
 
   const curatorsList = _.chain(cur)
     .replace(/["]/g, "")
@@ -99,8 +99,10 @@ const AdminChildOrder = ({
       <div className="element">
         <p className="key">Список кураторов</p>
         <div className="curators">
-          {curatorsList.map((list) => (
-            <p className="value">{list}</p>
+          {curatorsList.map((list, index) => (
+            <p key={index} className="value">
+              {list}
+            </p>
           ))}
         </div>
       </div>

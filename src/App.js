@@ -100,6 +100,7 @@ function App() {
           {/* <Route path="/landing" element={<Landing />} /> */}
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/register/:id" element={<Register />} />
         </Routes>
         <Toaster
           position={"top-right"}

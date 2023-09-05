@@ -27,6 +27,7 @@ const AllUsers = () => {
     { label: "Дата рождения", key: "date" },
     { label: "Место работы", key: "job" },
     { label: "Должность", key: "job_title" },
+    { label: "Реферальная ссылка", key: "referal" },
   ];
 
   return (
@@ -54,6 +55,7 @@ const AllUsers = () => {
             created={u.createdAt}
             updated={u.updatedAt}
             id={u._id}
+            referal={u.referal}
           />
         ))}
       </Wrapper>
