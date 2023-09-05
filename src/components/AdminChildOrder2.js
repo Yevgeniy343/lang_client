@@ -52,8 +52,12 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-
     align-items: center;
+    height: 50px;
+    :hover {
+      background-color: var(--main-3);
+      cursor: pointer;
+    }
     p {
       padding: 0.5rem;
       width: 220px;

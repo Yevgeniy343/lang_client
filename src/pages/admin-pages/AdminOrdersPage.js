@@ -10,16 +10,51 @@ import EventAdminModal from "../../components/adminModal/eventAdminModal";
 import AdminChildOrder from "../../components/AdminChildOrder";
 import AdminChildOrder2 from "../../components/AdminChildOrder2";
 import { getChildOrders } from "../../features/adminSlice";
+import _ from "lodash";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
   const { childOrders } = useSelector((store) => store.admin);
+
+  const childOrders2 = _.sortBy(childOrders, "name");
+  console.log(childOrders2);
 
   useEffect(() => {
     dispatch(getChildOrders());
   }, []);
 
   const [state, setState] = useState("child");
+  const [sort, setSort] = useState();
+  const [data, setData] = useState(childOrders);
+
+  console.log(sort);
+
+  useEffect(() => {
+    if (sort === "name") {
+      const childOrders2 = _.sortBy(childOrders, "name");
+      setData(childOrders2);
+    }
+    if (sort === "id") {
+      const childOrders2 = _.sortBy(childOrders, "_id");
+      setData(childOrders2);
+    }
+    if (sort === "subject") {
+      const childOrders2 = _.sortBy(childOrders, "subject");
+      setData(childOrders2);
+    }
+    if (sort === "punct") {
+      const childOrders2 = _.sortBy(childOrders, "punct");
+      setData(childOrders2);
+    }
+    if (sort === "nomPul") {
+      const childOrders2 = _.sortBy(childOrders, "nomPul");
+      setData(childOrders2);
+    }
+    if (sort === "language") {
+      const childOrders2 = _.sortBy(childOrders, "language");
+      setData(childOrders2);
+    }
+  }, [sort]);
 
   return (
     <>
@@ -74,16 +109,46 @@ const AdminOrdersPage = () => {
               /> */}
         <div className="t">
           <div className="header2">
-            <p className="key">id заявки</p>
-            <p className="key">ФИО участника</p>
-            <p className="key">Cубъект</p>
-            <p className="key">Населенный пункт</p>
-            <p className="key">Номинация</p>
-            <p className="key">Язык работы</p>
+            <p
+              onClick={() => setSort("id")}
+              className={sort === "id" ? "key key-active" : "key"}
+            >
+              id заявки
+            </p>
+            <p
+              className={sort === "name" ? "key key-active" : "key"}
+              onClick={() => setSort("name")}
+            >
+              ФИО участника
+            </p>
+            <p
+              className={sort === "subject" ? "key key-active" : "key"}
+              onClick={() => setSort("subject")}
+            >
+              Cубъект
+            </p>
+            <p
+              className={sort === "punct" ? "key key-active" : "key"}
+              onClick={() => setSort("punct")}
+            >
+              Населенный пункт
+            </p>
+            <p
+              className={sort === "nomPul" ? "key key-active" : "key"}
+              onClick={() => setSort("nomPul")}
+            >
+              Номинация
+            </p>
+            <p
+              className={sort === "language" ? "key key-active" : "key"}
+              onClick={() => setSort("language")}
+            >
+              Язык работы
+            </p>
           </div>
           {state === "child" && (
             <div className="child_orders">
-              {childOrders?.map((order) => (
+              {data?.map((order) => (
                 <AdminChildOrder2
                   key={order._id}
                   id={order._id}
@@ -169,6 +234,15 @@ const Wrapper = styled.div`
       width: 220px;
       min-width: 220px;
     }
+  }
+  .key {
+    :hover {
+      background-color: var(--main-3);
+      cursor: pointer;
+    }
+  }
+  .key-active {
+    background-color: var(--main-3);
   }
   @media (min-width: 576px) {
   }
