@@ -24,7 +24,6 @@ const initialState = {
 
 const Register = () => {
   const { ref } = useParams();
-  console.log(ref);
   const { user, isLoading } = useSelector((store) => store.user);
   const [values, setValues] = useState(initialState);
   const [remind, setRemind] = useState(false);

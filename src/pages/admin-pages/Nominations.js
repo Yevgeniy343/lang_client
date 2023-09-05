@@ -106,7 +106,7 @@ const Nominations = () => {
         <div className="header">
           <h4>Созданные номинации</h4>
         </div>
-        {nominations.map((n) => (
+        {nominations?.map((n) => (
           <Nomination
             key={n._id}
             name={n.name}

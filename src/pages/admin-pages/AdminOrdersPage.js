@@ -8,6 +8,7 @@ import AdminEvents from "./AdminEvents";
 import Event from "../../components/adminComponents/Event";
 import EventAdminModal from "../../components/adminModal/eventAdminModal";
 import AdminChildOrder from "../../components/AdminChildOrder";
+import AdminChildOrder2 from "../../components/AdminChildOrder2";
 import { getChildOrders } from "../../features/adminSlice";
 
 const AdminOrdersPage = () => {
@@ -44,10 +45,7 @@ const AdminOrdersPage = () => {
             </div>
           </div>
         </div>
-        {state === "child" && (
-          <div className="child_orders">
-            {childOrders?.map((order) => (
-              <AdminChildOrder
+        {/* <AdminChildOrder
                 key={order._id}
                 id={order._id}
                 eventId={order.eventId}
@@ -73,10 +71,33 @@ const AdminOrdersPage = () => {
                 extra2={order.extra2}
                 extra3={order.extra3}
                 createdAt={order.createdAt}
-              />
-            ))}
+              /> */}
+        <div className="t">
+          <div className="header2">
+            <p className="key">id заявки</p>
+            <p className="key">ФИО участника</p>
+            <p className="key">Cубъект</p>
+            <p className="key">Населенный пункт</p>
+            <p className="key">Номинация</p>
+            <p className="key">Язык работы</p>
           </div>
-        )}
+          {state === "child" && (
+            <div className="child_orders">
+              {childOrders?.map((order) => (
+                <AdminChildOrder2
+                  key={order._id}
+                  id={order._id}
+                  name={order.name}
+                  subject={order.subject}
+                  punct={order.punct}
+                  language={order.language}
+                  language2={order.language2}
+                  nomPul={order.nomPul}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </Wrapper>
     </>
   );
@@ -87,6 +108,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 0 1rem;
+  /* overflow: auto; */
+
   .header {
     display: flex;
     justify-content: center;
@@ -128,6 +151,25 @@ const Wrapper = styled.div`
   }
   .child_orders {
     width: 100%;
+  }
+  .t {
+    min-width: 900px;
+    width: 100%;
+    overflow: auto;
+    margin: 1rem;
+  }
+  .header2 {
+    border: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    /* overflow-x: auto; */
+    width: 100%;
+    p {
+      padding: 0.5rem;
+      width: 220px;
+      min-width: 220px;
+      /* border: 1px solid gray; */
+    }
   }
   @media (min-width: 576px) {
   }
