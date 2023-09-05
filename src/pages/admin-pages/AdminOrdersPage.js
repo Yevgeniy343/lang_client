@@ -153,22 +153,21 @@ const Wrapper = styled.div`
     width: 100%;
   }
   .t {
-    min-width: 900px;
+    /* min-width: 900px; */
     width: 100%;
     overflow: auto;
     margin: 1rem;
+    display: flex;
+    flex-direction: column;
   }
   .header2 {
-    border: 1px solid gray;
     display: flex;
     justify-content: space-between;
-    /* overflow-x: auto; */
     width: 100%;
     p {
       padding: 0.5rem;
       width: 220px;
       min-width: 220px;
-      /* border: 1px solid gray; */
     }
   }
   @media (min-width: 576px) {

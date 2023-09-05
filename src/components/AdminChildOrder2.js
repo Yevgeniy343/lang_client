@@ -49,10 +49,8 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   .table {
-    /* border-right: 1px solid gray; */
     display: flex;
     justify-content: space-between;
-    /* overflow-x: auto; */
     width: 100%;
 
     align-items: center;
@@ -60,7 +58,6 @@ const Wrapper = styled.div`
       padding: 0.5rem;
       width: 220px;
       min-width: 220px;
-      /* border-right: 1px solid gray; */
     }
   }
   @media (min-width: 576px) {
