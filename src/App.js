@@ -14,6 +14,7 @@ import AllEvents from "./pages/admin-pages/AllEvents";
 import AllUsers from "./pages/admin-pages/AllUsers";
 import Nominations from "./pages/admin-pages/Nominations";
 import AdminOrdersPage from "./pages/admin-pages/AdminOrdersPage";
+import Register2 from "./pages/Register2";
 
 function App() {
   return (
@@ -100,7 +101,7 @@ function App() {
           {/* <Route path="/landing" element={<Landing />} /> */}
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/register/:id" element={<Register />} />
+          <Route path="/register/:ref" element={<Register2 />} />
         </Routes>
         <Toaster
           position={"top-right"}

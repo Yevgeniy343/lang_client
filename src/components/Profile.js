@@ -10,7 +10,7 @@ import ChangePassword from "./ChangePassword";
 import { AiOutlineCopy } from "react-icons/ai";
 import copy from "copy-to-clipboard";
 
-const { REACT_APP_URL_API } = process.env;
+const { REACT_APP_REF } = process.env;
 
 const Profile = () => {
   const { user, isLoading } = useSelector((store) => store.user);
@@ -54,7 +54,7 @@ const Profile = () => {
   };
 
   const copyHandler = () => {
-    copy(`${REACT_APP_URL_API}/register/${user.referal}`);
+    copy(`${REACT_APP_REF}/register/${user.referal}`);
   };
 
   return (
@@ -173,7 +173,7 @@ const Profile = () => {
         {user.referal && (
           <div className="ref">
             <p className="referal_link" id="link">
-              {REACT_APP_URL_API}/register/{user.referal}
+              {REACT_APP_REF}/register/{user.referal}
             </p>
             <AiOutlineCopy onClick={copyHandler} />
           </div>
