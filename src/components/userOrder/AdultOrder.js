@@ -39,9 +39,11 @@ const AdultOrder = ({ passCalculate }) => {
     phone: user.phone,
     job_title: user.job_title,
     job: user.job,
-    internship: "",
     job_title2: "",
+    job_title3: "",
+    internship: "",
     internship2: "",
+    internship3: "",
     job2: "",
     job3: "",
     name: "",
@@ -242,6 +244,17 @@ const AdultOrder = ({ passCalculate }) => {
   formData.append("subject2", subject2);
   formData.append("subject3", subject3);
   formData.append("punct", values.punct);
+  formData.append("punct2", values.punct2);
+  formData.append("punct3", values.punct3);
+  formData.append("job", values.job);
+  formData.append("job2", values.job2);
+  formData.append("job3", values.job3);
+  formData.append("job_title", values.job_title);
+  formData.append("job_title2", values.job_title2);
+  formData.append("job_title3", values.job_title3);
+  formData.append("internship", values.internship);
+  formData.append("internship2", values.internship2);
+  formData.append("internship3", values.internship3);
   formData.append("graduate", values.graduate);
   formData.append("nomPul", nomPul);
   formData.append("language", language);
@@ -527,7 +540,7 @@ const AdultOrder = ({ passCalculate }) => {
                   </label>
                   <Input
                     type="text"
-                    name="job_title2"
+                    name="job_title3"
                     value={values.job_title3}
                     onChange={changeHandler}
                   />
@@ -550,7 +563,7 @@ const AdultOrder = ({ passCalculate }) => {
                   <Input
                     type="text"
                     name="punct3"
-                    value={values.punc3}
+                    value={values.punct3}
                     onChange={changeHandler}
                   />
                 </div>
