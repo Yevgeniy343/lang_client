@@ -9,21 +9,24 @@ import Event from "../../components/adminComponents/Event";
 import EventAdminModal from "../../components/adminModal/eventAdminModal";
 import AdminChildOrder from "../../components/AdminChildOrder";
 import AdminChildOrder2 from "../../components/AdminChildOrder2";
-import { getChildOrders } from "../../features/adminSlice";
+import AdminAdultOrder2 from "../../components/AdminAdultOrder2";
+import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
 import _ from "lodash";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
-  const { childOrders } = useSelector((store) => store.admin);
-
-  const childOrders2 = _.sortBy(childOrders, "name");
-  console.log(childOrders2);
+  const { childOrders, adultOrders } = useSelector((store) => store.admin);
 
   useEffect(() => {
     dispatch(getChildOrders());
   }, []);
 
+  useEffect(() => {
+    dispatch(getAdultOrders());
+  }, []);
+
   const [state, setState] = useState("child");
+  console.log(state);
   const [sort, setSort] = useState();
   const [data, setData] = useState(childOrders);
 
@@ -150,6 +153,22 @@ const AdminOrdersPage = () => {
             <div className="child_orders">
               {data?.map((order) => (
                 <AdminChildOrder2
+                  key={order._id}
+                  id={order._id}
+                  name={order.name}
+                  subject={order.subject}
+                  punct={order.punct}
+                  language={order.language}
+                  language2={order.language2}
+                  nomPul={order.nomPul}
+                />
+              ))}
+            </div>
+          )}
+          {state === "adult" && (
+            <div className="child_orders">
+              {adultOrders?.map((order) => (
+                <AdminAdultOrder2
                   key={order._id}
                   id={order._id}
                   name={order.name}
