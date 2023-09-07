@@ -7,6 +7,7 @@ import {
   changeUserPassThunk,
   remindUserThunk,
   createChildOrderThunk,
+  createAdultOrderThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -78,8 +79,15 @@ export const changeUserPass = createAsyncThunk(
 export const createChildOrder = createAsyncThunk(
   "user/createchildorder",
   async (info, thunkAPI) => {
-    console.log(info);
     return createChildOrderThunk(`/user/createChildOrder/`, info, thunkAPI);
+  }
+);
+
+export const createAdultOrder = createAsyncThunk(
+  "user/createadultorder",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return createAdultOrderThunk(`/user/createAdultOrder/`, info, thunkAPI);
   }
 );
 
@@ -218,6 +226,19 @@ const userSlice = createSlice({
       toast.success(`Ваша заявка принята на рассмотрение модератору.`);
     });
     builder.addCase(createChildOrder.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // createAdultOrder
+    builder.addCase(createAdultOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(createAdultOrder.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(`Ваша заявка принята на рассмотрение модератору.`);
+    });
+    builder.addCase(createAdultOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

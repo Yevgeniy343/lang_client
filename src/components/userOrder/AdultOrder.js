@@ -11,6 +11,7 @@ import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import { subjects, languages, curators } from "../../data/data-order";
 import CheckboxNomUser from "../../components-special/CheckboxNomUser2";
+import { createAdultOrder } from "../../features/user/userSlise";
 
 import _ from "lodash";
 
@@ -100,11 +101,6 @@ const AdultOrder = ({ passCalculate }) => {
 
   const changeCuratorHandler = (e) => {
     setCur({ ...cur, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log("--------------");
   };
 
   const tarifHandler = (data) => {
@@ -228,6 +224,43 @@ const AdultOrder = ({ passCalculate }) => {
       }
     }
   }, [tarif, curatorsAmount, part, extraDiplom]);
+
+  // ___________________________________________________________________________
+
+  const formData = new FormData();
+  formData.append("file", file ? file : "false");
+  formData.append("file2", file2 ? file2 : "false");
+  formData.append("eventId", currentOrder.id);
+  formData.append("tarif", tarif);
+  formData.append("name", values.name);
+  formData.append("name2", values.name2);
+  formData.append("name3", values.name3);
+  formData.append("part", part);
+  formData.append("curatorsAmount", curatorsAmount);
+  formData.append("cur", JSON.stringify(cur));
+  formData.append("subject", subject);
+  formData.append("subject2", subject2);
+  formData.append("subject3", subject3);
+  formData.append("punct", values.punct);
+  formData.append("graduate", values.graduate);
+  formData.append("nomPul", nomPul);
+  formData.append("language", language);
+  formData.append("language2", values.language2);
+  formData.append("link", values.link);
+  formData.append("email", values.email);
+  formData.append("phone", phone);
+  formData.append("extra1", values.extra1);
+  formData.append("extra2", values.extra2);
+  formData.append("extra3", values.extra3);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createAdultOrder(formData));
+    console.log("--------------");
+  };
+
+  // ___________________________________________________________________________
+
   return (
     <Wrapper>
       <form onSubmit={onSubmit}>
@@ -945,7 +978,11 @@ const AdultOrder = ({ passCalculate }) => {
           />
         </div>
         <div className="actions">
-          <Button text="Отправить заявку" disabled={!agreement || !condition} />
+          <Button
+            text="Отправить заявку"
+            type="submit"
+            disabled={!agreement || !condition}
+          />
         </div>
       </form>
     </Wrapper>
