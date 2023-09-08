@@ -5,6 +5,7 @@ import _ from "lodash";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import moment from "moment";
+import { isChildOrderHandler } from "../features/adminSlice";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -19,29 +20,29 @@ const AdminChildOrder2 = ({
   language2,
 }) => {
   const { events } = useSelector((store) => store.admin);
+  const dispatch = useDispatch();
 
   const thisEvent = events?.find((ev) => ev._id === eventId);
 
   return (
-    <Wrapper>
-      <div className="table">
-        <p className="value">{id}</p>
-        <p className="value">{name}</p>
-        <p className="value">{subject}</p>
-        <p className="value">{punct}</p>
-        <p className="value">{nomPul}</p>
-        {language && <p className="value">{language}</p>}
-        {language2 && <p className="value">{language2}</p>}
-      </div>
-      <div className="element"></div>
-      <div className="element"></div>
-
-      <div className="element"></div>
-      <div className="element"></div>
-      <div className="element"></div>
-      {language && <div className="element"></div>}
-      {language2 && <div className="element"></div>}
-    </Wrapper>
+    <>
+      <Wrapper>
+        <div
+          className="table"
+          onClick={() => dispatch(isChildOrderHandler(true))}
+        >
+          <p className="value">{id}</p>
+          <p className="value">{name}</p>
+          <p className="value">{subject}</p>
+          <p className="value">{punct}</p>
+          <p className="value">{nomPul}</p>
+          {language && <p className="value">{language}</p>}
+          {language2 && <p className="value">{language2}</p>}
+        </div>
+        {language && <div className="element"></div>}
+        {language2 && <div className="element"></div>}
+      </Wrapper>
+    </>
   );
 };
 

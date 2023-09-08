@@ -67,122 +67,124 @@ const AdminChildOrder = ({
   };
 
   return (
-    <Wrapper>
-      <div className="element">
-        <p className="key">id заявки</p>
-        <p className="value">{id}</p>
-      </div>
-      <div className="element">
-        <p className="key">конкурс</p>
-        <p className="value">{thisEvent?.name}</p>
-      </div>
-      <div className="element">
-        <p className="key">ФИО участника</p>
-        <p className="value">{name}</p>
-      </div>
-      <div className="element">
-        <p className="key">ФИО участника 2</p>
-        <p className="value">{name2}</p>
-      </div>
-      <div className="element">
-        <p className="key">ФИО участника 3</p>
-        <p className="value">{name3}</p>
-      </div>
-      <div className="element">
-        <p className="key">Колическво участников</p>
-        <p className="value">{part}</p>
-      </div>
-      <div className="element">
-        <p className="key">Колическво кураторов</p>
-        <p className="value">{curatorsAmount}</p>
-      </div>
-      <div className="element">
-        <p className="key">Список кураторов</p>
-        <div className="curators">
-          {curatorsList.map((list, index) => (
-            <p key={index} className="value">
-              {list}
+    <>
+      <Wrapper>
+        <div className="element">
+          <p className="key">id заявки</p>
+          <p className="value">{id}</p>
+        </div>
+        <div className="element">
+          <p className="key">конкурс</p>
+          <p className="value">{thisEvent?.name}</p>
+        </div>
+        <div className="element">
+          <p className="key">ФИО участника</p>
+          <p className="value">{name}</p>
+        </div>
+        <div className="element">
+          <p className="key">ФИО участника 2</p>
+          <p className="value">{name2}</p>
+        </div>
+        <div className="element">
+          <p className="key">ФИО участника 3</p>
+          <p className="value">{name3}</p>
+        </div>
+        <div className="element">
+          <p className="key">Колическво участников</p>
+          <p className="value">{part}</p>
+        </div>
+        <div className="element">
+          <p className="key">Колическво кураторов</p>
+          <p className="value">{curatorsAmount}</p>
+        </div>
+        <div className="element">
+          <p className="key">Список кураторов</p>
+          <div className="curators">
+            {curatorsList.map((list, index) => (
+              <p key={index} className="value">
+                {list}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div className="element">
+          <p className="key">Возраст</p>
+          <p className="value">{age}</p>
+        </div>
+        <div className="element">
+          <p className="key">Cубъект</p>
+          <p className="value">{subject}</p>
+        </div>
+        <div className="element">
+          <p className="key">Населенный пункт</p>
+          <p className="value">{punct}</p>
+        </div>
+        <div className="element">
+          <p className="key">Наименование учебного заведения</p>
+          <p className="value">{graduate}</p>
+        </div>
+        <div className="element">
+          <p className="key">Номинация</p>
+          <p className="value">{nomPul}</p>
+        </div>
+        {language && (
+          <div className="element">
+            <p className="key">Язык работы</p>
+            <p className="value">{language}</p>
+          </div>
+        )}
+        {language2 && (
+          <div className="element">
+            <p className="key">Язык работы</p>
+            <p className="value">{language2}</p>
+          </div>
+        )}
+        {file && (
+          <div className="element">
+            <p className="key">Работа</p>
+            <p className="value link" onClick={downloadHandler}>
+              скачать
             </p>
-          ))}
-        </div>
-      </div>
-      <div className="element">
-        <p className="key">Возраст</p>
-        <p className="value">{age}</p>
-      </div>
-      <div className="element">
-        <p className="key">Cубъект</p>
-        <p className="value">{subject}</p>
-      </div>
-      <div className="element">
-        <p className="key">Населенный пункт</p>
-        <p className="value">{punct}</p>
-      </div>
-      <div className="element">
-        <p className="key">Наименование учебного заведения</p>
-        <p className="value">{graduate}</p>
-      </div>
-      <div className="element">
-        <p className="key">Номинация</p>
-        <p className="value">{nomPul}</p>
-      </div>
-      {language && (
+          </div>
+        )}
         <div className="element">
-          <p className="key">Язык работы</p>
-          <p className="value">{language}</p>
+          <p className="key">Ссылка на работу</p>
+          <p className="value">{link}</p>
         </div>
-      )}
-      {language2 && (
         <div className="element">
-          <p className="key">Язык работы</p>
-          <p className="value">{language2}</p>
+          <p className="key">Email</p>
+          <p className="value">{email}</p>
         </div>
-      )}
-      {file && (
         <div className="element">
-          <p className="key">Работа</p>
-          <p className="value link" onClick={downloadHandler}>
-            скачать
-          </p>
+          <p className="key">Телефон</p>
+          <p className="value">{phone}</p>
         </div>
-      )}
-      <div className="element">
-        <p className="key">Ссылка на работу</p>
-        <p className="value">{link}</p>
-      </div>
-      <div className="element">
-        <p className="key">Email</p>
-        <p className="value">{email}</p>
-      </div>
-      <div className="element">
-        <p className="key">Телефон</p>
-        <p className="value">{phone}</p>
-      </div>
-      <div className="element">
-        <p className="key">Дополнительное поле 1</p>
-        <p className="value">{extra1}</p>
-      </div>
-      <div className="element">
-        <p className="key">Дополнительное поле 2</p>
-        <p className="value">{extra2}</p>
-      </div>
-      <div className="element">
-        <p className="key">Дополнительное поле 3</p>
-        <p className="value">{extra3}</p>
-      </div>
-      {file2 && (
         <div className="element">
-          <p className="key">Квитанция от оплате</p>
-          <p className="value link" onClick={downloadHandler2}>
-            скачать
-          </p>
+          <p className="key">Дополнительное поле 1</p>
+          <p className="value">{extra1}</p>
         </div>
-      )}
-      <div className="element">
-        <p className="key">Дата/время создания</p>
-        <p className="value">{moment(createdAt).format("lll")}</p>
-      </div>
-    </Wrapper>
+        <div className="element">
+          <p className="key">Дополнительное поле 2</p>
+          <p className="value">{extra2}</p>
+        </div>
+        <div className="element">
+          <p className="key">Дополнительное поле 3</p>
+          <p className="value">{extra3}</p>
+        </div>
+        {file2 && (
+          <div className="element">
+            <p className="key">Квитанция от оплате</p>
+            <p className="value link" onClick={downloadHandler2}>
+              скачать
+            </p>
+          </div>
+        )}
+        <div className="element">
+          <p className="key">Дата/время создания</p>
+          <p className="value">{moment(createdAt).format("lll")}</p>
+        </div>
+      </Wrapper>
+    </>
   );
 };
 

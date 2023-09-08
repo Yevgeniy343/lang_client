@@ -12,10 +12,13 @@ import AdminChildOrder2 from "../../components/AdminChildOrder2";
 import AdminAdultOrder2 from "../../components/AdminAdultOrder2";
 import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
 import _ from "lodash";
+import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrder";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
-  const { childOrders, adultOrders } = useSelector((store) => store.admin);
+  const { childOrders, adultOrders, isChildOrder } = useSelector(
+    (store) => store.admin
+  );
   console.log("childOrdesr", childOrders);
   console.log("adultOrdesr", adultOrders);
 
@@ -28,12 +31,9 @@ const AdminOrdersPage = () => {
   }, []);
 
   const [state, setState] = useState("child");
-  console.log(state);
   const [sort, setSort] = useState();
   const [data, setData] = useState(childOrders);
   const [data2, setData2] = useState(adultOrders);
-
-  console.log(sort);
 
   useEffect(() => {
     if (sort === "name") {
@@ -198,6 +198,7 @@ const AdminOrdersPage = () => {
           )}
         </div>
       </Wrapper>
+      {isChildOrder && <AdminEditChildOrder />}
     </>
   );
 };
