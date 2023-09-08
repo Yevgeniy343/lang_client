@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
 import _ from "lodash";
+import Button from "../../components-special/Button";
 
 const AdminEditChildOrder = () => {
   const dispatch = useDispatch();
@@ -226,6 +227,9 @@ const AdminEditChildOrder = () => {
             />
           </div>
         </div>
+        <div className="actions">
+          <Button text="Сохранить" disabled={true} />
+        </div>
       </div>
     </Wrapper>
   );
@@ -244,6 +248,7 @@ const Wrapper = styled.div`
   transition: var(--transition);
   z-index: 999;
   opacity: 1;
+
   .modal {
     background-color: white;
     width: 95vw;
@@ -289,6 +294,12 @@ const Wrapper = styled.div`
   }
   label {
     margin-left: 1rem;
+  }
+  .actions {
+    margin: 2rem;
+    width: 95%;
+    display: flex;
+    justify-content: center;
   }
   @media (min-width: 576px) {
     .in {
