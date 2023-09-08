@@ -24,6 +24,12 @@ const ChildrenOrder = ({ passCalculate }) => {
     (store) => store.user
   );
 
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1;
+  const currentDay = today.getDate();
+  const randomNumber = _.random(100000, 999999);
+  const number = currentMonth + "/" + currentDay + "/" + randomNumber + "-1";
+
   const thisNom = noms.find((n) => n.eventId === currentOrder.id);
   const thisNomLF = nomins.find((n) => n.name === nomPul);
 
@@ -166,6 +172,7 @@ const ChildrenOrder = ({ passCalculate }) => {
   formData.append("extra1", values.extra1);
   formData.append("extra2", values.extra2);
   formData.append("extra3", values.extra3);
+  formData.append("number", number);
 
   const onSubmit = (e) => {
     e.preventDefault();

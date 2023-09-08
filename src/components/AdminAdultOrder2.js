@@ -17,6 +17,7 @@ const AdminAdultOrder2 = ({
   nomPul,
   language,
   language2,
+  number,
 }) => {
   const { events } = useSelector((store) => store.admin);
 
@@ -25,7 +26,7 @@ const AdminAdultOrder2 = ({
   return (
     <Wrapper>
       <div className="table">
-        <p className="value">{id}</p>
+        <p className="value">{number}</p>
         <p className="value">{name}</p>
         <p className="value">{subject}</p>
         <p className="value">{punct}</p>
@@ -33,12 +34,6 @@ const AdminAdultOrder2 = ({
         {language && <p className="value">{language}</p>}
         {language2 && <p className="value">{language2}</p>}
       </div>
-      <div className="element"></div>
-      <div className="element"></div>
-
-      <div className="element"></div>
-      <div className="element"></div>
-      <div className="element"></div>
       {language && <div className="element"></div>}
       {language2 && <div className="element"></div>}
     </Wrapper>

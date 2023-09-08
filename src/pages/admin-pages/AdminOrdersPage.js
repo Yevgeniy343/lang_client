@@ -42,10 +42,10 @@ const AdminOrdersPage = () => {
       const adultOrders2 = _.sortBy(adultOrders, "name");
       setData2(adultOrders2);
     }
-    if (sort === "id") {
-      const childOrders2 = _.sortBy(childOrders, "_id");
+    if (sort === "number") {
+      const childOrders2 = _.sortBy(childOrders, "number");
       setData(childOrders2);
-      const adultOrders2 = _.sortBy(adultOrders, "_id");
+      const adultOrders2 = _.sortBy(adultOrders, "number");
       setData2(adultOrders2);
     }
     if (sort === "subject") {
@@ -128,8 +128,8 @@ const AdminOrdersPage = () => {
         <div className="t">
           <div className="header2">
             <p
-              onClick={() => setSort("id")}
-              className={sort === "id" ? "key key-active" : "key"}
+              onClick={() => setSort("number")}
+              className={sort === "number" ? "key key-active" : "key"}
             >
               id заявки
             </p>
@@ -169,6 +169,7 @@ const AdminOrdersPage = () => {
               {data?.map((order) => (
                 <AdminChildOrder2
                   key={order._id}
+                  number={order.number}
                   id={order._id}
                   name={order.name}
                   subject={order.subject}
@@ -185,13 +186,14 @@ const AdminOrdersPage = () => {
               {data2?.map((order) => (
                 <AdminAdultOrder2
                   key={order._id}
-                  id={order._id}
+                  number={order.number}
                   name={order.name}
                   subject={order.subject}
                   punct={order.punct}
                   language={order.language}
                   language2={order.language2}
                   nomPul={order.nomPul}
+                  id={order._id}
                 />
               ))}
             </div>

@@ -13,7 +13,7 @@ import {
 const { REACT_APP_URL_API } = process.env;
 
 const AdminChildOrder2 = ({
-  id,
+  number,
   eventId,
   name,
   subject,
@@ -21,6 +21,7 @@ const AdminChildOrder2 = ({
   nomPul,
   language,
   language2,
+  id,
 }) => {
   const { events } = useSelector((store) => store.admin);
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const AdminChildOrder2 = ({
     <>
       <Wrapper>
         <div className="table" onClick={modalHandler}>
-          <p className="value">{id}</p>
+          <p className="value">{number}</p>
           <p className="value">{name}</p>
           <p className="value">{subject}</p>
           <p className="value">{punct}</p>

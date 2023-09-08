@@ -21,7 +21,9 @@ const AdminEditChildOrder = () => {
   const thisOrder = childOrders.find(
     (order) => order._id === currentChildOrder
   );
-  //   const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
+
+  console.log(thisOrder);
+  // const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
 
   const initialState = {
     name: thisOrder?.name,
@@ -257,6 +259,7 @@ const Wrapper = styled.div`
     border-radius: 10px;
     padding: 0 2rem;
     overflow-y: auto;
+    overflow-x: hidden;
     ::-webkit-scrollbar {
       width: 10px;
     }
