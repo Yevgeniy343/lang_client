@@ -35,6 +35,7 @@ const initialState = {
   adultOrders: [],
   isChildOrder: "false",
   isAdultOrder: "false",
+  currentChildOrder: "",
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -123,8 +124,11 @@ const adminSlice = createSlice({
       removeAdminFromLocalStorage();
       toast.success(`Пока !`);
     },
+    currentChildOrderHandler: (state, { payload }) => {
+      state.currentChildOrder = payload;
+    },
     isAdultOrderHandler: (state, { payload }) => {
-      state.isChildOrder = payload;
+      state.isAdultOrder = payload;
     },
     isChildOrderHandler: (state, { payload }) => {
       state.isChildOrder = payload;
@@ -321,5 +325,6 @@ export const {
   adultNominationHandlerClean,
   isAdultOrderHandler,
   isChildOrderHandler,
+  currentChildOrderHandler,
 } = adminSlice.actions;
 export default adminSlice.reducer;

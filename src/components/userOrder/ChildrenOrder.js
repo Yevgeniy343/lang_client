@@ -70,6 +70,7 @@ const ChildrenOrder = ({ passCalculate }) => {
   const [curatorsAmount, setCuratorsAmount] = useState(defaultValue);
   const [cur, setCur] = useState(initialStateCurators);
   const [phone, setPhone] = useState(initialState.phone);
+  console.log(phone.phone);
   const [agreement, setAgreement] = useState(false);
   const [condition, setCondition] = useState(false);
   const [part, setPart] = useState("");
@@ -162,7 +163,7 @@ const ChildrenOrder = ({ passCalculate }) => {
   formData.append("language2", values.language2);
   formData.append("link", values.link);
   formData.append("email", values.email);
-  formData.append("phone", phone);
+  formData.append("phone", phone.phone);
   formData.append("extra1", values.extra1);
   formData.append("extra2", values.extra2);
   formData.append("extra3", values.extra3);
@@ -803,7 +804,6 @@ const ChildrenOrder = ({ passCalculate }) => {
 
 const Wrapper = styled.div`
   margin-top: 5rem;
-
   .in {
     margin: 1rem 0;
     margin-bottom: 2rem;

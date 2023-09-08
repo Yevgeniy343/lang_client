@@ -24,7 +24,7 @@ const AdminOrdersPage = () => {
 
   useEffect(() => {
     dispatch(getChildOrders());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAdultOrders());

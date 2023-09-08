@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { isChildOrderHandler } from "../../features/adminSlice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Input from "../../components-special/Input";
+import TextArea from "../../components/TextArea";
+import _ from "lodash";
 
 const AdminEditChildOrder = () => {
   const dispatch = useDispatch();
+  const { currentChildOrder, childOrders, events } = useSelector(
+    (store) => store.admin
+  );
+
+  const changeHandler = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const thisOrder = childOrders.find(
+    (order) => order._id === currentChildOrder
+  );
+  //   const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
+
+  const initialState = {
+    name: thisOrder?.name,
+    phone: thisOrder?.phone,
+    email: thisOrder?.email,
+    tarif: thisOrder?.tarif,
+    name2: thisOrder?.name2,
+    name3: thisOrder?.name3,
+    punct: thisOrder?.punct,
+    graduate: thisOrder?.graduate,
+    language: thisOrder?.language,
+    language2: thisOrder?.language2,
+    link: thisOrder?.link,
+    extra1: thisOrder?.extra,
+    extra2: thisOrder?.extra2,
+    extra3: thisOrder?.extra3,
+    cur: thisOrder?.cur,
+    pert: thisOrder?.part,
+    age: thisOrder?.age,
+    curatorsAmount: thisOrder?.curatorsAmount,
+    nomPul: thisOrder?.nomPul,
+  };
+
+  const [values, setValues] = useState(initialState);
 
   return (
     <Wrapper>
@@ -16,6 +55,175 @@ const AdminEditChildOrder = () => {
             onClick={() => dispatch(isChildOrderHandler(false))}
           >
             <AiOutlineClose />
+          </div>
+        </div>
+        <div className="content">
+          <div className="in">
+            <label>Фамилия и имя конкурсанта</label>
+            <Input
+              type="text"
+              name="name"
+              value={values.name}
+              onChange={changeHandler}
+            />
+          </div>
+
+          <div className="in">
+            <label>Вариант участия</label>
+            <Input
+              type="text"
+              name="tarif"
+              value={values.tarif}
+              onChange={changeHandler}
+            />
+          </div>
+          {values.tarif !== "Коллективный" && (
+            <div className="in">
+              <label>Фамилия и имя второго конкурсанта</label>
+              <Input
+                type="text"
+                name="name2"
+                value={values.name2}
+                onChange={changeHandler}
+              />
+            </div>
+          )}
+          {values.tarif !== "Коллективный" && (
+            <div className="in">
+              <label>Фамилия и имя третьего конкурсанта</label>
+              <Input
+                type="text"
+                name="name3"
+                value={values.name3}
+                onChange={changeHandler}
+              />
+            </div>
+          )}
+          <div className="in">
+            <label>Количество кураторов</label>
+            <Input
+              type="text"
+              name="curatorsAmount"
+              value={values.curatorsAmount}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Возрастная категория</label>
+            <Input
+              type="text"
+              name="age"
+              value={values.age}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Cубъект Российской Федерации</label>
+            <Input
+              type="text"
+              name="subject"
+              value={values.subject}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Населенный пункт</label>
+            <Input
+              type="text"
+              name="punct"
+              value={values.punct}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Номинация</label>
+            <Input
+              type="text"
+              name="nomPul"
+              value={values.nomPul}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Язык работы</label>
+            <Input
+              type="text"
+              name="language"
+              value={values.language}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Язык работы</label>
+            <Input
+              type="text"
+              name="language2"
+              value={values.language2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Ссылка на работу</label>
+            <Input
+              type="text"
+              name="link"
+              value={values.link}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>email</label>
+            <Input
+              type="email"
+              name="email"
+              value={values.email}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>телефон</label>
+            <Input
+              type="text"
+              name="phone"
+              value={values.phone}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Дополнительное поле 1</label>
+            <Input
+              type="text"
+              name="extra1"
+              value={values.extra1}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Дополнительное поле 1</label>
+            <Input
+              type="text"
+              name="extra2"
+              value={values.extra2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Дополнительное поле 1</label>
+            <Input
+              type="text"
+              name="extra3"
+              value={values.extra3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Информация по кураторам</label>
+            <TextArea
+              type="text"
+              name="cur"
+              value={values.cur}
+              onChange={changeHandler}
+            />
           </div>
         </div>
       </div>
@@ -70,9 +278,27 @@ const Wrapper = styled.div`
       }
     }
   }
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .in {
+    width: 250px;
+    margin: 1rem;
+  }
+  label {
+    margin-left: 1rem;
+  }
   @media (min-width: 576px) {
+    .in {
+      width: 300px;
+    }
   }
   @media (min-width: 768px) {
+    .in {
+      width: 350px;
+    }
   }
   @media (min-width: 992px) {
   }
