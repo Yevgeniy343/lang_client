@@ -280,6 +280,7 @@ const adminSlice = createSlice({
     builder.addCase(getChildOrders.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.childOrders = payload;
+      console.log(payload);
     });
     builder.addCase(getChildOrders.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -293,6 +294,7 @@ const adminSlice = createSlice({
     builder.addCase(getAdultOrders.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.adultOrders = payload;
+      console.log(payload);
     });
     builder.addCase(getAdultOrders.rejected, (state, { payload }) => {
       state.isLoading = false;

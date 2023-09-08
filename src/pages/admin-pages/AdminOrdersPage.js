@@ -16,6 +16,8 @@ import _ from "lodash";
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
   const { childOrders, adultOrders } = useSelector((store) => store.admin);
+  console.log("childOrdesr", childOrders);
+  console.log("adultOrdesr", adultOrders);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -29,6 +31,7 @@ const AdminOrdersPage = () => {
   console.log(state);
   const [sort, setSort] = useState();
   const [data, setData] = useState(childOrders);
+  const [data2, setData2] = useState(adultOrders);
 
   console.log(sort);
 
@@ -36,26 +39,38 @@ const AdminOrdersPage = () => {
     if (sort === "name") {
       const childOrders2 = _.sortBy(childOrders, "name");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "name");
+      setData2(adultOrders2);
     }
     if (sort === "id") {
       const childOrders2 = _.sortBy(childOrders, "_id");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "_id");
+      setData2(adultOrders2);
     }
     if (sort === "subject") {
       const childOrders2 = _.sortBy(childOrders, "subject");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "subject");
+      setData2(adultOrders2);
     }
     if (sort === "punct") {
       const childOrders2 = _.sortBy(childOrders, "punct");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "punct");
+      setData2(adultOrders2);
     }
     if (sort === "nomPul") {
       const childOrders2 = _.sortBy(childOrders, "nomPul");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "nomPul");
+      setData2(adultOrders2);
     }
     if (sort === "language") {
       const childOrders2 = _.sortBy(childOrders, "language");
       setData(childOrders2);
+      const adultOrders2 = _.sortBy(adultOrders, "language");
+      setData2(adultOrders2);
     }
   }, [sort]);
 
@@ -167,7 +182,7 @@ const AdminOrdersPage = () => {
           )}
           {state === "adult" && (
             <div className="child_orders">
-              {adultOrders?.map((order) => (
+              {data2?.map((order) => (
                 <AdminAdultOrder2
                   key={order._id}
                   id={order._id}
