@@ -64,12 +64,12 @@ const AdminEditChildOrder = () => {
             <AiOutlineClose />
           </div>
         </div>
-        <div className="in">
-          <p>{thisOrder.number}</p>
-          <p>{formattedDate}</p>
-        </div>
 
         <div className="content">
+          <div className="in in2">
+            <p>id заявки: {thisOrder.number}</p>
+            <p>созданa: {formattedDate}</p>
+          </div>
           <div className="in">
             <label>Фамилия и имя конкурсанта</label>
             <Input
@@ -310,9 +310,20 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     justify-content: center;
   }
+
   .in {
     width: 250px;
     margin: 0.5rem;
+  }
+  .in2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dotted var(--main-0);
+    p {
+      color: var(--main-0);
+    }
   }
   label {
     margin-left: 1rem;
