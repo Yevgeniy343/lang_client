@@ -7,8 +7,11 @@ import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
 import _ from "lodash";
 import Button from "../../components-special/Button";
+import moment from "moment";
+import ruLocale from "moment/locale/ru";
 
 const AdminEditChildOrder = () => {
+  moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
   const { currentChildOrder, childOrders, events } = useSelector(
     (store) => store.admin
@@ -48,6 +51,7 @@ const AdminEditChildOrder = () => {
   };
 
   const [values, setValues] = useState(initialState);
+  const formattedDate = moment(thisOrder.createdAt).format("lll");
 
   return (
     <Wrapper>
@@ -60,10 +64,12 @@ const AdminEditChildOrder = () => {
             <AiOutlineClose />
           </div>
         </div>
+        <div className="in">
+          <p>{thisOrder.number}</p>
+          <p>{formattedDate}</p>
+        </div>
+
         <div className="content">
-          <div className="in">
-            <p>{thisOrder.number}</p>
-          </div>
           <div className="in">
             <label>Фамилия и имя конкурсанта</label>
             <Input
