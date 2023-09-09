@@ -62,52 +62,14 @@ const AdminEditChildOrder = () => {
         </div>
         <div className="content">
           <div className="in">
+            <p>{thisOrder.number}</p>
+          </div>
+          <div className="in">
             <label>Фамилия и имя конкурсанта</label>
             <Input
               type="text"
               name="name"
               value={values.name}
-              onChange={changeHandler}
-            />
-          </div>
-
-          <div className="in">
-            <label>Вариант участия</label>
-            <Input
-              type="text"
-              name="tarif"
-              value={values.tarif}
-              onChange={changeHandler}
-            />
-          </div>
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя второго конкурсанта</label>
-              <Input
-                type="text"
-                name="name2"
-                value={values.name2}
-                onChange={changeHandler}
-              />
-            </div>
-          )}
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя третьего конкурсанта</label>
-              <Input
-                type="text"
-                name="name3"
-                value={values.name3}
-                onChange={changeHandler}
-              />
-            </div>
-          )}
-          <div className="in">
-            <label>Количество кураторов</label>
-            <Input
-              type="text"
-              name="curatorsAmount"
-              value={values.curatorsAmount}
               onChange={changeHandler}
             />
           </div>
@@ -135,6 +97,15 @@ const AdminEditChildOrder = () => {
               type="text"
               name="punct"
               value={values.punct}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Наименование учебного заведения</label>
+            <Input
+              type="text"
+              name="punct"
+              value={values.graduate}
               onChange={changeHandler}
             />
           </div>
@@ -175,6 +146,24 @@ const AdminEditChildOrder = () => {
             />
           </div>
           <div className="in">
+            <label>Количество кураторов</label>
+            <Input
+              type="text"
+              name="curatorsAmount"
+              value={values.curatorsAmount}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Информация по кураторам</label>
+            <TextArea
+              type="text"
+              name="cur"
+              value={values.cur}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
             <label>email</label>
             <Input
               type="email"
@@ -192,6 +181,39 @@ const AdminEditChildOrder = () => {
               onChange={changeHandler}
             />
           </div>
+
+          <div className="in">
+            <label>Вариант участия</label>
+            <Input
+              type="text"
+              name="tarif"
+              value={values.tarif}
+              onChange={changeHandler}
+            />
+          </div>
+          {values.tarif !== "Коллективный" && (
+            <div className="in">
+              <label>Фамилия и имя второго конкурсанта</label>
+              <Input
+                type="text"
+                name="name2"
+                value={values.name2}
+                onChange={changeHandler}
+              />
+            </div>
+          )}
+          {values.tarif !== "Коллективный" && (
+            <div className="in">
+              <label>Фамилия и имя третьего конкурсанта</label>
+              <Input
+                type="text"
+                name="name3"
+                value={values.name3}
+                onChange={changeHandler}
+              />
+            </div>
+          )}
+
           <div className="in">
             <label>Дополнительное поле 1</label>
             <Input
@@ -216,15 +238,6 @@ const AdminEditChildOrder = () => {
               type="text"
               name="extra3"
               value={values.extra3}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Информация по кураторам</label>
-            <TextArea
-              type="text"
-              name="cur"
-              value={values.cur}
               onChange={changeHandler}
             />
           </div>
@@ -293,7 +306,7 @@ const Wrapper = styled.div`
   }
   .in {
     width: 250px;
-    margin: 1rem;
+    margin: 0.5rem;
   }
   label {
     margin-left: 1rem;
@@ -304,16 +317,26 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
   }
+  input {
+    height: 40px;
+    padding: 0;
+  }
   @media (min-width: 576px) {
     .in {
       width: 300px;
+      margin: 1rem;
     }
+  }
+  input {
+    height: 50px;
+    padding: 1rem;
   }
   @media (min-width: 768px) {
     .in {
       width: 350px;
     }
   }
+
   @media (min-width: 992px) {
   }
   @media (min-width: 1200px) {
