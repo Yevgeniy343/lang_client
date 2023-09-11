@@ -5,7 +5,6 @@ import Select from "../../components-special/Select";
 import Button from "../../components-special/Button";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import Checkbox from "../../components-special/Checkbox";
 import CheckboxTarif from "../../components-special/CheckboxTarif";
 import PhoneInput from "react-phone-input-2";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";

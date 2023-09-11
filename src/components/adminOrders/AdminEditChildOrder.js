@@ -30,6 +30,7 @@ const AdminEditChildOrder = () => {
 
   const initialState = {
     name: thisOrder?.name,
+    subject: thisOrder?.subject,
     phone: thisOrder?.phone,
     email: thisOrder?.email,
     tarif: thisOrder?.tarif,

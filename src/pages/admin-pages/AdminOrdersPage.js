@@ -29,7 +29,7 @@ const AdminOrdersPage = () => {
 
   useEffect(() => {
     dispatch(getAdultOrders());
-  }, []);
+  }, [dispatch]);
 
   const [state, setState] = useState("child");
   const [sort, setSort] = useState();

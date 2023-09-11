@@ -9,6 +9,7 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
+import { interpolate } from "framer-motion";
 
 const AdminEditAdultOrder = () => {
   moment.locale("ru", ruLocale);
@@ -30,12 +31,26 @@ const AdminEditAdultOrder = () => {
 
   const initialState = {
     name: thisOrder?.name,
+    name2: thisOrder?.name2,
+    name3: thisOrder?.name3,
+    subject: thisOrder?.subject,
+    subject2: thisOrder?.subject2,
+    subject3: thisOrder?.subject3,
+    job: thisOrder?.job,
+    job2: thisOrder?.job2,
+    job3: thisOrder?.job3,
+    job_title: thisOrder?.job_title,
+    job_title2: thisOrder?.job_title2,
+    job_title3: thisOrder?.job_title3,
+    internship: thisOrder?.internship,
+    internship2: thisOrder?.internship2,
+    internship3: thisOrder?.internship3,
     phone: thisOrder?.phone,
     email: thisOrder?.email,
     tarif: thisOrder?.tarif,
-    name2: thisOrder?.name2,
-    name3: thisOrder?.name3,
     punct: thisOrder?.punct,
+    punct2: thisOrder?.punct2,
+    punct3: thisOrder?.punct3,
     graduate: thisOrder?.graduate,
     language: thisOrder?.language,
     language2: thisOrder?.language2,
@@ -45,7 +60,6 @@ const AdminEditAdultOrder = () => {
     extra3: thisOrder?.extra3,
     cur: thisOrder?.cur,
     pert: thisOrder?.part,
-    age: thisOrder?.age,
     curatorsAmount: thisOrder?.curatorsAmount,
     nomPul: thisOrder?.nomPul,
   };
@@ -79,21 +93,23 @@ const AdminEditAdultOrder = () => {
               onChange={changeHandler}
             />
           </div>
+
+          {/* ______________________________________________________ */}
           <div className="in">
-            <label>Возрастная категория</label>
+            <label>Занимаемая должность</label>
             <Input
               type="text"
-              name="age"
-              value={values.age}
+              name="job_title"
+              value={values.job_title}
               onChange={changeHandler}
             />
           </div>
           <div className="in">
-            <label>Cубъект Российской Федерации</label>
+            <label>Место работы</label>
             <Input
               type="text"
-              name="subject"
-              value={values.subject}
+              name="job"
+              value={values.job}
               onChange={changeHandler}
             />
           </div>
@@ -106,6 +122,135 @@ const AdminEditAdultOrder = () => {
               onChange={changeHandler}
             />
           </div>
+
+          <div className="in">
+            <label>Cубъект Российской Федерации</label>
+            <Input
+              type="text"
+              name="subject"
+              value={values.subject}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Стаж педагогичческой работы</label>
+            <Input
+              type="text"
+              name="internship"
+              value={values.internship}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Фамилия имя отчество второго участника</label>
+            <Input
+              type="text"
+              name="name2"
+              value={values.name2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Занимаемая должность второго участника</label>
+            <Input
+              type="text"
+              name="job_title2"
+              value={values.job_title2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Место работы второго участника</label>
+            <Input
+              type="text"
+              name="job2"
+              value={values.job2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Населенный пункт второго участника</label>
+            <Input
+              type="text"
+              name="punct2"
+              value={values.punct2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Cубъект Российской Федерации второго участника</label>
+            <Input
+              type="text"
+              name="subject"
+              value={values.subject2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Стаж педагогической работы второго участника</label>
+            <Input
+              type="text"
+              name="internship2"
+              value={values.internship2}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Фамилия имя отчество третьего участника</label>
+            <Input
+              type="text"
+              name="name3"
+              value={values.name3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Занимаемая должность третьего участника</label>
+            <Input
+              type="text"
+              name="job_title3"
+              value={values.job_title3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Место работы третьего участника</label>
+            <Input
+              type="text"
+              name="job3"
+              value={values.job3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Населенный пункт третьего участника</label>
+            <Input
+              type="text"
+              name="punct3"
+              value={values.punct3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Cубъект Российской Федерации третьего участника</label>
+            <Input
+              type="text"
+              name="subject"
+              value={values.subject3}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="in">
+            <label>Стаж педагогической работы третьего участника</label>
+            <Input
+              type="text"
+              name="internship2"
+              value={values.internship3}
+              onChange={changeHandler}
+            />
+          </div>
+          {/* ______________________________________________________ */}
+
           <div className="in">
             <label>Наименование учебного заведения</label>
             <Input
@@ -151,6 +296,7 @@ const AdminEditAdultOrder = () => {
               onChange={changeHandler}
             />
           </div>
+
           <div className="in">
             <label>Количество кураторов</label>
             <Input
@@ -197,28 +343,6 @@ const AdminEditAdultOrder = () => {
               onChange={changeHandler}
             />
           </div>
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя второго конкурсанта</label>
-              <Input
-                type="text"
-                name="name2"
-                value={values.name2}
-                onChange={changeHandler}
-              />
-            </div>
-          )}
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя третьего конкурсанта</label>
-              <Input
-                type="text"
-                name="name3"
-                value={values.name3}
-                onChange={changeHandler}
-              />
-            </div>
-          )}
 
           <div className="in">
             <label>Дополнительное поле 1</label>
