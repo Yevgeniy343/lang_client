@@ -9,6 +9,8 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
+import { editChildrenOrder } from "../../features/adminSlice";
+import toast from "react-hot-toast";
 
 const AdminEditChildOrder = () => {
   moment.locale("ru", ruLocale);
@@ -25,7 +27,6 @@ const AdminEditChildOrder = () => {
     (order) => order._id === currentChildOrder
   );
 
-  console.log(thisOrder);
   // const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
 
   const initialState = {
@@ -54,9 +55,38 @@ const AdminEditChildOrder = () => {
   const [values, setValues] = useState(initialState);
   const formattedDate = moment(thisOrder.createdAt).format("lll");
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      editChildrenOrder({
+        orderId: currentChildOrder,
+        name: values.name,
+        name2: values.name2,
+        name3: values.name3,
+        tarif: values.tarif,
+        part: values.part,
+        curatorsAmount: values.curatorsAmount,
+        cur: values.cur,
+        age: values.age,
+        subject: values.subject,
+        punct: values.punct,
+        graduate: values.graduate,
+        nomPul: values.nomPul,
+        language: values.language,
+        language2: values.language2,
+        link: values.link,
+        email: values.email,
+        phone: values.phone,
+        extra1: values.extra1,
+        extra2: values.extra2,
+        extra3: values.extra3,
+      })
+    );
+  };
+
   return (
     <Wrapper>
-      <div className="modal">
+      <form className="modal" onSubmit={onSubmit}>
         <div className="close">
           <div
             className="close"
@@ -250,9 +280,9 @@ const AdminEditChildOrder = () => {
           </div>
         </div>
         <div className="actions">
-          <Button text="Сохранить" disabled={true} />
+          <Button text="Сохранить" type="submit" />
         </div>
-      </div>
+      </form>
     </Wrapper>
   );
 };

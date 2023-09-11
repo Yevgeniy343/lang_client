@@ -20,8 +20,6 @@ const AdminOrdersPage = () => {
   const { childOrders, adultOrders, isChildOrder, isAdultOrder } = useSelector(
     (store) => store.admin
   );
-  console.log("childOrdesr", childOrders);
-  console.log("adultOrdesr", adultOrders);
 
   useEffect(() => {
     dispatch(getChildOrders());

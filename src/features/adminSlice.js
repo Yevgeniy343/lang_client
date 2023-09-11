@@ -11,6 +11,7 @@ import {
   deleteNomThunk,
   getChildOrdersThunk,
   getAdultOrdersThunk,
+  editChildrenOrderThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -113,6 +114,13 @@ export const getAdultOrders = createAsyncThunk(
   "admin/getAdultOrders",
   async (info, thunkAPI) => {
     return getAdultOrdersThunk(`/admin/getAdultOrders/`, info, thunkAPI);
+  }
+);
+
+export const editChildrenOrder = createAsyncThunk(
+  "admin/editChildrenOrder",
+  async (info, thunkAPI) => {
+    return editChildrenOrderThunk(`/admin/editChildrenOrder/`, info, thunkAPI);
   }
 );
 
@@ -310,9 +318,22 @@ const adminSlice = createSlice({
     builder.addCase(getAdultOrders.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.adultOrders = payload;
-      console.log(payload);
     });
     builder.addCase(getAdultOrders.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // editChildrenOrder
+    builder.addCase(editChildrenOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success("Изменения сохранены !");
+      // state.adultOrders = payload;
+    });
+    builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
