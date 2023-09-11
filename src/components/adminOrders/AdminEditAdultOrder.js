@@ -9,7 +9,7 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
-import { interpolate } from "framer-motion";
+import { editAdultOrder } from "../../features/adminSlice";
 
 const AdminEditAdultOrder = () => {
   moment.locale("ru", ruLocale);
@@ -67,9 +67,50 @@ const AdminEditAdultOrder = () => {
   const [values, setValues] = useState(initialState);
   const formattedDate = moment(thisOrder.createdAt).format("lll");
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(
+      editAdultOrder({
+        orderId: currentAdultOrder,
+        name: values.name,
+        name2: values.name2,
+        name3: values.name3,
+        tarif: values.tarif,
+        part: values.part,
+        curatorsAmount: values.curatorsAmount,
+        cur: values.cur,
+        subject: values.subject,
+        subject2: values.subject2,
+        subject3: values.subject3,
+        punct: values.punct,
+        punct2: values.punct2,
+        punct3: values.punct3,
+        job: values.job,
+        job2: values.job2,
+        job3: values.job3,
+        job_title: values.job_title,
+        job_title2: values.job_title2,
+        job_title3: values.job_title3,
+        internship: values.internship,
+        internship2: values.internship2,
+        internship3: values.internship3,
+        graduate: values.graduate,
+        nomPul: values.nomPul,
+        language: values.language,
+        language2: values.language2,
+        link: values.link,
+        email: values.email,
+        phone: values.phone,
+        extra1: values.extra1,
+        extra2: values.extra2,
+        extra3: values.extra3,
+      })
+    );
+  };
+
   return (
     <Wrapper>
-      <div className="modal">
+      <form className="modal" onSubmit={onSubmit}>
         <div className="close">
           <div
             className="close"
@@ -235,7 +276,7 @@ const AdminEditAdultOrder = () => {
             <label>Cубъект Российской Федерации третьего участника</label>
             <Input
               type="text"
-              name="subject"
+              name="subject3"
               value={values.subject3}
               onChange={changeHandler}
             />
@@ -244,7 +285,7 @@ const AdminEditAdultOrder = () => {
             <label>Стаж педагогической работы третьего участника</label>
             <Input
               type="text"
-              name="internship2"
+              name="internship3"
               value={values.internship3}
               onChange={changeHandler}
             />
@@ -255,7 +296,7 @@ const AdminEditAdultOrder = () => {
             <label>Наименование учебного заведения</label>
             <Input
               type="text"
-              name="punct"
+              name="graduate"
               value={values.graduate}
               onChange={changeHandler}
             />
@@ -373,9 +414,9 @@ const AdminEditAdultOrder = () => {
           </div>
         </div>
         <div className="actions">
-          <Button text="Сохранить" disabled={true} />
+          <Button text="Сохранить" type="submit" />
         </div>
-      </div>
+      </form>
     </Wrapper>
   );
 };
