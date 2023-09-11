@@ -5,6 +5,10 @@ import _ from "lodash";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import moment from "moment";
+import {
+  isAdultOrderHandler,
+  currentAdultOrderHandler,
+} from "../features/adminSlice";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -21,11 +25,18 @@ const AdminAdultOrder2 = ({
 }) => {
   const { events } = useSelector((store) => store.admin);
 
+  const dispatch = useDispatch();
+
+  const modalHandler = () => {
+    dispatch(isAdultOrderHandler(true));
+    dispatch(currentAdultOrderHandler(id));
+  };
+
   const thisEvent = events?.find((ev) => ev._id === eventId);
 
   return (
     <Wrapper>
-      <div className="table">
+      <div className="table" onClick={modalHandler}>
         <p className="value">{number}</p>
         <p className="value">{name}</p>
         <p className="value">{subject}</p>

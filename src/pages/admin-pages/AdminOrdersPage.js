@@ -13,10 +13,11 @@ import AdminAdultOrder2 from "../../components/AdminAdultOrder2";
 import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
 import _ from "lodash";
 import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrder";
+import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrder";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
-  const { childOrders, adultOrders, isChildOrder } = useSelector(
+  const { childOrders, adultOrders, isChildOrder, isAdultOrder } = useSelector(
     (store) => store.admin
   );
   console.log("childOrdesr", childOrders);
@@ -201,6 +202,7 @@ const AdminOrdersPage = () => {
         </div>
       </Wrapper>
       {isChildOrder && <AdminEditChildOrder />}
+      {isAdultOrder && <AdminEditAdultOrder />}
     </>
   );
 };
