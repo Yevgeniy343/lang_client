@@ -34,6 +34,13 @@ export const loginJury = createAsyncThunk(
   }
 );
 
+export const remindJury = createAsyncThunk(
+  "user/remindJury",
+  async (jury, thunkAPI) => {
+    return remindJuryThunk(`/jury-auth/remind/`, jury, thunkAPI);
+  }
+);
+
 const jurySlice = createSlice({
   name: "jury",
   initialState,
@@ -78,6 +85,19 @@ const jurySlice = createSlice({
       toast.success(`Добро пожаловать  ${jury.name} !`);
     });
     builder.addCase(loginJury.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // remind
+    builder.addCase(remindJury.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(remindJury.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(payload.msg);
+    });
+    builder.addCase(remindJury.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

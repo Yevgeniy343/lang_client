@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { registerJury, loginJury } from "../../features/jury/jurySlice";
+import {
+  registerJury,
+  loginJury,
+  remindJury,
+} from "../../features/jury/jurySlice";
 import toast from "react-hot-toast";
 import Input from "../../components-special/Input";
 import InputPass from "../../components-special/InputPass";
@@ -59,7 +63,7 @@ const JuryRegister = () => {
       toast.error("Укажите Email");
       return;
     }
-    // dispatch(remindUser({ remind_email: remind }));
+    dispatch(remindJury({ remind_email: remind }));
   };
 
   return (

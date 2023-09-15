@@ -50,7 +50,6 @@ export const loginUser = createAsyncThunk(
 export const remindUser = createAsyncThunk(
   "user/remindUser",
   async (user, thunkAPI) => {
-    console.log(user);
     return remindUserThunk(`/auth/remind/`, user, thunkAPI);
   }
 );
