@@ -26,6 +26,7 @@ const EventItem = ({
   tarif_2a,
   tarif_3a,
   diplom,
+  index,
 }) => {
   const dispatch = useDispatch();
 

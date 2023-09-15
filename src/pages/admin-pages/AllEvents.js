@@ -47,6 +47,7 @@ const AllEvents = () => {
               tarif_2a={e.tarif_2a}
               tarif_3a={e.tarif_3a}
               diplom={e.diplom}
+              index={e.index}
             />
           ))}
         </Wrapper>

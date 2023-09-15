@@ -42,3 +42,32 @@ export const getAdminFromLocalStorage = () => {
   const admin = result ? JSON.parse(result) : null;
   return admin;
 };
+
+// jujry
+
+export const addJuryToLocalStorage = (jury) => {
+  localStorage.setItem("jury", JSON.stringify(jury));
+};
+
+export const removeJuryFromLocalStorage = () => {
+  localStorage.removeItem("jury");
+};
+
+export const getJuryFromLocalStorage = () => {
+  const result = localStorage.getItem("jury");
+  const jury = result ? JSON.parse(result) : null;
+  return jury;
+};
+
+export const addTokenJuryToLocalStorage = (tokenJ) => {
+  localStorage.setItem("tokenJ", tokenJ);
+};
+
+export const removeTokenJuryFromLocalStorage = () => {
+  localStorage.removeItem("tokenJ");
+};
+
+export const getTokenJuryFromLocalStorage = () => {
+  const tokenJ = localStorage.getItem("tokenJ");
+  return tokenJ;
+};

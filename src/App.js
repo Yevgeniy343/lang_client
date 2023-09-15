@@ -15,6 +15,7 @@ import AllUsers from "./pages/admin-pages/AllUsers";
 import Nominations from "./pages/admin-pages/Nominations";
 import AdminOrdersPage from "./pages/admin-pages/AdminOrdersPage";
 import Register2 from "./pages/Register2";
+import JuryRegister from "./pages/jury-pages/JuryRegister";
 
 function App() {
   return (
@@ -102,6 +103,7 @@ function App() {
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/register/:ref" element={<Register2 />} />
+          <Route path="/jury" element={<JuryRegister />} />
         </Routes>
         <Toaster
           position={"top-right"}

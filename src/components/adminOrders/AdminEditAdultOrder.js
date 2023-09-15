@@ -26,7 +26,6 @@ const AdminEditAdultOrder = () => {
     (order) => order._id === currentAdultOrder
   );
 
-  console.log(thisOrder);
   // const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
 
   const initialState = {

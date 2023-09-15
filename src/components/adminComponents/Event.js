@@ -9,11 +9,13 @@ import {
   getNom,
   childNominationHandlerClean,
   adultNominationHandlerClean,
+  getEvents,
 } from "../../features/adminSlice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import CheckboxChild from "../../components-special/Checkbox-child";
 import CheckboxAdult from "../../components-special/Checkbox-adult";
+// import _ from "lodash";
 
 const initialState = {
   name: "",
@@ -27,13 +29,20 @@ const Event = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+
+  useEffect(() => {
     dispatch(childNominationHandlerClean());
     dispatch(adultNominationHandlerClean());
   }, []);
 
-  const { nominations, childNominations, adultNominations } = useSelector(
-    (store) => store.admin
-  );
+  const { nominations, childNominations, adultNominations, events } =
+    useSelector((store) => store.admin);
+
+  // const maxIndex = _.maxBy(events, "index");
+  // console.log(maxIndex);
+
   const [file, setFile] = useState();
   const [image, setImage] = useState();
   const [values, setValues] = useState(initialState);
@@ -108,6 +117,7 @@ const Event = () => {
   formData.append("tarif_3a", values.tarif_3a);
   formData.append("supervisor", values.supervisor);
   formData.append("diplom", values.diplom);
+  // formData.append("index", maxIndex.index);
 
   const onSubmit = (e) => {
     e.preventDefault();

@@ -38,7 +38,6 @@ const Wrapper = styled.div`
     max-width: 600px;
     margin: 2rem;
     padding: 2rem;
-    /* width: 300px; */
     .event-header {
       display: flex;
       align-items: center;
