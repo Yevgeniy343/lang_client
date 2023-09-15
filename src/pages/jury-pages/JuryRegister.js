@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { registerJury } from "../../features/jury/jurySlice";
+import { registerJury, loginJury } from "../../features/jury/jurySlice";
 import toast from "react-hot-toast";
 import Input from "../../components-special/Input";
 import InputPass from "../../components-special/InputPass";
@@ -37,7 +37,7 @@ const JuryRegister = () => {
       return;
     }
     if (isMember) {
-      //   dispatch(loginUser({ email: email, password: password }));
+      dispatch(loginJury({ email: email, password: password }));
       return;
     }
     dispatch(registerJury({ name, email, password }));
