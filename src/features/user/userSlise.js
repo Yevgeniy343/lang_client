@@ -86,7 +86,6 @@ export const createChildOrder = createAsyncThunk(
 export const createAdultOrder = createAsyncThunk(
   "user/createadultorder",
   async (info, thunkAPI) => {
-    console.log(info);
     return createAdultOrderThunk(`/user/createAdultOrder/`, info, thunkAPI);
   }
 );
@@ -121,11 +120,10 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // registers
     builder.addCase(registerUser.pending, (state) => {
       state.isLoading = true;
     });
-
-    // registers
     builder.addCase(registerUser.fulfilled, (state, { payload }) => {
       const { user, token } = payload;
       state.isLoading = false;

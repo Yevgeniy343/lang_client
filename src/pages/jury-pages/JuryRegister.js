@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {} from "../../features/jury/jurySlice";
+import { registerJury } from "../../features/jury/jurySlice";
 import toast from "react-hot-toast";
 import Input from "../../components-special/Input";
 import InputPass from "../../components-special/InputPass";
@@ -40,7 +40,7 @@ const JuryRegister = () => {
       //   dispatch(loginUser({ email: email, password: password }));
       return;
     }
-    // dispatch(registerUser({ name, email, password }));
+    dispatch(registerJury({ name, email, password }));
   };
 
   const toggleMemberHandler = () => {
@@ -49,7 +49,7 @@ const JuryRegister = () => {
 
   useEffect(() => {
     if (jury) {
-      navigate("/personal-area");
+      navigate("/jury-area");
     }
   }, [jury]);
 

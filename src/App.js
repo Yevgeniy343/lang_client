@@ -6,6 +6,7 @@ import {
   ProtectedRoute,
 } from "./pages/index-pages";
 import ProtectedAdmin from "./pages/ProtectedAdmin";
+import ProtectedJury from "./pages/ProtectedJury";
 import AdminLogin from "./pages/admin-pages/AdminLogin";
 import AdminPage from "./pages/admin-pages/AdminPage";
 import { Toaster } from "react-hot-toast";
@@ -16,6 +17,7 @@ import Nominations from "./pages/admin-pages/Nominations";
 import AdminOrdersPage from "./pages/admin-pages/AdminOrdersPage";
 import Register2 from "./pages/Register2";
 import JuryRegister from "./pages/jury-pages/JuryRegister";
+import JuryArea from "./pages/jury-pages/JuryArea";
 
 function App() {
   return (
@@ -97,6 +99,17 @@ function App() {
             }
           >
             <Route path="/orders" element={<AdminOrdersPage />} />
+          </Route>
+
+          <Route
+            path="/jury-area"
+            element={
+              <ProtectedJury>
+                <JuryArea />
+              </ProtectedJury>
+            }
+          >
+            <Route path="/jury-area" element={<JuryArea />} />
           </Route>
 
           {/* <Route path="/landing" element={<Landing />} /> */}
