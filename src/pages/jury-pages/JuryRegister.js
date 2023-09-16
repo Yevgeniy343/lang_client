@@ -20,6 +20,7 @@ import {
   subjects,
 } from "../../data/data-order";
 import Select from "../../components-special/Select";
+import PhoneInput from "react-phone-input-2";
 
 const initialState = {
   name: "",
@@ -31,12 +32,14 @@ const initialState = {
   other2: "",
   oy: "",
   punct: "",
+  phone: "",
 };
 
 const JuryRegister = () => {
   const { jury, isLoading } = useSelector((store) => store.jury);
   const [values, setValues] = useState(initialState);
   const [remind, setRemind] = useState(false);
+  const [state, setState] = useState("");
   const [sp, setSp] = useState();
   console.log(sp);
   const [lang, setLang] = useState();
@@ -45,6 +48,7 @@ const JuryRegister = () => {
   console.log(nomins);
   const [subj, setSubj] = useState();
   console.log(subj);
+  console.log(state);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -196,6 +200,16 @@ const JuryRegister = () => {
                     onChange={changeHandler}
                   />
                 </div>
+                <div className="in2">
+                  <label>Номер телефона для звонков</label>
+                  <PhoneInput
+                    className="i"
+                    value={initialState.phone}
+                    inputProps={{ name: "phone" }}
+                    country="ru"
+                    onChange={(phone) => setState({ phone })}
+                  />
+                </div>
               </div>
             )}
 
@@ -337,6 +351,12 @@ const Wrapper = styled.main`
     flex-direction: column;
     align-items: flex-start;
   }
+  .in2 {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   label {
     font-size: 0.9rem;
     margin-left: 1rem;
@@ -344,6 +364,14 @@ const Wrapper = styled.main`
   }
   span {
     color: var(--clr-red-dark);
+  }
+  .i {
+    display: flex;
+  }
+  .i > input {
+    background: var(--gray-0);
+    border: none;
+    height: 50px;
   }
   @media (min-width: 992px) {
   }
