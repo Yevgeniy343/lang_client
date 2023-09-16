@@ -2,11 +2,18 @@ import styled from "styled-components";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "../../components-special/Button";
+import NavBar from "../../components/juryNavigations/NavBar";
+import SideBar from "../../components/juryNavigations/SideBar";
 
 const JuryArea = () => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
-  return <Wrapper>jury</Wrapper>;
+  return (
+    <Wrapper>
+      <NavBar />
+      <SideBar />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

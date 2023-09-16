@@ -18,6 +18,7 @@ const initialState = {
   isLoading: false,
   jury: getJuryFromLocalStorage(),
   tokenJ: getTokenJuryFromLocalStorage(),
+  isSidebarOpen: false,
 };
 
 export const registerJury = createAsyncThunk(
@@ -44,12 +45,18 @@ export const remindJury = createAsyncThunk(
 const jurySlice = createSlice({
   name: "jury",
   initialState,
-  reduserc: {
+  reducers: {
     logOutJury: (state) => {
       state.jury = null;
       state.tokenJ = "";
       removeJuryFromLocalStorage();
       removeTokenJuryFromLocalStorage();
+    },
+    sidebarCloseHandler: (state) => {
+      state.isSidebarOpen = false;
+    },
+    sidebarOpenHandler: (state) => {
+      state.isSidebarOpen = true;
     },
   },
   extraReducers: (builder) => {
@@ -104,5 +111,6 @@ const jurySlice = createSlice({
   },
 });
 
-export const { logOutJury } = jurySlice.actions;
+export const { logOutJury, sidebarCloseHandler, sidebarOpenHandler } =
+  jurySlice.actions;
 export default jurySlice.reducer;
