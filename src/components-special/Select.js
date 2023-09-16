@@ -134,6 +134,9 @@ const Wrapper = styled.div`
   .menu2 {
     width: 265px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     ::-webkit-scrollbar {
       width: 5px;
     }

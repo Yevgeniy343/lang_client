@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const subjects = [
   { id: 1, label: "Республика Адыгея" },
   { id: 2, label: "Республика Алтай" },
@@ -77,4 +79,25 @@ export const curators = [
   { id: 1, label: "1" },
   { id: 2, label: "2" },
   { id: 3, label: "3" },
+];
+
+export const specialization = [
+  { id: nanoid(), sp: "Учитель родного языка" },
+  { id: nanoid(), sp: "Учитель русского языка и литературы" },
+  { id: nanoid(), sp: "Педагог изобразительного искусства и ДПИ" },
+  { id: nanoid(), sp: "Педагог по вокальному и инструментальному искусству" },
+  { id: nanoid(), sp: "Педагог хореографического искусства" },
+  { id: nanoid(), sp: "Воспитатель, старший воспитатель дошкольных ОУ" },
+  { id: nanoid(), sp: "Фотограф" },
+  { id: nanoid(), sp: "Другое" },
+];
+
+export const nom = [
+  { id: nanoid(), nomination: "Любые на родном языке" },
+  { id: nanoid(), nomination: "ИЗО" },
+  { id: nanoid(), nomination: "ДПИ" },
+  { id: nanoid(), nomination: "Вокал" },
+  { id: nanoid(), nomination: "Хореография" },
+  { id: nanoid(), nomination: "Фотография" },
+  { id: nanoid(), nomination: "Другое" },
 ];

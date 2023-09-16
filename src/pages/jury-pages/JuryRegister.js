@@ -12,6 +12,14 @@ import Input from "../../components-special/Input";
 import InputPass from "../../components-special/InputPass";
 import Button from "../../components-special/Button";
 import Loading from "../../components/Loading";
+import CheckboxSp from "../../components-special/CheckboxSp";
+import {
+  specialization,
+  languages,
+  nom,
+  subjects,
+} from "../../data/data-order";
+import Select from "../../components-special/Select";
 
 const initialState = {
   name: "",
@@ -19,12 +27,24 @@ const initialState = {
   password: "",
   isMember: true,
   remind: "",
+  other: "",
+  other2: "",
+  oy: "",
+  punct: "",
 };
 
 const JuryRegister = () => {
   const { jury, isLoading } = useSelector((store) => store.jury);
   const [values, setValues] = useState(initialState);
   const [remind, setRemind] = useState(false);
+  const [sp, setSp] = useState();
+  console.log(sp);
+  const [lang, setLang] = useState();
+  console.log(lang);
+  const [nomins, setNom] = useState();
+  console.log(nomins);
+  const [subj, setSubj] = useState();
+  console.log(subj);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,6 +86,22 @@ const JuryRegister = () => {
     dispatch(remindJury({ remind_email: remind }));
   };
 
+  const spHandler = (d) => {
+    setSp(d);
+  };
+
+  const languageHandler = (d2) => {
+    setLang(d2);
+  };
+
+  const nomHandler = (d3) => {
+    setNom(d3);
+  };
+
+  const subjectHandler = (d3) => {
+    setSubj(d3);
+  };
+
   return (
     <div>
       {isLoading && <Loading />}
@@ -77,14 +113,92 @@ const JuryRegister = () => {
           </h3>
           <div className="input-content">
             {!values.isMember && (
-              <Input
-                placeholder="Name"
-                type="text"
-                name="name"
-                value={values.name}
-                onChange={changeHandler}
-              />
+              <div>
+                <Input
+                  placeholder="ФИО"
+                  type="text"
+                  name="name"
+                  value={values.name}
+                  onChange={changeHandler}
+                />
+                {specialization.map((s) => (
+                  <CheckboxSp
+                    key={s.id}
+                    label={s.sp}
+                    indicator={sp}
+                    passState={spHandler}
+                  />
+                ))}
+                <div className="in">
+                  {sp === "Другое" && (
+                    <Input
+                      placeholder="Другое"
+                      type="text"
+                      name="other"
+                      value={values.other}
+                      onChange={changeHandler}
+                    />
+                  )}
+                </div>
+                {sp === "Учитель родного языка" && (
+                  <div className="in">
+                    <label>
+                      Выберите родной язык, учителем которого Вы являетесь
+                    </label>
+                    <Select passState={languageHandler} data={languages} />
+                  </div>
+                )}
+                <div className="in">
+                  <label>
+                    <span>*</span>
+                    Какие номинации Вы компетентны жюрировать
+                  </label>
+                  {nom.map((n) => (
+                    <CheckboxSp
+                      key={n.id}
+                      label={n.nomination}
+                      indicator={nomins}
+                      passState={nomHandler}
+                    />
+                  ))}
+                </div>
+                {nomins === "Другое" && (
+                  <div className="in">
+                    <Input
+                      placeholder="Другое"
+                      type="text"
+                      name="other2"
+                      value={values.other2}
+                      onChange={changeHandler}
+                    />
+                  </div>
+                )}
+                <div className="in">
+                  <Input
+                    placeholder="Название ОУ, должность"
+                    type="text"
+                    name="oy"
+                    value={values.oy}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Регион</label>
+                  <Select passState={subjectHandler} data={subjects} />
+                </div>
+                <div className="in">
+                  <label>Населенный пункт</label>
+                  <Input
+                    placeholder="Насеоенный пункт"
+                    type="text"
+                    name="punct"
+                    value={values.punct}
+                    onChange={changeHandler}
+                  />
+                </div>
+              </div>
             )}
+
             <Input
               placeholder="Email"
               type="email"
@@ -93,7 +207,7 @@ const JuryRegister = () => {
               onChange={changeHandler}
             />
             <InputPass
-              placeholder="Password"
+              placeholder="Пароль"
               type="password"
               name="password"
               value={values.password}
@@ -217,7 +331,20 @@ const Wrapper = styled.main`
     /* margin: 1rem; */
     color: var(--clr-grey-4);
   }
-
+  .in {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  label {
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    color: var(--clr-grey-5);
+  }
+  span {
+    color: var(--clr-red-dark);
+  }
   @media (min-width: 992px) {
   }
 `;
