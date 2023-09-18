@@ -804,6 +804,7 @@ const ChildrenOrder = ({ passCalculate }) => {
           <Button text="Отправить заявку" disabled={!agreement || !condition} />
         </div>
       </form>
+      <div className="pay"></div>
     </Wrapper>
   );
 };
