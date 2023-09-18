@@ -12,11 +12,16 @@ import ruLocale from "moment/locale/ru";
 import { editAdultOrder } from "../../features/adminSlice";
 import FileDownload from "js-file-download";
 import Axios from "axios";
+import toast from "react-hot-toast";
 
 const { REACT_APP_URL_API } = process.env;
 
 const AdminEditAdultOrder = () => {
   const [state, setState] = useState();
+
+  if (state === "Одобрить") {
+    toast.success("Заявка одобрена");
+  }
 
   moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
@@ -60,13 +65,14 @@ const AdminEditAdultOrder = () => {
     language: thisOrder?.language,
     language2: thisOrder?.language2,
     link: thisOrder?.link,
-    extra1: thisOrder?.extra,
+    extra1: thisOrder?.extra1,
     extra2: thisOrder?.extra2,
     extra3: thisOrder?.extra3,
     cur: thisOrder?.cur,
     pert: thisOrder?.part,
     curatorsAmount: thisOrder?.curatorsAmount,
     nomPul: thisOrder?.nomPul,
+    decline: "",
   };
 
   const [values, setValues] = useState(initialState);
@@ -111,6 +117,7 @@ const AdminEditAdultOrder = () => {
         extra3: values.extra3,
       })
     );
+    setState("");
   };
 
   const downloadHandler = (e) => {
@@ -123,6 +130,24 @@ const AdminEditAdultOrder = () => {
       FileDownload(res.data, initialState.file);
     });
   };
+
+  const declineHandler = (e) => {
+    e.preventDefault();
+    toast.success("Заявка отклонена !");
+    setTimeout(() => {
+      dispatch(isAdultOrderHandler(false));
+    }, 1000);
+  };
+
+  const okHandler = () => {
+    setState("Одобрена");
+    toast.success("Заявка одобрена !");
+
+    setTimeout(() => {
+      dispatch(isAdultOrderHandler(false));
+    }, 1000);
+  };
+
   return (
     <Wrapper>
       <div className="modal">
@@ -136,7 +161,8 @@ const AdminEditAdultOrder = () => {
         </div>
 
         <div className="panel">
-          <Button text="Одобрить" onClick={() => setState("Одобрить")} />
+          <Button text="К заявке" onClick={() => setState("")} />
+          <Button text="Одобрить" onClick={okHandler} />
           {/* ______________________________________________________ */}
 
           <Button
@@ -148,8 +174,26 @@ const AdminEditAdultOrder = () => {
             onClick={() => setState("Редактировать")}
           />
         </div>
-        {state === "Одобрить" && (
-          <div>
+
+        {state === "Отказать в одобрении" && (
+          <div className="decline">
+            <label>
+              <span>*</span>
+              Причина отказа
+            </label>
+            <TextArea
+              type="text"
+              name="decline"
+              value={values.decline}
+              onChange={changeHandler}
+            />
+            <div className="actions">
+              <Button text="Отказать" onClick={declineHandler} />
+            </div>
+          </div>
+        )}
+        {state !== "Отказать в одобрении" && state !== "Редактировать" && (
+          <div className="info">
             <div className="element">
               <p className="key">Фамилия и имя конкурсанта</p>
               <p className="value">{initialState?.name}</p>
@@ -573,7 +617,7 @@ const AdminEditAdultOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>Дополнительное поле 1</label>
+                  <label>Дополнительное поле 2</label>
                   <Input
                     type="text"
                     name="extra2"
@@ -582,7 +626,7 @@ const AdminEditAdultOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>Дополнительное поле 1</label>
+                  <label>Дополнительное поле 3</label>
                   <Input
                     type="text"
                     name="extra3"
@@ -642,6 +686,9 @@ const Wrapper = styled.div`
     margin: 1rem;
     display: flex;
     justify-content: center;
+  }
+  .info {
+    margin: 1rem;
   }
   .modal {
     background-color: white;
@@ -710,6 +757,9 @@ const Wrapper = styled.div`
   input {
     height: 40px;
     padding: 0;
+  }
+  span {
+    color: var(--clr-red-dark);
   }
   @media (min-width: 576px) {
     .in {
