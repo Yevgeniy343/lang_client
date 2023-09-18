@@ -10,6 +10,10 @@ import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
 import { editAdultOrder } from "../../features/adminSlice";
+import FileDownload from "js-file-download";
+import Axios from "axios";
+
+const { REACT_APP_URL_API } = process.env;
 
 const AdminEditAdultOrder = () => {
   const [state, setState] = useState();
@@ -109,13 +113,32 @@ const AdminEditAdultOrder = () => {
     );
   };
 
+  const downloadHandler = (e) => {
+    e.preventDefault();
+    Axios({
+      url: `${REACT_APP_URL_API}/${initialState.file}`,
+      method: "GET",
+      responseType: "blob",
+    }).then((res) => {
+      FileDownload(res.data, initialState.file);
+    });
+  };
   return (
     <Wrapper>
       <div className="modal">
-        {/* ______________________________________________________ */}
+        <div className="close">
+          <div
+            className="close"
+            onClick={() => dispatch(isAdultOrderHandler(false))}
+          >
+            <AiOutlineClose />
+          </div>
+        </div>
 
         <div className="panel">
-          <Button text="Одобрить" onClick={() => setState("Обобрить")} />
+          <Button text="Одобрить" onClick={() => setState("Одобрить")} />
+          {/* ______________________________________________________ */}
+
           <Button
             text="Отказать в одобрении"
             onClick={() => setState("Отказать в одобрении")}
@@ -125,315 +148,455 @@ const AdminEditAdultOrder = () => {
             onClick={() => setState("Редактировать")}
           />
         </div>
-
-        {/* ______________________________________________________ */}
-        {state === "Редактировать" && (
-          <form onSubmit={onSubmit}>
-            <div className="close">
-              <div
-                className="close"
-                onClick={() => dispatch(isAdultOrderHandler(false))}
-              >
-                <AiOutlineClose />
-              </div>
+        {state === "Одобрить" && (
+          <div>
+            <div className="element">
+              <p className="key">Фамилия и имя конкурсанта</p>
+              <p className="value">{initialState?.name}</p>
             </div>
-
-            <div className="content">
-              <div className="in in2">
-                <p>id заявки: {thisOrder.number}</p>
-                <p>созданa: {formattedDate}</p>
-              </div>
-              <div className="in">
-                <label>Фамилия и имя конкурсанта</label>
-                <Input
-                  type="text"
-                  name="name"
-                  value={values.name}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Занимаемая должность</label>
-                <Input
-                  type="text"
-                  name="job_title"
-                  value={values.job_title}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Место работы</label>
-                <Input
-                  type="text"
-                  name="job"
-                  value={values.job}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Населенный пункт</label>
-                <Input
-                  type="text"
-                  name="punct"
-                  value={values.punct}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Cубъект Российской Федерации</label>
-                <Input
-                  type="text"
-                  name="subject"
-                  value={values.subject}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Стаж педагогичческой работы</label>
-                <Input
-                  type="text"
-                  name="internship"
-                  value={values.internship}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Фамилия имя отчество второго участника</label>
-                <Input
-                  type="text"
-                  name="name2"
-                  value={values.name2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Занимаемая должность второго участника</label>
-                <Input
-                  type="text"
-                  name="job_title2"
-                  value={values.job_title2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Место работы второго участника</label>
-                <Input
-                  type="text"
-                  name="job2"
-                  value={values.job2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Населенный пункт второго участника</label>
-                <Input
-                  type="text"
-                  name="punct2"
-                  value={values.punct2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Cубъект Российской Федерации второго участника</label>
-                <Input
-                  type="text"
-                  name="subject"
-                  value={values.subject2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Стаж педагогической работы второго участника</label>
-                <Input
-                  type="text"
-                  name="internship2"
-                  value={values.internship2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Фамилия имя отчество третьего участника</label>
-                <Input
-                  type="text"
-                  name="name3"
-                  value={values.name3}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Занимаемая должность третьего участника</label>
-                <Input
-                  type="text"
-                  name="job_title3"
-                  value={values.job_title3}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Место работы третьего участника</label>
-                <Input
-                  type="text"
-                  name="job3"
-                  value={values.job3}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Населенный пункт третьего участника</label>
-                <Input
-                  type="text"
-                  name="punct3"
-                  value={values.punct3}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Cубъект Российской Федерации третьего участника</label>
-                <Input
-                  type="text"
-                  name="subject3"
-                  value={values.subject3}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Стаж педагогической работы третьего участника</label>
-                <Input
-                  type="text"
-                  name="internship3"
-                  value={values.internship3}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Наименование учебного заведения</label>
-                <Input
-                  type="text"
-                  name="graduate"
-                  value={values.graduate}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Номинация</label>
-                <Input
-                  type="text"
-                  name="nomPul"
-                  value={values.nomPul}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Язык работы</label>
-                <Input
-                  type="text"
-                  name="language"
-                  value={values.language}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Язык работы</label>
-                <Input
-                  type="text"
-                  name="language2"
-                  value={values.language2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Ссылка на работу</label>
-                <Input
-                  type="text"
-                  name="link"
-                  value={values.link}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Количество кураторов</label>
-                <Input
-                  type="text"
-                  name="curatorsAmount"
-                  value={values.curatorsAmount}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Информация по кураторам</label>
-                <TextArea
-                  type="text"
-                  name="cur"
-                  value={values.cur}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>email</label>
-                <Input
-                  type="email"
-                  name="email"
-                  value={values.email}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>телефон</label>
-                <Input
-                  type="text"
-                  name="phone"
-                  value={values.phone}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Вариант участия</label>
-                <Input
-                  type="text"
-                  name="tarif"
-                  value={values.tarif}
-                  onChange={changeHandler}
-                />
-              </div>
-
-              <div className="in">
-                <label>Дополнительное поле 1</label>
-                <Input
-                  type="text"
-                  name="extra1"
-                  value={values.extra1}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Дополнительное поле 1</label>
-                <Input
-                  type="text"
-                  name="extra2"
-                  value={values.extra2}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="in">
-                <label>Дополнительное поле 1</label>
-                <Input
-                  type="text"
-                  name="extra3"
-                  value={values.extra3}
-                  onChange={changeHandler}
-                />
-              </div>
+            <div className="element">
+              <p className="key">Занимаемая должность</p>
+              <p className="value">{initialState?.job_title}</p>
             </div>
-            <div className="actions">
-              <Button text="Сохранить" type="submit" />
+            <div className="element">
+              <p className="key">Место работы</p>
+              <p className="value">{initialState?.job}</p>
             </div>
-          </form>
+            <div className="element">
+              <p className="key">Населенный пункт</p>
+              <p className="value">{initialState?.punct}</p>
+            </div>
+            <div className="element">
+              <p className="key">Cубъект Российской Федерации</p>
+              <p className="value">{initialState?.subject}</p>
+            </div>
+            <div className="element">
+              <p className="key">Стаж педагогичческой работы</p>
+              <p className="value">{initialState?.internship}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия имя отчество второго участника</p>
+              <p className="value">{initialState?.name2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Занимаемая должность второго участника</p>
+              <p className="value">{initialState?.job_title2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Место работы второго участника</p>
+              <p className="value">{initialState?.job2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Населенный пункт второго участника</p>
+              <p className="value">{initialState?.punct2}</p>
+            </div>
+            <div className="element">
+              <p className="key">
+                Cубъект Российской Федерации второго участника
+              </p>
+              <p className="value">{initialState?.subject2}</p>
+            </div>
+            <div className="element">
+              <p className="key">
+                Стаж педагогической работы второго участника
+              </p>
+              <p className="value">{initialState?.internship2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия имя отчество третьего участника</p>
+              <p className="value">{initialState?.name3}</p>
+            </div>
+            <div className="element">
+              <p className="key">Занимаемая должность третьего участника</p>
+              <p className="value">{initialState?.job_title3}</p>
+            </div>
+            <div className="element">
+              <p className="key">Место работы третьего участника</p>
+              <p className="value">{initialState?.job3}</p>
+            </div>
+            <div className="element">
+              <p className="key">Населенный пункт третьего участника</p>
+              <p className="value">{initialState?.punct3}</p>
+            </div>
+            <div className="element">
+              <p className="key">
+                Cубъект Российской Федерации третьего участника
+              </p>
+              <p className="value">{initialState?.subject3}</p>
+            </div>
+            <div className="element">
+              <p className="key">
+                Стаж педагогической работы третьего участника
+              </p>
+              <p className="value">{initialState?.internship3}</p>
+            </div>
+            <div className="element">
+              <p className="key">Наименование учебного заведения</p>
+              <p className="value">{initialState?.graduate}</p>
+            </div>
+            <div className="element">
+              <p className="key">Номинация</p>
+              <p className="value">{initialState?.nomPul}</p>
+            </div>
+            {initialState.language && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language}</p>
+              </div>
+            )}
+            {initialState.language2 && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language2}</p>
+              </div>
+            )}
+            <div className="element">
+              <p className="key">Ссылка на работу</p>
+              <p className="value">{initialState?.link}</p>
+            </div>
+            <div className="element">
+              <p className="key">Количество кураторов</p>
+              <p className="value">{initialState?.curatorsAmount}</p>
+            </div>
+            {initialState.file && (
+              <div className="element">
+                <p className="key">Работа</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            <div className="element">
+              <p className="key">Информация по кураторам</p>
+              <p className="value">{initialState?.cur}</p>
+            </div>
+            <div className="element">
+              <p className="key">Email</p>
+              <p className="value">{initialState?.email}</p>
+            </div>
+            <div className="element">
+              <p className="key">Телефон</p>
+              <p className="value">{initialState?.phone}</p>
+            </div>
+            <div className="element">
+              <p className="key">Вариант участия</p>
+              <p className="value">{initialState?.tarif}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 1</p>
+              <p className="value">{initialState?.extra1}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 2</p>
+              <p className="value">{initialState?.extra2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 3</p>
+              <p className="value">{initialState?.extra3}</p>
+            </div>
+          </div>
         )}
+        {/* ______________________________________________________ */}
+        <form onSubmit={onSubmit}>
+          {state === "Редактировать" && (
+            <div>
+              <div className="content">
+                <div className="in in2">
+                  <p>id заявки: {thisOrder.number}</p>
+                  <p>созданa: {formattedDate}</p>
+                </div>
+                <div className="in">
+                  <label>Фамилия и имя конкурсанта</label>
+                  <Input
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Занимаемая должность</label>
+                  <Input
+                    type="text"
+                    name="job_title"
+                    value={values.job_title}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Место работы</label>
+                  <Input
+                    type="text"
+                    name="job"
+                    value={values.job}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Населенный пункт</label>
+                  <Input
+                    type="text"
+                    name="punct"
+                    value={values.punct}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Cубъект Российской Федерации</label>
+                  <Input
+                    type="text"
+                    name="subject"
+                    value={values.subject}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Стаж педагогичческой работы</label>
+                  <Input
+                    type="text"
+                    name="internship"
+                    value={values.internship}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Фамилия имя отчество второго участника</label>
+                  <Input
+                    type="text"
+                    name="name2"
+                    value={values.name2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Занимаемая должность второго участника</label>
+                  <Input
+                    type="text"
+                    name="job_title2"
+                    value={values.job_title2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Место работы второго участника</label>
+                  <Input
+                    type="text"
+                    name="job2"
+                    value={values.job2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Населенный пункт второго участника</label>
+                  <Input
+                    type="text"
+                    name="punct2"
+                    value={values.punct2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Cубъект Российской Федерации второго участника</label>
+                  <Input
+                    type="text"
+                    name="subject"
+                    value={values.subject2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Стаж педагогической работы второго участника</label>
+                  <Input
+                    type="text"
+                    name="internship2"
+                    value={values.internship2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Фамилия имя отчество третьего участника</label>
+                  <Input
+                    type="text"
+                    name="name3"
+                    value={values.name3}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Занимаемая должность третьего участника</label>
+                  <Input
+                    type="text"
+                    name="job_title3"
+                    value={values.job_title3}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Место работы третьего участника</label>
+                  <Input
+                    type="text"
+                    name="job3"
+                    value={values.job3}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Населенный пункт третьего участника</label>
+                  <Input
+                    type="text"
+                    name="punct3"
+                    value={values.punct3}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Cубъект Российской Федерации третьего участника</label>
+                  <Input
+                    type="text"
+                    name="subject3"
+                    value={values.subject3}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Стаж педагогической работы третьего участника</label>
+                  <Input
+                    type="text"
+                    name="internship3"
+                    value={values.internship3}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Наименование учебного заведения</label>
+                  <Input
+                    type="text"
+                    name="graduate"
+                    value={values.graduate}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Номинация</label>
+                  <Input
+                    type="text"
+                    name="nomPul"
+                    value={values.nomPul}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Язык работы</label>
+                  <Input
+                    type="text"
+                    name="language"
+                    value={values.language}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Язык работы</label>
+                  <Input
+                    type="text"
+                    name="language2"
+                    value={values.language2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Ссылка на работу</label>
+                  <Input
+                    type="text"
+                    name="link"
+                    value={values.link}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Количество кураторов</label>
+                  <Input
+                    type="text"
+                    name="curatorsAmount"
+                    value={values.curatorsAmount}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Информация по кураторам</label>
+                  <TextArea
+                    type="text"
+                    name="cur"
+                    value={values.cur}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>email</label>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>телефон</label>
+                  <Input
+                    type="text"
+                    name="phone"
+                    value={values.phone}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Вариант участия</label>
+                  <Input
+                    type="text"
+                    name="tarif"
+                    value={values.tarif}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra1"
+                    value={values.extra1}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra2"
+                    value={values.extra2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra3"
+                    value={values.extra3}
+                    onChange={changeHandler}
+                  />
+                </div>
+              </div>
+              <div className="actions">
+                <Button text="Сохранить" type="submit" />
+              </div>
+            </div>
+          )}
+        </form>
       </div>
     </Wrapper>
   );
@@ -452,9 +615,33 @@ const Wrapper = styled.div`
   transition: var(--transition);
   z-index: 999;
   opacity: 1;
+  .element {
+    display: flex;
+    p {
+      margin: 0.5rem 0.3rem;
+    }
+    .key {
+      /* word-break: break-all; */
+    }
+    .value {
+      color: var(--main-0);
+      word-break: break-all;
+    }
+  }
+  .link {
+    cursor: pointer;
+    :hover {
+      text-decoration: underline;
+    }
+  }
+  .curators {
+    display: flex;
+    flex-direction: column;
+  }
   .panel {
     margin: 1rem;
     display: flex;
+    justify-content: center;
   }
   .modal {
     background-color: white;
