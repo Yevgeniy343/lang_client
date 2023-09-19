@@ -38,6 +38,8 @@ const AdminEditAdultOrder = () => {
     (order) => order._id === currentAdultOrder
   );
 
+  console.log(thisOrder);
+
   // const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
 
   const initialState = {
@@ -124,11 +126,11 @@ const AdminEditAdultOrder = () => {
   const downloadHandler = (e) => {
     e.preventDefault();
     Axios({
-      url: `${REACT_APP_URL_API}/${initialState.file}`,
+      url: `${REACT_APP_URL_API}/${thisOrder.file}`,
       method: "GET",
       responseType: "blob",
     }).then((res) => {
-      FileDownload(res.data, initialState.file);
+      FileDownload(res.data, thisOrder.file);
     });
   };
 
@@ -310,7 +312,7 @@ const AdminEditAdultOrder = () => {
               <p className="key">Количество кураторов</p>
               <p className="value">{initialState?.curatorsAmount}</p>
             </div>
-            {initialState.file && (
+            {thisOrder.file && (
               <div className="element">
                 <p className="key">Работа</p>
                 <p className="value link" onClick={downloadHandler}>
@@ -356,6 +358,24 @@ const AdminEditAdultOrder = () => {
                 <div className="in in2">
                   <p>id заявки: {thisOrder.number}</p>
                   <p>созданa: {formattedDate}</p>
+                </div>
+                <div className="in">
+                  <label>Номинация</label>
+                  <Input
+                    type="text"
+                    name="nomPul"
+                    value={values.nomPul}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Ссылка на работу</label>
+                  <Input
+                    type="text"
+                    name="link"
+                    value={values.link}
+                    onChange={changeHandler}
+                  />
                 </div>
                 <div className="in">
                   <label>Фамилия и имя конкурсанта</label>
@@ -531,15 +551,7 @@ const AdminEditAdultOrder = () => {
                     onChange={changeHandler}
                   />
                 </div>
-                <div className="in">
-                  <label>Номинация</label>
-                  <Input
-                    type="text"
-                    name="nomPul"
-                    value={values.nomPul}
-                    onChange={changeHandler}
-                  />
-                </div>
+
                 <div className="in">
                   <label>Язык работы</label>
                   <Input
@@ -555,15 +567,6 @@ const AdminEditAdultOrder = () => {
                     type="text"
                     name="language2"
                     value={values.language2}
-                    onChange={changeHandler}
-                  />
-                </div>
-                <div className="in">
-                  <label>Ссылка на работу</label>
-                  <Input
-                    type="text"
-                    name="link"
-                    value={values.link}
                     onChange={changeHandler}
                   />
                 </div>
