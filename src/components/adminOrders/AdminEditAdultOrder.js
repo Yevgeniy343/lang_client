@@ -9,10 +9,11 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
-import { editAdultOrder } from "../../features/adminSlice";
+import { editAdultOrder, editStausOrder } from "../../features/adminSlice";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -140,6 +141,9 @@ const AdminEditAdultOrder = () => {
   };
 
   const okHandler = () => {
+    dispatch(
+      editStausOrder({ status: "Одобрена", orderId: currentAdultOrder })
+    );
     setState("Одобрена");
     toast.success("Заявка одобрена !");
 
@@ -296,7 +300,11 @@ const AdminEditAdultOrder = () => {
             )}
             <div className="element">
               <p className="key">Ссылка на работу</p>
-              <p className="value">{initialState?.link}</p>
+              <p className="value">
+                <a href={initialState?.link} target="_blank">
+                  {initialState?.link}
+                </a>
+              </p>
             </div>
             <div className="element">
               <p className="key">Количество кураторов</p>
@@ -686,6 +694,7 @@ const Wrapper = styled.div`
     margin: 1rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
   .info {
     margin: 1rem;
