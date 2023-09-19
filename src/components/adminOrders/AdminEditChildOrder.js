@@ -52,7 +52,7 @@ const AdminEditChildOrder = () => {
   };
 
   const [values, setValues] = useState(initialState);
-  const formattedDate = moment(thisOrder.createdAt).format("lll");
+  const formattedDate = moment(thisOrder?.createdAt).format("lll");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -97,7 +97,7 @@ const AdminEditChildOrder = () => {
 
         <div className="content">
           <div className="in in2">
-            <p>id заявки: {thisOrder.number}</p>
+            <p>id заявки: {thisOrder?.number}</p>
             <p>созданa: {formattedDate}</p>
           </div>
           <div className="in">

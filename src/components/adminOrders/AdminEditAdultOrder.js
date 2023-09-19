@@ -205,6 +205,10 @@ const AdminEditAdultOrder = () => {
               <p className="value">{initialState?.name}</p>
             </div>
             <div className="element">
+              <p className="key">Номинация</p>
+              <p className="value">{initialState?.nomPul}</p>
+            </div>
+            <div className="element">
               <p className="key">Занимаемая должность</p>
               <p className="value">{initialState?.job_title}</p>
             </div>
@@ -283,10 +287,6 @@ const AdminEditAdultOrder = () => {
             <div className="element">
               <p className="key">Наименование учебного заведения</p>
               <p className="value">{initialState?.graduate}</p>
-            </div>
-            <div className="element">
-              <p className="key">Номинация</p>
-              <p className="value">{initialState?.nomPul}</p>
             </div>
             {initialState.language && (
               <div className="element">
