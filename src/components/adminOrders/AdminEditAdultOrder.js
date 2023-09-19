@@ -38,8 +38,6 @@ const AdminEditAdultOrder = () => {
     (order) => order._id === currentAdultOrder
   );
 
-  console.log(thisOrder);
-
   // const thisEvent = events.find((ev) => ev._id === thisOrder.eventId);
 
   const initialState = {
@@ -138,7 +136,12 @@ const AdminEditAdultOrder = () => {
     e.preventDefault();
     toast.success("Заявка отклонена !");
     dispatch(
-      editStausOrder({ status: "declined", orderId: currentAdultOrder })
+      editStausOrder({
+        status: "declined",
+        orderId: currentAdultOrder,
+        decline: values.decline,
+        email: values.email,
+      })
     );
     setTimeout(() => {
       dispatch(isAdultOrderHandler(false));

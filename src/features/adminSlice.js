@@ -136,6 +136,7 @@ export const editAdultOrder = createAsyncThunk(
 export const editStausOrder = createAsyncThunk(
   "admin/editStatusOrder",
   async (info, thunkAPI) => {
+    console.log(info);
     return editStatusOrderThunk(`/admin/editStatusOrder/`, info, thunkAPI);
   }
 );
