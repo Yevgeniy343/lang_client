@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import _ from "lodash";
@@ -38,7 +38,15 @@ const AdminAdultOrder2 = ({
   return (
     <Wrapper>
       <div
-        className={status === "pending" ? "table blue" : "table"}
+        className={
+          status === "pending"
+            ? "table pending"
+            : status === "ok"
+            ? "table ok"
+            : status === "declined"
+            ? "table declined"
+            : "table"
+        }
         onClick={modalHandler}
       >
         <p className="value">{number}</p>
@@ -74,8 +82,14 @@ const Wrapper = styled.div`
       min-width: 220px;
     }
   }
-  .blue {
+  .pending {
     background: var(--pending-1);
+  }
+  .ok {
+    background: var(--ok-1);
+  }
+  .declined {
+    background: var(--declined-1);
   }
   @media (min-width: 576px) {
   }

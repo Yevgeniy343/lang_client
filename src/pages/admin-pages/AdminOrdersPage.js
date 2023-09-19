@@ -23,16 +23,24 @@ const AdminOrdersPage = () => {
 
   useEffect(() => {
     dispatch(getChildOrders());
-  }, [dispatch]);
+  }, [childOrders?._id]);
 
   useEffect(() => {
     dispatch(getAdultOrders());
-  }, [dispatch]);
+  }, [adultOrders?._id]);
 
   const [state, setState] = useState("child");
   const [sort, setSort] = useState();
   const [data, setData] = useState(childOrders);
   const [data2, setData2] = useState(adultOrders);
+
+  useEffect(() => {
+    setData2(adultOrders);
+  }, [adultOrders]);
+
+  useEffect(() => {
+    setData(childOrders);
+  }, [childOrders]);
 
   useEffect(() => {
     if (sort === "name") {

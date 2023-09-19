@@ -137,15 +137,16 @@ const AdminEditAdultOrder = () => {
   const declineHandler = (e) => {
     e.preventDefault();
     toast.success("Заявка отклонена !");
+    dispatch(
+      editStausOrder({ status: "declined", orderId: currentAdultOrder })
+    );
     setTimeout(() => {
       dispatch(isAdultOrderHandler(false));
     }, 1000);
   };
 
   const okHandler = () => {
-    dispatch(
-      editStausOrder({ status: "Одобрена", orderId: currentAdultOrder })
-    );
+    dispatch(editStausOrder({ status: "ok", orderId: currentAdultOrder }));
     setState("Одобрена");
     toast.success("Заявка одобрена !");
 
