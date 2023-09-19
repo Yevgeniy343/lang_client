@@ -22,6 +22,7 @@ const AdminAdultOrder2 = ({
   language,
   language2,
   number,
+  status,
 }) => {
   const { events } = useSelector((store) => store.admin);
 
@@ -36,7 +37,10 @@ const AdminAdultOrder2 = ({
 
   return (
     <Wrapper>
-      <div className="table" onClick={modalHandler}>
+      <div
+        className={status === "pending" ? "table blue" : "table"}
+        onClick={modalHandler}
+      >
         <p className="value">{number}</p>
         <p className="value">{name}</p>
         <p className="value">{subject}</p>
@@ -69,6 +73,9 @@ const Wrapper = styled.div`
       width: 220px;
       min-width: 220px;
     }
+  }
+  .blue {
+    background: var(--pending-1);
   }
   @media (min-width: 576px) {
   }

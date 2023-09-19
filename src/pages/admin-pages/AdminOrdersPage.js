@@ -176,6 +176,7 @@ const AdminOrdersPage = () => {
                   language={order.language}
                   language2={order.language2}
                   nomPul={order.nomPul}
+                  status={order.status}
                 />
               ))}
             </div>
@@ -193,6 +194,7 @@ const AdminOrdersPage = () => {
                   language2={order.language2}
                   nomPul={order.nomPul}
                   id={order._id}
+                  status={order.status}
                 />
               ))}
             </div>
