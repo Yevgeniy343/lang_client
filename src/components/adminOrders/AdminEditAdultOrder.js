@@ -176,14 +176,18 @@ const AdminEditAdultOrder = () => {
         </div>
 
         <div className="panel">
-          <Button text="К заявке" onClick={() => setState("")} />
-          <Button text="Одобрить" onClick={okHandler} />
-          {/* ______________________________________________________ */}
+          {/* <Button text="К заявке" onClick={() => setState("")} /> */}
+          {thisOrder.status === "pending" && (
+            <Button text="Одобрить" onClick={okHandler} />
+          )}
 
-          <Button
-            text="Отказать в одобрении"
-            onClick={() => setState("Отказать в одобрении")}
-          />
+          {/* ______________________________________________________ */}
+          {thisOrder.status === "pending" && (
+            <Button
+              text="Отказать в одобрении"
+              onClick={() => setState("Отказать в одобрении")}
+            />
+          )}
           <Button
             text="Редактировать"
             onClick={() => setState("Редактировать")}
