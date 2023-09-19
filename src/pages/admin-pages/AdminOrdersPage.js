@@ -14,12 +14,28 @@ import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
 import _ from "lodash";
 import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrder";
 import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrder";
+import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
   const { childOrders, adultOrders, isChildOrder, isAdultOrder } = useSelector(
     (store) => store.admin
   );
+
+  const [pending, setPending] = useState();
+  const [child, setChild] = useState();
+  const [adult, setAdult] = useState();
+  console.log(pending);
+
+  useEffect(() => {
+    if (pending) {
+      const adultOrders2 = _.filter(adultOrders, { status: "pending" });
+      setAdult(adultOrders2);
+    } else {
+      const adultOrders2 = adultOrders;
+      setAdult(adultOrders2);
+    }
+  }, [pending]);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -32,11 +48,11 @@ const AdminOrdersPage = () => {
   const [state, setState] = useState("child");
   const [sort, setSort] = useState();
   const [data, setData] = useState(childOrders);
-  const [data2, setData2] = useState(adultOrders);
+  const [data2, setData2] = useState(adult);
 
   useEffect(() => {
-    setData2(adultOrders);
-  }, [adultOrders]);
+    setData2(adult);
+  }, [adult]);
 
   useEffect(() => {
     setData(childOrders);
@@ -81,6 +97,10 @@ const AdminOrdersPage = () => {
     }
   }, [sort]);
 
+  const statusHandler = (d) => {
+    setPending(d);
+  };
+
   return (
     <>
       <AdminNavBar />
@@ -103,6 +123,7 @@ const AdminOrdersPage = () => {
             >
               <p className="choose">взростые</p>
             </div>
+            <CheckboxAgreement label="В ожидании" passState={statusHandler} />
           </div>
         </div>
         {/* <AdminChildOrder

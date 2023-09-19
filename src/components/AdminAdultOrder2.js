@@ -37,19 +37,20 @@ const AdminAdultOrder2 = ({
 
   return (
     <Wrapper>
-      <div
-        className={
-          status === "pending"
-            ? "table pending"
-            : status === "ok"
-            ? "table ok"
-            : status === "declined"
-            ? "table declined"
-            : "table"
-        }
-        onClick={modalHandler}
-      >
-        <p className="value">{number}</p>
+      <div className="table" onClick={modalHandler}>
+        <p
+          className={
+            status === "pending"
+              ? "value pending"
+              : status === "ok"
+              ? "value ok"
+              : status === "declined"
+              ? "value declined"
+              : "value"
+          }
+        >
+          {number}
+        </p>
         <p className="value">{name}</p>
         <p className="value">{subject}</p>
         <p className="value">{punct}</p>
