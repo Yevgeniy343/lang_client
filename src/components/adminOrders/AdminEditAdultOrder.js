@@ -209,6 +209,30 @@ const AdminEditAdultOrder = () => {
               <p className="value">{initialState?.nomPul}</p>
             </div>
             <div className="element">
+              <p className="key">Ссылка на работу</p>
+              <p className="value">
+                <a href={initialState?.link} target="_blank">
+                  {initialState?.link}
+                </a>
+              </p>
+            </div>
+            {thisOrder?.file && (
+              <div className="element">
+                <p className="key">Работа</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            {thisOrder?.file2 && (
+              <div className="element">
+                <p className="key">Квитанция</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            <div className="element">
               <p className="key">Занимаемая должность</p>
               <p className="value">{initialState?.job_title}</p>
             </div>
@@ -300,26 +324,12 @@ const AdminEditAdultOrder = () => {
                 <p className="value">{initialState?.language2}</p>
               </div>
             )}
-            <div className="element">
-              <p className="key">Ссылка на работу</p>
-              <p className="value">
-                <a href={initialState?.link} target="_blank">
-                  {initialState?.link}
-                </a>
-              </p>
-            </div>
+
             <div className="element">
               <p className="key">Количество кураторов</p>
               <p className="value">{initialState?.curatorsAmount}</p>
             </div>
-            {thisOrder?.file && (
-              <div className="element">
-                <p className="key">Работа</p>
-                <p className="value link" onClick={downloadHandler}>
-                  скачать
-                </p>
-              </div>
-            )}
+
             <div className="element">
               <p className="key">Информация по кураторам</p>
               <p className="value">{initialState?.cur}</p>
