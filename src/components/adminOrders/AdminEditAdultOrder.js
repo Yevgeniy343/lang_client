@@ -163,6 +163,15 @@ const AdminEditAdultOrder = () => {
     }, 1000);
   };
 
+  const handleDecline = (reason) => {
+    setValues((prevState) => {
+      return {
+        ...prevState,
+        decline: reason,
+      };
+    });
+  };
+
   return (
     <Wrapper>
       <div className="modal">
@@ -176,7 +185,7 @@ const AdminEditAdultOrder = () => {
         </div>
 
         <div className="panel">
-          {/* <Button text="К заявке" onClick={() => setState("")} /> */}
+          <Button text="К заявке" onClick={() => setState("")} />
           {thisOrder.status === "pending" && (
             <Button text="Одобрить" onClick={okHandler} />
           )}
@@ -208,6 +217,11 @@ const AdminEditAdultOrder = () => {
             />
             <div className="actions">
               <Button text="Отказать" onClick={declineHandler} />
+            </div>
+            <div className="reasons">
+              <p onClick={() => handleDecline("reason 1")}>reason 1</p>
+              <p onClick={() => handleDecline("reason 2")}>reason 2</p>
+              <p onClick={() => handleDecline("reason 3")}>reason 3</p>
             </div>
           </div>
         )}
@@ -795,6 +809,23 @@ const Wrapper = styled.div`
   }
   span {
     color: var(--clr-red-dark);
+  }
+  .reasons {
+    p {
+      margin: 0.5rem;
+      border: 1px dotted var(--main-0);
+      width: max-content;
+      padding: 0.5rem;
+      transition: 1s;
+      :hover {
+        background: var(--declined-1);
+        border: 1px solid var(--main-0);
+        cursor: pointer;
+      }
+      :active {
+        border: 1px dotted var(--main-0);
+      }
+    }
   }
   @media (min-width: 576px) {
     .in {
