@@ -79,7 +79,7 @@ const AdminEditAdultOrder = () => {
   };
 
   const [values, setValues] = useState(initialState);
-  const formattedDate = moment(thisOrder.createdAt).format("lll");
+  const formattedDate = moment(thisOrder?.createdAt).format("lll");
 
   const onSubmit = (e) => {
     e.preventDefault();
