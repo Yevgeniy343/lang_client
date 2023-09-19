@@ -134,18 +134,23 @@ const AdminEditAdultOrder = () => {
 
   const declineHandler = (e) => {
     e.preventDefault();
-    toast.success("Заявка отклонена !");
-    dispatch(
-      editStausOrder({
-        status: "declined",
-        orderId: currentAdultOrder,
-        decline: values.decline,
-        email: values.email,
-      })
-    );
-    setTimeout(() => {
-      dispatch(isAdultOrderHandler(false));
-    }, 1000);
+    if (!values.decline) {
+      toast.error("Введите причину отказа");
+      return;
+    } else {
+      dispatch(
+        editStausOrder({
+          status: "declined",
+          orderId: currentAdultOrder,
+          decline: values.decline,
+          email: values.email,
+        })
+      );
+      toast.success("Заявка отклонена !");
+      setTimeout(() => {
+        dispatch(isAdultOrderHandler(false));
+      }, 1000);
+    }
   };
 
   const okHandler = () => {
