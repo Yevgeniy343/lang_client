@@ -312,7 +312,7 @@ const AdminEditAdultOrder = () => {
               <p className="key">Количество кураторов</p>
               <p className="value">{initialState?.curatorsAmount}</p>
             </div>
-            {thisOrder.file && (
+            {thisOrder?.file && (
               <div className="element">
                 <p className="key">Работа</p>
                 <p className="value link" onClick={downloadHandler}>
