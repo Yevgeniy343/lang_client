@@ -25,6 +25,10 @@ const AdminOrdersPage = () => {
   const [pending, setPending] = useState();
   const [child, setChild] = useState();
   const [adult, setAdult] = useState();
+  const [state, setState] = useState("child");
+  const [sort, setSort] = useState();
+  const [data, setData] = useState(childOrders);
+  const [data2, setData2] = useState(adult);
   console.log(pending);
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const AdminOrdersPage = () => {
       const adultOrders2 = adultOrders;
       setAdult(adultOrders2);
     }
-  }, [pending]);
+  }, [pending, adultOrders]);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -45,14 +49,9 @@ const AdminOrdersPage = () => {
     dispatch(getAdultOrders());
   }, [adultOrders?._id]);
 
-  const [state, setState] = useState("child");
-  const [sort, setSort] = useState();
-  const [data, setData] = useState(childOrders);
-  const [data2, setData2] = useState(adult);
-
   useEffect(() => {
     setData2(adult);
-  }, [adult]);
+  }, [pending, adult]);
 
   useEffect(() => {
     setData(childOrders);
@@ -253,7 +252,7 @@ const Wrapper = styled.div`
   }
   .panel {
     display: flex;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     width: 100%;
   }
   .category {

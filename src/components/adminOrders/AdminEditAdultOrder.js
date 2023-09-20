@@ -219,9 +219,26 @@ const AdminEditAdultOrder = () => {
               <Button text="Отказать" onClick={declineHandler} />
             </div>
             <div className="reasons">
-              <p onClick={() => handleDecline("reason 1")}>reason 1</p>
-              <p onClick={() => handleDecline("reason 2")}>reason 2</p>
-              <p onClick={() => handleDecline("reason 3")}>reason 3</p>
+              <p onClick={(e) => handleDecline(e.target.textContent)}>
+                Ваша работа не принята. Причина: Вы не открыли доступ к файлу.
+                Что нужно сделать, чтобы работу приняли: откройте доступ и
+                отредактируйте заявку, внесите в нее корректную ссылку. Перед
+                отправкой рекомендуем проверить, есть ли доступ.
+              </p>
+              <p onClick={(e) => handleDecline(e.target.textContent)}>
+                Ваша работа не принята. Причина: на видео представлены 2
+                участника, а в заявке Вы указываете одиночного участника. Что
+                нужно сделать, чтобы работу приняли: изменить заявку, отметить
+                ее как работа в соавторстве. Внести доплату на второго
+                участника.
+              </p>
+              <p onClick={(e) => handleDecline(e.target.textContent)}>
+                Ваша работа не принята. Причина: на видео представлен
+                художественный коллектив, а в заявке Вы указываете одиночного
+                участника. Что нужно сделать, чтобы работу приняли: изменить
+                заявку, отметить ее как коллективная работа. Внести доплату до
+                тарифа “Коллективный”.
+              </p>
             </div>
           </div>
         )}
@@ -814,9 +831,9 @@ const Wrapper = styled.div`
     p {
       margin: 0.5rem;
       border: 1px dotted var(--main-0);
-      width: max-content;
       padding: 0.5rem;
       transition: 1s;
+
       :hover {
         background: var(--declined-1);
         border: 1px solid var(--main-0);
@@ -826,6 +843,9 @@ const Wrapper = styled.div`
         border: 1px dotted var(--main-0);
       }
     }
+  }
+  textarea {
+    height: 150px;
   }
   @media (min-width: 576px) {
     .in {
