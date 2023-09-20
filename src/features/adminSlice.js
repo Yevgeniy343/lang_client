@@ -14,6 +14,7 @@ import {
   editChildrenOrderThunk,
   editAdultOrderThunk,
   editStatusOrderThunk,
+  getReasonsThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -40,6 +41,7 @@ const initialState = {
   isAdultOrder: false,
   currentChildOrder: "",
   currentAdultOrder: "",
+  reasons: [],
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -136,8 +138,15 @@ export const editAdultOrder = createAsyncThunk(
 export const editStausOrder = createAsyncThunk(
   "admin/editStatusOrder",
   async (info, thunkAPI) => {
-    console.log(info);
     return editStatusOrderThunk(`/admin/editStatusOrder/`, info, thunkAPI);
+  }
+);
+
+export const getReasons = createAsyncThunk(
+  "admin/getReasons",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return getReasonsThunk(`/admin/getReasons/`, info, thunkAPI);
   }
 );
 
@@ -380,6 +389,19 @@ const adminSlice = createSlice({
       state.childOrders = payload.ordersChild;
     });
     builder.addCase(editStausOrder.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // getReasons
+    builder.addCase(getReasons.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getReasons.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.reasons = payload;
+    });
+    builder.addCase(getReasons.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

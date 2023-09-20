@@ -9,7 +9,11 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
-import { editAdultOrder, editStausOrder } from "../../features/adminSlice";
+import {
+  editAdultOrder,
+  editStausOrder,
+  getReasons,
+} from "../../features/adminSlice";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import toast from "react-hot-toast";
@@ -18,6 +22,10 @@ import { Link } from "react-router-dom";
 const { REACT_APP_URL_API } = process.env;
 
 const AdminEditAdultOrder = () => {
+  useEffect(() => {
+    dispatch(getReasons());
+  }, []);
+
   const [state, setState] = useState();
 
   if (state === "Одобрить") {
@@ -26,7 +34,7 @@ const AdminEditAdultOrder = () => {
 
   moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
-  const { currentAdultOrder, adultOrders, events } = useSelector(
+  const { currentAdultOrder, adultOrders, events, reasons } = useSelector(
     (store) => store.admin
   );
 
@@ -219,26 +227,11 @@ const AdminEditAdultOrder = () => {
               <Button text="Отказать" onClick={declineHandler} />
             </div>
             <div className="reasons">
-              <p onClick={(e) => handleDecline(e.target.textContent)}>
-                Ваша работа не принята. Причина: Вы не открыли доступ к файлу.
-                Что нужно сделать, чтобы работу приняли: откройте доступ и
-                отредактируйте заявку, внесите в нее корректную ссылку. Перед
-                отправкой рекомендуем проверить, есть ли доступ.
-              </p>
-              <p onClick={(e) => handleDecline(e.target.textContent)}>
-                Ваша работа не принята. Причина: на видео представлены 2
-                участника, а в заявке Вы указываете одиночного участника. Что
-                нужно сделать, чтобы работу приняли: изменить заявку, отметить
-                ее как работа в соавторстве. Внести доплату на второго
-                участника.
-              </p>
-              <p onClick={(e) => handleDecline(e.target.textContent)}>
-                Ваша работа не принята. Причина: на видео представлен
-                художественный коллектив, а в заявке Вы указываете одиночного
-                участника. Что нужно сделать, чтобы работу приняли: изменить
-                заявку, отметить ее как коллективная работа. Внести доплату до
-                тарифа “Коллективный”.
-              </p>
+              {reasons.map((r) => (
+                <p onClick={(e) => handleDecline(e.target.textContent)}>
+                  {r.reason}
+                </p>
+              ))}
             </div>
           </div>
         )}

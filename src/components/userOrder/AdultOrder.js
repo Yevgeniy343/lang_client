@@ -275,8 +275,21 @@ const AdultOrder = ({ passCalculate }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createAdultOrder(formData));
-    console.log("--------------");
+    if (
+      !values.name ||
+      !values.job_title ||
+      !values.job ||
+      !values.internship ||
+      !subject ||
+      !values.email ||
+      !phone.phone
+    ) {
+      console.log(values);
+      toast.error("Введите все значения");
+      return;
+    } else {
+      dispatch(createAdultOrder(formData));
+    }
   };
 
   // ___________________________________________________________________________
