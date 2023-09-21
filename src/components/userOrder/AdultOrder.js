@@ -282,7 +282,8 @@ const AdultOrder = ({ passCalculate }) => {
       !values.internship ||
       !subject ||
       !values.email ||
-      !phone.phone
+      !phone.phone ||
+      !language
     ) {
       console.log(values);
       toast.error("Введите все значения");

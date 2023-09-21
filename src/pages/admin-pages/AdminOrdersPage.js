@@ -25,11 +25,10 @@ const AdminOrdersPage = () => {
   const [pending, setPending] = useState();
   const [child, setChild] = useState();
   const [adult, setAdult] = useState();
-  const [state, setState] = useState("child");
-  const [sort, setSort] = useState();
-  const [data, setData] = useState(childOrders);
+  const [state, setState] = useState();
+  const [sort, setSort] = useState("Child");
+  const [data, setData] = useState(child);
   const [data2, setData2] = useState(adult);
-  console.log(pending);
 
   useEffect(() => {
     if (pending) {
@@ -40,6 +39,16 @@ const AdminOrdersPage = () => {
       setAdult(adultOrders2);
     }
   }, [pending, adultOrders]);
+
+  useEffect(() => {
+    if (pending) {
+      const childOrders2 = _.filter(childOrders, { status: "pending" });
+      setChild(childOrders2);
+    } else {
+      const childOrders2 = childOrders;
+      setChild(childOrders2);
+    }
+  }, [pending, childOrders]);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -54,8 +63,8 @@ const AdminOrdersPage = () => {
   }, [pending, adult]);
 
   useEffect(() => {
-    setData(childOrders);
-  }, [childOrders]);
+    setData(child);
+  }, [pending, child]);
 
   useEffect(() => {
     if (sort === "name") {

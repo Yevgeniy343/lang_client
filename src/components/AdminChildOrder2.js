@@ -22,6 +22,7 @@ const AdminChildOrder2 = ({
   language,
   language2,
   id,
+  status,
 }) => {
   const { events } = useSelector((store) => store.admin);
   const dispatch = useDispatch();
@@ -37,7 +38,19 @@ const AdminChildOrder2 = ({
     <>
       <Wrapper>
         <div className="table" onClick={modalHandler}>
-          <p className="value">{number}</p>
+          <p
+            className={
+              status === "pending"
+                ? "value pending"
+                : status === "ok"
+                ? "value ok"
+                : status === "declined"
+                ? "value declined"
+                : "value"
+            }
+          >
+            {number}
+          </p>
           <p className="value">{name}</p>
           <p className="value">{subject}</p>
           <p className="value">{punct}</p>
@@ -70,6 +83,15 @@ const Wrapper = styled.div`
       width: 220px;
       min-width: 220px;
     }
+  }
+  .pending {
+    background: var(--pending-1);
+  }
+  .ok {
+    background: var(--ok-1);
+  }
+  .declined {
+    background: var(--declined-1);
   }
   @media (min-width: 576px) {
   }

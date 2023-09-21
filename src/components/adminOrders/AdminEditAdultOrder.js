@@ -17,11 +17,11 @@ import {
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 
 const { REACT_APP_URL_API } = process.env;
 
 const AdminEditAdultOrder = () => {
+  moment.locale("ru", ruLocale);
   useEffect(() => {
     dispatch(getReasons());
   }, []);
@@ -32,7 +32,6 @@ const AdminEditAdultOrder = () => {
     toast.success("Заявка одобрена");
   }
 
-  moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
   const { currentAdultOrder, adultOrders, events, reasons } = useSelector(
     (store) => store.admin
@@ -198,7 +197,6 @@ const AdminEditAdultOrder = () => {
             <Button text="Одобрить" onClick={okHandler} />
           )}
 
-          {/* ______________________________________________________ */}
           {thisOrder.status === "pending" && (
             <Button
               text="Отказать в одобрении"

@@ -9,14 +9,29 @@ import _ from "lodash";
 import Button from "../../components-special/Button";
 import moment from "moment";
 import ruLocale from "moment/locale/ru";
-import { editChildrenOrder } from "../../features/adminSlice";
+import {
+  editChildrenOrder,
+  editStausOrder,
+  getReasons,
+} from "../../features/adminSlice";
+import FileDownload from "js-file-download";
+import Axios from "axios";
+import toast from "react-hot-toast";
+
+const { REACT_APP_URL_API } = process.env;
 
 const AdminEditChildOrder = () => {
   moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
-  const { currentChildOrder, childOrders, events } = useSelector(
+  const { currentChildOrder, childOrders, events, reasons } = useSelector(
     (store) => store.admin
   );
+
+  const [state, setState] = useState();
+
+  if (state === "Одобрить") {
+    toast.success("Заявка одобрена");
+  }
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -79,8 +94,61 @@ const AdminEditChildOrder = () => {
         extra1: values.extra1,
         extra2: values.extra2,
         extra3: values.extra3,
+        decline: "",
       })
     );
+    setState("");
+  };
+
+  const downloadHandler = (e) => {
+    e.preventDefault();
+    Axios({
+      url: `${REACT_APP_URL_API}/${thisOrder.file}`,
+      method: "GET",
+      responseType: "blob",
+    }).then((res) => {
+      FileDownload(res.data, thisOrder.file);
+    });
+  };
+
+  const declineHandler = (e) => {
+    e.preventDefault();
+    if (!values.decline) {
+      toast.error("Введите причину отказа");
+      return;
+    } else {
+      dispatch(
+        editStausOrder({
+          status: "declined",
+          orderId: currentChildOrder,
+          decline: values.decline,
+          email: values.email,
+        })
+      );
+      toast.success("Заявка отклонена !");
+      setTimeout(() => {
+        dispatch(isChildOrderHandler(false));
+      }, 1000);
+    }
+  };
+
+  const okHandler = () => {
+    dispatch(editStausOrder({ status: "ok", orderId: currentChildOrder }));
+    setState("Одобрена");
+    toast.success("Заявка одобрена !");
+
+    setTimeout(() => {
+      dispatch(isChildOrderHandler(false));
+    }, 1000);
+  };
+
+  const handleDecline = (reason) => {
+    setValues((prevState) => {
+      return {
+        ...prevState,
+        decline: reason,
+      };
+    });
   };
 
   return (
@@ -94,6 +162,49 @@ const AdminEditChildOrder = () => {
             <AiOutlineClose />
           </div>
         </div>
+
+        <div className="panel">
+          <Button text="К заявке" onClick={() => setState("")} />
+          {thisOrder?.status === "pending" && (
+            <Button text="Одобрить" onClick={okHandler} />
+          )}
+
+          {thisOrder?.status === "pending" && (
+            <Button
+              text="Отказать в одобрении"
+              onClick={() => setState("Отказать в одобрении")}
+            />
+          )}
+          <Button
+            text="Редактировать"
+            onClick={() => setState("Редактировать")}
+          />
+        </div>
+
+        {state === "Отказать в одобрении" && (
+          <div className="decline">
+            <label>
+              <span>*</span>
+              Причина отказа
+            </label>
+            <TextArea
+              type="text"
+              name="decline"
+              value={values.decline}
+              onChange={changeHandler}
+            />
+            <div className="actions">
+              <Button text="Отказать" onClick={declineHandler} />
+            </div>
+            <div className="reasons">
+              {reasons.map((r) => (
+                <p onClick={(e) => handleDecline(e.target.textContent)}>
+                  {r.reason}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="content">
           <div className="in in2">
@@ -334,6 +445,12 @@ const Wrapper = styled.div`
         color: var(--main-1);
       }
     }
+  }
+  .panel {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .content {
     display: flex;

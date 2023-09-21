@@ -176,8 +176,19 @@ const ChildrenOrder = ({ passCalculate }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createChildOrder(formData));
-    console.log("--------------");
+    if (
+      !values.name ||
+      !subject ||
+      !values.email ||
+      !phone.phone ||
+      !language
+    ) {
+      toast.error("Введите все значения");
+      return;
+    } else {
+      dispatch(createChildOrder(formData));
+    }
+    // console.log("--------------");
     // console.log("tarif = ", tarif);
     // console.log("name = ", values.name);
     // console.log("name2 = ", values.name2);
