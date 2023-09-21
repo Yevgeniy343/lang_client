@@ -395,7 +395,7 @@ const AdminEditAdultOrder = () => {
             </div>
           </div>
         )}
-        {/* ______________________________________________________ */}
+
         <form onSubmit={onSubmit}>
           {state === "Редактировать" && (
             <div>

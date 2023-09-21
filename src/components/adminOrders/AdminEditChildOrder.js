@@ -153,7 +153,7 @@ const AdminEditChildOrder = () => {
 
   return (
     <Wrapper>
-      <form className="modal" onSubmit={onSubmit}>
+      <div className="modal">
         <div className="close">
           <div
             className="close"
@@ -206,193 +206,203 @@ const AdminEditChildOrder = () => {
           </div>
         )}
 
-        <div className="content">
-          <div className="in in2">
-            <p>id заявки: {thisOrder?.number}</p>
-            <p>созданa: {formattedDate}</p>
-          </div>
-          <div className="in">
-            <label>Фамилия и имя конкурсанта</label>
-            <Input
-              type="text"
-              name="name"
-              value={values.name}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Возрастная категория</label>
-            <Input
-              type="text"
-              name="age"
-              value={values.age}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Cубъект Российской Федерации</label>
-            <Input
-              type="text"
-              name="subject"
-              value={values.subject}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Населенный пункт</label>
-            <Input
-              type="text"
-              name="punct"
-              value={values.punct}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Наименование учебного заведения</label>
-            <Input
-              type="text"
-              name="punct"
-              value={values.graduate}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Номинация</label>
-            <Input
-              type="text"
-              name="nomPul"
-              value={values.nomPul}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Язык работы</label>
-            <Input
-              type="text"
-              name="language"
-              value={values.language}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Язык работы</label>
-            <Input
-              type="text"
-              name="language2"
-              value={values.language2}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Ссылка на работу</label>
-            <Input
-              type="text"
-              name="link"
-              value={values.link}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Количество кураторов</label>
-            <Input
-              type="text"
-              name="curatorsAmount"
-              value={values.curatorsAmount}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Информация по кураторам</label>
-            <TextArea
-              type="text"
-              name="cur"
-              value={values.cur}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>email</label>
-            <Input
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>телефон</label>
-            <Input
-              type="text"
-              name="phone"
-              value={values.phone}
-              onChange={changeHandler}
-            />
-          </div>
+        {state !== "Отказать в одобрении" && state !== "Редактировать" && (
+          <div className="info">vervreverver</div>
+        )}
 
-          <div className="in">
-            <label>Вариант участия</label>
-            <Input
-              type="text"
-              name="tarif"
-              value={values.tarif}
-              onChange={changeHandler}
-            />
-          </div>
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя второго конкурсанта</label>
-              <Input
-                type="text"
-                name="name2"
-                value={values.name2}
-                onChange={changeHandler}
-              />
+        <form onSubmit={onSubmit}>
+          {state === "Редактировать" && (
+            <div>
+              <div className="content">
+                <div className="in in2">
+                  <p>id заявки: {thisOrder?.number}</p>
+                  <p>созданa: {formattedDate}</p>
+                </div>
+                <div className="in">
+                  <label>Фамилия и имя конкурсанта</label>
+                  <Input
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Возрастная категория</label>
+                  <Input
+                    type="text"
+                    name="age"
+                    value={values.age}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Cубъект Российской Федерации</label>
+                  <Input
+                    type="text"
+                    name="subject"
+                    value={values.subject}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Населенный пункт</label>
+                  <Input
+                    type="text"
+                    name="punct"
+                    value={values.punct}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Наименование учебного заведения</label>
+                  <Input
+                    type="text"
+                    name="punct"
+                    value={values.graduate}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Номинация</label>
+                  <Input
+                    type="text"
+                    name="nomPul"
+                    value={values.nomPul}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Язык работы</label>
+                  <Input
+                    type="text"
+                    name="language"
+                    value={values.language}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Язык работы</label>
+                  <Input
+                    type="text"
+                    name="language2"
+                    value={values.language2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Ссылка на работу</label>
+                  <Input
+                    type="text"
+                    name="link"
+                    value={values.link}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Количество кураторов</label>
+                  <Input
+                    type="text"
+                    name="curatorsAmount"
+                    value={values.curatorsAmount}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Информация по кураторам</label>
+                  <TextArea
+                    type="text"
+                    name="cur"
+                    value={values.cur}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>email</label>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>телефон</label>
+                  <Input
+                    type="text"
+                    name="phone"
+                    value={values.phone}
+                    onChange={changeHandler}
+                  />
+                </div>
+
+                <div className="in">
+                  <label>Вариант участия</label>
+                  <Input
+                    type="text"
+                    name="tarif"
+                    value={values.tarif}
+                    onChange={changeHandler}
+                  />
+                </div>
+                {values.tarif !== "Коллективный" && (
+                  <div className="in">
+                    <label>Фамилия и имя второго конкурсанта</label>
+                    <Input
+                      type="text"
+                      name="name2"
+                      value={values.name2}
+                      onChange={changeHandler}
+                    />
+                  </div>
+                )}
+                {values.tarif !== "Коллективный" && (
+                  <div className="in">
+                    <label>Фамилия и имя третьего конкурсанта</label>
+                    <Input
+                      type="text"
+                      name="name3"
+                      value={values.name3}
+                      onChange={changeHandler}
+                    />
+                  </div>
+                )}
+
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra1"
+                    value={values.extra1}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra2"
+                    value={values.extra2}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="in">
+                  <label>Дополнительное поле 1</label>
+                  <Input
+                    type="text"
+                    name="extra3"
+                    value={values.extra3}
+                    onChange={changeHandler}
+                  />
+                </div>
+              </div>
+              <div className="actions">
+                <Button text="Сохранить" type="submit" />
+              </div>
             </div>
           )}
-          {values.tarif !== "Коллективный" && (
-            <div className="in">
-              <label>Фамилия и имя третьего конкурсанта</label>
-              <Input
-                type="text"
-                name="name3"
-                value={values.name3}
-                onChange={changeHandler}
-              />
-            </div>
-          )}
-
-          <div className="in">
-            <label>Дополнительное поле 1</label>
-            <Input
-              type="text"
-              name="extra1"
-              value={values.extra1}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Дополнительное поле 1</label>
-            <Input
-              type="text"
-              name="extra2"
-              value={values.extra2}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Дополнительное поле 1</label>
-            <Input
-              type="text"
-              name="extra3"
-              value={values.extra3}
-              onChange={changeHandler}
-            />
-          </div>
-        </div>
-        <div className="actions">
-          <Button text="Сохранить" type="submit" />
-        </div>
-      </form>
+        </form>
+      </div>
     </Wrapper>
   );
 };
@@ -484,6 +494,29 @@ const Wrapper = styled.div`
   input {
     height: 40px;
     padding: 0;
+  }
+  span {
+    color: var(--clr-red-dark);
+  }
+  .reasons {
+    p {
+      margin: 0.5rem;
+      border: 1px dotted var(--main-0);
+      padding: 0.5rem;
+      transition: 1s;
+
+      :hover {
+        background: var(--declined-1);
+        border: 1px solid var(--main-0);
+        cursor: pointer;
+      }
+      :active {
+        border: 1px dotted var(--main-0);
+      }
+    }
+  }
+  textarea {
+    height: 150px;
   }
   @media (min-width: 576px) {
     .in {
