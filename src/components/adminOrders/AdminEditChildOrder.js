@@ -23,6 +23,11 @@ const { REACT_APP_URL_API } = process.env;
 const AdminEditChildOrder = () => {
   moment.locale("ru", ruLocale);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getReasons());
+  }, []);
+
   const { currentChildOrder, childOrders, events, reasons } = useSelector(
     (store) => store.admin
   );
@@ -207,7 +212,108 @@ const AdminEditChildOrder = () => {
         )}
 
         {state !== "Отказать в одобрении" && state !== "Редактировать" && (
-          <div className="info">vervreverver</div>
+          <div className="info">
+            <div className="element">
+              <p className="key">Фамилия и имя конкурсанта</p>
+              <p className="value">{initialState?.name}</p>
+            </div>
+            <div className="element">
+              <p className="key">Номинация</p>
+              <p className="value">{initialState?.nomPul}</p>
+            </div>
+            <div className="element">
+              <p className="key">Ссылка на работу</p>
+              <p className="value">
+                <a href={initialState?.link} target="_blank">
+                  {initialState?.link}
+                </a>
+              </p>
+            </div>
+            {thisOrder?.file && (
+              <div className="element">
+                <p className="key">Работа</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            {thisOrder?.file2 && (
+              <div className="element">
+                <p className="key">Квитанция</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            <div className="element">
+              <p className="key">Возрастная категория</p>
+              <p className="value">{initialState?.age}</p>
+            </div>
+            <div className="element">
+              <p className="key">Субъект Российской Федерации</p>
+              <p className="value">{initialState?.subject}</p>
+            </div>
+            <div className="element">
+              <p className="key">Населенный пункт</p>
+              <p className="value">{initialState?.punct}</p>
+            </div>
+            <div className="element">
+              <p className="key">Наименование учебного заведения</p>
+              <p className="value">{initialState?.graduate}</p>
+            </div>
+            {initialState?.language && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language}</p>
+              </div>
+            )}
+            {initialState?.language2 && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language2}</p>
+              </div>
+            )}
+            <div className="element">
+              <p className="key">Количество кураторов</p>
+              <p className="value">{initialState?.curatorsAmount}</p>
+            </div>
+            <div className="element">
+              <p className="key">Информация по кураторам</p>
+              <p className="value">{initialState?.cur}</p>
+            </div>
+            <div className="element">
+              <p className="key">email</p>
+              <p className="value">{initialState?.email}</p>
+            </div>
+            <div className="element">
+              <p className="key">телефон</p>
+              <p className="value">{initialState?.phone}</p>
+            </div>
+            <div className="element">
+              <p className="key">Вариант участия</p>
+              <p className="value">{initialState?.tarif}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия и имя второго конкурсанта</p>
+              <p className="value">{initialState?.name2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия и имя третьего конкурсанта</p>
+              <p className="value">{initialState?.name3}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 1</p>
+              <p className="value">{initialState?.extra1}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 2</p>
+              <p className="value">{initialState?.extra2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Дополнительное поле 3</p>
+              <p className="value">{initialState?.extra3}</p>
+            </div>
+          </div>
         )}
 
         <form onSubmit={onSubmit}>
@@ -318,7 +424,7 @@ const AdminEditChildOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>email</label>
+                  <label>Email</label>
                   <Input
                     type="email"
                     name="email"
@@ -327,7 +433,7 @@ const AdminEditChildOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>телефон</label>
+                  <label>Телефон</label>
                   <Input
                     type="text"
                     name="phone"
@@ -420,7 +526,38 @@ const Wrapper = styled.div`
   transition: var(--transition);
   z-index: 999;
   opacity: 1;
-
+  .element {
+    display: flex;
+    p {
+      margin: 0.5rem 0.3rem;
+    }
+    .key {
+      /* word-break: break-all; */
+    }
+    .value {
+      color: var(--main-0);
+      word-break: break-all;
+    }
+  }
+  .link {
+    cursor: pointer;
+    :hover {
+      text-decoration: underline;
+    }
+  }
+  .curators {
+    display: flex;
+    flex-direction: column;
+  }
+  .panel {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .info {
+    margin: 1rem;
+  }
   .modal {
     background-color: white;
     width: 95vw;
@@ -456,12 +593,7 @@ const Wrapper = styled.div`
       }
     }
   }
-  .panel {
-    margin: 1rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+
   .content {
     display: flex;
     flex-wrap: wrap;

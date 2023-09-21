@@ -280,7 +280,7 @@ const AdminEditAdultOrder = () => {
               <p className="value">{initialState?.punct}</p>
             </div>
             <div className="element">
-              <p className="key">Cубъект Российской Федерации</p>
+              <p className="key">Субъект Российской Федерации</p>
               <p className="value">{initialState?.subject}</p>
             </div>
             <div className="element">

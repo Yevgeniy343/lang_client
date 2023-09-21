@@ -357,7 +357,7 @@ const adminSlice = createSlice({
     builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       toast.success("Изменения сохранены !");
-      // state.adultOrders = payload;
+      state.childOrders = payload.ordersChild;
     });
     builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
