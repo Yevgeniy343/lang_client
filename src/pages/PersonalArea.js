@@ -10,6 +10,7 @@ import Profile from "../components/Profile";
 import UserEvents from "../components/UserEvents";
 import { getEvent } from "../features/user/userSlise";
 import UserModalOrder from "../components/userOrder/userModalOrder";
+import UserOrders from "../components/userOrder/UserOrders";
 
 const PersonamArea = () => {
   const { user, currentSmallMenu, events, isOrderModal } = useSelector(
@@ -31,7 +32,7 @@ const PersonamArea = () => {
         </div>
         <div className="container">
           <div className="left">
-            <SmallMenu item="Мои заказы" />
+            <SmallMenu item="Мои заявки" />
             <SmallMenu item="Профиль" />
             <SmallMenu item="Все мероприятия" />
             <SmallMenu item="Скачать дипломы" />
@@ -40,6 +41,7 @@ const PersonamArea = () => {
             <RightHeader />
             {currentSmallMenu === "Профиль" && <Profile />}
             {currentSmallMenu === "Все мероприятия" && <UserEvents />}
+            {currentSmallMenu === "Мои заявки" && <UserOrders />}
             {isOrderModal && <UserModalOrder />}
           </div>
         </div>
