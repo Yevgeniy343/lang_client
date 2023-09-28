@@ -7,6 +7,7 @@ const UserOrders = () => {
   const { user, isLoading, childOrders, adultOrders } = useSelector(
     (store) => store.user
   );
+  console.log(childOrders);
   const dispatch = useDispatch();
 
   return (
@@ -20,21 +21,23 @@ const UserOrders = () => {
       {childOrders.map((child) => (
         <UserOrder
           key={child._id}
-          id={child._id}
+          orderId={child._id}
           status={child.status}
           nomPul={child.nomPul}
           eventId={child.eventId}
           name={child.name}
+          type="child"
         />
       ))}
       {adultOrders.map((adult) => (
         <UserOrder
           key={adult._id}
-          id={adult._id}
+          orderId={adult._id}
           status={adult.status}
           nomPul={adult.nomPul}
           eventId={adult.eventId}
           name={adult.name}
+          type="adult"
         />
       ))}
     </Wrapper>

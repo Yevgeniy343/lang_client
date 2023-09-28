@@ -531,9 +531,7 @@ const Wrapper = styled.div`
     p {
       margin: 0.5rem 0.3rem;
     }
-    .key {
-      /* word-break: break-all; */
-    }
+
     .value {
       color: var(--main-0);
       word-break: break-all;

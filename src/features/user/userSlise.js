@@ -95,7 +95,6 @@ export const createAdultOrder = createAsyncThunk(
 export const getAllOrders = createAsyncThunk(
   "user/getAllOrders",
   async (info, thunkAPI) => {
-    console.log(info);
     return getAllOrdersThunk(`/user/getAllOrders/${info}`, info, thunkAPI);
   }
 );

@@ -2,17 +2,29 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import UserChildOrder from "./UserChildOrder";
+import UserAdultOrder from "./UserAdultOrder";
 
-const UserOrder = ({ id, status, nomPul, eventId, name }) => {
-  const { events } = useSelector((store) => store.user);
+const UserOrder = ({ orderId, status, nomPul, eventId, name, type }) => {
+  const { events, childOrders, adultOrders } = useSelector(
+    (store) => store.user
+  );
 
   const [isExtra, setIsExtra] = useState(false);
 
   const thisEvent = events.find((e) => e._id === eventId);
 
+  if (type === "child") {
+    const thisOrder = childOrders.find((child) => child._id === orderId);
+  }
+  if (type === "adult") {
+    const thisOrder = adultOrders.find((adult) => adult._id === orderId);
+  }
+
   return (
-    <Wrapper onClick={() => setIsExtra(!isExtra)}>
+    <Wrapper>
       <motion.div
+        onClick={() => setIsExtra(!isExtra)}
         className={
           status === "pending"
             ? "header pending"
@@ -24,6 +36,9 @@ const UserOrder = ({ id, status, nomPul, eventId, name }) => {
         }
       >
         <p>
+          <span>статус:</span> {status}
+        </p>
+        <p>
           <span>конкурс:</span> {thisEvent.name}
         </p>
         <p>
@@ -34,16 +49,16 @@ const UserOrder = ({ id, status, nomPul, eventId, name }) => {
           <span>номинация: </span>
           {nomPul}
         </p>
-        <p>
-          <span>статус:</span> {status}
-        </p>
       </motion.div>
       {/* <AnimatePresence> */}
       {isExtra && (
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0 },
+            visible: {
+              opacity: 1,
+              y: 0,
+            },
             exit: { opacity: 0, y: 800 },
           }}
           transition={{
@@ -64,7 +79,12 @@ const UserOrder = ({ id, status, nomPul, eventId, name }) => {
               : "extra"
           }
         >
-          extras
+          {type === "child" && (
+            <UserChildOrder key={orderId} orderId={orderId} />
+          )}
+          {type === "adult" && (
+            <UserAdultOrder key={orderId} orderId={orderId} />
+          )}
         </motion.div>
       )}
       {/* </AnimatePresence> */}
@@ -107,7 +127,7 @@ const Wrapper = styled.div`
     margin: 0.5rem;
   }
   .extra {
-    height: 500px;
+    height: 450px;
     &.pending {
       border: 5px solid var(--pending-1);
     }
