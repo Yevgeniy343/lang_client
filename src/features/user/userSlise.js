@@ -8,6 +8,7 @@ import {
   remindUserThunk,
   createChildOrderThunk,
   createAdultOrderThunk,
+  getAllOrdersThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -31,6 +32,8 @@ const initialState = {
   noms: [],
   nomins: [],
   nomPul: "",
+  childOrders: [],
+  adultOrders: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -86,6 +89,14 @@ export const createAdultOrder = createAsyncThunk(
   "user/createadultorder",
   async (info, thunkAPI) => {
     return createAdultOrderThunk(`/user/createAdultOrder/`, info, thunkAPI);
+  }
+);
+
+export const getAllOrders = createAsyncThunk(
+  "user/getAllOrders",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return getAllOrdersThunk(`/user/getAllOrders/${info}`, info, thunkAPI);
   }
 );
 
@@ -236,6 +247,20 @@ const userSlice = createSlice({
       toast.success(`Ваша заявка принята на рассмотрение модератору.`);
     });
     builder.addCase(createAdultOrder.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // getAllOrders
+    builder.addCase(getAllOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getAllOrders.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.childOrders = payload.childOrders;
+      state.adultOrders = payload.adultOrders;
+    });
+    builder.addCase(getAllOrders.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
