@@ -1,25 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import UserChildOrder from "./UserChildOrder";
 import UserAdultOrder from "./UserAdultOrder";
 
 const UserOrder = ({ orderId, status, nomPul, eventId, name, type }) => {
-  const { events, childOrders, adultOrders } = useSelector(
-    (store) => store.user
-  );
+  const { events } = useSelector((store) => store.user);
 
   const [isExtra, setIsExtra] = useState(false);
 
   const thisEvent = events.find((e) => e._id === eventId);
-
-  if (type === "child") {
-    const thisOrder = childOrders.find((child) => child._id === orderId);
-  }
-  if (type === "adult") {
-    const thisOrder = adultOrders.find((adult) => adult._id === orderId);
-  }
 
   return (
     <Wrapper>
@@ -35,11 +26,23 @@ const UserOrder = ({ orderId, status, nomPul, eventId, name, type }) => {
             : "header"
         }
       >
+        {status === "pending" && (
+          <p>
+            <span>статус:</span> в обработке
+          </p>
+        )}
+        {status === "ok" && (
+          <p>
+            <span>статус:</span> одобрено
+          </p>
+        )}
+        {status === "declined" && (
+          <p>
+            <span>статус:</span> отклонено
+          </p>
+        )}
         <p>
-          <span>статус:</span> {status}
-        </p>
-        <p>
-          <span>конкурс:</span> {thisEvent.name}
+          <span>конкурс:</span> {thisEvent?.name}
         </p>
         <p>
           <span>имя: </span>
@@ -124,7 +127,7 @@ const Wrapper = styled.div`
   p {
     color: var(--main-0);
     width: 300px;
-    margin: 0.5rem;
+    margin: 0;
   }
   .extra {
     height: 450px;
@@ -148,6 +151,9 @@ const Wrapper = styled.div`
     }
   }
   @media (min-width: 992px) {
+    p {
+      margin: 0.5rem;
+    }
   }
   @media (min-width: 1200px) {
   }

@@ -483,7 +483,7 @@ const AdminEditChildOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>Дополнительное поле 1</label>
+                  <label>Дополнительное поле 2</label>
                   <Input
                     type="text"
                     name="extra2"
@@ -492,7 +492,7 @@ const AdminEditChildOrder = () => {
                   />
                 </div>
                 <div className="in">
-                  <label>Дополнительное поле 1</label>
+                  <label>Дополнительное поле 3</label>
                   <Input
                     type="text"
                     name="extra3"

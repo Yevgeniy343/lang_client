@@ -7,7 +7,7 @@ const UserOrders = () => {
   const { user, isLoading, childOrders, adultOrders } = useSelector(
     (store) => store.user
   );
-  console.log(childOrders);
+
   const dispatch = useDispatch();
 
   return (

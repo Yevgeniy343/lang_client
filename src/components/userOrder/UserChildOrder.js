@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import FileDownload from "js-file-download";
 import Axios from "axios";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { VscEdit } from "react-icons/vsc";
 import { FcEditImage, FcCheckmark } from "react-icons/fc";
 import Input from "../../components-special/Input";
@@ -92,325 +92,359 @@ const UserChildOrder = ({ orderId }) => {
 
   return (
     <Wrapper>
-      {!isEdit && (
-        <div>
-          <div className="element">
-            <p className="key">Фамилия и имя конкурсанта</p>
-            <p className="value">{initialState?.name}</p>
-          </div>
-          <div className="element">
-            <p className="key">Номинация</p>
-            <p className="value">{initialState?.nomPul}</p>
-          </div>
-          <div className="element">
-            <p className="key">Ссылка на работу</p>
-            <p className="value">
-              <a href={initialState?.link} target="_blank">
-                {initialState?.link}
-              </a>
-            </p>
-          </div>
-          {thisOrder?.file && (
+      <AnimatePresence>
+        {!isEdit && (
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 },
+              exit: { opacity: 0 },
+            }}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{
+              duration: 1,
+            }}
+          >
             <div className="element">
-              <p className="key">Работа</p>
-              <p className="value link" onClick={downloadHandler}>
-                скачать
-              </p>
+              <p className="key">Фамилия и имя конкурсанта</p>
+              <p className="value">{initialState?.name}</p>
             </div>
-          )}
-          {thisOrder?.file2 && (
             <div className="element">
-              <p className="key">Квитанция</p>
-              <p className="value link" onClick={downloadHandler}>
-                скачать
-              </p>
+              <p className="key">Номинация</p>
+              <p className="value">{initialState?.nomPul}</p>
             </div>
-          )}
-          <div className="element">
-            <p className="key">Возрастная категория</p>
-            <p className="value">{initialState?.age}</p>
-          </div>
-          <div className="element">
-            <p className="key">Субъект Российской Федерации</p>
-            <p className="value">{initialState?.subject}</p>
-          </div>
-          <div className="element">
-            <p className="key">Населенный пункт</p>
-            <p className="value">{initialState?.punct}</p>
-          </div>
-          <div className="element">
-            <p className="key">Наименование учебного заведения</p>
-            <p className="value">{initialState?.graduate}</p>
-          </div>
-          {initialState?.language && (
+            {initialState?.link && (
+              <div className="element">
+                <p className="key">Ссылка на работу</p>
+                <p className="value">
+                  <a href={initialState?.link} target="_blank">
+                    {initialState?.link}
+                  </a>
+                </p>
+              </div>
+            )}
+            {thisOrder?.file && (
+              <div className="element">
+                <p className="key">Работа</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
+            {thisOrder?.file2 && (
+              <div className="element">
+                <p className="key">Квитанция</p>
+                <p className="value link" onClick={downloadHandler}>
+                  скачать
+                </p>
+              </div>
+            )}
             <div className="element">
-              <p className="key">Язык работы</p>
-              <p className="value">{initialState?.language}</p>
+              <p className="key">Возрастная категория</p>
+              <p className="value">{initialState?.age}</p>
             </div>
-          )}
-          {initialState?.language2 && (
             <div className="element">
-              <p className="key">Язык работы</p>
-              <p className="value">{initialState?.language2}</p>
+              <p className="key">Субъект Российской Федерации</p>
+              <p className="value">{initialState?.subject}</p>
             </div>
-          )}
-          <div className="element">
-            <p className="key">Количество кураторов</p>
-            <p className="value">{initialState?.curatorsAmount}</p>
-          </div>
-          <div className="element">
-            <p className="key">Информация по кураторам</p>
-            <p className="value">{initialState?.cur}</p>
-          </div>
-          <div className="element">
-            <p className="key">email</p>
-            <p className="value">{initialState?.email}</p>
-          </div>
-          <div className="element">
-            <p className="key">телефон</p>
-            <p className="value">{initialState?.phone}</p>
-          </div>
-          <div className="element">
-            <p className="key">Вариант участия</p>
-            <p className="value">{initialState?.tarif}</p>
-          </div>
-          {initialState?.name2 && (
             <div className="element">
-              <p className="key">Фамилия и имя второго конкурсанта</p>
-              <p className="value">{initialState?.name2}</p>
+              <p className="key">Населенный пункт</p>
+              <p className="value">{initialState?.punct}</p>
             </div>
-          )}
-          {initialState?.name3 && (
             <div className="element">
-              <p className="key">Фамилия и имя третьего конкурсанта</p>
-              <p className="value">{initialState?.name3}</p>
+              <p className="key">Наименование учебного заведения</p>
+              <p className="value">{initialState?.graduate}</p>
             </div>
-          )}
-          {initialState?.extra1 && (
+            {initialState?.language && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language}</p>
+              </div>
+            )}
+            {initialState?.language2 && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language2}</p>
+              </div>
+            )}
             <div className="element">
-              <p className="key">Дополнительное поле 1</p>
-              <p className="value">{initialState?.extra1}</p>
+              <p className="key">Количество кураторов</p>
+              <p className="value">{initialState?.curatorsAmount}</p>
             </div>
-          )}
-          {initialState?.extra2 && (
             <div className="element">
-              <p className="key">Дополнительное поле 2</p>
-              <p className="value">{initialState?.extra2}</p>
+              <p className="key">Информация по кураторам</p>
+              <p className="value">{initialState?.cur}</p>
             </div>
-          )}
-          {initialState?.extra3 && (
             <div className="element">
-              <p className="key">Дополнительное поле 3</p>
-              <p className="value">{initialState?.extra3}</p>
+              <p className="key">email</p>
+              <p className="value">{initialState?.email}</p>
             </div>
-          )}
-        </div>
-      )}
-      {isEdit && (
-        <form className="content" onSubmit={onSubmit}>
-          <div className="in">
-            <label>Фамилия и имя конкурсанта</label>
-            <Input
-              type="text"
-              name="name"
-              value={values.name}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Возрастная категория</label>
-            <Input
-              type="text"
-              name="age"
-              value={values.age}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Cубъект Российской Федерации</label>
-            <Input
-              type="text"
-              name="subject"
-              value={values.subject}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Населенный пункт</label>
-            <Input
-              type="text"
-              name="punct"
-              value={values.punct}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Наименование учебного заведения</label>
-            <Input
-              type="text"
-              name="punct"
-              value={values.graduate}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Номинация</label>
-            <Input
-              type="text"
-              name="nomPul"
-              value={values.nomPul}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Номинация</label>
-            <Input
-              type="text"
-              name="nomPul"
-              value={values.nomPul}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Язык работы</label>
-            <Input
-              type="text"
-              name="language"
-              value={values.language}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Язык работы</label>
-            <Input
-              type="text"
-              name="language2"
-              value={values.language2}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Ссылка на работу</label>
-            <Input
-              type="text"
-              name="link"
-              value={values.link}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Количество кураторов</label>
-            <Input
-              type="text"
-              name="curatorsAmount"
-              value={values.curatorsAmount}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Информация по кураторам</label>
-            <TextArea
-              type="text"
-              name="cur"
-              value={values.cur}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Email</label>
-            <Input
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Телефон</label>
-            <Input
-              type="text"
-              name="phone"
-              value={values.phone}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Вариант участия</label>
-            <Input
-              type="text"
-              name="tarif"
-              value={values.tarif}
-              onChange={changeHandler}
-            />
-          </div>
-          {values.tarif !== "Коллективный" && (
+            <div className="element">
+              <p className="key">телефон</p>
+              <p className="value">{initialState?.phone}</p>
+            </div>
+            <div className="element">
+              <p className="key">Вариант участия</p>
+              <p className="value">{initialState?.tarif}</p>
+            </div>
+            {initialState?.name2 && (
+              <div className="element">
+                <p className="key">Фамилия и имя второго конкурсанта</p>
+                <p className="value">{initialState?.name2}</p>
+              </div>
+            )}
+            {initialState?.name3 && (
+              <div className="element">
+                <p className="key">Фамилия и имя третьего конкурсанта</p>
+                <p className="value">{initialState?.name3}</p>
+              </div>
+            )}
+            {initialState?.extra1 && (
+              <div className="element">
+                <p className="key">Дополнительное поле 1</p>
+                <p className="value">{initialState?.extra1}</p>
+              </div>
+            )}
+            {initialState?.extra2 && (
+              <div className="element">
+                <p className="key">Дополнительное поле 2</p>
+                <p className="value">{initialState?.extra2}</p>
+              </div>
+            )}
+            {initialState?.extra3 && (
+              <div className="element">
+                <p className="key">Дополнительное поле 3</p>
+                <p className="value">{initialState?.extra3}</p>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isEdit && (
+          <motion.form
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 },
+              exit: { opacity: 0 },
+            }}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{
+              duration: 1,
+            }}
+            className="content"
+            onSubmit={onSubmit}
+          >
             <div className="in">
-              <label>Фамилия и имя второго конкурсанта</label>
+              <label>Фамилия и имя конкурсанта</label>
               <Input
                 type="text"
-                name="name2"
-                value={values.name2}
+                name="name"
+                value={values.name}
                 onChange={changeHandler}
               />
             </div>
-          )}
-          {values.tarif !== "Коллективный" && (
             <div className="in">
-              <label>Фамилия и имя третьего конкурсанта</label>
+              <label>Возрастная категория</label>
               <Input
                 type="text"
-                name="name3"
-                value={values.name3}
+                name="age"
+                value={values.age}
                 onChange={changeHandler}
               />
             </div>
-          )}
-          <div className="in">
-            <label>Дополнительное поле 1</label>
-            <Input
-              type="text"
-              name="extra1"
-              value={values.extra1}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Дополнительное поле 2</label>
-            <Input
-              type="text"
-              name="extra2"
-              value={values.extra2}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="in">
-            <label>Дополнительное поле 3</label>
-            <Input
-              type="text"
-              name="extra3"
-              value={values.extra3}
-              onChange={changeHandler}
-            />
-          </div>
-          <div className="actions">
-            <Button text="Сохранить" type="submit" />
-          </div>
-        </form>
-      )}
-      <motion.div className="edit">
-        <motion.div
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [0, 0, 270, 270, 0],
-            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-          }}
-          transition={{ duration: 3, delay: 1.5 }}
-          className="icon"
-          onClick={() => setIsEdit(!isEdit)}
-        >
-          <VscEdit />
+            <div className="in">
+              <label>Cубъект Российской Федерации</label>
+              <Input
+                type="text"
+                name="subject"
+                value={values.subject}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Населенный пункт</label>
+              <Input
+                type="text"
+                name="punct"
+                value={values.punct}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Наименование учебного заведения</label>
+              <Input
+                type="text"
+                name="punct"
+                value={values.graduate}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Номинация</label>
+              <Input
+                type="text"
+                name="nomPul"
+                value={values.nomPul}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Номинация</label>
+              <Input
+                type="text"
+                name="nomPul"
+                value={values.nomPul}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Язык работы</label>
+              <Input
+                type="text"
+                name="language"
+                value={values.language}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Язык работы</label>
+              <Input
+                type="text"
+                name="language2"
+                value={values.language2}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Ссылка на работу</label>
+              <Input
+                type="text"
+                name="link"
+                value={values.link}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Количество кураторов</label>
+              <Input
+                type="text"
+                name="curatorsAmount"
+                value={values.curatorsAmount}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Информация по кураторам</label>
+              <TextArea
+                type="text"
+                name="cur"
+                value={values.cur}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Email</label>
+              <Input
+                type="email"
+                name="email"
+                value={values.email}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Телефон</label>
+              <Input
+                type="text"
+                name="phone"
+                value={values.phone}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Вариант участия</label>
+              <Input
+                type="text"
+                name="tarif"
+                value={values.tarif}
+                onChange={changeHandler}
+              />
+            </div>
+            {values.tarif !== "Коллективный" && (
+              <div className="in">
+                <label>Фамилия и имя второго конкурсанта</label>
+                <Input
+                  type="text"
+                  name="name2"
+                  value={values.name2}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
+            {values.tarif !== "Коллективный" && (
+              <div className="in">
+                <label>Фамилия и имя третьего конкурсанта</label>
+                <Input
+                  type="text"
+                  name="name3"
+                  value={values.name3}
+                  onChange={changeHandler}
+                />
+              </div>
+            )}
+            <div className="in">
+              <label>Дополнительное поле 1</label>
+              <Input
+                type="text"
+                name="extra1"
+                value={values.extra1}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Дополнительное поле 2</label>
+              <Input
+                type="text"
+                name="extra2"
+                value={values.extra2}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="in">
+              <label>Дополнительное поле 3</label>
+              <Input
+                type="text"
+                name="extra3"
+                value={values.extra3}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="actions">
+              <Button text="Сохранить" type="submit" />
+            </div>
+          </motion.form>
+        )}
+      </AnimatePresence>
+      {thisOrder.status === "declined" && (
+        <motion.div className="edit">
+          <motion.div
+            animate={{
+              scale: [1, 2, 2, 1, 1],
+              rotate: [0, 0, 270, 270, 0],
+              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+            }}
+            transition={{ duration: 3, delay: 1.5 }}
+            className="icon"
+            onClick={() => setIsEdit(!isEdit)}
+          >
+            <VscEdit />
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </Wrapper>
   );
 };
@@ -459,7 +493,7 @@ const Wrapper = styled.div`
     bottom: 40px;
     display: flex;
     justify-content: flex-end;
-    margin-right: 4rem;
+    margin-right: 3rem;
     .icon {
       border: 1px solid var(--main-0);
       border-radius: 50%;
@@ -472,10 +506,10 @@ const Wrapper = styled.div`
         box-shadow: var(--bsh-1);
       }
       svg {
-        font-size: 2rem;
+        font-size: 1.2rem;
         cursor: pointer;
         color: var(--main-0);
-        margin: 0.7rem;
+        margin: 0.4rem;
       }
     }
   }
@@ -514,6 +548,16 @@ const Wrapper = styled.div`
   @media (min-width: 768px) {
   }
   @media (min-width: 992px) {
+    .edit {
+      bottom: 40px;
+      margin-right: 4rem;
+      .icon {
+        svg {
+          font-size: 2rem;
+          margin: 0.7rem;
+        }
+      }
+    }
   }
   @media (min-width: 1200px) {
   }
