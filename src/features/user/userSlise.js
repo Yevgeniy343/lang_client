@@ -278,7 +278,7 @@ const userSlice = createSlice({
     });
     builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      // state.childOrders = payload.childOrders;
+      state.childOrders = payload;
       // state.adultOrders = payload.adultOrders;
     });
     builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {

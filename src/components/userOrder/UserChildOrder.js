@@ -15,7 +15,7 @@ const { REACT_APP_URL_API } = process.env;
 
 const UserChildOrder = ({ orderId }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const { events, childOrders } = useSelector((store) => store.user);
+  const { events, childOrders, user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const thisOrder = childOrders.find((child) => child._id === orderId);
@@ -85,7 +85,7 @@ const UserChildOrder = ({ orderId }) => {
         extra1: values.extra1,
         extra2: values.extra2,
         extra3: values.extra3,
-        decline: "",
+        userId: user._id,
       })
     );
   };
@@ -404,7 +404,7 @@ const UserChildOrder = ({ orderId }) => {
             rotate: [0, 0, 270, 270, 0],
             borderRadius: ["0%", "0%", "50%", "50%", "0%"],
           }}
-          transition={{ duration: 3, delay: 2 }}
+          transition={{ duration: 3, delay: 1.5 }}
           className="icon"
           onClick={() => setIsEdit(!isEdit)}
         >
