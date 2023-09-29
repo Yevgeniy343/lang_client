@@ -441,7 +441,6 @@ const AdminEditChildOrder = () => {
                     onChange={changeHandler}
                   />
                 </div>
-
                 <div className="in">
                   <label>Вариант участия</label>
                   <Input

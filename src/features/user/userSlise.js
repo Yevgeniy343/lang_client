@@ -9,6 +9,7 @@ import {
   createChildOrderThunk,
   createAdultOrderThunk,
   getAllOrdersThunk,
+  editChildrenOrderThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -96,6 +97,13 @@ export const getAllOrders = createAsyncThunk(
   "user/getAllOrders",
   async (info, thunkAPI) => {
     return getAllOrdersThunk(`/user/getAllOrders/${info}`, info, thunkAPI);
+  }
+);
+
+export const editChildrenOrder = createAsyncThunk(
+  "user/editChildrenOrder",
+  async (info, thunkAPI) => {
+    return editChildrenOrderThunk(`/user/editChildrenOrder/`, info, thunkAPI);
   }
 );
 
@@ -260,6 +268,20 @@ const userSlice = createSlice({
       state.adultOrders = payload.adultOrders;
     });
     builder.addCase(getAllOrders.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // editChildrenOrder
+    builder.addCase(editChildrenOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      // state.childOrders = payload.childOrders;
+      // state.adultOrders = payload.adultOrders;
+    });
+    builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
