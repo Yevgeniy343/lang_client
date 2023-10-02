@@ -627,22 +627,21 @@ const UserAdultOrder = ({ orderId }) => {
           </motion.form>
         )}
       </AnimatePresence>
-      {thisOrder.status === "declined" && (
-        <motion.div className="edit">
-          <motion.div
-            animate={{
-              scale: [1, 2, 2, 1, 1],
-              rotate: [0, 0, 270, 270, 0],
-              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-            }}
-            transition={{ duration: 3, delay: 1.5 }}
-            className="icon"
-            onClick={() => setIsEdit(!isEdit)}
-          >
-            <VscEdit />
-          </motion.div>
+
+      <motion.div className="edit">
+        <motion.div
+          animate={{
+            scale: [1, 2, 2, 1, 1],
+            rotate: [0, 0, 270, 270, 0],
+            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+          }}
+          transition={{ duration: 3, delay: 1.5 }}
+          className="icon"
+          onClick={() => setIsEdit(!isEdit)}
+        >
+          <VscEdit />
         </motion.div>
-      )}
+      </motion.div>
     </Wrapper>
   );
 };
