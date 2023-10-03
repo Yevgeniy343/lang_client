@@ -287,7 +287,6 @@ const userSlice = createSlice({
     builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.childOrders = payload;
-      // state.adultOrders = payload.adultOrders;
     });
     builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -301,6 +300,7 @@ const userSlice = createSlice({
     builder.addCase(editAdultOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.adultOrders = payload;
+      console.log(payload);
     });
     builder.addCase(editAdultOrder.rejected, (state, { payload }) => {
       state.isLoading = false;

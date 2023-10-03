@@ -9,6 +9,8 @@ import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
 import Button from "../../components-special/Button";
 import { editAdultOrder } from "../../features/user/userSlise";
+import Select2 from "../../components-special/Select2";
+import { subjects, languages } from "../../data/data-order";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -55,6 +57,11 @@ const UserAdultOrder = ({ orderId }) => {
     nomPul: thisOrder?.nomPul,
   };
 
+  const [age, setAge] = useState();
+  const [subject, setSubject] = useState();
+  const [subject2, setSubject2] = useState();
+  const [subject3, setSubject3] = useState();
+  const [language, setLanguage] = useState();
   const [values, setValues] = useState(initialState);
 
   const changeHandler = (e) => {
@@ -72,6 +79,20 @@ const UserAdultOrder = ({ orderId }) => {
     });
   };
 
+  const subjectHandler = (a) => {
+    setSubject(a);
+  };
+  const subject2Handler = (a) => {
+    setSubject2(a);
+  };
+  const subject3Handler = (a) => {
+    setSubject3(a);
+  };
+
+  const languageHandler = (a) => {
+    setLanguage(a);
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -84,9 +105,14 @@ const UserAdultOrder = ({ orderId }) => {
         part: values.part,
         curatorsAmount: values.curatorsAmount,
         cur: values.cur,
-        subject: values.subject,
-        subject2: values.subject2,
-        subject3: values.subject3,
+        // subject: values.subject,
+        subject: subject,
+
+        // subject2: values.subject2,
+
+        subject2: subject2,
+        // subject3: values.subject3,
+        subject3: subject3,
         punct: values.punct,
         punct2: values.punct2,
         punct3: values.punct3,
@@ -109,6 +135,7 @@ const UserAdultOrder = ({ orderId }) => {
         extra1: values.extra1,
         extra2: values.extra2,
         extra3: values.extra3,
+        userId: user._id,
       })
     );
   };
@@ -394,11 +421,16 @@ const UserAdultOrder = ({ orderId }) => {
             </div>
             <div className="in">
               <label>Cубъект Российской Федерации</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="subject"
                 value={values.subject}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={subjectHandler}
+                data={subjects}
+                def={initialState.subject}
               />
             </div>
             <div className="in">
@@ -448,11 +480,16 @@ const UserAdultOrder = ({ orderId }) => {
             </div>
             <div className="in">
               <label>Cубъект Российской Федерации второго участника</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="subject"
                 value={values.subject2}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={subject2Handler}
+                data={subjects}
+                def={initialState.subject2}
               />
             </div>
             <div className="in">
@@ -502,11 +539,16 @@ const UserAdultOrder = ({ orderId }) => {
             </div>
             <div className="in">
               <label>Cубъект Российской Федерации третьего участника</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="subject3"
                 value={values.subject3}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={subject3Handler}
+                data={subjects}
+                def={initialState.subject3}
               />
             </div>
             <div className="in">
@@ -530,15 +572,20 @@ const UserAdultOrder = ({ orderId }) => {
 
             <div className="in">
               <label>Язык работы</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="language"
                 value={values.language}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={languageHandler}
+                data={languages}
+                def={initialState.language}
               />
             </div>
             <div className="in">
-              <label>Язык работы</label>
+              <label>Язык работы, если его нет в списке</label>
               <Input
                 type="text"
                 name="language2"

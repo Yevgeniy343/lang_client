@@ -101,3 +101,12 @@ export const nom = [
   { id: nanoid(), nomination: "Фотография" },
   { id: nanoid(), nomination: "Другое" },
 ];
+
+export const ages = [
+  { id: nanoid(), label: "3-5 лет" },
+  { id: nanoid(), label: "6-8 лет" },
+  { id: nanoid(), label: "9-12 лет" },
+  { id: nanoid(), label: "13-15 лет" },
+  { id: nanoid(), label: "16-18 лет" },
+  { id: nanoid(), label: "19-22 лет" },
+];

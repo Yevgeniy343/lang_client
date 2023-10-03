@@ -178,40 +178,18 @@ const ChildrenOrder = ({ passCalculate }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (
+      !tarif ||
       !values.name ||
-      !subject ||
       !values.email ||
       !phone.phone ||
-      !language
+      !language ||
+      !nomPul
     ) {
       toast.error("Введите все значения");
       return;
     } else {
       dispatch(createChildOrder(formData));
     }
-    // console.log("--------------");
-    // console.log("tarif = ", tarif);
-    // console.log("name = ", values.name);
-    // console.log("name2 = ", values.name2);
-    // console.log("name3 = ", values.name3);
-    // console.log("part = ", part);
-    // console.log("curatorsAmount = ", curatorsAmount);
-    // console.log("curators = ", cur);
-    // console.log("age = ", age);
-    // console.log("subject = ", subject);
-    // console.log("punct = ", values.punct);
-    // console.log("graduate = ", values.graduate);
-    // console.log("nomination = ", nomPul);
-    // console.log("language = ", language);
-    // console.log("language2 = ", values.language2);
-    // console.log("link = ", values.link);
-    // console.log("file 1 ", file);
-    // console.log("file 2 ", file2);
-    // console.log("email = ", values.email);
-    // console.log("phone = ", phone);
-    // console.log("extra1 = ", values.extra1);
-    // console.log("extra2 = ", values.extra2);
-    // console.log("extra3 = ", values.extra3);
   };
 
   const amountPartHandler = (part) => {

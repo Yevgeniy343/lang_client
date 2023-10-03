@@ -10,6 +10,8 @@ import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
 import { editChildrenOrder } from "../../features/user/userSlise";
 import Button from "../../components-special/Button";
+import Select2 from "../../components-special/Select2";
+import { ages, subjects, languages } from "../../data/data-order";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -43,6 +45,9 @@ const UserChildOrder = ({ orderId }) => {
     nomPul: thisOrder?.nomPul,
   };
 
+  const [age, setAge] = useState();
+  const [subject, setSubject] = useState();
+  const [language, setLanguage] = useState();
   const [values, setValues] = useState(initialState);
 
   const changeHandler = (e) => {
@@ -60,6 +65,18 @@ const UserChildOrder = ({ orderId }) => {
     });
   };
 
+  const ageHandler = (a) => {
+    setAge(a);
+  };
+
+  const subjectHandler = (a) => {
+    setSubject(a);
+  };
+
+  const languageHandler = (a) => {
+    setLanguage(a);
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -72,12 +89,15 @@ const UserChildOrder = ({ orderId }) => {
         part: values.part,
         curatorsAmount: values.curatorsAmount,
         cur: values.cur,
-        age: values.age,
-        subject: values.subject,
+        // age: values.age,
+        age: age,
+        // subject: values.subject,
+        subject: subject,
         punct: values.punct,
         graduate: values.graduate,
         nomPul: values.nomPul,
-        language: values.language,
+        // language: values.language,
+        language: language,
         language2: values.language2,
         link: values.link,
         email: values.email,
@@ -250,20 +270,30 @@ const UserChildOrder = ({ orderId }) => {
             </div>
             <div className="in">
               <label>Возрастная категория</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="age"
                 value={values.age}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={ageHandler}
+                data={ages}
+                def={initialState.age}
               />
             </div>
             <div className="in">
               <label>Cубъект Российской Федерации</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="subject"
                 value={values.subject}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={subjectHandler}
+                data={subjects}
+                def={initialState.subject}
               />
             </div>
             <div className="in">
@@ -279,7 +309,7 @@ const UserChildOrder = ({ orderId }) => {
               <label>Наименование учебного заведения</label>
               <Input
                 type="text"
-                name="punct"
+                name="graduate"
                 value={values.graduate}
                 onChange={changeHandler}
               />
@@ -294,25 +324,21 @@ const UserChildOrder = ({ orderId }) => {
               />
             </div>
             <div className="in">
-              <label>Номинация</label>
-              <Input
-                type="text"
-                name="nomPul"
-                value={values.nomPul}
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="in">
               <label>Язык работы</label>
-              <Input
+              {/* <Input
                 type="text"
                 name="language"
                 value={values.language}
                 onChange={changeHandler}
+              /> */}
+              <Select2
+                passState={languageHandler}
+                data={languages}
+                def={initialState.language}
               />
             </div>
             <div className="in">
-              <label>Язык работы</label>
+              <label>Язык работы, если его нет в списке</label>
               <Input
                 type="text"
                 name="language2"

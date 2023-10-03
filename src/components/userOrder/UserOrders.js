@@ -49,7 +49,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
     /* margin: 0.5rem 0; */
-
     width: 100%;
     p {
       padding: 0.5rem;

@@ -9,10 +9,10 @@ const animations = {
   exit: { opacity: 0, y: -50 },
 };
 
-const Select = ({ passState, data }) => {
-  // console.log(data);
+const Select = ({ passState, data, def }) => {
+  console.log(def);
 
-  const [state, setState] = useState();
+  const [state, setState] = useState(def);
   passState(state);
   const [arrow, setArrow] = useState(false);
 
@@ -48,18 +48,6 @@ const Select = ({ passState, data }) => {
                 {d.label}
               </p>
             ))}
-            {/* <p className="item" onClick={itemHandler}>
-              2
-            </p>
-            <p className="item" onClick={itemHandler}>
-              3
-            </p>
-            <p className="item" onClick={itemHandler}>
-              4
-            </p>
-            <p className="item" onClick={itemHandler}>
-              5
-            </p> */}
           </div>
         </motion.div>
       )}
@@ -107,7 +95,7 @@ const Wrapper = styled.div`
   .menu {
     display: flex;
     justify-content: center;
-    /* position: absolute; */
+    position: absolute;
     /* border-radius: 5px; */
     border-left: 2px solid var(--main-1);
     border-right: 2px solid var(--main-1);
