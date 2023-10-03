@@ -698,6 +698,7 @@ const Wrapper = styled.div`
   overflow-y: auto;
   margin: 1rem;
   position: relative;
+
   ::-webkit-scrollbar {
     width: 7px;
   }
@@ -787,6 +788,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
   }
+
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {

@@ -19,6 +19,7 @@ const initialState = {
   jury: getJuryFromLocalStorage(),
   tokenJ: getTokenJuryFromLocalStorage(),
   isSidebarOpen: false,
+  currentSmallMenu: "",
 };
 
 export const registerJury = createAsyncThunk(
@@ -57,6 +58,9 @@ const jurySlice = createSlice({
     },
     sidebarOpenHandler: (state) => {
       state.isSidebarOpen = true;
+    },
+    smallMenuHandler: (state, { payload }) => {
+      state.currentSmallMenu = payload;
     },
   },
   extraReducers: (builder) => {
@@ -111,6 +115,10 @@ const jurySlice = createSlice({
   },
 });
 
-export const { logOutJury, sidebarCloseHandler, sidebarOpenHandler } =
-  jurySlice.actions;
+export const {
+  logOutJury,
+  sidebarCloseHandler,
+  sidebarOpenHandler,
+  smallMenuHandler,
+} = jurySlice.actions;
 export default jurySlice.reducer;
