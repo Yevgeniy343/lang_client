@@ -6,9 +6,12 @@ import NavBar from "../../components/juryNavigations/NavBar";
 import SideBar from "../../components/juryNavigations/SideBar";
 import JurySmallMenu from "../../components/JurySmallMenu";
 import Stars from "./Stars";
+import JuryProfile from "../../components/JuryProfile";
+import Actual from "../../components/Actual";
+import Works from "../../components/Works";
 
 const JuryArea = () => {
-  const { jury } = useSelector((store) => store.jury);
+  const { jury, currentSmallMenu } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   return (
     <Wrapper>
@@ -26,6 +29,9 @@ const JuryArea = () => {
           </div>
           <div className="right">
             <Stars />
+            {currentSmallMenu === "Профиль" && <JuryProfile />}
+            {currentSmallMenu === "Актуальные мероприятия" && <Actual />}
+            {currentSmallMenu === "Работы для проверки" && <Works />}
           </div>
         </div>
       </div>

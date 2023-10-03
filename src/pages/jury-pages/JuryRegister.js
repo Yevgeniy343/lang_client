@@ -39,7 +39,7 @@ const JuryRegister = () => {
   const { jury, isLoading } = useSelector((store) => store.jury);
   const [values, setValues] = useState(initialState);
   const [remind, setRemind] = useState(false);
-  const [state, setState] = useState("");
+  const [phone, setState] = useState("");
   const [sp, setSp] = useState();
   console.log(sp);
   const [lang, setLang] = useState();
@@ -48,7 +48,6 @@ const JuryRegister = () => {
   console.log(nomins);
   const [subj, setSubj] = useState();
   console.log(subj);
-  console.log(state);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,6 +55,11 @@ const JuryRegister = () => {
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  console.log(values.other);
+  console.log(values.oy);
+  console.log(values.punct);
+  console.log(values.phone);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +72,21 @@ const JuryRegister = () => {
       dispatch(loginJury({ email: email, password: password }));
       return;
     }
-    dispatch(registerJury({ name, email, password }));
+    dispatch(
+      registerJury({
+        name,
+        email,
+        password,
+        sp,
+        lang,
+        nomins,
+        subj,
+        spOther: values.other,
+        oy: values.oy,
+        punct: values.punct,
+        phone: phone.phone,
+      })
+    );
   };
 
   const toggleMemberHandler = () => {
@@ -193,7 +211,7 @@ const JuryRegister = () => {
                 <div className="in">
                   <label>Населенный пункт</label>
                   <Input
-                    placeholder="Насеоенный пункт"
+                    placeholder="Населенный пункт"
                     type="text"
                     name="punct"
                     value={values.punct}
