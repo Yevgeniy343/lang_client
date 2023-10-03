@@ -218,7 +218,6 @@ const Wrapper = styled.div`
     }
   }
   .actions {
-    /* width: 100%; */
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
@@ -274,7 +273,6 @@ const Wrapper = styled.div`
       }
     }
     .actions {
-      /* width: 100%; */
       display: flex;
       justify-content: flex-start;
       margin-bottom: 1rem;

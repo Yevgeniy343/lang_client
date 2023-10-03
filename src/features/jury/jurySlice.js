@@ -3,6 +3,7 @@ import {
   registerJuryThunk,
   loginJuryThunk,
   remindJuryThunk,
+  changeJuryPassThunk,
 } from "./jury-thunk";
 import {
   addJuryToLocalStorage,
@@ -23,23 +24,31 @@ const initialState = {
 };
 
 export const registerJury = createAsyncThunk(
-  "user/registerJury",
+  "jury/registerJury",
   async (jury, thunkAPI) => {
     return registerJuryThunk("/jury-auth/signup", jury, thunkAPI);
   }
 );
 
 export const loginJury = createAsyncThunk(
-  "user/loginJury",
+  "jury/loginJury",
   async (jury, thunkAPI) => {
     return loginJuryThunk(`/jury-auth/login/`, jury, thunkAPI);
   }
 );
 
 export const remindJury = createAsyncThunk(
-  "user/remindJury",
+  "jury/remindJury",
   async (jury, thunkAPI) => {
     return remindJuryThunk(`/jury-auth/remind/`, jury, thunkAPI);
+  }
+);
+
+export const changeJuryPass = createAsyncThunk(
+  "jury/pass",
+  async (jury, thunkAPI) => {
+    console.log(jury);
+    return changeJuryPassThunk(`/jury-auth/changepass/`, jury, thunkAPI);
   }
 );
 
@@ -109,6 +118,19 @@ const jurySlice = createSlice({
       toast.success(payload.msg);
     });
     builder.addCase(remindJury.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // changeJuryPass
+    builder.addCase(changeJuryPass.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(changeJuryPass.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success(`Пароль успешно изменен`);
+    });
+    builder.addCase(changeJuryPass.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
