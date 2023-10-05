@@ -9,10 +9,16 @@ import Stars from "./Stars";
 import JuryProfile from "../../components/JuryProfile";
 import Actual from "../../components/Actual";
 import Works from "../../components/Works";
+import { getOrders } from "../../features/jury/jurySlice";
 
 const JuryArea = () => {
   const { jury, currentSmallMenu } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrders({ id: jury._id }));
+  }, []);
+
   return (
     <Wrapper>
       <NavBar />

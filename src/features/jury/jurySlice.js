@@ -4,6 +4,7 @@ import {
   loginJuryThunk,
   remindJuryThunk,
   changeJuryPassThunk,
+  getOrdersThunk,
 } from "./jury-thunk";
 import {
   addJuryToLocalStorage,
@@ -21,6 +22,8 @@ const initialState = {
   tokenJ: getTokenJuryFromLocalStorage(),
   isSidebarOpen: false,
   currentSmallMenu: "",
+  childOrders: [],
+  adultOrders: [],
 };
 
 export const registerJury = createAsyncThunk(
@@ -48,6 +51,13 @@ export const juryPassword = createAsyncThunk(
   "jury/pass",
   async (jury, thunkAPI) => {
     return changeJuryPassThunk(`/jury/changepass/`, jury, thunkAPI);
+  }
+);
+
+export const getOrders = createAsyncThunk(
+  "jury/getOrders",
+  async (jury, thunkAPI) => {
+    return getOrdersThunk(`/jury/getOrders/${jury.id}`, jury, thunkAPI);
   }
 );
 
@@ -129,6 +139,19 @@ const jurySlice = createSlice({
       toast.success(`Пароль успешно изменен`);
     });
     builder.addCase(juryPassword.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    builder.addCase(getOrders.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getOrders.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.childOrders = payload.childOrders;
+      state.adultOrders = payload.adultOrders;
+    });
+    builder.addCase(getOrders.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

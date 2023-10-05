@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Works = () => {
+  const {} = useSelector((store) => store.user);
+
   return <Wrapper>works</Wrapper>;
 };
 const Wrapper = styled.div`
