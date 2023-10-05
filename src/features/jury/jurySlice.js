@@ -44,11 +44,10 @@ export const remindJury = createAsyncThunk(
   }
 );
 
-export const changeJuryPass = createAsyncThunk(
+export const juryPassword = createAsyncThunk(
   "jury/pass",
   async (jury, thunkAPI) => {
-    console.log(jury);
-    return changeJuryPassThunk(`/jury-auth/changepass/`, jury, thunkAPI);
+    return changeJuryPassThunk(`/jury/changepass/`, jury, thunkAPI);
   }
 );
 
@@ -122,15 +121,14 @@ const jurySlice = createSlice({
       toast.error(payload);
     });
 
-    // changeJuryPass
-    builder.addCase(changeJuryPass.pending, (state) => {
+    builder.addCase(juryPassword.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(changeJuryPass.fulfilled, (state, { payload }) => {
+    builder.addCase(juryPassword.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       toast.success(`Пароль успешно изменен`);
     });
-    builder.addCase(changeJuryPass.rejected, (state, { payload }) => {
+    builder.addCase(juryPassword.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

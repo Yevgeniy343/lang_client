@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import InputPass from "../components-special/InputPass";
 import Button from "../components-special/Button";
-import { changeJuryPass } from "../features/jury/jurySlice";
+import { juryPassword } from "../features/jury/jurySlice";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
@@ -33,8 +33,9 @@ const JuryChangePassword = () => {
       toast.error("Введенные пароли не совпадают !");
       return;
     }
-    dispatch();
-    changeJuryPass({ pass: pass, pass1: pass1, pass2: pass2, id: jury._id });
+    dispatch(
+      juryPassword({ pass: pass, pass1: pass1, pass2: pass2, id: jury._id })
+    );
     setValues(initialState);
   };
 

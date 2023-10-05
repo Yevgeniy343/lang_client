@@ -137,7 +137,7 @@ const EventAdminModal = () => {
   formData.append("id", currentEvent.id);
   formData.append("childNoms", childNominations);
   formData.append("adultNoms", adultNominations);
-  formData.append("nomId", thisNom._id);
+  formData.append("nomId", thisNom?._id);
   formData.append("extra1", values.extra1);
   formData.append("extra2", values.extra2);
   formData.append("extra3", values.extra3);
