@@ -292,7 +292,7 @@ const EventAdminModal = () => {
             <label>
               <span>*</span>Список номинаций для педагогов
             </label>
-            {nominations.map((n) => (
+            {nominations?.map((n) => (
               <CheckboxAdult key={n._id} label={n.name} />
             ))}
           </div>

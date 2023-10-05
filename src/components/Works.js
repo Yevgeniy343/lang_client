@@ -1,11 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import JuruOrders from "./JuruOrders";
 
 const Works = () => {
-  const {} = useSelector((store) => store.user);
+  const { adultOrders, childOrders } = useSelector((store) => store.jury);
 
-  return <Wrapper>works</Wrapper>;
+  return (
+    <Wrapper>
+      <p>жюри доступны все заявки</p>
+      {adultOrders.map((order) => (
+        <JuruOrders
+          key={order._id}
+          id={order._id}
+          number={order.number}
+          link={order.link}
+          file={order.file}
+        />
+      ))}
+      {childOrders.map((order) => (
+        <JuruOrders
+          key={order._id}
+          id={order._id}
+          number={order.number}
+          link={order.link}
+          file={order.file}
+          age={order.age}
+        />
+      ))}
+    </Wrapper>
+  );
 };
 const Wrapper = styled.div`
   @media (min-width: 576px) {

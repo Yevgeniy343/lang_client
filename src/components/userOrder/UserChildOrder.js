@@ -139,7 +139,7 @@ const UserChildOrder = ({ orderId }) => {
               <div className="element">
                 <p className="key">Ссылка на работу</p>
                 <p className="value">
-                  <a href={initialState?.link} target="_blank">
+                  <a href={initialState?.link} target="blank">
                     {initialState?.link}
                   </a>
                 </p>
