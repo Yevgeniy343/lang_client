@@ -55,6 +55,7 @@ const UserAdultOrder = ({ orderId }) => {
     pert: thisOrder?.part,
     curatorsAmount: thisOrder?.curatorsAmount,
     nomPul: thisOrder?.nomPul,
+    number: thisOrder?.number,
   };
 
   const [age, setAge] = useState();
@@ -157,6 +158,10 @@ const UserAdultOrder = ({ orderId }) => {
               duration: 1,
             }}
           >
+            <div className="element">
+              <p className="key">id</p>
+              <p className="value">{initialState?.number}</p>
+            </div>
             <div className="element">
               <p className="key">Фамилия и имя конкурсанта</p>
               <p className="value">{initialState?.name}</p>

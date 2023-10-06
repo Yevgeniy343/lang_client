@@ -27,6 +27,7 @@ const UserOrders = () => {
           eventId={child.eventId}
           name={child.name}
           type="child"
+          number={child.number}
         />
       ))}
       {adultOrders.map((adult) => (
@@ -38,6 +39,7 @@ const UserOrders = () => {
           eventId={adult.eventId}
           name={adult.name}
           type="adult"
+          number={adult.number}
         />
       ))}
     </Wrapper>

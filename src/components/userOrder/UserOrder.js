@@ -5,7 +5,15 @@ import { motion } from "framer-motion";
 import UserChildOrder from "./UserChildOrder";
 import UserAdultOrder from "./UserAdultOrder";
 
-const UserOrder = ({ orderId, status, nomPul, eventId, name, type }) => {
+const UserOrder = ({
+  orderId,
+  status,
+  nomPul,
+  eventId,
+  name,
+  type,
+  number,
+}) => {
   const { events } = useSelector((store) => store.user);
 
   const [isExtra, setIsExtra] = useState(false);
@@ -41,6 +49,9 @@ const UserOrder = ({ orderId, status, nomPul, eventId, name, type }) => {
             <span>статус:</span> отклонено
           </p>
         )}
+        <p>
+          <span>id:</span> {number}
+        </p>
         <p>
           <span>конкурс:</span> {thisEvent?.name}
         </p>
@@ -126,7 +137,7 @@ const Wrapper = styled.div`
   }
   p {
     color: var(--main-0);
-    width: 300px;
+    width: 250px;
     margin: 0;
   }
   .extra {

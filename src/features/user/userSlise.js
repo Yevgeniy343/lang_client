@@ -287,6 +287,7 @@ const userSlice = createSlice({
     builder.addCase(editChildrenOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.childOrders = payload;
+      toast.success(`Изменения сохранены !`);
     });
     builder.addCase(editChildrenOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -300,7 +301,7 @@ const userSlice = createSlice({
     builder.addCase(editAdultOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.adultOrders = payload;
-      console.log(payload);
+      toast.success(`Изменения сохранены !`);
     });
     builder.addCase(editAdultOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
