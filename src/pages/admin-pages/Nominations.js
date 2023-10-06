@@ -9,19 +9,20 @@ import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { createNom, getNom } from "../../features/adminSlice";
 import Nomination from "../../components/Nomination";
+import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 
 const initialState = [
   {
-    nom1: "",
-    nom2: "",
-    nom3: "",
+    nom1: false,
+    nom2: false,
+    nom3: false,
   },
 ];
 const Nominations = () => {
   const { nominations } = useSelector((store) => store.admin);
-  const [nom1, setNom1] = useState(initialState);
-  const [nom2, setNom2] = useState(initialState);
-  const [nom3, setNom3] = useState(initialState);
+  const [nom1, setNom1] = useState(false);
+  const [nom2, setNom2] = useState(false);
+  const [nom3, setNom3] = useState(false);
   const [values, setValues] = useState(initialState);
   const dispatch = useDispatch();
   console.log(nom1);
@@ -36,8 +37,8 @@ const Nominations = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const nomHandler1 = (data) => {
-    setNom1(data);
+  const nomHandler1 = () => {
+    setNom1(!nom1);
   };
   const nomHandler2 = (data) => {
     setNom2(data);
@@ -82,20 +83,17 @@ const Nominations = () => {
               value={values.name}
               onChange={changeHandler}
             />
-            <Checkbox
+            <CheckboxAgreement
               passState={nomHandler1}
               label="доступно прикрепление ссылки"
-              indicator={nom1}
             />
-            <Checkbox
+            <CheckboxAgreement
               passState={nomHandler2}
               label="доступно прикрепление файла"
-              indicator={nom2}
             />
-            <Checkbox
+            <CheckboxAgreement
               passState={nomHandler3}
               label="доступен выбор языка"
-              indicator={nom3}
             />
           </div>
 

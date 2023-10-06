@@ -11,9 +11,9 @@ const Nomination = ({ name, link, file, language, id }) => {
     <Wrapper>
       <div className="div">
         <p className="name">{name}</p>
-        {link && <p>доступно прикрепление ссылки</p>}
-        {file && <p>доступно прикрепление файла</p>}
-        {language && <p>доступен выбор языка</p>}
+        {link === true && <p>доступно прикрепление ссылки</p>}
+        {file === true && <p>доступно прикрепление файла</p>}
+        {language === true && <p>доступен выбор языка</p>}
         <MdDelete onClick={() => dispatch(deleteNom({ id: id }))} />
       </div>
     </Wrapper>
