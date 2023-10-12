@@ -274,13 +274,15 @@ const AdultOrder = ({ passCalculate }) => {
   formData.append("number", number);
   formData.append("userId", user._id);
 
+  formData.append("eventName", currentOrder.name);
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (
       !values.name ||
-      // !values.job_title ||
-      // !values.job ||
-      // !values.internship ||
+      !values.job_title ||
+      !values.job ||
+      !values.internship ||
       !subject ||
       !values.email ||
       !phone.phone

@@ -175,6 +175,8 @@ const ChildrenOrder = ({ passCalculate }) => {
   formData.append("number", number);
   formData.append("userId", user._id);
 
+  formData.append("eventName", currentOrder.name);
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (!tarif || !values.name || !values.email || !phone.phone || !nomPul) {
