@@ -307,8 +307,8 @@ const Wrapper = styled.div`
     width: 100%;
     p {
       padding: 0.5rem;
-      width: 220px;
-      min-width: 220px;
+      width: 140px;
+      min-width: 140px;
     }
   }
   .key {

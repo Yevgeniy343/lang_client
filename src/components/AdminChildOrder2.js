@@ -73,15 +73,15 @@ const Wrapper = styled.div`
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    height: 50px;
+    height: 40px;
     :hover {
       background-color: var(--main-3);
       cursor: pointer;
     }
     p {
-      padding: 0.5rem;
-      width: 220px;
-      min-width: 220px;
+      padding: 0.3rem;
+      width: 140px;
+      min-width: 140px;
     }
   }
   .pending {

@@ -28,7 +28,7 @@ const AdultOrder = ({ passCalculate }) => {
   const currentMonth = today.getMonth() + 1;
   const currentDay = today.getDate();
   const randomNumber = _.random(100000, 999999);
-  const number = currentMonth + "/" + currentDay + "/" + randomNumber + "-2";
+  const number = currentMonth + currentDay + randomNumber;
 
   const dispatch = useDispatch();
   const filePickerRef = useRef();
@@ -283,8 +283,8 @@ const AdultOrder = ({ passCalculate }) => {
       // !values.internship ||
       !subject ||
       !values.email ||
-      !phone.phone ||
-      !language
+      !phone.phone
+      // !language
     ) {
       console.log(values);
       toast.error("Введите все значения");

@@ -28,7 +28,7 @@ const ChildrenOrder = ({ passCalculate }) => {
   const currentMonth = today.getMonth() + 1;
   const currentDay = today.getDate();
   const randomNumber = _.random(100000, 999999);
-  const number = currentMonth + "/" + currentDay + "/" + randomNumber + "-1";
+  const number = currentMonth + currentDay + randomNumber;
 
   const thisNom = noms.find((n) => n.eventId === currentOrder.id);
   const thisNomLF = nomins.find((n) => n.name === nomPul);

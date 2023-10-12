@@ -108,8 +108,8 @@ const UserOrder = ({
 
 const Wrapper = styled.div`
   .header {
-    padding: 1rem;
-    display: flex;
+    padding: 0.2rem;
+    /* display: flex; */
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
@@ -158,12 +158,12 @@ const Wrapper = styled.div`
     span {
     }
     p {
-      width: 300px;
+      width: 150px;
     }
   }
   @media (min-width: 992px) {
     p {
-      margin: 0.5rem;
+      margin: 0.3rem;
     }
   }
   @media (min-width: 1200px) {
