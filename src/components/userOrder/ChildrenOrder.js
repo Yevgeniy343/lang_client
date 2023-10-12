@@ -177,14 +177,7 @@ const ChildrenOrder = ({ passCalculate }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (
-      !tarif ||
-      !values.name ||
-      !values.email ||
-      !phone.phone ||
-      !language ||
-      !nomPul
-    ) {
+    if (!tarif || !values.name || !values.email || !phone.phone || !nomPul) {
       toast.error("Введите все значения");
       return;
     } else {

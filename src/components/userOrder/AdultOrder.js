@@ -278,9 +278,9 @@ const AdultOrder = ({ passCalculate }) => {
     e.preventDefault();
     if (
       !values.name ||
-      !values.job_title ||
-      !values.job ||
-      !values.internship ||
+      // !values.job_title ||
+      // !values.job ||
+      // !values.internship ||
       !subject ||
       !values.email ||
       !phone.phone ||
