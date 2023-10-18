@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Button from "../../components-special/Button";
 import { useSelector, useDispatch } from "react-redux";
 import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
-import AdminEvents from "./AdminEvents";
-import Event from "../../components/adminComponents/Event";
-import EventAdminModal from "../../components/adminModal/eventAdminModal";
-import AdminChildOrder from "../../components/AdminChildOrder";
+
 import AdminChildOrder2 from "../../components/AdminChildOrder2";
 import AdminAdultOrder2 from "../../components/AdminAdultOrder2";
 import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
@@ -15,12 +11,13 @@ import _ from "lodash";
 import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrder";
 import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrder";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
+import SelectEvents from "../../components-special/SelectEvents";
+import { MdOutlineAirlineSeatLegroomReduced } from "react-icons/md";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
-  const { childOrders, adultOrders, isChildOrder, isAdultOrder } = useSelector(
-    (store) => store.admin
-  );
+  const { childOrders, adultOrders, isChildOrder, isAdultOrder, events } =
+    useSelector((store) => store.admin);
 
   const [pending, setPending] = useState();
   const [child, setChild] = useState();
@@ -29,26 +26,53 @@ const AdminOrdersPage = () => {
   const [sort, setSort] = useState("Child");
   const [data, setData] = useState(child);
   const [data2, setData2] = useState(adult);
+  const [concurs, setConcurs] = useState();
+  const [adult4, setAdult4] = useState();
+  const [child4, setChild4] = useState();
+
+  useEffect(() => {
+    if (!concurs) {
+      const adultOrders3 = adultOrders;
+      setAdult4(adultOrders3);
+    } else {
+      const adultOrders3 = _.filter(adultOrders, { eventId: concurs });
+      setAdult4(adultOrders3);
+    }
+  }, [concurs]);
+
+  useEffect(() => {
+    if (!concurs) {
+      const childOrders3 = childOrders;
+      setChild4(childOrders3);
+    } else {
+      const childOrders3 = _.filter(childOrders, { eventId: concurs });
+      setChild4(childOrders3);
+    }
+  }, [concurs]);
+
+  const eventHandler = (d) => {
+    setConcurs(d._id);
+  };
 
   useEffect(() => {
     if (pending) {
-      const adultOrders2 = _.filter(adultOrders, { status: "pending" });
-      setAdult(adultOrders2);
+      const adultOrders2 = _.filter(adult4, { status: "pending" });
+      setAdult(adultOrders2, adult4);
     } else {
-      const adultOrders2 = adultOrders;
+      const adultOrders2 = adult4;
       setAdult(adultOrders2);
     }
-  }, [pending, adultOrders]);
+  }, [pending, adultOrders, adult4]);
 
   useEffect(() => {
     if (pending) {
-      const childOrders2 = _.filter(childOrders, { status: "pending" });
+      const childOrders2 = _.filter(child4, { status: "pending" });
       setChild(childOrders2);
     } else {
-      const childOrders2 = childOrders;
+      const childOrders2 = child4;
       setChild(childOrders2);
     }
-  }, [pending, childOrders]);
+  }, [pending, childOrders, child4]);
 
   useEffect(() => {
     dispatch(getChildOrders());
@@ -131,36 +155,13 @@ const AdminOrdersPage = () => {
             >
               <p className="choose">взростые</p>
             </div>
-            <CheckboxAgreement label="В ожидании" passState={statusHandler} />
+            <div className="filter">
+              <SelectEvents passState={eventHandler} data={events} />
+              <CheckboxAgreement label="В ожидании" passState={statusHandler} />
+            </div>
           </div>
         </div>
-        {/* <AdminChildOrder
-                key={order._id}
-                id={order._id}
-                eventId={order.eventId}
-                name={order.name}
-                name2={order.name2}
-                name3={order.name3}
-                part={order.part}
-                curatorsAmount={order.curatorsAmount}
-                cur={order.cur}
-                age={order.age}
-                subject={order.subject}
-                punct={order.punct}
-                graduate={order.graduate}
-                nomPul={order.nomPul}
-                language={order.language}
-                language2={order.language2}
-                file={order.file}
-                link={order.link}
-                file2={order.file2}
-                email={order.email}
-                phone={order.phone}
-                extra1={order.extra1}
-                extra2={order.extra2}
-                extra3={order.extra3}
-                createdAt={order.createdAt}
-              /> */}
+
         <div className="t">
           <div className="header2">
             <p
@@ -261,8 +262,17 @@ const Wrapper = styled.div`
   }
   .panel {
     display: flex;
-    /* border: 1px solid gray; */
+    justify-content: center;
+    align-items: center;
     width: 100%;
+  }
+  .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+      margin: 0 0.5rem;
+    }
   }
   .category {
     display: flex;

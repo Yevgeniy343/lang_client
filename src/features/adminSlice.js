@@ -330,7 +330,6 @@ const adminSlice = createSlice({
     builder.addCase(getChildOrders.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.childOrders = payload;
-      console.log(payload);
     });
     builder.addCase(getChildOrders.rejected, (state, { payload }) => {
       state.isLoading = false;
