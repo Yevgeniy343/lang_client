@@ -171,3 +171,10 @@ export const ages = [
   { id: nanoid(), label: "16-18 лет" },
   { id: nanoid(), label: "19-22 лет" },
 ];
+
+export const amount = [
+  { id: nanoid(), label: "5" },
+  { id: nanoid(), label: "4" },
+  { id: nanoid(), label: "3" },
+  { id: nanoid(), label: "2" },
+];
