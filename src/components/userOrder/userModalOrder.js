@@ -31,10 +31,6 @@ const UserModalOrder = () => {
     setAmount(totalAmount);
   };
 
-  // __________________________________________________
-
-  // ________________________________________________________
-
   return (
     <Wrapper>
       <div className="modal">

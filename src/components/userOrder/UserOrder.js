@@ -52,7 +52,7 @@ const UserOrder = ({
         <p>
           <span>id:</span> {number}
         </p>
-        <p>
+        <p className="concurs">
           <span>конкурс:</span> {thisEvent?.name}
         </p>
         <p>
@@ -107,8 +107,17 @@ const UserOrder = ({
 };
 
 const Wrapper = styled.div`
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  span {
+    margin: 0;
+    padding: 0;
+  }
   .header {
-    padding: 0.2rem;
+    padding: 0;
+    margin: 0;
     /* display: flex; */
     justify-content: space-between;
     flex-wrap: wrap;
@@ -139,7 +148,9 @@ const Wrapper = styled.div`
     color: var(--main-0);
     width: 250px;
     margin: 0;
+    padding: 0;
   }
+
   .extra {
     height: 450px;
     &.pending {
@@ -158,12 +169,14 @@ const Wrapper = styled.div`
     span {
     }
     p {
-      width: 150px;
+      width: 250px;
+      margin: 0;
     }
   }
+
   @media (min-width: 992px) {
     p {
-      margin: 0.3rem;
+      margin: 0;
     }
   }
   @media (min-width: 1200px) {

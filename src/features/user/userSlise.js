@@ -246,7 +246,9 @@ const userSlice = createSlice({
     });
     builder.addCase(createChildOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      state.childOrders = payload;
       toast.success(`Ваша заявка принята на рассмотрение модератору.`);
+      state.isOrderModal = false;
     });
     builder.addCase(createChildOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
@@ -259,7 +261,9 @@ const userSlice = createSlice({
     });
     builder.addCase(createAdultOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      state.adultOrders = payload;
       toast.success(`Ваша заявка принята на рассмотрение модератору.`);
+      state.isOrderModal = false;
     });
     builder.addCase(createAdultOrder.rejected, (state, { payload }) => {
       state.isLoading = false;

@@ -53,7 +53,7 @@ const Wrapper = styled.div`
     /* margin: 0.5rem 0; */
     width: 100%;
     p {
-      padding: 0.5rem;
+      padding: 0;
       width: 220px;
       min-width: 220px;
     }
