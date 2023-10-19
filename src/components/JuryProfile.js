@@ -36,6 +36,7 @@ const JuryProfile = () => {
   };
 
   const [values, setValues] = useState(initialState);
+  const [noms, setNoms] = useState(jury.nomins);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -47,19 +48,16 @@ const JuryProfile = () => {
     console.log(values.email);
     console.log(state);
     console.log(lang);
+    console.log(noms);
   };
 
   const languageHandler = (d) => {
     setLang(d);
   };
 
-  const [noms, setNoms] = useState([]);
-  console.log(noms);
-
   let data;
   const nomsHandler = (d) => {
     const includes = _.includes(noms, d);
-    console.log(includes);
     if (!includes) {
       data = [...noms, d];
       setNoms(data);

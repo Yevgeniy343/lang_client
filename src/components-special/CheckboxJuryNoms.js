@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineCheck } from "react-icons/ai";
+import { useSelector } from "react-redux";
+import _ from "lodash";
 
 const Checkbox = ({ label, onClick, passState }) => {
-  const [active, setActive] = useState(false);
+  const { jury } = useSelector((store) => store.jury);
+  const includes = _.includes(jury.nomins, label);
+
+  const [active, setActive] = useState(includes === true ? true : false);
 
   const checkboxHandler = () => {
     if (!active) {
