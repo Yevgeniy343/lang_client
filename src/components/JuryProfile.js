@@ -8,13 +8,19 @@ import "react-phone-input-2/lib/style.css";
 import copy from "copy-to-clipboard";
 import { AiOutlineCopy } from "react-icons/ai";
 import JuryChangePassword from "../components/JuryChangePassword";
+import Select2 from "../components-special/Select2";
+import { languages } from "../data/data-order";
+import CheckboxJuryNoms from "../components-special/CheckboxJuryNoms";
+import _ from "lodash";
 
 const { REACT_APP_REF } = process.env;
 
 const JuryProfile = () => {
   const { jury, isLoading } = useSelector((store) => store.jury);
+  const { nominations } = useSelector((store) => store.admin);
   const dispatch = useDispatch();
   const [state, setState] = useState("");
+  const [lang, setLang] = useState();
 
   const initialState = {
     name: jury.name,
@@ -37,6 +43,31 @@ const JuryProfile = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(values.name);
+    console.log(values.email);
+    console.log(state);
+    console.log(lang);
+  };
+
+  const languageHandler = (d) => {
+    setLang(d);
+  };
+
+  const [noms, setNoms] = useState([]);
+  console.log(noms);
+
+  let data;
+  const nomsHandler = (d) => {
+    const includes = _.includes(noms, d);
+    console.log(includes);
+    if (!includes) {
+      data = [...noms, d];
+      setNoms(data);
+    }
+    if (includes) {
+      data = noms.filter((n) => n !== d);
+      setNoms(data);
+    }
   };
 
   return (
@@ -48,7 +79,7 @@ const JuryProfile = () => {
             <label>ФИО</label>
             <Input
               type="text"
-              name="second_name"
+              name="name"
               value={values.name}
               onChange={changeHandler}
             />
@@ -71,24 +102,20 @@ const JuryProfile = () => {
             <label>Телефон</label>
             <PhoneInput
               className="i"
-              //   type="phone"
-              //   name="phone"
               value={initialState.phone}
-              //   onChange={changeHandler}
               inputProps={{ name: "phone" }}
-              // onlyCountries={["ru"]}
               country="ru"
               onChange={(phone) => setState({ phone })}
             />
-            {/* <Input
-              type="tel"
-              name="phone"
-              value={values.phone}
-              onChange={changeHandler}
-              pattern="[7]{3}-[0-9]{3}-[0-9]{4}"
-            /> */}
+          </div>
+          <div className="noms">
+            {nominations.map((n) => (
+              <CheckboxJuryNoms label={n.name} passState={nomsHandler} />
+            ))}
           </div>
         </div>
+        <label>Язык</label>
+        <Select2 passState={languageHandler} data={languages} />
         <div className="actions">
           <Button text="Сохранить" type="submit" />
         </div>
@@ -128,6 +155,7 @@ const Wrapper = styled.div`
     justify-content: center;
     margin-bottom: 1rem;
     margin-right: 1rem;
+    margin-top: 1rem;
   }
   span {
     color: var(--clr-red-dark);
