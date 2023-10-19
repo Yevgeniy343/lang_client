@@ -11,6 +11,7 @@ import JuryChangePassword from "../components/JuryChangePassword";
 import Select2 from "../components-special/Select2";
 import { languages } from "../data/data-order";
 import CheckboxJuryNoms from "../components-special/CheckboxJuryNoms";
+import { editProfile } from "../features/jury/jurySlice";
 import _ from "lodash";
 
 const { REACT_APP_REF } = process.env;
@@ -44,11 +45,16 @@ const JuryProfile = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(values.name);
-    console.log(values.email);
-    console.log(state);
-    console.log(lang);
-    console.log(noms);
+    dispatch(
+      editProfile({
+        name: values.name,
+        email: values.email,
+        phone: state.phone,
+        lang: lang,
+        nomins: noms,
+        id: jury._id,
+      })
+    );
   };
 
   const languageHandler = (d) => {

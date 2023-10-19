@@ -5,6 +5,7 @@ import {
   remindJuryThunk,
   changeJuryPassThunk,
   getOrdersThunk,
+  editProfileThunk,
 } from "./jury-thunk";
 import {
   addJuryToLocalStorage,
@@ -58,6 +59,14 @@ export const getOrders = createAsyncThunk(
   "jury/getOrders",
   async (jury, thunkAPI) => {
     return getOrdersThunk(`/jury/getOrders/${jury.id}`, jury, thunkAPI);
+  }
+);
+
+export const editProfile = createAsyncThunk(
+  "jury/editProfile",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return editProfileThunk(`/jury/editProfile/`, info, thunkAPI);
   }
 );
 
@@ -152,6 +161,19 @@ const jurySlice = createSlice({
       state.adultOrders = payload.adultOrders;
     });
     builder.addCase(getOrders.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    builder.addCase(editProfile.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(editProfile.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.jury = payload;
+      addJuryToLocalStorage(payload);
+    });
+    builder.addCase(editProfile.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
