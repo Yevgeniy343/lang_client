@@ -82,3 +82,17 @@ export const editProfileThunk = async (url, info, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
+
+export const checkThunk = async (url, info, thunkAPI) => {
+  try {
+    const resp = await customFetch.patch(url, info);
+    return resp.data;
+  } catch (error) {
+    if (error.response.status === 401) {
+      thunkAPI.dispatch(logOutJury());
+      return thunkAPI.rejectWithValue("Пользователь не авторизован");
+    }
+    console.log(error.response.data.msg);
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};

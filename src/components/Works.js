@@ -18,6 +18,7 @@ const Works = () => {
           file={order.file}
           nomPul={order.nomPul}
           type="adult"
+          juryOrder={order.jury}
         />
       ))}
       {childOrders.map((order) => (
@@ -30,6 +31,7 @@ const Works = () => {
           age={order.age}
           nomPul={order.nomPul}
           type="child"
+          juryOrder={order.jury}
         />
       ))}
     </Wrapper>
