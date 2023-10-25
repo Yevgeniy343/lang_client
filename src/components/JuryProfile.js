@@ -113,7 +113,7 @@ const JuryProfile = () => {
             />
           </div>
           <div className="noms">
-            {nominations.map((n) => (
+            {nominations?.map((n) => (
               <CheckboxJuryNoms label={n.name} passState={nomsHandler} />
             ))}
           </div>

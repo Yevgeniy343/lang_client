@@ -21,7 +21,7 @@ const CVid = ({ nomPul, type, link, file, id }) => {
   const [amount4, setAmount4] = useState(false);
   const [amount5, setAmount5] = useState(false);
   const [amount6, setAmount6] = useState(false);
-  const [amount7, setAmount7] = useState(false);
+
   const [totalAmount, setTotalAmount] = useState(NaN);
 
   useEffect(() => {
@@ -31,10 +31,9 @@ const CVid = ({ nomPul, type, link, file, id }) => {
       parseInt(amount3) +
       parseInt(amount4) +
       parseInt(amount5) +
-      parseInt(amount6) +
-      parseInt(amount7);
+      parseInt(amount6);
     setTotalAmount(total_amount);
-  }, [amount1, amount2, amount3, amount4, amount5, amount6, amount7]);
+  }, [amount1, amount2, amount3, amount4, amount5, amount6]);
 
   const downloadHandler = (e) => {
     e.preventDefault();
@@ -65,9 +64,7 @@ const CVid = ({ nomPul, type, link, file, id }) => {
   const amountHandler6 = (a) => {
     setAmount6(a);
   };
-  const amountHandler7 = (a) => {
-    setAmount7(a);
-  };
+
   const checkHandler = () => {
     if (isNaN(totalAmount)) {
       return toast.error("Проставьте все оценки");
@@ -79,8 +76,8 @@ const CVid = ({ nomPul, type, link, file, id }) => {
   return (
     <Wrapper>
       <div className="panel">
-        <p>{nomPul}</p>
-        <p>{type}</p>
+        {/* <p>{nomPul}</p> */}
+        {/* <p>{type}</p> */}
         <a href={link} target="blank">
           ссылка: {link}
         </a>
@@ -251,31 +248,6 @@ const CVid = ({ nomPul, type, link, file, id }) => {
           <CheckboxAmount
             passState={amountHandler6}
             indicator={amount6}
-            label="2"
-          />
-        </div>
-        <div className="in">
-          <p>Общий бал</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler7}
-            indicator={amount7}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler7}
-            indicator={amount7}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler7}
-            indicator={amount7}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler7}
-            indicator={amount7}
             label="2"
           />
         </div>
