@@ -253,18 +253,25 @@ const CVid = ({ nomPul, type, link, file, id }) => {
         </div>
       </div>
       <div className="actions">
-        <p className="amount">{totalAmount}</p>
         <Button
-          text="Оценить"
+          text="РАБОТА ПРОВЕРЕНА"
           onClick={checkHandler}
           //   disabled={status === "Проверено" ? true : false}
         />
+        <p className="amount">{totalAmount}</p>
       </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
+  .actions {
+    display: flex;
+    justify-content: start;
+    p {
+      margin: 1rem;
+    }
+  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
