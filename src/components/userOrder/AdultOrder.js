@@ -313,7 +313,7 @@ const AdultOrder = ({ passCalculate }) => {
             />
             <div className="about-tarif">
               <p className="include-about">
-                Оплата {currentOrder.tarif_1} руб.
+                Оплата {currentOrder.tarif_1a} руб.
               </p>
               <p className="include">● Диплом в электронном варианте</p>
 
@@ -395,7 +395,7 @@ const AdultOrder = ({ passCalculate }) => {
             />
             <div className="about-tarif">
               <p className="include-about">
-                Оплата по {currentOrder.tarif_2} руб. за каждого участника.
+                Оплата по {currentOrder.tarif_2a} руб. за каждого участника.
               </p>
               <p className="include">
                 ● Для работ не более 2-х авторов: входит диплом в электронном
@@ -619,7 +619,7 @@ const AdultOrder = ({ passCalculate }) => {
             <div className="about-tarif">
               <p className="include-about">
                 Наградной пакет «Коллективный»: задействован творческий
-                коллектив от 3-х и более человек. {currentOrder.tarif_3} руб.
+                коллектив от 3-х и более человек. {currentOrder.tarif_3a} руб.
                 Включает:
               </p>
               <p className="include">

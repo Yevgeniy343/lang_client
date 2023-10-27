@@ -266,7 +266,7 @@ const ChildrenOrder = ({ passCalculate }) => {
             <div className="about-tarif">
               <p className="include-about">
                 Наградной пакет «Соавторство»: задействовано не более 3-х
-                авторов. {currentOrder.tarif_2} руб. руб. за каждого участника.
+                авторов. {currentOrder.tarif_2} руб. за каждого участника.
                 Включает:
               </p>
               <p className="include">

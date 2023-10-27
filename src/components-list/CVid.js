@@ -252,7 +252,7 @@ const CVid = ({ nomPul, type, link, file, id }) => {
           />
         </div>
       </div>
-      <div className="actions">
+      <div className="actions2">
         <Button
           text="РАБОТА ПРОВЕРЕНА"
           onClick={checkHandler}
@@ -265,11 +265,13 @@ const CVid = ({ nomPul, type, link, file, id }) => {
 };
 
 const Wrapper = styled.div`
-  .actions {
+  .actions2 {
     display: flex;
     justify-content: start;
-    p {
-      margin: 1rem;
+    .amount {
+      font-size: 2rem;
+      color: var(--clr-green-dark);
+      margin-left: 2rem;
     }
   }
   @media (min-width: 576px) {
