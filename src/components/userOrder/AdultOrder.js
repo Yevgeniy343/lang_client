@@ -280,12 +280,12 @@ const AdultOrder = ({ passCalculate }) => {
     e.preventDefault();
     if (
       !values.name ||
-      !values.job_title ||
-      !values.job ||
-      !values.internship ||
-      !subject ||
-      !values.email ||
-      !phone.phone
+      // !values.job_title ||
+      // !values.job ||
+      // !values.internship ||
+      // !subject ||
+      !values.email
+      // !phone.phone
       // !language
     ) {
       console.log(values);
@@ -317,11 +317,11 @@ const AdultOrder = ({ passCalculate }) => {
               </p>
               <p className="include">● Диплом в электронном варианте</p>
 
-              <p className="include small">
+              {/* <p className="include small">
                 * Работы, в которых участвуют 2 и более руководителя,
                 оплачиваются + {currentOrder.supervisor} руб. к стоимости
                 оргвзноса за каждого руководителя.
-              </p>
+              </p> */}
             </div>
             {tarif === "Одиночный участник" && (
               <div>
@@ -398,14 +398,14 @@ const AdultOrder = ({ passCalculate }) => {
                 Оплата по {currentOrder.tarif_2a} руб. за каждого участника.
               </p>
               <p className="include">
-                ● Для работ не более 2-х авторов: входит диплом в электронном
+                ● Для работ не более 3-х авторов: входит диплом в электронном
                 варианте на каждого участника
               </p>
-              <p className="include small">
+              {/* <p className="include small">
                 * Работы, в которых участвуют 2 и более руководителя,
                 оплачиваются + {currentOrder.supervisor} руб. к стоимости
                 оргвзноса за каждого руководителя.
-              </p>
+              </p> */}
             </div>
             {tarif === "Соавторство" && (
               <div className="in">
@@ -626,15 +626,15 @@ const AdultOrder = ({ passCalculate }) => {
                 ● Коллективный диплом (победителя, лауреата или участника) в
                 электронном варианте
               </p>
-              <p className="include">
+              {/* <p className="include">
                 ● Благодарность руководителю работы в электронном варианте – 1
                 шт.
-              </p>
-              <p className="include small">
+              </p> */}
+              {/* <p className="include small">
                 * Работы, в которых участвуют 2 и более руководителя,
                 оплачиваются + {currentOrder.supervisor} руб. к стоимости
                 оргвзноса за каждого руководителя.
-              </p>
+              </p> */}
             </div>
           </div>
           {tarif === "Коллективный" && (
@@ -672,8 +672,8 @@ const AdultOrder = ({ passCalculate }) => {
         </div>
         <div className="in">
           <label>
-            <span>*</span>Нужен ли дополнительный диплом для куратора
-            (руководителя) работы?
+            <span>*</span>Если работу сопровождал куратор, отметьте. В этом
+            случае доплата 150 руб. и куратор тоже получит диплом
           </label>
           <CheckboxAgreement passState={extraDiplomHandler} label="Да" />
         </div>

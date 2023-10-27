@@ -136,6 +136,18 @@ const UserChildOrder = ({ orderId }) => {
               <p className="key">Фамилия и имя конкурсанта</p>
               <p className="value">{initialState?.name}</p>
             </div>
+            {initialState?.name2 && (
+              <div className="element">
+                <p className="key">Фамилия и имя второго конкурсанта</p>
+                <p className="value">{initialState?.name2}</p>
+              </div>
+            )}
+            {initialState?.name3 && (
+              <div className="element">
+                <p className="key">Фамилия и имя третьего конкурсанта</p>
+                <p className="value">{initialState?.name3}</p>
+              </div>
+            )}
             <div className="element">
               <p className="key">Номинация</p>
               <p className="value">{initialState?.nomPul}</p>
@@ -214,18 +226,6 @@ const UserChildOrder = ({ orderId }) => {
               <p className="key">Вариант участия</p>
               <p className="value">{initialState?.tarif}</p>
             </div>
-            {initialState?.name2 && (
-              <div className="element">
-                <p className="key">Фамилия и имя второго конкурсанта</p>
-                <p className="value">{initialState?.name2}</p>
-              </div>
-            )}
-            {initialState?.name3 && (
-              <div className="element">
-                <p className="key">Фамилия и имя третьего конкурсанта</p>
-                <p className="value">{initialState?.name3}</p>
-              </div>
-            )}
             {initialState?.extra1 && (
               <div className="element">
                 <p className="key">Дополнительное поле 1</p>

@@ -38,13 +38,13 @@ const PersonamArea = () => {
           <div className="left">
             <SmallMenu item="Мои заявки" />
             <SmallMenu item="Профиль" />
-            <SmallMenu item="Все мероприятия" />
+            <SmallMenu item="Актуальные мероприятия" />
             <SmallMenu item="Скачать дипломы" />
           </div>
           <div className="right">
             <RightHeader />
             {currentSmallMenu === "Профиль" && <Profile />}
-            {currentSmallMenu === "Все мероприятия" && <UserEvents />}
+            {currentSmallMenu === "Актуальные мероприятия" && <UserEvents />}
             {currentSmallMenu === "Мои заявки" && <UserOrders />}
             {isOrderModal && <UserModalOrder />}
           </div>
