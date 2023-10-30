@@ -9,7 +9,7 @@ import Stars from "./Stars";
 import JuryProfile from "../../components/JuryProfile";
 import Actual from "../../components/Actual";
 import Works from "../../components/Works";
-import { getOrders } from "../../features/jury/jurySlice";
+import { getOrders, getEvents } from "../../features/jury/jurySlice";
 
 const JuryArea = () => {
   const { jury, currentSmallMenu } = useSelector((store) => store.jury);
@@ -17,6 +17,10 @@ const JuryArea = () => {
 
   useEffect(() => {
     dispatch(getOrders({ id: jury._id }));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getEvents());
   }, []);
 
   return (

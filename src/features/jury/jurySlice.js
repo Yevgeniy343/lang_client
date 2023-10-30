@@ -7,6 +7,7 @@ import {
   getOrdersThunk,
   editProfileThunk,
   checkThunk,
+  getEventsThunk,
 } from "./jury-thunk";
 import {
   addJuryToLocalStorage,
@@ -26,6 +27,7 @@ const initialState = {
   currentSmallMenu: "",
   childOrders: [],
   adultOrders: [],
+  events: [],
 };
 
 export const registerJury = createAsyncThunk(
@@ -71,9 +73,16 @@ export const editProfile = createAsyncThunk(
 );
 
 export const check = createAsyncThunk("jury/check", async (info, thunkAPI) => {
-  console.log(info);
   return checkThunk(`/jury/check/`, info, thunkAPI);
 });
+
+export const getEvents = createAsyncThunk(
+  "jury/getEvents",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return getEventsThunk(`/jury/getEvents/`, info, thunkAPI);
+  }
+);
 
 const jurySlice = createSlice({
   name: "jury",
@@ -193,6 +202,19 @@ const jurySlice = createSlice({
       toast.success(`Проверено !`);
     });
     builder.addCase(check.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    builder.addCase(getEvents.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getEvents.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.events = payload;
+      // toast.success(`Проверено !`);
+    });
+    builder.addCase(getEvents.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
