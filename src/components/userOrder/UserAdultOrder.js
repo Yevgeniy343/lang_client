@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import FileDownload from "js-file-download";
@@ -11,6 +11,7 @@ import Button from "../../components-special/Button";
 import { editAdultOrder } from "../../features/user/userSlise";
 import Select2 from "../../components-special/Select2";
 import { subjects, languages } from "../../data/data-order";
+import toast from "react-hot-toast";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -93,6 +94,12 @@ const UserAdultOrder = ({ orderId }) => {
   const languageHandler = (a) => {
     setLanguage(a);
   };
+
+  useEffect(() => {
+    if (isEdit === true) {
+      toast("После редактирования нажмите кнопку СОХРАНИТЬ");
+    }
+  }, [isEdit]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -369,6 +376,9 @@ const UserAdultOrder = ({ orderId }) => {
             className="content"
             onSubmit={onSubmit}
           >
+            <div className="actions">
+              <Button text="Сохранить" type="submit" />
+            </div>
             <div className="in">
               <label>Фамилия и имя конкурсанта</label>
               <Input
@@ -672,9 +682,6 @@ const UserAdultOrder = ({ orderId }) => {
                 value={values.extra3}
                 onChange={changeHandler}
               />
-            </div>
-            <div className="actions">
-              <Button text="Сохранить" type="submit" />
             </div>
           </motion.form>
         )}
