@@ -36,7 +36,7 @@ const JuryArea = () => {
             <JurySmallMenu item="Профиль" />
             <JurySmallMenu item="Актуальные мероприятия" />
             <JurySmallMenu item="Работы для проверки" />
-            <JurySmallMenu item="Диплом" />
+            <JurySmallMenu item="Скачать грамоты за труд" />
           </div>
           <div className="right">
             <Stars />

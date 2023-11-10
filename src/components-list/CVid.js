@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id }) => {
+const CVid = ({ nomPul, type, link, file, id, passState }) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -71,6 +71,7 @@ const CVid = ({ nomPul, type, link, file, id }) => {
     } else {
       setStatus("Проверено");
       dispatch(check({ amount: totalAmount, orderId: id, juryId: jury._id }));
+      passState(false);
     }
   };
   return (

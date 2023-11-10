@@ -38,6 +38,10 @@ const JuruOrders = ({
     });
   };
 
+  const closeExtra = (data) => {
+    setExtra(data);
+  };
+
   return (
     <Wrapper>
       <div className="header" onClick={() => setExtra(!extra)}>
@@ -58,7 +62,14 @@ const JuruOrders = ({
       </div>
       {extra && (
         <div className="extra">
-          <CVid nomPul={nomPul} type={type} link={link} file={file} id={id} />
+          <CVid
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+          />
         </div>
       )}
     </Wrapper>
