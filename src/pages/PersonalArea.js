@@ -8,7 +8,11 @@ import SmallMenu from "../components/SmallMenu";
 import RightHeader from "../components/RightHeader";
 import Profile from "../components/Profile";
 import UserEvents from "../components/UserEvents";
-import { getEvent, getAllOrders } from "../features/user/userSlise";
+import {
+  getEvent,
+  getAllOrders,
+  getCondition,
+} from "../features/user/userSlise";
 import UserModalOrder from "../components/userOrder/userModalOrder";
 import UserOrders from "../components/userOrder/UserOrders";
 
@@ -24,6 +28,10 @@ const PersonamArea = () => {
 
   useEffect(() => {
     dispatch(getAllOrders(user._id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getCondition());
   }, [dispatch]);
 
   return (

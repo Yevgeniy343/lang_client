@@ -11,6 +11,7 @@ import {
   getAllOrdersThunk,
   editChildrenOrderThunk,
   editAdultOrderThunk,
+  getConditionThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -36,6 +37,7 @@ const initialState = {
   nomPul: "",
   childOrders: [],
   adultOrders: [],
+  condition_text: "",
 };
 
 export const registerUser = createAsyncThunk(
@@ -112,6 +114,13 @@ export const editAdultOrder = createAsyncThunk(
   "user/editAdultOrder",
   async (info, thunkAPI) => {
     return editAdultOrderThunk(`/user/editAdultOrder/`, info, thunkAPI);
+  }
+);
+
+export const getCondition = createAsyncThunk(
+  "user/getCondition",
+  async (info, thunkAPI) => {
+    return getConditionThunk(`/user/getCondition/`, info, thunkAPI);
   }
 );
 
@@ -308,6 +317,18 @@ const userSlice = createSlice({
       toast.success(`Изменения сохранены !`);
     });
     builder.addCase(editAdultOrder.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    builder.addCase(getCondition.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCondition.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.condition_text = payload;
+    });
+    builder.addCase(getCondition.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });
