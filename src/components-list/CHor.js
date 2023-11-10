@@ -12,7 +12,7 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const CHor = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -97,7 +97,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
       </div>
       <div className="list2">
         <div className="in">
-          <p>Соответствие теме конкурса</p>
+          <p>
+            Техника исполнения: правильное использование движений для выражения
+            основной мысли хореографического произведения
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -122,7 +125,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Качество видео (звук, статичность камеры, высокое разрешение)</p>
+          <p>
+            Качество исполнения (объем, качество движений, проученность
+            движений)
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -147,7 +153,11 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Уровень владения языком, правильное литературное произношение</p>
+          <p>
+            Композиция танца: перемещение по площадке, выбор танцевальных
+            элементов, фигуры танца, рациональное использование танцевальной
+            площадки, взаимодействие танцоров друг с другом.
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -173,8 +183,8 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
         </div>
         <div className="in">
           <p>
-            Исполнительский уровень актеров: дикция, постановка логического
-            ударения, соблюдение нужной интонации
+            Имидж: контакт со зрителем, реквизит, артистизм, костюм,
+            самопрезентация, наличие поклона, уход со сцены  
           </p>
         </div>
         <div className="in">
@@ -201,8 +211,8 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
         </div>
         <div className="in">
           <p>
-            Выражение личного отношения, артистизм, яркость художественных
-            образов, применение выразительных средств (мимики, жестов, движений)
+            Качество записи (со штатива, правильное освещение, хорошая
+            фонограмма и т.п.)
           </p>
         </div>
         <div className="in">
@@ -228,7 +238,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Декорации, антураж</p>
+          <p>
+            Соответствие движений национальному колориту танца, следование его
+            особенностям и традициям{" "}
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -265,4 +278,4 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   );
 };
 
-export default CVid;
+export default CHor;

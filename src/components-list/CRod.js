@@ -12,7 +12,7 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const CRod = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -84,7 +84,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
         </a>
         {file && (
           <p className="value link" onClick={downloadHandler}>
-            скачать работу
+            Соблюдение темы номинации
           </p>
         )}
       </div>
@@ -97,7 +97,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
       </div>
       <div className="list2">
         <div className="in">
-          <p>Соответствие теме конкурса</p>
+          <p>Соблюдение темы номинации</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -122,7 +122,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Качество видео (звук, статичность камеры, высокое разрешение)</p>
+          <p>Глубина темы исследования и её раскрытие</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -147,7 +147,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Уровень владения языком, правильное литературное произношение</p>
+          <p>Самостоятельность, соответствие работы возрасту</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -172,10 +172,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>
-            Исполнительский уровень актеров: дикция, постановка логического
-            ударения, соблюдение нужной интонации
-          </p>
+          <p>Соответствие структуре презентации</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -200,10 +197,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>
-            Выражение личного отношения, артистизм, яркость художественных
-            образов, применение выразительных средств (мимики, жестов, движений)
-          </p>
+          <p>Творческий подход, оформление, использование артефактов</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -228,7 +222,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Декорации, антураж</p>
+          <p>Владение языком (грамотность, литературность)</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -265,4 +259,4 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   );
 };
 
-export default CVid;
+export default CRod;

@@ -12,7 +12,15 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const CEsse = ({
+  nomPul,
+  type,
+  link,
+  file,
+  id,
+  passState,
+  passStateAmount,
+}) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -97,88 +105,88 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
       </div>
       <div className="list2">
         <div className="in">
-          <p>Соответствие теме конкурса</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler1}
-            indicator={amount1}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler1}
-            indicator={amount1}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler1}
-            indicator={amount1}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler1}
-            indicator={amount1}
-            label="2"
-          />
-        </div>
-        <div className="in">
-          <p>Качество видео (звук, статичность камеры, высокое разрешение)</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="2"
-          />
-        </div>
-        <div className="in">
-          <p>Уровень владения языком, правильное литературное произношение</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="2"
-          />
-        </div>
-        <div className="in">
           <p>
-            Исполнительский уровень актеров: дикция, постановка логического
-            ударения, соблюдение нужной интонации
+            Соответствие работы общей теме конкурса (Родина, родной язык,
+            культура)
           </p>
         </div>
         <div className="in">
           <CheckboxAmount
+            passState={amountHandler1}
+            indicator={amount1}
+            label="5"
+          />
+          <CheckboxAmount
+            passState={amountHandler1}
+            indicator={amount1}
+            label="4"
+          />
+          <CheckboxAmount
+            passState={amountHandler1}
+            indicator={amount1}
+            label="3"
+          />
+          <CheckboxAmount
+            passState={amountHandler1}
+            indicator={amount1}
+            label="2"
+          />
+        </div>
+        <div className="in">
+          <p>100% уникальность работы </p>
+        </div>
+        <div className="in">
+          <CheckboxAmount
+            passState={amountHandler2}
+            indicator={amount2}
+            label="5"
+          />
+          <CheckboxAmount
+            passState={amountHandler2}
+            indicator={amount2}
+            label="4"
+          />
+          <CheckboxAmount
+            passState={amountHandler2}
+            indicator={amount2}
+            label="3"
+          />
+          <CheckboxAmount
+            passState={amountHandler2}
+            indicator={amount2}
+            label="2"
+          />
+        </div>
+        <div className="in">
+          <p>Степень владения литературным письменным языком</p>
+        </div>
+        <div className="in">
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="5"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="4"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="3"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="2"
+          />
+        </div>
+        <div className="in">
+          <p>Соответствие возрасту</p>
+        </div>
+        <div className="in">
+          <CheckboxAmount
             passState={amountHandler4}
             indicator={amount4}
             label="5"
@@ -200,10 +208,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>
-            Выражение личного отношения, артистизм, яркость художественных
-            образов, применение выразительных средств (мимики, жестов, движений)
-          </p>
+          <p>Отражение взглядов автора, самостоятельность оценки и суждения</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -228,7 +233,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Декорации, антураж</p>
+          <p>Стилистическая, пунктуационная и грамматическая грамотность</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -265,4 +270,4 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   );
 };
 
-export default CVid;
+export default CEsse;

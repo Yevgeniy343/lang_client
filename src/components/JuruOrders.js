@@ -2,7 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FileDownload from "js-file-download";
 import Axios from "axios";
+import CDecor from "../components-list/CDecor";
+import CEsse from "../components-list/CEsse";
+import CHor from "../components-list/CHor";
+import CHud from "../components-list/CHud";
+import CLit from "../components-list/CLit";
 import CVid from "../components-list/CVid";
+import CVokal from "../components-list/CVokal";
+import CRod from "../components-list/CRod";
+import CTet from "../components-list/CTet";
+import CIzo from "../components-list/CIzo";
+import CPrez from "../components-list/CPrez";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 
@@ -18,12 +28,12 @@ const JuruOrders = ({
   type,
   juryOrder,
 }) => {
+  const [totalAmount, setTotalAmount] = useState();
+  console.log(totalAmount);
+  console.log(nomPul);
   const { jury } = useSelector((store) => store.jury);
 
-  console.log(juryOrder);
-  console.log(jury._id);
   const include = _.includes(_.map(juryOrder, "juryId"), jury._id);
-  console.log(include);
 
   const [extra, setExtra] = useState(false);
 
@@ -40,6 +50,10 @@ const JuruOrders = ({
 
   const closeExtra = (data) => {
     setExtra(data);
+  };
+
+  const totalAmountHandler = (total_amount) => {
+    setTotalAmount(total_amount);
   };
 
   return (
@@ -69,6 +83,97 @@ const JuruOrders = ({
             file={file}
             id={id}
             passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CVokal
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CDecor
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CEsse
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CHor
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CHud
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CIzo
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CLit
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CPrez
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CRod
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
+          />
+          <CTet
+            nomPul={nomPul}
+            type={type}
+            link={link}
+            file={file}
+            id={id}
+            passState={closeExtra}
+            passStateAmount={totalAmountHandler}
           />
         </div>
       )}

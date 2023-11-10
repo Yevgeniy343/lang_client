@@ -12,7 +12,7 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const CHud = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -97,7 +97,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
       </div>
       <div className="list2">
         <div className="in">
-          <p>Соответствие теме конкурса</p>
+          <p>
+            Соответствие выбранного стихотворения теме конкурса (Родина, родной
+            язык), полнота раскрытия темы
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -122,7 +125,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Качество видео (звук, статичность камеры, высокое разрешение)</p>
+          <p>Презентация (представил ли участник себя, работу и автора)</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -147,7 +150,9 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Уровень владения языком, правильное литературное произношение</p>
+          <p>
+            Уровень владения данным языком, правильное литературное произношение
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -173,8 +178,8 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
         </div>
         <div className="in">
           <p>
-            Исполнительский уровень актеров: дикция, постановка логического
-            ударения, соблюдение нужной интонации
+            Исполнительский уровень: дикция, постановка логического ударения,
+            соблюдение нужной интонации
           </p>
         </div>
         <div className="in">
@@ -228,7 +233,7 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Декорации, антураж</p>
+          <p>Безошибочное прочтение</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -265,4 +270,4 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   );
 };
 
-export default CVid;
+export default CHud;

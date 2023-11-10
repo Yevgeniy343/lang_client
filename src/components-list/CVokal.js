@@ -12,7 +12,15 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const CVokal = ({
+  nomPul,
+  type,
+  link,
+  file,
+  id,
+  passState,
+  passStateAmount,
+}) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -97,7 +105,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
       </div>
       <div className="list2">
         <div className="in">
-          <p>Соответствие теме конкурса</p>
+          <p>
+            Соответствие репертуара исполнительским возможностям и возрастной
+            категории исполнителя/лей
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -118,92 +129,91 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           <CheckboxAmount
             passState={amountHandler1}
             indicator={amount1}
-            label="2"
-          />
-        </div>
-        <div className="in">
-          <p>Качество видео (звук, статичность камеры, высокое разрешение)</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler2}
-            indicator={amount2}
-            label="2"
-          />
-        </div>
-        <div className="in">
-          <p>Уровень владения языком, правильное литературное произношение</p>
-        </div>
-        <div className="in">
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="5"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="4"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
-            label="3"
-          />
-          <CheckboxAmount
-            passState={amountHandler3}
-            indicator={amount3}
             label="2"
           />
         </div>
         <div className="in">
           <p>
-            Исполнительский уровень актеров: дикция, постановка логического
-            ударения, соблюдение нужной интонации
+            Исполнительское мастерство (чистота интонации и качество звучания,
+            вокальные данные)
           </p>
         </div>
         <div className="in">
           <CheckboxAmount
-            passState={amountHandler4}
-            indicator={amount4}
+            passState={amountHandler2}
+            indicator={amount2}
             label="5"
           />
           <CheckboxAmount
-            passState={amountHandler4}
-            indicator={amount4}
+            passState={amountHandler2}
+            indicator={amount2}
             label="4"
           />
           <CheckboxAmount
-            passState={amountHandler4}
-            indicator={amount4}
+            passState={amountHandler2}
+            indicator={amount2}
             label="3"
           />
           <CheckboxAmount
-            passState={amountHandler4}
-            indicator={amount4}
+            passState={amountHandler2}
+            indicator={amount2}
             label="2"
           />
         </div>
         <div className="in">
           <p>
-            Выражение личного отношения, артистизм, яркость художественных
-            образов, применение выразительных средств (мимики, жестов, движений)
+            Качество записи (статичная, со штатива), правильное освещение, сцена
           </p>
+        </div>
+        <div className="in">
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="5"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="4"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="3"
+          />
+          <CheckboxAmount
+            passState={amountHandler3}
+            indicator={amount3}
+            label="2"
+          />
+        </div>
+        <div className="in">
+          <p>Сценическая культура (умение двигаться по сцене, костюм)</p>
+        </div>
+        <div className="in">
+          <CheckboxAmount
+            passState={amountHandler4}
+            indicator={amount4}
+            label="5"
+          />
+          <CheckboxAmount
+            passState={amountHandler4}
+            indicator={amount4}
+            label="4"
+          />
+          <CheckboxAmount
+            passState={amountHandler4}
+            indicator={amount4}
+            label="3"
+          />
+          <CheckboxAmount
+            passState={amountHandler4}
+            indicator={amount4}
+            label="2"
+          />
+        </div>
+        <div className="in">
+          <p>Яркость, самобытность и оригинальность подачи материала</p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -228,7 +238,10 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
           />
         </div>
         <div className="in">
-          <p>Декорации, антураж</p>
+          <p>
+            Соответствие стиля и манеры исполнения, костюмов, музыкальных
+            инструментов народным традициям
+          </p>
         </div>
         <div className="in">
           <CheckboxAmount
@@ -265,4 +278,4 @@ const CVid = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
   );
 };
 
-export default CVid;
+export default CVokal;
