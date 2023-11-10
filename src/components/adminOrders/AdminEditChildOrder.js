@@ -214,12 +214,20 @@ const AdminEditChildOrder = () => {
         {state !== "Отказать в одобрении" && state !== "Редактировать" && (
           <div className="info">
             <div className="element">
+              <p className="key">Номинация</p>
+              <p className="value">{initialState?.nomPul}</p>
+            </div>
+            <div className="element">
+              <p className="key">Тариф</p>
+              <p className="value">{initialState?.tarif}</p>
+            </div>
+            <div className="element">
               <p className="key">Фамилия и имя конкурсанта</p>
               <p className="value">{initialState?.name}</p>
             </div>
             <div className="element">
-              <p className="key">Номинация</p>
-              <p className="value">{initialState?.nomPul}</p>
+              <p className="key">Возрастная категория</p>
+              <p className="value">{initialState?.age}</p>
             </div>
             <div className="element">
               <p className="key">Ссылка на работу</p>
@@ -246,10 +254,6 @@ const AdminEditChildOrder = () => {
               </div>
             )}
             <div className="element">
-              <p className="key">Возрастная категория</p>
-              <p className="value">{initialState?.age}</p>
-            </div>
-            <div className="element">
               <p className="key">Субъект Российской Федерации</p>
               <p className="value">{initialState?.subject}</p>
             </div>
@@ -257,6 +261,7 @@ const AdminEditChildOrder = () => {
               <p className="key">Населенный пункт</p>
               <p className="value">{initialState?.punct}</p>
             </div>
+
             <div className="element">
               <p className="key">Наименование учебного заведения</p>
               <p className="value">{initialState?.graduate}</p>
@@ -288,10 +293,6 @@ const AdminEditChildOrder = () => {
             <div className="element">
               <p className="key">телефон</p>
               <p className="value">{initialState?.phone}</p>
-            </div>
-            <div className="element">
-              <p className="key">Вариант участия</p>
-              <p className="value">{initialState?.tarif}</p>
             </div>
             <div className="element">
               <p className="key">Фамилия и имя второго конкурсанта</p>
@@ -378,24 +379,7 @@ const AdminEditChildOrder = () => {
                     onChange={changeHandler}
                   />
                 </div>
-                <div className="in">
-                  <label>Язык работы</label>
-                  <Input
-                    type="text"
-                    name="language"
-                    value={values.language}
-                    onChange={changeHandler}
-                  />
-                </div>
-                <div className="in">
-                  <label>Язык работы</label>
-                  <Input
-                    type="text"
-                    name="language2"
-                    value={values.language2}
-                    onChange={changeHandler}
-                  />
-                </div>
+
                 <div className="in">
                   <label>Ссылка на работу</label>
                   <Input

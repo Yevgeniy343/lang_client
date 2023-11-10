@@ -236,12 +236,16 @@ const AdminEditAdultOrder = () => {
         {state !== "Отказать в одобрении" && state !== "Редактировать" && (
           <div className="info">
             <div className="element">
-              <p className="key">Фамилия и имя конкурсанта</p>
-              <p className="value">{initialState?.name}</p>
-            </div>
-            <div className="element">
               <p className="key">Номинация</p>
               <p className="value">{initialState?.nomPul}</p>
+            </div>
+            <div className="element">
+              <p className="key">Тариф</p>
+              <p className="value">{initialState?.tarif}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия и имя конкурсанта</p>
+              <p className="value">{initialState?.name}</p>
             </div>
             <div className="element">
               <p className="key">Ссылка на работу</p>
@@ -251,6 +255,7 @@ const AdminEditAdultOrder = () => {
                 </a>
               </p>
             </div>
+
             {thisOrder?.file && (
               <div className="element">
                 <p className="key">Работа</p>
@@ -268,6 +273,31 @@ const AdminEditAdultOrder = () => {
               </div>
             )}
             <div className="element">
+              <p className="key">Субъект Российской Федерации</p>
+              <p className="value">{initialState?.subject}</p>
+            </div>
+            <div className="element">
+              <p className="key">Населенный пункт</p>
+              <p className="value">{initialState?.punct}</p>
+            </div>
+            <div className="element">
+              <p className="key">Наименование учебного заведения</p>
+              <p className="value">{initialState?.graduate}</p>
+            </div>
+            {initialState.language && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language}</p>
+              </div>
+            )}
+            {initialState.language2 && (
+              <div className="element">
+                <p className="key">Язык работы</p>
+                <p className="value">{initialState?.language2}</p>
+              </div>
+            )}
+
+            <div className="element">
               <p className="key">Занимаемая должность</p>
               <p className="value">{initialState?.job_title}</p>
             </div>
@@ -275,14 +305,7 @@ const AdminEditAdultOrder = () => {
               <p className="key">Место работы</p>
               <p className="value">{initialState?.job}</p>
             </div>
-            <div className="element">
-              <p className="key">Населенный пункт</p>
-              <p className="value">{initialState?.punct}</p>
-            </div>
-            <div className="element">
-              <p className="key">Субъект Российской Федерации</p>
-              <p className="value">{initialState?.subject}</p>
-            </div>
+
             <div className="element">
               <p className="key">Стаж педагогичческой работы</p>
               <p className="value">{initialState?.internship}</p>
@@ -343,22 +366,6 @@ const AdminEditAdultOrder = () => {
               </p>
               <p className="value">{initialState?.internship3}</p>
             </div>
-            <div className="element">
-              <p className="key">Наименование учебного заведения</p>
-              <p className="value">{initialState?.graduate}</p>
-            </div>
-            {initialState.language && (
-              <div className="element">
-                <p className="key">Язык работы</p>
-                <p className="value">{initialState?.language}</p>
-              </div>
-            )}
-            {initialState.language2 && (
-              <div className="element">
-                <p className="key">Язык работы</p>
-                <p className="value">{initialState?.language2}</p>
-              </div>
-            )}
 
             <div className="element">
               <p className="key">Количество кураторов</p>
@@ -376,10 +383,6 @@ const AdminEditAdultOrder = () => {
             <div className="element">
               <p className="key">Телефон</p>
               <p className="value">{initialState?.phone}</p>
-            </div>
-            <div className="element">
-              <p className="key">Вариант участия</p>
-              <p className="value">{initialState?.tarif}</p>
             </div>
             <div className="element">
               <p className="key">Дополнительное поле 1</p>
