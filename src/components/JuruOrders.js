@@ -13,6 +13,12 @@ import CRod from "../components-list/CRod";
 import CTet from "../components-list/CTet";
 import CIzo from "../components-list/CIzo";
 import CPrez from "../components-list/CPrez";
+import AEsse from "../components-list/AEsse";
+import AFra from "../components-list/AFra";
+import AHud from "../components-list/AEsse";
+import ANay from "../components-list/ANay";
+import APer from "../components-list/APer";
+import AVok from "../components-list/APer";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 
@@ -29,8 +35,9 @@ const JuruOrders = ({
   juryOrder,
 }) => {
   const [totalAmount, setTotalAmount] = useState();
-  console.log(totalAmount);
+  // console.log(totalAmount);
   console.log(nomPul);
+  console.log(type);
   const { jury } = useSelector((store) => store.jury);
 
   const include = _.includes(_.map(juryOrder, "juryId"), jury._id);
@@ -76,105 +83,201 @@ const JuruOrders = ({
       </div>
       {extra && (
         <div className="extra">
-          <CVid
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CVokal
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CDecor
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CEsse
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CHor
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CHud
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CIzo
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CLit
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CPrez
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CRod
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
-          <CTet
-            nomPul={nomPul}
-            type={type}
-            link={link}
-            file={file}
-            id={id}
-            passState={closeExtra}
-            passStateAmount={totalAmountHandler}
-          />
+          {type === "adult" && (
+            <div className="filter_adult">
+              {nomPul === "Вокальное искусство" && (
+                <AVok
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Передовой опыт" && (
+                <APer
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Научно-методическая разработка" && (
+                <ANay
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Художественное слово" && (
+                <AHud
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Фрагмент внеклассного мероприятия" && (
+                <AFra
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Эссе" && (
+                <AEsse
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+            </div>
+          )}
+          {type === "child" && (
+            <div className="filter_child">
+              {nomPul === "Видеотрейлер" && (
+                <CVid
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Вокал" && (
+                <CVokal
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Декоративно-прикладное искусство" && (
+                <CDecor
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Эссе" && (
+                <CEsse
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Хореографическое искусство" && (
+                <CHor
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Художественное слово" && (
+                <CHud
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "ИЗО" && (
+                <CIzo
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Литературно-музыкальная композиция" && (
+                <CLit
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Презентация" && (
+                <CPrez
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Моя родословная" && (
+                <CRod
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+              {nomPul === "Театральное искусство" && (
+                <CTet
+                  nomPul={nomPul}
+                  type={type}
+                  link={link}
+                  file={file}
+                  id={id}
+                  passState={closeExtra}
+                  passStateAmount={totalAmountHandler}
+                />
+              )}
+            </div>
+          )}
         </div>
       )}
     </Wrapper>
