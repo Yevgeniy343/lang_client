@@ -30,6 +30,7 @@ const UserAdultOrder = ({ orderId }) => {
     subject: thisOrder?.subject,
     subject2: thisOrder?.subject2,
     subject3: thisOrder?.subject3,
+    status: thisOrder?.status,
     job: thisOrder?.job,
     job2: thisOrder?.job2,
     job3: thisOrder?.job3,
@@ -58,7 +59,7 @@ const UserAdultOrder = ({ orderId }) => {
     nomPul: thisOrder?.nomPul,
     number: thisOrder?.number,
   };
-
+  console.log(initialState.status);
   const [age, setAge] = useState();
   const [subject, setSubject] = useState();
   const [subject2, setSubject2] = useState();
@@ -121,6 +122,10 @@ const UserAdultOrder = ({ orderId }) => {
         subject2: subject2,
         // subject3: values.subject3,
         subject3: subject3,
+        status:
+          initialState.status === "declined"
+            ? "отредактировано владельцем"
+            : "pending",
         punct: values.punct,
         punct2: values.punct2,
         punct3: values.punct3,
@@ -686,7 +691,6 @@ const UserAdultOrder = ({ orderId }) => {
           </motion.form>
         )}
       </AnimatePresence>
-
       <motion.div className="edit">
         <motion.div
           animate={{

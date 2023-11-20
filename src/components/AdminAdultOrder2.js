@@ -46,6 +46,8 @@ const AdminAdultOrder2 = ({
               ? "value ok"
               : status === "declined"
               ? "value declined"
+              : status === "отредактировано владельцем"
+              ? "value edited"
               : "value"
           }
         >
@@ -91,6 +93,9 @@ const Wrapper = styled.div`
   }
   .declined {
     background: var(--declined-1);
+  }
+  .edited {
+    background-color: var(--edited-1);
   }
   @media (min-width: 576px) {
   }

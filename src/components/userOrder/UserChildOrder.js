@@ -35,6 +35,7 @@ const UserChildOrder = ({ orderId }) => {
     graduate: thisOrder?.graduate,
     language: thisOrder?.language,
     language2: thisOrder?.language2,
+    status: thisOrder?.status,
     link: thisOrder?.link,
     extra1: thisOrder?.extra,
     extra2: thisOrder?.extra2,
@@ -107,6 +108,10 @@ const UserChildOrder = ({ orderId }) => {
         // language: values.language,
         language: language,
         language2: values.language2,
+        status:
+          initialState.status === "declined"
+            ? "отредактировано владельцем"
+            : "pending",
         link: values.link,
         email: values.email,
         phone: values.phone,

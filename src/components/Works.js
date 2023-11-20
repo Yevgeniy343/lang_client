@@ -8,7 +8,6 @@ const Works = () => {
 
   return (
     <Wrapper>
-      <p>жюри доступны все заявки</p>
       {adultOrders.map((order) => (
         <JuruOrders
           key={order._id}
