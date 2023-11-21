@@ -19,6 +19,7 @@ import AHud from "../components-list/AEsse";
 import ANay from "../components-list/ANay";
 import APer from "../components-list/APer";
 import AVok from "../components-list/APer";
+import Other from "../components-list/Other";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 
@@ -278,6 +279,31 @@ const JuruOrders = ({
               )}
             </div>
           )}
+          {nomPul !== "Театральное искусство" &&
+            nomPul !== "Презентация" &&
+            nomPul !== "Моя родословная" &&
+            nomPul !== "Литературно-музыкальная композиция" &&
+            nomPul !== "ИЗО" &&
+            nomPul !== "Художественное слово" &&
+            nomPul !== "Хореографическое искусство" &&
+            nomPul !== "Эссе" &&
+            nomPul !== "Декоративно-прикладное искусство" &&
+            nomPul !== "Вокал" &&
+            nomPul !== "Видеотрейлер" &&
+            nomPul !== "Фрагмент внеклассного мероприятия" &&
+            nomPul !== "Научно-методическая разработка" &&
+            nomPul !== "Вокальное искусство" &&
+            nomPul !== "Передовой опыт" && (
+              <Other
+                nomPul={nomPul}
+                type={type}
+                link={link}
+                file={file}
+                id={id}
+                passState={closeExtra}
+                passStateAmount={totalAmountHandler}
+              />
+            )}
         </div>
       )}
     </Wrapper>
