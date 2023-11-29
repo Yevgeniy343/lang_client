@@ -11,6 +11,7 @@ import {
   AiOutlineTeam,
   AiFillDatabase,
   AiOutlineAliwangwang,
+  AiFillFolderOpen,
 } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
 
@@ -27,10 +28,6 @@ const AdminNavBar = () => {
       <NavContainer>
         <div className="nav-center">
           <div className="nav-header">
-            <div className="logo">
-              {/* <img src={logo} alt="logo" className="logo" /> */}
-              <h4>админ</h4>
-            </div>
             <button
               type="button"
               className="nav-toggle"
@@ -59,6 +56,10 @@ const AdminNavBar = () => {
             <li onClick={() => navigate("/all-users")}>
               <AiOutlineTeam />
               <p>Все пользователи</p>
+            </li>
+            <li onClick={() => navigate("/diploms")}>
+              <AiFillFolderOpen />
+              <p>Грамоты</p>
             </li>
             <li onClick={() => dispatch(logOutAdmin())}>
               <GiExitDoor />

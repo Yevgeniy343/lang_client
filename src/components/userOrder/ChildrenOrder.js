@@ -619,6 +619,9 @@ const ChildrenOrder = ({ passCalculate }) => {
           </div>
         )}
         <div className="in">
+          <Button text="Оплатить" />
+        </div>
+        <div className="in">
           <label>
             <span>*</span>Квитанция об оплате
           </label>

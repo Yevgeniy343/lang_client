@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import styled from "styled-components";
 import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";

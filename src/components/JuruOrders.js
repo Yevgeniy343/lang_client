@@ -69,17 +69,18 @@ const JuruOrders = ({
       <div className="header" onClick={() => setExtra(!extra)}>
         {include && <p>Проверено</p>}
         {!include && <p>Не проверено</p>}
+        <p>{nomPul}</p>
         <p>id: {number}</p>
-        <p>возраст: {age}</p>
-        {
-          <a href={link} target="blank">
-            ссылка: {link}
-          </a>
-        }
+        {type === "child" && <p>возраст: {age}</p>}
         {file && (
           <p className="value link" onClick={downloadHandler}>
             скачать работу
           </p>
+        )}
+        {link && (
+          <a href={link} target="blank">
+            ссылка: {link}
+          </a>
         )}
       </div>
       {extra && (
@@ -314,13 +315,17 @@ const Wrapper = styled.div`
   .header {
     padding: 1rem;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     transition: 0.6s;
     cursor: pointer;
     border: 1px solid var(--main-0);
     margin: 0.5rem 0;
+    p {
+      width: 200px;
+      text-align: start;
+      overflow-x: auto;
+    }
   }
   .panel {
     border: 1px dotted var(--main-0);

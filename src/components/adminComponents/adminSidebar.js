@@ -5,6 +5,7 @@ import {
   AiOutlineUnorderedList,
   AiOutlineTeam,
   AiFillDatabase,
+  AiFillFolderOpen,
   AiOutlineAliwangwang,
 } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
@@ -49,6 +50,11 @@ const AdminSideBar = () => {
     dispatch(sidebarCloseHandler());
   };
 
+  const diplomHandler = () => {
+    navigate("/diploms");
+    dispatch(sidebarCloseHandler());
+  };
+
   const { isSidebarOpen } = useSelector((store) => store.user);
   return (
     <SidebarContainer>
@@ -84,6 +90,10 @@ const AdminSideBar = () => {
           <li onClick={allUsersHandler}>
             <AiOutlineTeam />
             <p>Все пользователи</p>
+          </li>
+          <li onClick={diplomHandler}>
+            <AiFillFolderOpen />
+            <p>Грамоты</p>
           </li>
           <li onClick={logOutHandler}>
             <GiExitDoor />

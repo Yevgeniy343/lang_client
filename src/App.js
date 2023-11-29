@@ -18,6 +18,7 @@ import AdminOrdersPage from "./pages/admin-pages/AdminOrdersPage";
 import Register2 from "./pages/Register2";
 import JuryRegister from "./pages/jury-pages/JuryRegister";
 import JuryArea from "./pages/jury-pages/JuryArea";
+import AdminDiplomPage from "./pages/admin-pages/AdminDiplomPage";
 
 function App() {
   return (
@@ -99,6 +100,17 @@ function App() {
             }
           >
             <Route path="/orders" element={<AdminOrdersPage />} />
+          </Route>
+
+          <Route
+            path="/diploms"
+            element={
+              <ProtectedAdmin>
+                <AdminDiplomPage />
+              </ProtectedAdmin>
+            }
+          >
+            <Route path="/diploms" element={<AdminDiplomPage />} />
           </Route>
 
           <Route
