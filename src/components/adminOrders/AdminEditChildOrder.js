@@ -170,16 +170,18 @@ const AdminEditChildOrder = () => {
 
         <div className="panel">
           <Button text="К заявке" onClick={() => setState("")} />
-          {thisOrder?.status === "pending" && (
+          {(thisOrder?.status === "pending" ||
+            thisOrder?.status === "отредактировано владельцем") && (
             <Button text="Одобрить" onClick={okHandler} />
           )}
-
-          {thisOrder?.status === "pending" && (
+          {(thisOrder.status === "pending" ||
+            thisOrder?.status === "отредактировано владельцем") && (
             <Button
               text="Отказать в одобрении"
               onClick={() => setState("Отказать в одобрении")}
             />
           )}
+
           <Button
             text="Редактировать"
             onClick={() => setState("Редактировать")}
