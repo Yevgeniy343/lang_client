@@ -13,10 +13,12 @@ import {
   editChildrenOrder,
   editStausOrder,
   getReasons,
+  deleteOrder,
 } from "../../features/adminSlice";
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import toast from "react-hot-toast";
+import { AiFillDelete } from "react-icons/ai";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -156,6 +158,10 @@ const AdminEditChildOrder = () => {
     });
   };
 
+  const deleteOrderHandler = () => {
+    dispatch(deleteOrder({ id: currentChildOrder }));
+    dispatch(isChildOrderHandler(false));
+  };
   return (
     <Wrapper>
       <div className="modal">
@@ -315,6 +321,9 @@ const AdminEditChildOrder = () => {
             <div className="element">
               <p className="key">Дополнительное поле 3</p>
               <p className="value">{initialState?.extra3}</p>
+            </div>
+            <div className="delete">
+              <AiFillDelete onClick={deleteOrderHandler} />
             </div>
           </div>
         )}
@@ -632,6 +641,21 @@ const Wrapper = styled.div`
   }
   textarea {
     height: 150px;
+  }
+  .delete {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    svg {
+      transition: 0.6s;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--clr-red-dark);
+      &:hover {
+        color: var(--clr-red-light);
+        scale: 1.1;
+      }
+    }
   }
   @media (min-width: 576px) {
     .in {

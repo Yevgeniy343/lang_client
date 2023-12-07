@@ -15,6 +15,7 @@ import {
   editAdultOrderThunk,
   editStatusOrderThunk,
   getReasonsThunk,
+  deleteOrderThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -145,8 +146,15 @@ export const editStausOrder = createAsyncThunk(
 export const getReasons = createAsyncThunk(
   "admin/getReasons",
   async (info, thunkAPI) => {
-    console.log(info);
     return getReasonsThunk(`/admin/getReasons/`, info, thunkAPI);
+  }
+);
+
+export const deleteOrder = createAsyncThunk(
+  "admin/deleteOrder",
+  async (info, thunkAPI) => {
+    console.log(info.id);
+    return deleteOrderThunk(`/admin/delete_order/${info.id}`, info, thunkAPI);
   }
 );
 
@@ -401,6 +409,21 @@ const adminSlice = createSlice({
       state.reasons = payload;
     });
     builder.addCase(getReasons.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    // deleteOrder
+    builder.addCase(deleteOrder.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteOrder.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.adultOrders = payload.ordersAdult;
+      state.childOrders = payload.ordersChild;
+      toast.success("Заявка удалена !");
+    });
+    builder.addCase(deleteOrder.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
-import { isAdultOrderHandler } from "../../features/adminSlice";
+import { isAdultOrderHandler, deleteOrder } from "../../features/adminSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
@@ -17,6 +17,7 @@ import {
 import FileDownload from "js-file-download";
 import Axios from "axios";
 import toast from "react-hot-toast";
+import { AiFillDelete } from "react-icons/ai";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -179,6 +180,11 @@ const AdminEditAdultOrder = () => {
     });
   };
 
+  const deleteOrderHandler = () => {
+    dispatch(deleteOrder({ id: thisOrder._id }));
+    dispatch(isAdultOrderHandler(false));
+  };
+
   return (
     <Wrapper>
       <div className="modal">
@@ -197,7 +203,7 @@ const AdminEditAdultOrder = () => {
             thisOrder?.status === "отредактировано владельцем") && (
             <Button text="Одобрить" onClick={okHandler} />
           )}
-          {(thisOrder.status === "pending" ||
+          {(thisOrder?.status === "pending" ||
             thisOrder?.status === "отредактировано владельцем") && (
             <Button
               text="Отказать в одобрении"
@@ -396,6 +402,9 @@ const AdminEditAdultOrder = () => {
             <div className="element">
               <p className="key">Дополнительное поле 3</p>
               <p className="value">{initialState?.extra3}</p>
+            </div>
+            <div className="delete">
+              <AiFillDelete onClick={deleteOrderHandler} />
             </div>
           </div>
         )}
@@ -841,6 +850,21 @@ const Wrapper = styled.div`
   }
   textarea {
     height: 150px;
+  }
+  .delete {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    svg {
+      transition: 0.6s;
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--clr-red-dark);
+      &:hover {
+        color: var(--clr-red-light);
+        scale: 1.1;
+      }
+    }
   }
   @media (min-width: 576px) {
     .in {
