@@ -234,6 +234,14 @@ const AdminEditChildOrder = () => {
               <p className="value">{initialState?.name}</p>
             </div>
             <div className="element">
+              <p className="key">Фамилия и имя второго конкурсанта</p>
+              <p className="value">{initialState?.name2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия и имя третьего конкурсанта</p>
+              <p className="value">{initialState?.name3}</p>
+            </div>
+            <div className="element">
               <p className="key">Возрастная категория</p>
               <p className="value">{initialState?.age}</p>
             </div>
@@ -302,14 +310,7 @@ const AdminEditChildOrder = () => {
               <p className="key">телефон</p>
               <p className="value">{initialState?.phone}</p>
             </div>
-            <div className="element">
-              <p className="key">Фамилия и имя второго конкурсанта</p>
-              <p className="value">{initialState?.name2}</p>
-            </div>
-            <div className="element">
-              <p className="key">Фамилия и имя третьего конкурсанта</p>
-              <p className="value">{initialState?.name3}</p>
-            </div>
+
             <div className="element">
               <p className="key">Дополнительное поле 1</p>
               <p className="value">{initialState?.extra1}</p>

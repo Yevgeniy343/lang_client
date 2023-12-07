@@ -55,7 +55,10 @@ const UserEvent = ({
       })
     );
   };
+  const today = new Date();
 
+  console.log("date2", new Date(date2));
+  console.log("today", today);
   return (
     <Wrapper>
       <div className="name">
@@ -72,7 +75,15 @@ const UserEvent = ({
         </div>
       </div>
       <div className="actives">
-        <Button text="Принять участие" onClick={orderHandler} />
+        <Button
+          text={
+            today > new Date(date2)
+              ? "Вы не можете подать заявку. Конкурс окончен"
+              : "Принять участие"
+          }
+          onClick={orderHandler}
+          disabled={today > new Date(date2) ? "disable" : ""}
+        />
       </div>
     </Wrapper>
   );

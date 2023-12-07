@@ -12,6 +12,7 @@ import { editAdultOrder } from "../../features/user/userSlise";
 import Select2 from "../../components-special/Select2";
 import { subjects, languages } from "../../data/data-order";
 import toast from "react-hot-toast";
+import _ from "lodash";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -22,6 +23,11 @@ const UserAdultOrder = ({ orderId }) => {
   const dispatch = useDispatch();
 
   const thisOrder = adultOrders.find((adult) => adult._id === orderId);
+
+  const thisEvent = _.find(events, (ev) => ev._id === thisOrder.eventId);
+
+  const today = new Date();
+  const HoursAgo36 = new Date(today.getTime() - 36 * 60 * 60 * 1000); // Subtract 36 hours in milliseconds
 
   const initialState = {
     name: thisOrder?.name,
@@ -59,7 +65,6 @@ const UserAdultOrder = ({ orderId }) => {
     nomPul: thisOrder?.nomPul,
     number: thisOrder?.number,
   };
-  console.log(initialState.status);
   const [age, setAge] = useState();
   const [subject, setSubject] = useState();
   const [subject2, setSubject2] = useState();
@@ -692,18 +697,25 @@ const UserAdultOrder = ({ orderId }) => {
         )}
       </AnimatePresence>
       <motion.div className="edit">
-        <motion.div
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [0, 0, 270, 270, 0],
-            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-          }}
-          transition={{ duration: 3, delay: 1.5 }}
-          className="icon"
-          onClick={() => setIsEdit(!isEdit)}
-        >
-          <VscEdit />
-        </motion.div>
+        {HoursAgo36 > new Date(thisEvent?.date2) && (
+          <p className="noedit">
+            К сожалению, Вы не можете редактировать заявку. Конкурс окончен
+          </p>
+        )}
+        {HoursAgo36 < new Date(thisEvent?.date2) && (
+          <motion.div
+            animate={{
+              scale: [1, 2, 2, 1, 1],
+              rotate: [0, 0, 270, 270, 0],
+              borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+            }}
+            transition={{ duration: 3, delay: 1.5 }}
+            className="icon"
+            onClick={() => setIsEdit(!isEdit)}
+          >
+            <VscEdit />
+          </motion.div>
+        )}
       </motion.div>
     </Wrapper>
   );
@@ -804,7 +816,10 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-
+  .noedit {
+    border: 1px solid var(--main-0);
+    padding: 0.5rem;
+  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {

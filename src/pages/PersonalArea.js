@@ -44,9 +44,9 @@ const PersonamArea = () => {
         </div>
         <div className="container">
           <div className="left">
-            <SmallMenu item="Мои заявки" />
             <SmallMenu item="Профиль" />
             <SmallMenu item="Актуальные мероприятия" />
+            <SmallMenu item="Мои заявки" />
             <SmallMenu item="Скачать дипломы" />
           </div>
           <div className="right">

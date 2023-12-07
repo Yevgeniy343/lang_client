@@ -255,6 +255,14 @@ const AdminEditAdultOrder = () => {
               <p className="value">{initialState?.name}</p>
             </div>
             <div className="element">
+              <p className="key">Фамилия имя отчество второго участника</p>
+              <p className="value">{initialState?.name2}</p>
+            </div>
+            <div className="element">
+              <p className="key">Фамилия имя отчество третьего участника</p>
+              <p className="value">{initialState?.name3}</p>
+            </div>
+            <div className="element">
               <p className="key">Ссылка на работу</p>
               <p className="value">
                 <a href={initialState?.link} target="_blank">
@@ -317,10 +325,7 @@ const AdminEditAdultOrder = () => {
               <p className="key">Стаж педагогичческой работы</p>
               <p className="value">{initialState?.internship}</p>
             </div>
-            <div className="element">
-              <p className="key">Фамилия имя отчество второго участника</p>
-              <p className="value">{initialState?.name2}</p>
-            </div>
+
             <div className="element">
               <p className="key">Занимаемая должность второго участника</p>
               <p className="value">{initialState?.job_title2}</p>
@@ -345,10 +350,7 @@ const AdminEditAdultOrder = () => {
               </p>
               <p className="value">{initialState?.internship2}</p>
             </div>
-            <div className="element">
-              <p className="key">Фамилия имя отчество третьего участника</p>
-              <p className="value">{initialState?.name3}</p>
-            </div>
+
             <div className="element">
               <p className="key">Занимаемая должность третьего участника</p>
               <p className="value">{initialState?.job_title3}</p>
