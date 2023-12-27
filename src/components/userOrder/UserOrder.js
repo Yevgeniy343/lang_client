@@ -39,31 +39,31 @@ const UserOrder = ({
         }
       >
         {status === "pending" && (
-          <p>
+          <p className="c1">
             <span>статус:</span> в обработке
           </p>
         )}
         {status === "ok" && (
-          <p>
+          <p className="c1">
             <span>статус:</span> одобрено
           </p>
         )}
         {status === "declined" && (
-          <p>
+          <p className="c1">
             <span>статус:</span> отклонено
           </p>
         )}
-        <p>
-          <span>id:</span> {number}
+        <p className="c2">
+          <span>номер заявки</span> {number}
         </p>
-        <p className="concurs">
+        <p className="c3">
           <span>конкурс:</span> {thisEvent?.name}
         </p>
-        <p>
+        <p className="c4">
           <span>имя: </span>
           {name}
         </p>
-        <p>
+        <p className="c5">
           <span>номинация: </span>
           {nomPul}
         </p>
@@ -128,7 +128,7 @@ const Wrapper = styled.div`
   .header {
     padding: 0;
     margin: 0;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     align-items: center;
     transition: 0.6s;
@@ -155,7 +155,7 @@ const Wrapper = styled.div`
   }
   p {
     color: var(--main-0);
-    width: 250px;
+    width: 150px;
     margin: 0;
     padding: 0;
   }
@@ -178,14 +178,28 @@ const Wrapper = styled.div`
     span {
     }
     p {
-      width: 250px;
       margin: 0;
+    }
+    .c1 {
+      width: 150px;
+    }
+    .c2 {
+      width: 170px;
+    }
+    .c3 {
+      width: 230px;
+    }
+    .c4 {
+      width: 230px;
+    }
+    .c5 {
+      width: 230px;
     }
   }
 
   @media (min-width: 992px) {
     p {
-      margin: 0;
+      width: initial;
     }
   }
   @media (min-width: 1200px) {

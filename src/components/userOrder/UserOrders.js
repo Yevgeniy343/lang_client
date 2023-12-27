@@ -49,13 +49,13 @@ const UserOrders = () => {
 const Wrapper = styled.div`
   .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     /* margin: 0.5rem 0; */
-    width: 100%;
+    /* width: 100%; */
     p {
       padding: 0;
-      width: 220px;
-      min-width: 220px;
+      /* width: 220px;
+      min-width: 220px; */
     }
   }
   @media (min-width: 576px) {
