@@ -20,6 +20,10 @@ const UserOrder = ({
 
   const thisEvent = events.find((e) => e._id === eventId);
 
+  const collapseHandler = (st) => {
+    setIsExtra(st);
+  };
+
   return (
     <Wrapper>
       <motion.div
@@ -64,7 +68,6 @@ const UserOrder = ({
           {nomPul}
         </p>
       </motion.div>
-      {/* <AnimatePresence> */}
       {isExtra && (
         <motion.div
           variants={{
@@ -94,14 +97,21 @@ const UserOrder = ({
           }
         >
           {type === "child" && (
-            <UserChildOrder key={orderId} orderId={orderId} />
+            <UserChildOrder
+              key={orderId}
+              orderId={orderId}
+              passState={collapseHandler}
+            />
           )}
           {type === "adult" && (
-            <UserAdultOrder key={orderId} orderId={orderId} />
+            <UserAdultOrder
+              key={orderId}
+              orderId={orderId}
+              passState={collapseHandler}
+            />
           )}
         </motion.div>
       )}
-      {/* </AnimatePresence> */}
     </Wrapper>
   );
 };
@@ -118,7 +128,6 @@ const Wrapper = styled.div`
   .header {
     padding: 0;
     margin: 0;
-    /* display: flex; */
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;

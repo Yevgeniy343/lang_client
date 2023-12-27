@@ -16,7 +16,7 @@ import _ from "lodash";
 
 const { REACT_APP_URL_API } = process.env;
 
-const UserAdultOrder = ({ orderId }) => {
+const UserAdultOrder = ({ orderId, passState }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const { events, adultOrders, user } = useSelector((store) => store.user);
@@ -160,6 +160,7 @@ const UserAdultOrder = ({ orderId }) => {
 
   return (
     <Wrapper>
+      <Button text="Свернуть" onClick={() => passState(false)} />
       <AnimatePresence>
         {!isEdit && (
           <motion.div
