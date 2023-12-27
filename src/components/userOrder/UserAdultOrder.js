@@ -119,7 +119,6 @@ const UserAdultOrder = ({ orderId, passState }) => {
         part: values.part,
         curatorsAmount: values.curatorsAmount,
         cur: values.cur,
-        // subject: values.subject,
         subject: subject,
 
         // subject2: values.subject2,
