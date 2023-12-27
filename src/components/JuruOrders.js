@@ -67,19 +67,19 @@ const JuruOrders = ({
   return (
     <Wrapper>
       <div className="header" onClick={() => setExtra(!extra)}>
-        {include && <p>Проверено</p>}
-        {!include && <p>Не проверено</p>}
-        <p>{nomPul}</p>
-        <p>id: {number}</p>
+        {include && <p className="c1">Проверено</p>}
+        {!include && <p className="c1">Не проверено</p>}
+        <p className="c2">{nomPul}</p>
+        <p className="c3">номер завки: {number}</p>
         {type === "child" && <p>возраст: {age}</p>}
         {file && (
-          <p className="value link" onClick={downloadHandler}>
+          <p className="link c4" onClick={downloadHandler}>
             скачать работу
           </p>
         )}
         {link && (
-          <a href={link} target="blank">
-            ссылка: {link}
+          <a href={link} target="blank" className="c5">
+            ссылка:{link}
           </a>
         )}
       </div>
@@ -322,7 +322,7 @@ const Wrapper = styled.div`
     border: 1px solid var(--main-0);
     margin: 0.5rem 0;
     p {
-      width: 200px;
+      /* width: 200px; */
       text-align: start;
       overflow-x: auto;
     }
@@ -354,6 +354,37 @@ const Wrapper = styled.div`
       font-size: 2rem;
       color: var(--clr-green-dark);
     }
+  }
+
+  .c1 {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
+  }
+  .c2 {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
+  }
+  .c3 {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
+  }
+  .c4 {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
+  }
+  .c5 {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
+  }
+  a {
+    max-width: 250px;
+    min-width: 250px;
+    margin: 0 15px;
   }
   @media (min-width: 576px) {
   }
