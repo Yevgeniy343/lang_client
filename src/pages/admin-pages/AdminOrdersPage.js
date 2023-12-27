@@ -13,11 +13,18 @@ import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrde
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import SelectEvents from "../../components-special/SelectEvents";
 import { MdOutlineAirlineSeatLegroomReduced } from "react-icons/md";
+import { getEvents } from "../../features/adminSlice";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
   const { childOrders, adultOrders, isChildOrder, isAdultOrder, events } =
     useSelector((store) => store.admin);
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+
+  console.log(events);
 
   const [pending, setPending] = useState();
   const [child, setChild] = useState();
@@ -166,36 +173,36 @@ const AdminOrdersPage = () => {
           <div className="header2">
             <p
               onClick={() => setSort("number")}
-              className={sort === "number" ? "key key-active" : "key"}
+              className={sort === "number" ? "key key-active c1" : "key c1"}
             >
               id заявки
             </p>
             <p
-              className={sort === "name" ? "key key-active" : "key"}
+              className={sort === "name" ? "key key-active c2" : "key c2"}
               onClick={() => setSort("name")}
             >
               ФИО участника
             </p>
             <p
-              className={sort === "subject" ? "key key-active" : "key"}
+              className={sort === "subject" ? "key key-active c3" : "key c3"}
               onClick={() => setSort("subject")}
             >
               Cубъект
             </p>
             <p
-              className={sort === "punct" ? "key key-active" : "key"}
+              className={sort === "punct" ? "key key-active c4" : "key c4"}
               onClick={() => setSort("punct")}
             >
               Населенный пункт
             </p>
             <p
-              className={sort === "nomPul" ? "key key-active" : "key"}
+              className={sort === "nomPul" ? "key key-active c5" : "key c5"}
               onClick={() => setSort("nomPul")}
             >
               Номинация
             </p>
             <p
-              className={sort === "language" ? "key key-active" : "key"}
+              className={sort === "language" ? "key key-active c6" : "key c6"}
               onClick={() => setSort("language")}
             >
               Язык работы
@@ -313,12 +320,12 @@ const Wrapper = styled.div`
   }
   .header2 {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: flex-start;
+    /* width: 100%; */
     p {
-      padding: 0.5rem;
-      width: 140px;
-      min-width: 140px;
+      /* padding: 0.5rem; */
+      /* width: 300px;
+      min-width: 300px; */
     }
   }
   .key {
@@ -329,6 +336,36 @@ const Wrapper = styled.div`
   }
   .key-active {
     background-color: var(--main-3);
+  }
+  .c1 {
+    max-width: 120px;
+    min-width: 120px;
+    margin: 0 10px;
+  }
+  .c2 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c3 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c4 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c5 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c6 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
   }
   @media (min-width: 576px) {
   }

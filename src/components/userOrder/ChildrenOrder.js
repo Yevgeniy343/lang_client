@@ -619,7 +619,7 @@ const ChildrenOrder = ({ passCalculate }) => {
           </div>
         )}
         <div className="in">
-          <Button text="Оплатить" />
+          <Button text="Оплатить" type="button" />
         </div>
         <div className="in">
           <label>

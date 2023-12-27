@@ -41,24 +41,24 @@ const AdminAdultOrder2 = ({
         <p
           className={
             status === "pending"
-              ? "value pending"
+              ? "value c1 pending"
               : status === "ok"
-              ? "value ok"
+              ? "value ok c1"
               : status === "declined"
-              ? "value declined"
+              ? "value declined c1"
               : status === "отредактировано владельцем"
-              ? "value edited"
-              : "value"
+              ? "value edited c1"
+              : "value c1"
           }
         >
           {number}
         </p>
-        <p className="value">{name}</p>
-        <p className="value">{subject}</p>
-        <p className="value">{punct}</p>
-        <p className="value">{nomPul}</p>
-        {language && <p className="value">{language}</p>}
-        {language2 && <p className="value">{language2}</p>}
+        <p className="c2">{name}</p>
+        <p className="c3">{subject}</p>
+        <p className="c4">{punct}</p>
+        <p className="c5">{nomPul}</p>
+        {language && <p className="c6">{language}</p>}
+        {language2 && <p className="c6">{language2}</p>}
       </div>
       {language && <div className="element"></div>}
       {language2 && <div className="element"></div>}
@@ -79,11 +79,11 @@ const Wrapper = styled.div`
       background-color: var(--main-3);
       cursor: pointer;
     }
-    p {
+    /* p {
       padding: 0.3rem;
       width: 140px;
       min-width: 140px;
-    }
+    } */
   }
   .pending {
     background: var(--pending-1);
@@ -96,6 +96,36 @@ const Wrapper = styled.div`
   }
   .edited {
     background-color: var(--edited-1);
+  }
+  .c1 {
+    max-width: 120px;
+    min-width: 120px;
+    margin: 0 10px;
+  }
+  .c2 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c3 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c4 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c5 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
+  }
+  .c6 {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 0 10px;
   }
   @media (min-width: 576px) {
   }
