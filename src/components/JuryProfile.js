@@ -34,10 +34,16 @@ const JuryProfile = () => {
     oy: jury.oy,
     punct: jury.punct,
     lang: jury.leng,
+    job_title: jury.job_title,
+    kval: jury.kval,
+    prof: jury.prof,
+    place: jury.place,
+    region: jury.region,
   };
 
   const [values, setValues] = useState(initialState);
   const [noms, setNoms] = useState(jury.nomins);
+  console.log(noms);
 
   const changeHandler = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -53,6 +59,11 @@ const JuryProfile = () => {
         lang: lang,
         nomins: noms,
         id: jury._id,
+        job_title: values.job_title,
+        kval: values.kval,
+        prof: values.prof,
+        place: values.place,
+        region: values.region,
       })
     );
   };
