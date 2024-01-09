@@ -13,6 +13,7 @@ import Select2 from "../../components-special/Select2";
 import { subjects, languages } from "../../data/data-order";
 import toast from "react-hot-toast";
 import _ from "lodash";
+import ButtonDark from "../../components-special/ButtonDark";
 
 const { REACT_APP_URL_API } = process.env;
 
@@ -159,7 +160,7 @@ const UserAdultOrder = ({ orderId, passState }) => {
 
   return (
     <Wrapper>
-      <Button text="Свернуть" onClick={() => passState(false)} />
+      <ButtonDark text="Свернуть" onClick={() => passState(false)} />
       <AnimatePresence>
         {!isEdit && (
           <motion.div
@@ -386,9 +387,6 @@ const UserAdultOrder = ({ orderId, passState }) => {
             className="content"
             onSubmit={onSubmit}
           >
-            <div className="actions">
-              <Button text="Сохранить" type="submit" />
-            </div>
             <div className="in">
               <label>Фамилия и имя конкурсанта</label>
               <Input
@@ -716,6 +714,9 @@ const UserAdultOrder = ({ orderId, passState }) => {
             <VscEdit />
           </motion.div>
         )}
+        <div className="actions">
+          <Button text="Сохранить" type="submit" />
+        </div>
       </motion.div>
     </Wrapper>
   );
@@ -811,10 +812,14 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
   .actions {
-    margin: 2rem;
-    width: 95%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 100px;
+    position: sticky;
+    width: 95%;
+    /* top: 200px; */
+    /* bottom: 10px; */
+    right: 100px;
   }
   .noedit {
     border: 1px solid var(--main-0);
