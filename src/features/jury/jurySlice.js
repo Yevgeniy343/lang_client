@@ -8,6 +8,7 @@ import {
   editProfileThunk,
   checkThunk,
   getEventsThunk,
+  getNomsThunk,
 } from "./jury-thunk";
 import {
   addJuryToLocalStorage,
@@ -28,6 +29,7 @@ const initialState = {
   childOrders: [],
   adultOrders: [],
   events: [],
+  nominations: [],
 };
 
 export const registerJury = createAsyncThunk(
@@ -79,7 +81,6 @@ export const check = createAsyncThunk("jury/check", async (info, thunkAPI) => {
 export const getEvents = createAsyncThunk(
   "jury/getEvents",
   async (info, thunkAPI) => {
-    console.log(info);
     return getEventsThunk(`/jury/getEvents/`, info, thunkAPI);
   }
 );
@@ -173,6 +174,7 @@ const jurySlice = createSlice({
       state.isLoading = false;
       state.childOrders = payload.childOrders;
       state.adultOrders = payload.adultOrders;
+      state.nominations = payload.noms;
     });
     builder.addCase(getOrders.rejected, (state, { payload }) => {
       state.isLoading = false;

@@ -17,8 +17,8 @@ import _ from "lodash";
 const { REACT_APP_REF } = process.env;
 
 const JuryProfile = () => {
-  const { jury, isLoading } = useSelector((store) => store.jury);
-  const { nominations } = useSelector((store) => store.admin);
+  const { jury, isLoading, nominations } = useSelector((store) => store.jury);
+
   const dispatch = useDispatch();
   const [state, setState] = useState("");
   const [lang, setLang] = useState();
@@ -89,6 +89,83 @@ const JuryProfile = () => {
             />
           </div>
         </div>
+        <div className="name">
+          <div className="first">
+            <label>Должность</label>
+            <Input
+              type="text"
+              name="job_title"
+              value={values.job_title}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Квалификационная категория</label>
+            <Input
+              type="text"
+              name="kval"
+              value={values.kval}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Профессиональные регалии</label>
+            <Input
+              type="text"
+              name="prof"
+              value={values.prof}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Место работы</label>
+            <Input
+              type="text"
+              name="place"
+              value={values.place}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Название ОУ</label>
+            <Input
+              type="text"
+              name="oy"
+              value={values.oy}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Населенный пункт</label>
+            <Input
+              type="text"
+              name="punct"
+              value={values.punct}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
+        <div className="name">
+          <div className="first">
+            <label>Регион РФ</label>
+            <Input
+              type="text"
+              name="region"
+              value={values.region}
+              onChange={changeHandler}
+            />
+          </div>
+        </div>
         <div className="contacts">
           <div className="firs">
             <label>
@@ -112,14 +189,23 @@ const JuryProfile = () => {
               onChange={(phone) => setState({ phone })}
             />
           </div>
-          <div className="noms">
+          <div className="in2">
+            <label>
+              Какую номинацию Вы компетентны проверять (может быть выбор
+              нескольких)
+            </label>
             {nominations?.map((n) => (
               <CheckboxJuryNoms label={n.name} passState={nomsHandler} />
             ))}
           </div>
         </div>
-        <label>Язык</label>
-        <Select2 passState={languageHandler} data={languages} />
+        <div className="in2">
+          <label>
+            Работы на каком языке Вы компетентны проверять (может быть выбор
+            нескольких)
+          </label>
+          <Select2 passState={languageHandler} data={languages} />
+        </div>
         <div className="actions">
           <Button text="Сохранить" type="submit" />
         </div>
@@ -186,6 +272,9 @@ const Wrapper = styled.div`
         color: var(--main-1);
       }
     }
+  }
+  .in2 {
+    margin-top: 50px;
   }
   @media (min-width: 576px) {
     .name,
