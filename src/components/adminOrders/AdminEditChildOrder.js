@@ -162,6 +162,14 @@ const AdminEditChildOrder = () => {
     dispatch(deleteOrder({ id: currentChildOrder }));
     dispatch(isChildOrderHandler(false));
   };
+
+  console.log(initialState?.cur);
+
+  const curators = _.replace(
+    initialState?.cur,
+    /cf1|cd1|cf2|"|:|cf3|cd2|cf2|cd3|cf3|{|}|,/g,
+    ""
+  );
   return (
     <Wrapper>
       <div className="modal">
@@ -298,10 +306,13 @@ const AdminEditChildOrder = () => {
               <p className="key">Количество кураторов</p>
               <p className="value">{initialState?.curatorsAmount}</p>
             </div>
+            {/* ___________________________________________________ */}
             <div className="element">
               <p className="key">Информация по кураторам</p>
-              <p className="value">{initialState?.cur}</p>
+              <p className="value">{curators}</p>
             </div>
+            {/* ___________________________________________________ */}
+
             <div className="element">
               <p className="key">email</p>
               <p className="value">{initialState?.email}</p>
