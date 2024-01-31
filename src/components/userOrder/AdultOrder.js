@@ -848,7 +848,7 @@ const AdultOrder = ({ passCalculate }) => {
           </div>
         )}
         <div className="in">
-          <Button text="Оплатить" />
+          <Button text="Пожертвовать" />
         </div>
         <div className="in">
           <label>
