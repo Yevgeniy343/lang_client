@@ -169,7 +169,7 @@ const Profile = () => {
         </div>
       </form>
       <div className="referal">
-        <label>Ваша реферальная ссылка:</label>
+        <h4>Ваша реферальная ссылка:</h4>
         {user.referal && (
           <div className="ref">
             <p className="referal_link" id="link">
@@ -248,6 +248,9 @@ const Wrapper = styled.div`
         color: var(--main-1);
       }
     }
+  }
+  .referal {
+    margin-top: 30px;
   }
   @media (min-width: 576px) {
     .name,
