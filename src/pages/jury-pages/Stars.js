@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import star from "../../images/—Pngtree—star_735865.png";
+import star from "../../images/star.png";
 import { motion } from "framer-motion";
 
 const Stars = () => {
