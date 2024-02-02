@@ -306,12 +306,11 @@ const AdminEditChildOrder = () => {
               <p className="key">Количество кураторов</p>
               <p className="value">{initialState?.curatorsAmount}</p>
             </div>
-            {/* ___________________________________________________ */}
+
             <div className="element">
               <p className="key">Информация по кураторам</p>
               <p className="value">{curators}</p>
             </div>
-            {/* ___________________________________________________ */}
 
             <div className="element">
               <p className="key">email</p>
