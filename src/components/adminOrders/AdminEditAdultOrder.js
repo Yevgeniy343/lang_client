@@ -185,6 +185,12 @@ const AdminEditAdultOrder = () => {
     dispatch(isAdultOrderHandler(false));
   };
 
+  const curators = _.replace(
+    initialState?.cur,
+    /cf1|cd1|cf2|"|:|cf3|cd2|cf2|cd3|cf3|{|}|,/g,
+    ""
+  );
+
   return (
     <Wrapper>
       <div className="modal">
@@ -383,7 +389,7 @@ const AdminEditAdultOrder = () => {
 
             <div className="element">
               <p className="key">Информация по кураторам</p>
-              <p className="value">{initialState?.cur}</p>
+              <p className="value">{curators}</p>
             </div>
             <div className="element">
               <p className="key">Email</p>
