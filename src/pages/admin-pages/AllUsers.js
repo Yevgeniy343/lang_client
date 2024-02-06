@@ -18,6 +18,8 @@ const AllUsers = () => {
     dispatch(getUsers());
   }, []);
 
+  console.log(users);
+
   const headers = [
     { label: "Имя", key: "name" },
     { label: "Фамилияя", key: "second_name" },
@@ -41,7 +43,7 @@ const AllUsers = () => {
             <AiOutlineCloudDownload />
           </CSVLink>
         </div>
-        {users.map((u) => (
+        {users?.map((u) => (
           <AdminUser
             key={u._id}
             name={u.name}

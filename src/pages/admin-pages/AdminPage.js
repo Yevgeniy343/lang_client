@@ -7,7 +7,11 @@ import AdminSideBar from "../../components/adminComponents/adminSidebar";
 import AdminEvents from "./AdminEvents";
 import Event from "../../components/adminComponents/Event";
 import EventAdminModal from "../../components/adminModal/eventAdminModal";
-import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
+import {
+  getChildOrders,
+  getAdultOrders,
+  getUsers,
+} from "../../features/adminSlice";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
@@ -15,6 +19,11 @@ const AdminPage = () => {
   useEffect(() => {
     dispatch(getChildOrders());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+
   return (
     <Wrapper>
       <AdminNavBar />
