@@ -201,20 +201,14 @@ const JuryProfile = () => {
             />
           </div>
           <div className="in2">
-            <label>
-              Какую номинацию Вы компетентны проверять (может быть выбор
-              нескольких)
-            </label>
+            <h4>Выберете номинацию для проверки</h4>
             {nominations?.map((n) => (
               <CheckboxJuryNoms label={n.name} passState={nomsHandler} />
             ))}
           </div>
         </div>
         <div className="in2">
-          <label>
-            Работы на каком языке Вы компетентны проверять (может быть выбор
-            нескольких)
-          </label>
+          <h4>Язык (языки) для проверки</h4>
           <Select2 passState={languageHandler} data={languages} />
         </div>
         <div className="actions">
