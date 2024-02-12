@@ -93,8 +93,7 @@ const UserChildOrder = ({ orderId, passState }) => {
     }
   }, [isEdit]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const saveHandler = () => {
     dispatch(
       editChildrenOrder({
         orderId: orderId,
@@ -288,7 +287,6 @@ const UserChildOrder = ({ orderId, passState }) => {
               duration: 1,
             }}
             className="content"
-            onSubmit={onSubmit}
           >
             <div className="in">
               <label>Фамилия и имя конкурсанта</label>
@@ -483,7 +481,7 @@ const UserChildOrder = ({ orderId, passState }) => {
           </motion.form>
         )}
         <div className="actions">
-          <Button text="Сохранить" type="submit" />
+          <Button text="Сохранить" onClick={saveHandler} />
         </div>
       </AnimatePresence>
       <motion.div className="edit">
@@ -556,6 +554,7 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-right: 3rem;
+
     .icon {
       border: 1px solid var(--main-0);
       border-radius: 50%;
@@ -609,6 +608,7 @@ const Wrapper = styled.div`
     /* top: 200px; */
     /* bottom: 10px; */
     right: 100px;
+    z-index: 2;
   }
   .noedit {
     border: 1px solid var(--main-0);

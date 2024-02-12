@@ -108,8 +108,7 @@ const UserAdultOrder = ({ orderId, passState }) => {
     }
   }, [isEdit]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const saveHandler = () => {
     dispatch(
       editAdultOrder({
         orderId: orderId,
@@ -391,7 +390,6 @@ const UserAdultOrder = ({ orderId, passState }) => {
               duration: 1,
             }}
             className="content"
-            onSubmit={onSubmit}
           >
             <div className="in">
               <label>Фамилия и имя конкурсанта</label>
@@ -721,7 +719,7 @@ const UserAdultOrder = ({ orderId, passState }) => {
           </motion.div>
         )}
         <div className="actions">
-          <Button text="Сохранить" type="submit" />
+          <Button text="Сохранить" onClick={saveHandler} />
         </div>
       </motion.div>
     </Wrapper>
@@ -826,6 +824,7 @@ const Wrapper = styled.div`
     /* top: 200px; */
     /* bottom: 10px; */
     right: 100px;
+    z-index: 2;
   }
   .noedit {
     border: 1px solid var(--main-0);
