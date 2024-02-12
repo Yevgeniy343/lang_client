@@ -12,7 +12,16 @@ import WrapperScale from "./WrapperScale";
 
 const { REACT_APP_URL_API } = process.env;
 
-const AHud = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
+const AHud = ({
+  nomPul,
+  type,
+  link,
+  file,
+  id,
+  passState,
+  passStateAmount,
+  passColapse,
+}) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
   const [status, setStatus] = useState();
@@ -251,11 +260,10 @@ const AHud = ({ nomPul, type, link, file, id, passState, passStateAmount }) => {
         </div>
       </div>
       <div className="actions2">
-        <Button
-          text="РАБОТА ПРОВЕРЕНА"
-          onClick={checkHandler}
-          //   disabled={status === "Проверено" ? true : false}
-        />
+        <Button text="РАБОТА ПРОВЕРЕНА" onClick={checkHandler} />
+        <p className="collapse" onClick={() => passColapse(false)}>
+          СВЕРНУТЬ
+        </p>
         {!isNaN(totalAmount) && <p className="amount">{totalAmount}</p>}
       </div>
     </WrapperScale>

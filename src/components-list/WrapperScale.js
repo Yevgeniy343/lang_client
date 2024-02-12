@@ -19,6 +19,9 @@ const WrapperScale = styled.div`
     font-size: 1rem;
     margin: 1rem;
     color: var(--main-0);
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: 900;
   }
   @media (min-width: 576px) {
   }

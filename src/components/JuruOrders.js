@@ -64,6 +64,10 @@ const JuruOrders = ({
     setTotalAmount(total_amount);
   };
 
+  const setCollapse = (state) => {
+    setExtra(state);
+  };
+
   return (
     <Wrapper>
       <div className="header" onClick={() => setExtra(!extra)}>
@@ -96,6 +100,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Передовой опыт" && (
@@ -107,6 +112,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Научно-методическая разработка" && (
@@ -118,6 +124,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Художественное слово" && (
@@ -129,6 +136,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Фрагмент внеклассного мероприятия" && (
@@ -140,6 +148,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Эссе" && (
@@ -151,6 +160,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
             </div>
@@ -166,6 +176,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Вокал" && (
@@ -177,6 +188,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Декоративно-прикладное искусство" && (
@@ -188,6 +200,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Эссе" && (
@@ -199,6 +212,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Хореографическое искусство" && (
@@ -210,6 +224,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Художественное слово" && (
@@ -221,6 +236,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "ИЗО" && (
@@ -232,6 +248,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Литературно-музыкальная композиция" && (
@@ -243,6 +260,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Презентация" && (
@@ -254,6 +272,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Моя родословная" && (
@@ -265,6 +284,7 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
               {nomPul === "Театральное искусство" && (
@@ -276,10 +296,12 @@ const JuruOrders = ({
                   id={id}
                   passState={closeExtra}
                   passStateAmount={totalAmountHandler}
+                  passColapse={setCollapse}
                 />
               )}
             </div>
           )}
+
           {nomPul !== "Театральное искусство" &&
             nomPul !== "Презентация" &&
             nomPul !== "Моя родословная" &&
@@ -303,6 +325,7 @@ const JuruOrders = ({
                 id={id}
                 passState={closeExtra}
                 passStateAmount={totalAmountHandler}
+                passColapse={setCollapse}
               />
             )}
         </div>
@@ -385,6 +408,17 @@ const Wrapper = styled.div`
     max-width: 250px;
     min-width: 250px;
     margin: 0 15px;
+  }
+
+  .collapse {
+    font-size: 1rem;
+    margin: 1rem;
+    color: var(--main-0);
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-weight: 900;
+
+    cursor: pointer;
   }
   @media (min-width: 576px) {
   }

@@ -20,6 +20,7 @@ const CEsse = ({
   id,
   passState,
   passStateAmount,
+  passColapse,
 }) => {
   const { jury } = useSelector((store) => store.jury);
   const dispatch = useDispatch();
@@ -259,11 +260,10 @@ const CEsse = ({
         </div>
       </div>
       <div className="actions2">
-        <Button
-          text="РАБОТА ПРОВЕРЕНА"
-          onClick={checkHandler}
-          //   disabled={status === "Проверено" ? true : false}
-        />
+        <Button text="РАБОТА ПРОВЕРЕНА" onClick={checkHandler} />
+        <p className="collapse" onClick={() => passColapse(false)}>
+          СВЕРНУТЬ
+        </p>
         {!isNaN(totalAmount) && <p className="amount">{totalAmount}</p>}
       </div>
     </WrapperScale>
