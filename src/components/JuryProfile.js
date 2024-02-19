@@ -64,6 +64,8 @@ const JuryProfile = () => {
         prof: values.prof,
         place: values.place,
         region: values.region,
+        oy: values.oy,
+        punct: values.punct,
       })
     );
   };
@@ -74,6 +76,7 @@ const JuryProfile = () => {
 
   let data;
   const nomsHandler = (d) => {
+    console.log(d);
     const includes = _.includes(noms, d);
     if (!includes) {
       data = [...noms, d];

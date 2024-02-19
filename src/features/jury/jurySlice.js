@@ -70,6 +70,7 @@ export const getOrders = createAsyncThunk(
 export const editProfile = createAsyncThunk(
   "jury/editProfile",
   async (info, thunkAPI) => {
+    console.log(info);
     return editProfileThunk(`/jury/editProfile/`, info, thunkAPI);
   }
 );
@@ -188,6 +189,7 @@ const jurySlice = createSlice({
       state.isLoading = false;
       state.jury = payload;
       addJuryToLocalStorage(payload);
+      toast.success("Изменения сохранены !");
     });
     builder.addCase(editProfile.rejected, (state, { payload }) => {
       state.isLoading = false;
