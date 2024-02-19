@@ -41,13 +41,13 @@ const JuryRegister = () => {
   const [remind, setRemind] = useState(false);
   const [phone, setState] = useState("");
   const [sp, setSp] = useState();
-  console.log(sp);
+  // console.log(sp);
   const [lang, setLang] = useState();
-  console.log(lang);
+  // console.log(lang);
   const [nomins, setNom] = useState();
   console.log(nomins);
   const [subj, setSubj] = useState();
-  console.log(subj);
+  // console.log(subj);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,10 +56,10 @@ const JuryRegister = () => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  console.log(values.other);
-  console.log(values.oy);
-  console.log(values.punct);
-  console.log(values.phone);
+  // console.log(values.other);
+  // console.log(values.oy);
+  // console.log(values.punct);
+  // console.log(values.phone);
 
   const onSubmit = (e) => {
     e.preventDefault();
