@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+// AllUsers.js
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
@@ -9,16 +10,35 @@ import AdminUser from "../../components/adminComponents/adminUser";
 import { AiOutlineCloudDownload } from "react-icons/ai";
 import { CSVLink, CSVDownload } from "react-csv";
 import _ from "lodash";
+import Button from "../../components-special/Button";
 
 const AllUsers = () => {
   const { users, isLoading } = useSelector((store) => store.admin);
   const dispatch = useDispatch();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5; // Количество пользователей на странице
+
+  // Вычисление индексов для отсечения пользователей
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Функция изменения страницы
+  const paginate = (pageNumber, event) => {
+    event.preventDefault();
+    setCurrentPage(pageNumber);
+  };
+
+  // Вычисление количества страниц
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(users.length / usersPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   useEffect(() => {
     dispatch(getUsers());
   }, []);
-
-  console.log(users);
 
   const headers = [
     { label: "Имя", key: "name" },
@@ -43,7 +63,7 @@ const AllUsers = () => {
             <AiOutlineCloudDownload />
           </CSVLink>
         </div>
-        {users?.map((u) => (
+        {currentUsers?.map((u) => (
           <AdminUser
             key={u._id}
             name={u.name}
@@ -61,6 +81,28 @@ const AllUsers = () => {
             from_ref={u.from_ref}
           />
         ))}
+        <nav>
+          <ul className="pagination">
+            {pageNumbers.map((number) => (
+              <li key={number} className="page-item">
+                {/* <a
+                  onClick={(e) => paginate(number, e)}
+                  href="!#"
+                  className="page-link"
+                >
+                  {number}
+                </a> */}
+                <div className="actions">
+                  <Button
+                    text={number}
+                    onClick={(e) => paginate(number, e)}
+                    className="page-link"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </Wrapper>
     </div>
   );
@@ -89,6 +131,12 @@ const Wrapper = styled.div`
       :hover {
         color: var(--clr-green-light);
       }
+    }
+  }
+  .pagination {
+    display: flex;
+    .actions {
+      margin: 10px;
     }
   }
   @media (min-width: 576px) {
