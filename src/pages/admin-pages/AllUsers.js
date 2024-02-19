@@ -11,6 +11,7 @@ import { AiOutlineCloudDownload } from "react-icons/ai";
 import { CSVLink, CSVDownload } from "react-csv";
 import _ from "lodash";
 import Button from "../../components-special/Button";
+import Input from "../../components-special/Input";
 
 const AllUsers = () => {
   const { users, isLoading } = useSelector((store) => store.admin);
@@ -19,10 +20,26 @@ const AllUsers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5; // Количество пользователей на странице
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Обработчик изменения текста в поле поиска
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Фильтрация списка пользователей на основе строки поиска
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // Заменяем использование `users` на `filteredUsers` для отображения и пагинации
+
   // Вычисление индексов для отсечения пользователей
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+  // const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
   // Функция изменения страницы
   const paginate = (pageNumber, event) => {
@@ -63,6 +80,16 @@ const AllUsers = () => {
             <AiOutlineCloudDownload />
           </CSVLink>
         </div>
+        <div className="search">
+          <div className="in">
+            <Input
+              type="text"
+              placeholder="Поиск по имени или email..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+          </div>
+        </div>
         {currentUsers?.map((u) => (
           <AdminUser
             key={u._id}
@@ -85,13 +112,6 @@ const AllUsers = () => {
           <ul className="pagination">
             {pageNumbers.map((number) => (
               <li key={number} className="page-item">
-                {/* <a
-                  onClick={(e) => paginate(number, e)}
-                  href="!#"
-                  className="page-link"
-                >
-                  {number}
-                </a> */}
                 <div className="actions">
                   <Button
                     text={number}
@@ -135,8 +155,17 @@ const Wrapper = styled.div`
   }
   .pagination {
     display: flex;
+    justify-content: center;
     .actions {
       margin: 10px;
+    }
+  }
+  .search {
+    display: flex;
+    justify-content: flex-end;
+    .in {
+      width: 300px;
+      margin-right: 15px;
     }
   }
   @media (min-width: 576px) {
