@@ -43,6 +43,7 @@ const initialState = {
   currentChildOrder: "",
   currentAdultOrder: "",
   reasons: [],
+  currentOrderType: "child",
 };
 
 export const loginAdmin = createAsyncThunk(
@@ -196,6 +197,9 @@ const adminSlice = createSlice({
     },
     adultNominationHandlerClean: (state) => {
       state.adultNominations = [];
+    },
+    currentOrderTypeHandler: (state, { payload }) => {
+      state.currentOrderType = payload;
     },
   },
   extraReducers: (builder) => {
@@ -442,5 +446,6 @@ export const {
   isChildOrderHandler,
   currentChildOrderHandler,
   currentAdultOrderHandler,
+  currentOrderTypeHandler,
 } = adminSlice.actions;
 export default adminSlice.reducer;

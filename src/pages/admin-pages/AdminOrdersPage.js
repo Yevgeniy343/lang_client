@@ -6,7 +6,11 @@ import AdminSideBar from "../../components/adminComponents/adminSidebar";
 
 import AdminChildOrder2 from "../../components/AdminChildOrder2";
 import AdminAdultOrder2 from "../../components/AdminAdultOrder2";
-import { getChildOrders, getAdultOrders } from "../../features/adminSlice";
+import {
+  getChildOrders,
+  getAdultOrders,
+  currentOrderTypeHandler,
+} from "../../features/adminSlice";
 import _ from "lodash";
 import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrder";
 import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrder";
@@ -17,19 +21,34 @@ import { getEvents } from "../../features/adminSlice";
 
 const AdminOrdersPage = () => {
   const dispatch = useDispatch();
-  const { childOrders, adultOrders, isChildOrder, isAdultOrder, events } =
-    useSelector((store) => store.admin);
+  // window.location.reload();
+  const {
+    childOrders,
+    adultOrders,
+    isChildOrder,
+    isAdultOrder,
+    events,
+    currentOrderType,
+  } = useSelector((store) => store.admin);
 
   useEffect(() => {
     dispatch(getEvents());
   }, []);
 
-  console.log(events);
+  useEffect(() => {
+    dispatch(getChildOrders());
+  }, [childOrders._id]);
+
+  useEffect(() => {
+    dispatch(getChildOrders());
+  }, [JSON.stringify(childOrders)]);
+
+  // console.log(events);
 
   const [pending, setPending] = useState();
   const [child, setChild] = useState();
   const [adult, setAdult] = useState();
-  const [state, setState] = useState();
+  // const [state, setState] = useState("child");
   const [sort, setSort] = useState("Child");
   const [data, setData] = useState(child);
   const [data2, setData2] = useState(adult);
@@ -151,14 +170,18 @@ const AdminOrdersPage = () => {
         <div className="panel">
           <div className="category">
             <div
-              className={state === "child" ? "child active" : "child"}
-              onClick={() => setState("child")}
+              className={
+                currentOrderType === "child" ? "child active" : "child"
+              }
+              onClick={() => dispatch(currentOrderTypeHandler("child"))}
             >
               <p className="choose">дети</p>
             </div>
             <div
-              className={state === "adult" ? "adult active" : "adult"}
-              onClick={() => setState("adult")}
+              className={
+                currentOrderType === "adult" ? "adult active" : "adult"
+              }
+              onClick={() => dispatch(currentOrderTypeHandler("adult"))}
             >
               <p className="choose">взростые</p>
             </div>
@@ -208,7 +231,7 @@ const AdminOrdersPage = () => {
               Язык работы
             </p>
           </div>
-          {state === "child" && (
+          {currentOrderType === "child" && (
             <div className="child_orders">
               {data?.map((order) => (
                 <AdminChildOrder2
@@ -226,7 +249,7 @@ const AdminOrdersPage = () => {
               ))}
             </div>
           )}
-          {state === "adult" && (
+          {currentOrderType === "adult" && (
             <div className="child_orders">
               {data2?.map((order) => (
                 <AdminAdultOrder2

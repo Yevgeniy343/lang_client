@@ -18,7 +18,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     dispatch(getChildOrders());
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     dispatch(getUsers());

@@ -14,6 +14,8 @@ import {
   editStausOrder,
   getReasons,
   deleteOrder,
+  getChildOrders,
+  getEvents,
 } from "../../features/adminSlice";
 import FileDownload from "js-file-download";
 import Axios from "axios";
@@ -33,6 +35,10 @@ const AdminEditChildOrder = () => {
   const { currentChildOrder, childOrders, events, reasons } = useSelector(
     (store) => store.admin
   );
+
+  useEffect(() => {
+    dispatch(getChildOrders());
+  }, [childOrders]);
 
   const [state, setState] = useState();
 
@@ -133,8 +139,11 @@ const AdminEditChildOrder = () => {
         })
       );
       toast.success("Заявка отклонена !");
+      dispatch(getChildOrders());
+
       setTimeout(() => {
         dispatch(isChildOrderHandler(false));
+        window.location.reload();
       }, 1000);
     }
   };
@@ -143,9 +152,10 @@ const AdminEditChildOrder = () => {
     dispatch(editStausOrder({ status: "ok", orderId: currentChildOrder }));
     setState("Одобрена");
     toast.success("Заявка одобрена !");
-
+    dispatch(getChildOrders());
     setTimeout(() => {
       dispatch(isChildOrderHandler(false));
+      window.location.reload();
     }, 1000);
   };
 
@@ -163,13 +173,14 @@ const AdminEditChildOrder = () => {
     dispatch(isChildOrderHandler(false));
   };
 
-  console.log(initialState?.cur);
+  // console.log(initialState?.cur);
 
   const curators = _.replace(
     initialState?.cur,
     /cf1|cd1|cf2|"|:|cf3|cd2|cf2|cd3|cf3|{|}|,/g,
     ""
   );
+
   return (
     <Wrapper>
       <div className="modal">

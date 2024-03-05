@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
-import { isAdultOrderHandler, deleteOrder } from "../../features/adminSlice";
+import {
+  isAdultOrderHandler,
+  deleteOrder,
+  getAdultOrders,
+} from "../../features/adminSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Input from "../../components-special/Input";
 import TextArea from "../../components/TextArea";
@@ -155,8 +159,10 @@ const AdminEditAdultOrder = () => {
         })
       );
       toast.success("Заявка отклонена !");
+      dispatch(getAdultOrders());
       setTimeout(() => {
         dispatch(isAdultOrderHandler(false));
+        window.location.reload();
       }, 1000);
     }
   };
@@ -165,9 +171,10 @@ const AdminEditAdultOrder = () => {
     dispatch(editStausOrder({ status: "ok", orderId: currentAdultOrder }));
     setState("Одобрена");
     toast.success("Заявка одобрена !");
-
+    dispatch(getAdultOrders());
     setTimeout(() => {
       dispatch(isAdultOrderHandler(false));
+      window.location.reload();
     }, 1000);
   };
 
