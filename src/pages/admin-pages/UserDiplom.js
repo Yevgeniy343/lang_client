@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import _ from "lodash";
+import { uploadDiplom } from "../../features/adminSlice";
+import toast from "react-hot-toast";
 
 function UserDiplom({ _id, name, second_name, email }) {
   const { childOrders, adultOrders, events } = useSelector(
     (store) => store.admin
   );
+
+  const dispatch = useDispatch();
+  const filePickerRef = useRef();
+
   const [extra, setExtra] = useState(false);
+  const [eventData, setEventData] = useState();
 
   const thisOrders1 = _.filter(childOrders, (c) => c.userId === _id);
   //   console.log("thisOrders1", thisOrders1);
@@ -22,7 +29,62 @@ function UserDiplom({ _id, name, second_name, email }) {
   //   console.log("events2", events2);
 
   const this_events = _.concat(events1, events2);
-  console.log("this_events", this_events);
+  //   console.log("this_events", this_events);
+
+  const [file, setFile] = useState();
+
+  const pickFileHandler = (data) => {
+    filePickerRef.current.click();
+    setEventData(data);
+  };
+
+  const pickedHandler = (e) => {
+    console.log("vfverfe");
+    let pickedFile;
+    if (e.target.files && e.target.files.length === 1) {
+      pickedFile = e.target.files[0];
+      setFile(pickedFile);
+      return;
+    }
+  };
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("userId", _id);
+  formData.append("eventId", eventData?.eventId);
+  formData.append("eventName", eventData?.eventName);
+
+  //   const createDiplomHandler = () => {
+  //     const { name } = values;
+  //     if (!name || !task || !group || !teacher) {
+  //       toast.error("Укажите все значения");
+  //       return;
+  //     }
+  //     // dispatch(uploadDiplom(formData));s
+  //     console.log(file);
+  //     console.log(_id);
+  //     console.log(eventData?.eventId);
+  //     console.log(eventData?.eventName);
+  //   };
+
+  useEffect(() => {
+    if (file) {
+      //   console.log(file);
+      //   console.log(_id);
+      //   console.log(eventData?.eventId);
+      //   console.log(eventData?.eventName);
+
+      if (!file || !_id || !eventData) {
+        toast.error("Укажите все значения");
+        return;
+      }
+      dispatch(uploadDiplom(formData));
+      //   console.log(file);
+      //   console.log(_id);
+      //   console.log(eventData?.eventId);
+      //   console.log(eventData?.eventName);
+    }
+  }, [file]);
 
   return (
     <Wrapper>
@@ -38,16 +100,34 @@ function UserDiplom({ _id, name, second_name, email }) {
           {this_events?.map((event) => {
             console.log("events", events);
             const eventName = _.find(events, (ev) => ev._id === event.eventId);
-            console.log("eventName", eventName);
+            // console.log("eventName", eventName);
             return eventName?.name.length > 0 ? (
-              <div className="line">
+              <div className="line" key={Math.random()}>
                 <p key={event.eventId}>{eventName?.name}</p>
-                <p className="upload">Загрузить диплом</p>
+                <p
+                  className="upload"
+                  onClick={() =>
+                    pickFileHandler({
+                      eventId: event?.eventId,
+                      eventName: eventName?.name,
+                    })
+                  }
+                >
+                  Загрузить диплом
+                  {/* <span>{file?.name}</span> */}
+                </p>
               </div>
             ) : null;
           })}
         </div>
       )}
+      <input
+        type="file"
+        style={{ display: "none" }}
+        accept=".img,.png,.jpeg,.jpg"
+        ref={filePickerRef}
+        onChange={pickedHandler}
+      />
     </Wrapper>
   );
 }
@@ -58,7 +138,6 @@ const Wrapper = styled.div`
   padding: 0;
   margin: 0;
   .header {
-    margin: 0;
     padding: 10px;
     /* border: 1px solid var(--main-0); */
     display: flex;
@@ -67,6 +146,7 @@ const Wrapper = styled.div`
     align-items: flex-start;
     cursor: pointer;
     transition: 0.5s;
+    margin: 0;
     :hover {
       background: var(--main-3);
       padding-left: 20px;

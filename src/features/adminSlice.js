@@ -16,6 +16,7 @@ import {
   editStatusOrderThunk,
   getReasonsThunk,
   deleteOrderThunk,
+  uploadDiplomThunk,
 } from "./admin-thunk";
 import toast from "react-hot-toast";
 import {
@@ -154,8 +155,15 @@ export const getReasons = createAsyncThunk(
 export const deleteOrder = createAsyncThunk(
   "admin/deleteOrder",
   async (info, thunkAPI) => {
-    console.log(info.id);
     return deleteOrderThunk(`/admin/delete_order/${info.id}`, info, thunkAPI);
+  }
+);
+
+export const uploadDiplom = createAsyncThunk(
+  "admin/uploadDiplom",
+  async (info, thunkAPI) => {
+    console.log(info);
+    return uploadDiplomThunk(`/admin/upload_diplom`, info, thunkAPI);
   }
 );
 
