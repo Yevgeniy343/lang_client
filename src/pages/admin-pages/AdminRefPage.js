@@ -2,25 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import AdminNavBar from "../../components/adminComponents/adminNavbar";
 import AdminSideBar from "../../components/adminComponents/adminSidebar";
-import AllUsers from "../../components/AllUsersDiplom";
 
-const AdmonDiplomPage = () => {
+const AdminRefPage = () => {
   return (
     <>
       <AdminNavBar />
       <AdminSideBar />
       <Wrapper>
         <div className="header">
-          <h4>Грамоты</h4>
-        </div>
-        <div className="all-users">
-          <AllUsers />
+          <h4>Реферальная программа</h4>
         </div>
       </Wrapper>
       ;
     </>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,9 +31,6 @@ const Wrapper = styled.div`
       color: var(--main-0);
     }
   }
-  .all-users {
-    width: 100%;
-  }
   @media (min-width: 576px) {
   }
   @media (min-width: 768px) {
@@ -48,4 +42,4 @@ const Wrapper = styled.div`
   @media (min-width: 1400px) {
   }
 `;
-export default AdmonDiplomPage;
+export default AdminRefPage;

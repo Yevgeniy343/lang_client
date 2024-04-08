@@ -12,6 +12,7 @@ import {
   AiFillDatabase,
   AiOutlineAliwangwang,
   AiFillFolderOpen,
+  AiOutlineShareAlt,
 } from "react-icons/ai";
 import { MdEventAvailable } from "react-icons/md";
 
@@ -61,6 +62,10 @@ const AdminNavBar = () => {
               <AiFillFolderOpen />
               <p>Грамоты</p>
             </li>
+            <li onClick={() => navigate("/refs")}>
+              <AiOutlineShareAlt />
+              <p>Рефералы</p>
+            </li>
             <li onClick={() => dispatch(logOutAdmin())}>
               <GiExitDoor />
               <p>Выйти</p>
@@ -77,7 +82,6 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-
   .nav-center {
     width: 90vw;
     margin: 0;
@@ -144,6 +148,13 @@ const NavContainer = styled.nav`
     transition: var(--transition2);
   }
   @media (min-width: 992px) {
+    height: 150px;
+
+    .nav-center {
+      width: 100vw;
+      margin: 0;
+      max-width: 100%;
+    }
     .nav-toggle {
       display: none;
     }
@@ -155,6 +166,9 @@ const NavContainer = styled.nav`
     .nav-links {
       display: flex;
       justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+
       li {
         display: flex;
         flex-direction: column;
@@ -167,6 +181,9 @@ const NavContainer = styled.nav`
         display: grid;
       }
     }
+  }
+  @media (min-width: 1050px) {
+    height: 100px;
   }
 `;
 

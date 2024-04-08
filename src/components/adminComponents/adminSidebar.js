@@ -7,6 +7,7 @@ import {
   AiFillDatabase,
   AiFillFolderOpen,
   AiOutlineAliwangwang,
+  AiOutlineShareAlt,
 } from "react-icons/ai";
 import { GiExitDoor } from "react-icons/gi";
 import { MdEventAvailable } from "react-icons/md";
@@ -54,6 +55,10 @@ const AdminSideBar = () => {
     navigate("/diploms");
     dispatch(sidebarCloseHandler());
   };
+  const refsHandler = () => {
+    navigate("/refs");
+    dispatch(sidebarCloseHandler());
+  };
 
   const { isSidebarOpen } = useSelector((store) => store.user);
   return (
@@ -94,6 +99,10 @@ const AdminSideBar = () => {
           <li onClick={diplomHandler}>
             <AiFillFolderOpen />
             <p>Грамоты</p>
+          </li>
+          <li onClick={refsHandler}>
+            <AiOutlineShareAlt />
+            <p>Рефералы</p>
           </li>
           <li onClick={logOutHandler}>
             <GiExitDoor />

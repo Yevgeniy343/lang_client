@@ -344,6 +344,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     border: 1px solid var(--main-0);
     margin: 0.5rem 0;
+    background: var(--declined-1); //не проверенные работы
     p {
       /* width: 200px; */
       text-align: start;
