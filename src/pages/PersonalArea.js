@@ -15,9 +15,10 @@ import {
 } from "../features/user/userSlise";
 import UserModalOrder from "../components/userOrder/userModalOrder";
 import UserOrders from "../components/userOrder/UserOrders";
+import DiplomDownload from "../components/DiplomDownload";
 
 const PersonamArea = () => {
-  const { user, currentSmallMenu, events, isOrderModal } = useSelector(
+  const { user, currentSmallMenu, isOrderModal } = useSelector(
     (store) => store.user
   );
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const PersonamArea = () => {
             {currentSmallMenu === "Профиль" && <Profile />}
             {currentSmallMenu === "Актуальные мероприятия" && <UserEvents />}
             {currentSmallMenu === "Мои заявки" && <UserOrders />}
+            {currentSmallMenu === "Скачать дипломы" && <DiplomDownload />}
             {isOrderModal && <UserModalOrder />}
           </div>
         </div>

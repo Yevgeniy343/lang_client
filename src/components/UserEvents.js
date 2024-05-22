@@ -45,7 +45,6 @@ const Wrapper = styled.div`
   h4 {
     margin-bottom: 2rem;
     color: var(--main-0);
-    /* text-align: center; */
   }
   @media (min-width: 576px) {
   }
