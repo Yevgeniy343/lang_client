@@ -439,6 +439,19 @@ const adminSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     });
+
+    // deleteOrder
+    builder.addCase(uploadDiplom.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(uploadDiplom.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      toast.success("Диплом загружен !");
+    });
+    builder.addCase(uploadDiplom.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
   },
 });
 

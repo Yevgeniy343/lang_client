@@ -16,7 +16,6 @@ import AdminEditChildOrder from "../../components/adminOrders/AdminEditChildOrde
 import AdminEditAdultOrder from "../../components/adminOrders/AdminEditAdultOrder";
 import CheckboxAgreement from "../../components-special/CheckboxAgreement";
 import SelectEvents from "../../components-special/SelectEvents";
-import { MdOutlineAirlineSeatLegroomReduced } from "react-icons/md";
 import { getEvents } from "../../features/adminSlice";
 
 const AdminOrdersPage = () => {
@@ -37,7 +36,7 @@ const AdminOrdersPage = () => {
 
   useEffect(() => {
     dispatch(getChildOrders());
-  }, [childOrders._id]);
+  }, [childOrders?._id]);
 
   useEffect(() => {
     dispatch(getChildOrders());
