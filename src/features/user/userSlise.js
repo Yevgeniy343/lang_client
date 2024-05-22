@@ -12,6 +12,7 @@ import {
   editChildrenOrderThunk,
   editAdultOrderThunk,
   getConditionThunk,
+  getDiplomsThunk,
 } from "./thunk";
 import toast from "react-hot-toast";
 import {
@@ -38,6 +39,7 @@ const initialState = {
   childOrders: [],
   adultOrders: [],
   condition_text: "",
+  diploms: [],
 };
 
 export const registerUser = createAsyncThunk(
@@ -121,6 +123,13 @@ export const getCondition = createAsyncThunk(
   "user/getCondition",
   async (info, thunkAPI) => {
     return getConditionThunk(`/user/getCondition/`, info, thunkAPI);
+  }
+);
+
+export const getDiploms = createAsyncThunk(
+  "user/getDiploms",
+  async (info, thunkAPI) => {
+    return getDiplomsThunk(`/user/getDiploms/${info.userId}`, info, thunkAPI);
   }
 );
 
@@ -329,6 +338,18 @@ const userSlice = createSlice({
       state.condition_text = payload;
     });
     builder.addCase(getCondition.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      toast.error(payload);
+    });
+
+    builder.addCase(getDiploms.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDiploms.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.diploms = payload;
+    });
+    builder.addCase(getDiploms.rejected, (state, { payload }) => {
       state.isLoading = false;
       toast.error(payload);
     });

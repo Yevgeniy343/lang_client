@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import _ from "lodash";
-import FileDownload from "js-file-download";
-import Axios from "axios";
-import moment from "moment";
+import { useDispatch } from "react-redux";
+
 import {
   isAdultOrderHandler,
   currentAdultOrderHandler,
@@ -24,16 +20,12 @@ const AdminAdultOrder2 = ({
   number,
   status,
 }) => {
-  const { events } = useSelector((store) => store.admin);
-
   const dispatch = useDispatch();
 
   const modalHandler = () => {
     dispatch(isAdultOrderHandler(true));
     dispatch(currentAdultOrderHandler(id));
   };
-
-  const thisEvent = events?.find((ev) => ev._id === eventId);
 
   return (
     <Wrapper>
@@ -79,11 +71,6 @@ const Wrapper = styled.div`
       background-color: var(--main-3);
       cursor: pointer;
     }
-    /* p {
-      padding: 0.3rem;
-      width: 140px;
-      min-width: 140px;
-    } */
   }
   .pending {
     background: var(--pending-1);

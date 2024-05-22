@@ -27,7 +27,6 @@ function UserDiplom({ _id, name, second_name, email }) {
           {second_name} {name}
         </p>
         <p>{email}</p>
-        <p>{this_events.length}</p>
       </div>
       {extra && (
         <div className="extra">
